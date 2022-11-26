@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton{
+	border: 7px solid;
+	border-radius: 15px;
+	background-color: rgb(79, 255, 53);
+	font-size: 20px;
+}
+QPushButton::hover{
+	background-color: red;
+}
+QPushButton::pressed{
+	background-color: red;
+	border: 15px solid green;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>25</y>
+      <width>811</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Purisa</family>
+      <pointsize>22</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <underline>false</underline>
+      <kerning>true</kerning>
+     </font>
+    </property>
+    <property name="text">
+     <string>Welcome to Domestic Animal</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_story">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>130</y>
+      <width>400</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Purisa</family>
+      <pointsize>-1</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Story Mode</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_endless">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>230</y>
+      <width>400</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Purisa</family>
+      <pointsize>-1</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Endless Mode</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_vs">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>330</y>
+      <width>400</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Purisa</family>
+      <pointsize>-1</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>VS Mode</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_custom">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>430</y>
+      <width>400</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Purisa</family>
+      <pointsize>-1</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Customize Controls</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
