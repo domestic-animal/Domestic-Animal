@@ -80,11 +80,11 @@ class FileManager:
 
 
 
-
-
+"""
 x2 = FileManager()
 x2.create_profile("test")
 x2.create_profile("i")
 pi = x2.load_profile("test")
 print(x2.get_profiles())
 print(os.path.join(os.path.dirname(os.getcwd()), "profiles"))
+"""
