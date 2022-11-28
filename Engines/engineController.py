@@ -41,8 +41,8 @@ class engineController:
                 YELLOW_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_yellow.png"))
             ##################
                 level = self.lvlSelector.getLevel(self.mode,self.diff)
-                self.currEngine = normalGameEngine(self.WIN,level,self.diff,
-                playerAssets= [YELLOW_SPACE_SHIP, YELLOW_LASER], gameAssets=[BG])
+                self.currEngine = normalGameEngine(self.WIN,level,self.diff,profile = 0,
+                playerAssets= [YELLOW_SPACE_SHIP, YELLOW_LASER],gameAssets=[BG])
             elif self.gameState == "menu":
                 self.currEngine = self.Engines[1]
             else:
