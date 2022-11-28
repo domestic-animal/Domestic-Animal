@@ -1,9 +1,11 @@
 import unittest
-
-
 import sys
+import os
  
-sys.path.append('../Domestic-Animal')
+current = os.path.dirname(os.path.realpath(__file__))
+parent = os.path.dirname(current)
+sys.path.append(parent)
+
 from customization import Customization
 
 class launcherTests(unittest.TestCase):
