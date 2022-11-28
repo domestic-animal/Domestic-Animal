@@ -69,7 +69,7 @@ class FileManager:
         return {
             "name": name,
             "achievements": [],
-            "controls": {"left": "", "right": "", "up": "", "down": "", "Fire": ""},
+            "controls": {"left": "", "right": "", "up": "", "down": "", "fire": ""},
             "story_progress": 0,
             "unlocked_weapons": [],
             "current_weapon": "",
