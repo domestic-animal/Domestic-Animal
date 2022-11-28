@@ -5,7 +5,7 @@ from PyQt5.QtCore import *
 from PyQt5 import uic
 
 class Customization(QMainWindow):
-    #control_signal = pyqtSignal(list)
+    control_signal = pyqtSignal(list)
 
     def __init__(self, pager : QStackedWidget):
         super(Customization,self).__init__()
@@ -32,6 +32,7 @@ class Customization(QMainWindow):
         
         if(self.validateControls(controls)):
             self.feed_label.setText("Saved Sucessfully !")
+            self.control_signal.emit(controls)
         else:
             self.feed_label.setText("Invalid. Controls must be unique.")
 

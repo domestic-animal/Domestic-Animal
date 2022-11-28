@@ -16,6 +16,6 @@ class launcherTests(unittest.TestCase):
         self.assertFalse(Customization.validateControls(['a','b','c','u','p','c']))
         
 
-
+    
 if __name__ == '__main__':
     unittest.main()
