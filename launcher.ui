@@ -25,7 +25,7 @@ QPushButton::hover{
 }
 QPushButton::pressed{
 	background-color: red;
-	border: 15px solid green;
+	border: 10px solid green;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -59,7 +59,7 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>130</y>
+      <y>100</y>
       <width>400</width>
       <height>75</height>
      </rect>
@@ -78,7 +78,7 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>230</y>
+      <y>200</y>
       <width>400</width>
       <height>75</height>
      </rect>
@@ -97,7 +97,7 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>330</y>
+      <y>300</y>
       <width>400</width>
       <height>75</height>
      </rect>
@@ -116,7 +116,7 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>430</y>
+      <y>400</y>
       <width>400</width>
       <height>75</height>
      </rect>
@@ -129,6 +129,25 @@ QPushButton::pressed{
     </property>
     <property name="text">
      <string>Customize Controls</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_profile">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>500</y>
+      <width>400</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Purisa</family>
+      <pointsize>-1</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Profile</string>
     </property>
    </widget>
   </widget>
