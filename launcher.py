@@ -46,9 +46,11 @@ class Launcher(QMainWindow):
 
 	def catchProfile(self, s : str):
 		self.profile = 	s
+		print(self.profile)
 
-	def catchControls(self, c : list):
+	def catchControls(self, c : dict):
 		self.controls = c
+		print(self.controls)
 		
 		
 

@@ -5,7 +5,7 @@ from PyQt5.QtCore import *
 from PyQt5 import uic
 
 class Customization(QMainWindow):
-    control_signal = pyqtSignal(list)
+    control_signal = pyqtSignal(dict)
 
     def __init__(self, pager : QStackedWidget):
         super(Customization,self).__init__()
@@ -23,12 +23,12 @@ class Customization(QMainWindow):
         self.back_button.setIcon(icon)
 
     def saveControls(self):
-        controls = []
-        controls.append(self.findChild(QComboBox, "combo_up").currentText())
-        controls.append(self.findChild(QComboBox, "combo_down").currentText())
-        controls.append(self.findChild(QComboBox, "combo_left").currentText())
-        controls.append(self.findChild(QComboBox, "combo_right").currentText())
-        controls.append(self.findChild(QComboBox, "combo_fire").currentText())
+        controls = {}
+        controls["up"] = self.findChild(QComboBox, "combo_up").currentText()
+        controls["down"] = self.findChild(QComboBox, "combo_down").currentText()
+        controls["left"] = self.findChild(QComboBox, "combo_left").currentText()
+        controls["right"] = self.findChild(QComboBox, "combo_right").currentText()
+        controls["fire"]=self.findChild(QComboBox, "combo_fire").currentText()
         
         if(self.validateControls(controls)):
             self.feed_label.setText("Saved Sucessfully !")
@@ -37,8 +37,9 @@ class Customization(QMainWindow):
             self.feed_label.setText("Invalid. Controls must be unique.")
 
     @staticmethod
-    def validateControls(l : list)->bool:
-        if len(l) == len(set(l)):
+    def validateControls(l : dict)->bool:
+        s = set(l.get(elem) for elem in l)
+        if len(l) == len(s):
             return True
         else:
             return False
