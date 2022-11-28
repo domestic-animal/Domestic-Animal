@@ -61,18 +61,3 @@ class Profile:
 
     def add_skin(self, skin_path):
         self.__skins.append(skin_path)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
