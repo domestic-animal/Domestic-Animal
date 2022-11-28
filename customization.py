@@ -35,7 +35,8 @@ class Customization(QMainWindow):
         else:
             self.feed_label.setText("Invalid. Controls must be unique.")
 
-    def validateControls(self, l : list)->bool:
+    @staticmethod
+    def validateControls(l : list)->bool:
         if len(l) == len(set(l)):
             return True
         else:
