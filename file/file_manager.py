@@ -2,10 +2,15 @@ from profile import Profile
 import os
 import json
 import pygame
+from cryptography.fernet import Fernet
 
 
 class FileManager:
+    def __init__(self):
+        pass
+
     __p_dir = os.path.join(os.path.dirname(os.getcwd()), "profiles")
+    __fernet = Fernet(b'lBW8DUQf7LkNAuDhTGeBCPHfytQ6dJP7TjVTM5_KlwE=')
 
     def create_profile(self, name):
         """
@@ -14,7 +19,7 @@ class FileManager:
         :return: object of class Profile if the profile is created successfully
                  False otherwise
         """
-        u_path = os.path.join(self.__p_dir, name + ".json")
+        u_path = os.path.join(self.__p_dir, name + ".txt")
         profile = Profile()
         profile.set_name(name)
         file = self.__create_new_file(name)
@@ -82,8 +87,10 @@ class FileManager:
                  False otherwise
         """
         try:
-            with open(os.path.join(self.__p_dir, name + ".json"), 'r') as openfile:
-                json_object = json.load(openfile)
+            with open(os.path.join(self.__p_dir, name + ".txt"), 'rb') as openfile:
+                file = self.__fernet.decrypt(openfile.read())
+                json_object = json.loads(file.decode())
+                print(json_object)
         except OSError:
             return False
         profile = Profile()
@@ -104,12 +111,13 @@ class FileManager:
         :return: True if profile is loaded successfully
                  False otherwise
         """
-        assets_dir = os.path.join(os.path.dirname(os.getcwd()), "assets")
+        assets_dir = os.path.join(os.path.dirname(os.getcwd()), "Assets")
         assets = os.listdir(assets_dir)
         assets_images = []
         for asset in assets:
-            img = pygame.image.load(os.path.join(assets_dir, asset))
-            assets_images.append(img)
+            if os.path.isfile(asset):
+                img = pygame.image.load(os.path.join(assets_dir, asset))
+                assets_images.append(img)
         return assets_images
 
     def __create_new_file(self, name):
@@ -131,8 +139,12 @@ class FileManager:
 
     def __write_file(self, file, path):
         try:
-            with open(path, "w") as outfile:
-                json.dump(file, outfile)
+            with open(path, "wb") as outfile:
+                json_object = json.dumps(file, indent=4)
+                encrypted_file = self.__fernet.encrypt(json_object.encode())
+                outfile.write(encrypted_file)
                 return True
         except OSError:
             return False
+
+
