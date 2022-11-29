@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5 import uic
 from functools import partial
-from profile import Profile
+from file.profile import Profile
 from file.file_manager import FileManager
 
 class Profiles(QMainWindow):

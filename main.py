@@ -8,6 +8,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     widget = QtWidgets.QStackedWidget()
     manager = FileManager()
+    
     ui = Launcher(widget)
     c = Customization(widget)
     p = Profiles(widget, manager)
