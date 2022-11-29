@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from customization import Customization
-from profiles import Profiles
-from launcher import Launcher
+from launcher.customization import Customization
+from launcher.profiles import Profiles
+from launcher.launcher import Launcher
 from file.file_manager import FileManager
 
 if __name__ == "__main__":

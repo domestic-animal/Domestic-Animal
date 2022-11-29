@@ -6,6 +6,7 @@ from PyQt5 import uic
 from functools import partial
 from file.profile import Profile
 from file.file_manager import FileManager
+import os
 
 class Profiles(QMainWindow):
     
@@ -13,7 +14,7 @@ class Profiles(QMainWindow):
     
     def __init__(self, pager : QStackedWidget, manager : FileManager):
         super(Profiles,self).__init__()
-        uic.loadUi("profiles.ui",baseinstance=self, resource_suffix='_rc')
+        uic.loadUi(os.path.join("launcher","ui","profiles.ui"),baseinstance=self, resource_suffix='_rc')
         self.pager = pager
         self.fileManager = manager
         self.findChild(QPushButton, "bt_continue").clicked.connect(self.handleContinue)
@@ -42,7 +43,7 @@ class Profiles(QMainWindow):
             bt.setText(elem)
             delete_bt = QToolButton()
             icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+            icon.addPixmap(QtGui.QPixmap(os.path.join("launcher","assets","delete.png")), QtGui.QIcon.Normal, QtGui.QIcon.On)
             delete_bt.setIcon(icon)
             delete_bt.clicked.connect(partial(self.handleDelete, i))
             self.radio_buttons.append(bt)

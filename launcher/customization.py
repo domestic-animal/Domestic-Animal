@@ -4,13 +4,15 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5 import uic
 from file.profile import Profile
+import os
 
 class Customization(QMainWindow):
     control_signal = pyqtSignal(dict)
 
     def __init__(self, pager : QStackedWidget):
         super(Customization,self).__init__()
-        uic.loadUi("customization.ui",baseinstance=self, resource_suffix='_rc')
+        
+        uic.loadUi(os.path.join("launcher","ui","customization.ui"),baseinstance=self, resource_suffix='_rc')
         self.pager = pager
 
         self.back_button = self.findChild(QToolButton, "bt_back")
@@ -20,7 +22,7 @@ class Customization(QMainWindow):
         self.feed_label = self.findChild(QLabel, "lb_feed")
 
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("back.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon.addPixmap(QtGui.QPixmap(os.path.join("launcher","assets","back.png")), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.back_button.setIcon(icon)
 
     def saveControls(self):

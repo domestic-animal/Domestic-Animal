@@ -5,12 +5,13 @@ from PyQt5.QtCore import *
 from PyQt5 import uic
 from file.profile import Profile
 from file.file_manager import FileManager
+import os
 
 
 class Launcher(QMainWindow):
 	def __init__(self, pager : QStackedWidget, manager: FileManager):
 		super(Launcher,self).__init__()
-		uic.loadUi("launcher.ui",baseinstance=self, resource_suffix='_rc')
+		uic.loadUi(os.path.join("launcher","ui","launcher.ui"),baseinstance=self, resource_suffix='_rc')
 		self.pager = pager
 		self.storyButton = self.findChild(QRadioButton, "bt_story")
 		self.endlessButton = self.findChild(QRadioButton, "bt_endless")
@@ -25,7 +26,7 @@ class Launcher(QMainWindow):
 		self.back_button = self.findChild(QToolButton, "bt_back")
 		self.back_button.clicked.connect(lambda: self.pager.setCurrentIndex(self.pager.currentIndex()-1))
 		icon = QtGui.QIcon()
-		icon.addPixmap(QtGui.QPixmap("back.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+		icon.addPixmap(QtGui.QPixmap(os.path.join("launcher","assets","back.png")), QtGui.QIcon.Normal, QtGui.QIcon.On)
 		self.back_button.setIcon(icon)
 
 		self.playButton = self.findChild(QPushButton, "bt_play")
