@@ -5,16 +5,14 @@ from levelSelector import levelSelector
 from normalGameEngine import normalGameEngine
 class engineController:
 
-#, levelSelector, currEngine, fileManager, mode,settings
-    def __init__(self,mode = -1,profile = None,gameState = "game"):
-        # self.profile = profile
+    def __init__(self,diff= 1,mode = -1,settings = None,fileManager = None,profile = None,gameState = "game"):
+        self.profile = profile
         self.lvlSelector = levelSelector()
-        # self.states = []
-        # self.fileManager = fileManager
-        # self.settings = settings
+        self.states = []
+        self.fileManager = fileManager
+        self.settings = settings
         self.mode = mode
-        self.diff = 1
-        # self.currEngine = currEngine
+        self.diff = self.diff
         self.gameState = gameState
         
     
