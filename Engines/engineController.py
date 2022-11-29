@@ -12,7 +12,7 @@ class engineController:
         self.fileManager = fileManager
         self.settings = settings
         self.mode = mode
-        self.diff = self.diff
+        self.diff = diff
         self.gameState = gameState
         
     
