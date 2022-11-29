@@ -41,7 +41,7 @@ class engineController:
                 bullet_sheet = pygame.image.load(os.path.join(".", "assets", "Bullets_10x16_[4,2].png"))
                 enemy_sheet = pygame.image.load(os.path.join(".", "assets", "Enemies_26x26_[6,2].png"))
                 BG = pygame.image.load(os.path.join(".","assets", "Backgrounds","allBGstars_1024x1913.png"))
-                PLAYER_SHIP_SKINS = SpriteSheet(player_sheet,16,16,2,2).skin
+                PLAYER_SHIP_SKINS = SpriteSheet(player_sheet,16,16,3,2).skin
                 BULLET_SHIP_SKINS = SpriteSheet(bullet_sheet,10,16,1,2).skin
                 ENEMY_SKINS = SpriteSheet(enemy_sheet,26,26,1,2,6).skin
             ##################
