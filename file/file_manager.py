@@ -1,15 +1,14 @@
-from profile import Profile
+from file.profile import Profile
 import os
 import json
 import pygame
 from cryptography.fernet import Fernet
 
-
 class FileManager:
     def __init__(self):
         pass
 
-    __p_dir = os.path.join(os.path.dirname(os.getcwd()), "profiles")
+    __p_dir = os.path.join(os.getcwd(), "profiles")
     __fernet = Fernet(b'lBW8DUQf7LkNAuDhTGeBCPHfytQ6dJP7TjVTM5_KlwE=')
 
     def create_profile(self, name):
