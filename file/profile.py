@@ -3,11 +3,11 @@ class Profile:
 
     __name = ""
     __controls = {"left": "", "right": "", "up": "", "down": "", "fire": ""}
-    __achievements: list
-    __story_progress: int
-    __unlocked_weapons: list
+    __achievements = []
+    __story_progress = 0
+    __unlocked_weapons = []
     __current_weapon = ""
-    __skins: list
+    __skins = []
     __current_skin = ""
 
     def set_name(self, name):
