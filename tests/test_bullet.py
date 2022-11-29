@@ -1,7 +1,6 @@
 import sys
 sys.path.insert(0, './Entities')
-from Entities.bullet import bullet
-from Entities.entity import entity
+from bullet import bullet
 
 import pygame
 import os
