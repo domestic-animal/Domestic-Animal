@@ -3,6 +3,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5 import uic
+from profile import Profile
 
 
 class Launcher(QMainWindow):
@@ -44,9 +45,9 @@ class Launcher(QMainWindow):
 			#start story mode
 			print("vs")
 
-	def catchProfile(self, s : str):
+	def catchProfile(self, s : Profile):
 		self.profile = 	s
-		print(self.profile)
+		print(self.profile.get_name())
 
 	def catchControls(self, c : dict):
 		self.controls = c
