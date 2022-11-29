@@ -36,7 +36,7 @@ class FileManager:
         :return: True if profile is saved successfully
                  False otherwise
         """
-        u_path = os.path.join(self.__p_dir, profile.get_name())
+        u_path = os.path.join(self.__p_dir, profile.get_name() + ".txt")
         if not os.path.exists(u_path):
             return False
         new_profile = {
@@ -69,7 +69,7 @@ class FileManager:
         :return: True if profile is deleted successfully
                  False otherwise
         """
-        path = os.path.join(self.__p_dir, name + ".json")
+        path = os.path.join(self.__p_dir, name + ".txt")
         if os.path.exists(path):
             try:
                 os.remove(path)
