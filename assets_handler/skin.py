@@ -10,6 +10,7 @@ class Skin():
         """
         self.frames = images
         self.last_update = pygame.time.get_ticks()
+        #self.mask = pygame.mask.from_surface(self.frames[0])
         self.animation_cooldown = cooldown
         self.currframe = 0
     

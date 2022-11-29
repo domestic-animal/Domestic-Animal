@@ -1,3 +1,4 @@
+import pygame
 class observer:
     def __init__(self):
         pass
@@ -7,14 +8,19 @@ class observer:
                 bullets.remove(i)
 
     def is_collide(self,obj1, obj2):
-            offset_x = obj2.x - obj1.x
-            offset_y = obj2.y - obj1.y
-            return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) != None
-            
+            print(obj1.width)
+            print(obj2.height)
+            if obj1.x > (obj2.x+obj2.width) or obj2.x > (obj1.x+obj1.width) :
+                return False
+            if obj1.y+obj1.height > obj2.y or obj2.y+obj2.height > obj1.y:
+                return False
+            return True
+
     def collision(self,bullets,enemies,player):
         for i in bullets:
             if i.is_friendly<0:
                 for j in enemies:
+                    print(self.is_collide(i,j))
                     if self.is_collide(i,j):
                         j.health-=i.damage
                         i.y=-40

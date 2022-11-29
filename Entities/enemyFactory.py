@@ -1,31 +1,36 @@
 import os
 import pygame
 import enemy
+import sys
+sys.path.insert(0, './assets_handler')
+
+
+from spritesheet import SpriteSheet
 from weapon import weapon
 from bullet import bullet
 import random
 class enemyFactory:
-   
-    dog = pygame.image.load(os.path.join(".","assets", "pixel_ship_blue_small.png"))
-    cats = pygame.image.load(os.path.join(".","assets", "pixel_ship_red_small.png"))
-    RED_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_red.png"))
+    enemySheet = pygame.image.load(os.path.join(".","assets", "Enemies_26x26_[6,2].png"))
+    bulletSheet = pygame.image.load(os.path.join(".", "assets", "Bullets_10x16_[4,2].png"))
+    ENEMY_SKINS = SpriteSheet(enemySheet,26,26,2,2,6).skin
+    BULLET_SKINS = SpriteSheet(bulletSheet,10,16,1,2,4).skin
+    DOG = ENEMY_SKINS[2]
 
-    GREEN_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_green.png"))
+    CAT = ENEMY_SKINS[1]
 
-    BLUE_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_blue.png"))
-    
-    YELLOW_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_yellow.png"))
+    CAT_LASER = BULLET_SKINS[2]
 
+    DOG_LASER = BULLET_SKINS[1]
         
     def create(self,type,diff,x,y,threshold):
         if type=="d":
-            w = weapon(self.YELLOW_LASER, 1, int(700/diff),20*diff,3*diff)
-            return enemy.dog(x,5*diff,y,w,self.dog,100*diff,3*diff,threshold)
+            w = weapon(self.DOG_LASER, 1, int(700/diff),20*diff,3*diff)
+            return enemy.dog(x,5*diff,y,w,self.DOG,100*diff,3*diff,threshold)
         elif  type=="c":
-            w = weapon(self.BLUE_LASER, 1, int(500/diff),20*diff,2*diff)
-            return enemy.cat(x,7*diff,y,w,self.cats,50*diff,5*diff,threshold)
-        elif  type=="r":
-            w = weapon(self.YELLOW_LASER, 1, int(230/diff),20*diff,2*diff)
+            w = weapon(self.CAT_LASER, 1, int(500/diff),20*diff,2*diff)
+            return enemy.cat(x,7*diff,y,w,self.CAT,50*diff,5*diff,threshold)
+       # elif  type=="r":
+        #    w = weapon(self.YELLOW_LASER, 1, int(230/diff),20*diff,2*diff)
      
         else: 
             return None

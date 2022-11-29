@@ -30,7 +30,7 @@ class SpriteSheet():
 		
 		retunes a pygame.Surface that holds the extracted image
 		"""
-		image = pygame.Surface((width, height)).convert_alpha()
+		image = pygame.Surface((width, height))#.convert_alpha()
 		image.blit(self.sheet, (0, 0),
 					((f * width), (s * height),
 					 (f * width + width), (s * height + height)))

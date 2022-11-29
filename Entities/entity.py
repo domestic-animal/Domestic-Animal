@@ -1,13 +1,15 @@
 class entity:
-    def __init__(self,x,y,image, velocity, ):
+    def __init__(self,x,y,skin, velocity):
         self.x =x
         self.y = y
-        self.image = image
+        self.skin = skin
         self.velocity = velocity
+        self.width = self.skin.frames[0].get_width()
+        self.height = self.skin.frames[0].get_height()
 
     def move():
         pass
     
     def draw(self, window):
-        window.blit(self.image, (self.x, self.y))
+        window.blit(self.skin.updateAnimation(), (self.x, self.y))
         

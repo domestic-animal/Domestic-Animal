@@ -7,7 +7,8 @@ class bullet(entity):
         self.damage = damage
         self.ishorizontal = ishorizontal
         self.is_friendly = is_friendly
-        self.mask = pygame.mask.from_surface(self.image)
+        #self.mask1 = pygame.mask.from_surface(self.skin.frame[0])
+        #self.mask2= pygame.mask.from_surface(self.skin.frame[1])
     
 
     def move(self):
@@ -19,7 +20,7 @@ class bullet(entity):
     def off_screen(self,width,height):
         return not(self.y <= height and self.y >= 0) or not (self.x <= width and self.x >= 0)
     
-    def draw(self, window):
-        window.blit(self.image, (self.x, self.y))
+  #  def draw(self, window):
+   #     window.blit(self.image, (self.x, self.y))
 
         
