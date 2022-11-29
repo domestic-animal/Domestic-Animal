@@ -1,15 +1,14 @@
 
-
 class Profile:
 
-    __name: ""
-    __controls: {"left": "", "right": "", "up": "", "down": "", "fire": ""}
+    __name = ""
+    __controls = {"left": "", "right": "", "up": "", "down": "", "fire": ""}
     __achievements: list
     __story_progress: int
     __unlocked_weapons: list
-    __current_weapon: ""
+    __current_weapon = ""
     __skins: list
-    __current_skin: ""
+    __current_skin = ""
 
     def set_name(self, name):
         self.__name = name
