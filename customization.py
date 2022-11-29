@@ -40,11 +40,18 @@ class Customization(QMainWindow):
 
     def getProfile(self, p : Profile):
         controls = p.get_controls()
-        self.findChild(QComboBox, "combo_up").setCurrentText(controls["up"])
-        self.findChild(QComboBox, "combo_down").setCurrentText(controls["down"])
-        self.findChild(QComboBox, "combo_left").setCurrentText(controls["left"])
-        self.findChild(QComboBox, "combo_right").setCurrentText(controls["right"])
-        self.findChild(QComboBox, "combo_fire").setCurrentText(controls["fire"])
+        if controls["up"] == "":
+            self.findChild(QComboBox, "combo_up").setCurrentIndex(0)
+            self.findChild(QComboBox, "combo_down").setCurrentIndex(0)
+            self.findChild(QComboBox, "combo_left").setCurrentIndex(0)
+            self.findChild(QComboBox, "combo_right").setCurrentIndex(0)
+            self.findChild(QComboBox, "combo_fire").setCurrentIndex(0)
+        else:
+            self.findChild(QComboBox, "combo_up").setCurrentText(controls["up"])
+            self.findChild(QComboBox, "combo_down").setCurrentText(controls["down"])
+            self.findChild(QComboBox, "combo_left").setCurrentText(controls["left"])
+            self.findChild(QComboBox, "combo_right").setCurrentText(controls["right"])
+            self.findChild(QComboBox, "combo_fire").setCurrentText(controls["fire"])
 
         
 
