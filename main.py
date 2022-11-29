@@ -9,11 +9,12 @@ if __name__ == "__main__":
     widget = QtWidgets.QStackedWidget()
     manager = FileManager()
     
-    ui = Launcher(widget)
+    ui = Launcher(widget, manager)
     c = Customization(widget)
     p = Profiles(widget, manager)
     c.control_signal.connect(ui.catchControls)
     p.profile_signal.connect(ui.catchProfile)
+    p.profile_signal.connect(c.getProfile)
     widget.addWidget(p)
     widget.addWidget(ui)
     widget.addWidget(c)

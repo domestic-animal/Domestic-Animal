@@ -4,10 +4,11 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5 import uic
 from file.profile import Profile
+from file.file_manager import FileManager
 
 
 class Launcher(QMainWindow):
-	def __init__(self, pager : QStackedWidget):
+	def __init__(self, pager : QStackedWidget, manager: FileManager):
 		super(Launcher,self).__init__()
 		uic.loadUi("launcher.ui",baseinstance=self, resource_suffix='_rc')
 		self.pager = pager
@@ -15,7 +16,7 @@ class Launcher(QMainWindow):
 		self.endlessButton = self.findChild(QRadioButton, "bt_endless")
 		self.vsButton = self.findChild(QRadioButton, "bt_vs")
 		self.storyButton.setChecked(True)
-
+		self.manager = manager
 		# customization button setup
 		self.customButton = self.findChild(QPushButton, "bt_custom")
 		self.customButton.clicked.connect(lambda : self.pager.setCurrentIndex(self.pager.currentIndex()+1))
@@ -52,6 +53,9 @@ class Launcher(QMainWindow):
 	def catchControls(self, c : dict):
 		self.controls = c
 		print(self.controls)
+		self.profile.set_controls(c)
+		print(self.profile.get_name())
+		print(self.manager.save_profile(self.profile))
 		
 		
 

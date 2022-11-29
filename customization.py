@@ -3,6 +3,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5 import uic
+from file.profile import Profile
 
 class Customization(QMainWindow):
     control_signal = pyqtSignal(dict)
@@ -35,6 +36,17 @@ class Customization(QMainWindow):
             self.control_signal.emit(controls)
         else:
             self.feed_label.setText("Invalid. Controls must be unique.")
+
+
+    def getProfile(self, p : Profile):
+        controls = p.get_controls()
+        self.findChild(QComboBox, "combo_up").setCurrentText(controls["up"])
+        self.findChild(QComboBox, "combo_down").setCurrentText(controls["down"])
+        self.findChild(QComboBox, "combo_left").setCurrentText(controls["left"])
+        self.findChild(QComboBox, "combo_right").setCurrentText(controls["right"])
+        self.findChild(QComboBox, "combo_fire").setCurrentText(controls["fire"])
+
+        
 
     @staticmethod
     def validateControls(l : dict)->bool:

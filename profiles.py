@@ -90,7 +90,8 @@ class Profiles(QMainWindow):
         for bt in self.radio_buttons:
             if bt.isChecked():
                 self.pager.setCurrentIndex(self.pager.currentIndex()+1)
-                self.profile_signal.emit(bt.text())
+                p = self.fileManager.load_profile(bt.text())
+                self.profile_signal.emit(p)
                 flag = True
         if not flag:
             self.label.setText("Choose a profile first")
