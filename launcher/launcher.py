@@ -6,6 +6,7 @@ from PyQt5 import uic
 from file.profile import Profile
 from file.file_manager import FileManager
 from Engines.engineController import engineController
+from launcher.customization import Customization
 import os
 import sys
 
@@ -68,8 +69,8 @@ class Launcher(QMainWindow):
 	def handlePlayButton(self):
 		self.pager.hide()
 		assets, backgrounds = self.manager.load_assets()
-		print(self.profile.get_controls())
-		self.controller = engineController(profile= self.profile, assets = assets, backgrounds = backgrounds)
+		self.controller = engineController(seetings = Customization.mapControls(self.profile.get_controls()),
+                                     profile= self.profile, assets = assets, backgrounds = backgrounds)
 		self.game_thread.setController(self.controller)
 		if self.storyButton.isChecked():
 			#start vs mode

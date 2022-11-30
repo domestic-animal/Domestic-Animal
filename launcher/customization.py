@@ -36,7 +36,7 @@ class Customization(QMainWindow):
         
         if(self.validateControls(controls)):
             self.feed_label.setText("Saved Sucessfully !")
-            self.control_signal.emit(Customization.mapControls(controls))
+            self.control_signal.emit(controls)
         else:
             self.feed_label.setText("Invalid. Controls must be unique.")
 
