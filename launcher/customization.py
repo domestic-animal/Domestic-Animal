@@ -64,6 +64,7 @@ class Customization(QMainWindow):
         for key in d:
             val = f'K_{d[key]}'
             new_d[key] = getattr(pygame, val)
+        print(new_d)
         return new_d        
 
     @staticmethod

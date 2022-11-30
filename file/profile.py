@@ -2,7 +2,7 @@
 class Profile:
 
     __name = ""
-    __controls = {"left": "", "right": "", "up": "", "down": "", "fire": ""}
+    __controls = {"left": int, "right": int, "up": int, "down": int, "fire": int}
     __achievements = []
     __story_progress = 0
     __unlocked_weapons = []
