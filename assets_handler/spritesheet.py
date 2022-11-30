@@ -1,5 +1,5 @@
 import pygame
-from skin import Skin
+from assets_handler.skin import Skin
 
 class SpriteSheet():
 	"""
