@@ -77,11 +77,16 @@ class Profiles(QMainWindow):
         
     def preformCreation(self, i: int):
         name = self.create_edit[i].text()
-        self.profiles.append(name)
+        
         p = self.fileManager.create_profile(name)
         if p is False:
             self.label.setText("error while creation")
-        self.fileManager.save_profile(p)
+            return
+        if self.fileManager.save_profile(p) is False:
+            self.label.setText("error while saving")
+            return
+        
+        self.profiles.append(name)
         del self.create_buttons[i]
         del self.create_edit[i]
         self.setup_profiles()
@@ -92,6 +97,10 @@ class Profiles(QMainWindow):
             if bt.isChecked():
                 self.pager.setCurrentIndex(self.pager.currentIndex()+1)
                 p = self.fileManager.load_profile(bt.text())
+                # handle errors
+                if p is False:
+                    self.label.setText("error while loading")
+                    return
                 self.profile_signal.emit(p)
                 flag = True
         if not flag:

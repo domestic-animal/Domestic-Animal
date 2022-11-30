@@ -5,6 +5,7 @@ from PyQt5.QtCore import *
 from PyQt5 import uic
 from file.profile import Profile
 import os
+import pygame
 
 class Customization(QMainWindow):
     control_signal = pyqtSignal(dict)
@@ -16,7 +17,7 @@ class Customization(QMainWindow):
         self.pager = pager
 
         self.back_button = self.findChild(QToolButton, "bt_back")
-        self.back_button.clicked.connect(lambda: self.pager.setCurrentIndex(self.pager.currentIndex()-1))
+        self.back_button.clicked.connect(self.back)
         
         self.findChild(QPushButton, "bt_save").clicked.connect(self.saveControls)
         self.feed_label = self.findChild(QLabel, "lb_feed")
@@ -54,8 +55,23 @@ class Customization(QMainWindow):
             self.findChild(QComboBox, "combo_left").setCurrentText(controls["left"])
             self.findChild(QComboBox, "combo_right").setCurrentText(controls["right"])
             self.findChild(QComboBox, "combo_fire").setCurrentText(controls["fire"])
-
+            
+    def back(self):
+        self.feed_label.setText("")
+        self.pager.setCurrentIndex(self.pager.currentIndex()-1)
         
+
+    @staticmethod
+    def mapControls(d : dict):
+        new_d = {}
+        default = {"up" : pygame.K_UP, "down" : pygame.K_DOWN, 
+                   "left" : pygame.K_LEFT, "right" : pygame.K_RIGHT, "fire" : pygame.K_SPACE}
+        for key in d:
+            val = f'K_{d[key]}'
+            if val == "K_":
+                return default
+            new_d[key] = getattr(pygame, val)
+        return new_d        
 
     @staticmethod
     def validateControls(l : dict)->bool:
