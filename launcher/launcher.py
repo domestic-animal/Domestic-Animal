@@ -69,7 +69,7 @@ class Launcher(QMainWindow):
 	def handlePlayButton(self):
 		self.pager.hide()
 		assets, backgrounds = self.manager.load_assets()
-		self.controller = engineController(seetings = Customization.mapControls(self.profile.get_controls()),
+		self.controller = engineController(settings = Customization.mapControls(self.profile.get_controls()),
                                      profile= self.profile, assets = assets, backgrounds = backgrounds)
 		self.game_thread.setController(self.controller)
 		if self.storyButton.isChecked():

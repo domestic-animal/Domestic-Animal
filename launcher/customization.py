@@ -17,7 +17,7 @@ class Customization(QMainWindow):
         self.pager = pager
 
         self.back_button = self.findChild(QToolButton, "bt_back")
-        self.back_button.clicked.connect(lambda: self.pager.setCurrentIndex(self.pager.currentIndex()-1))
+        self.back_button.clicked.connect(self.back)
         
         self.findChild(QPushButton, "bt_save").clicked.connect(self.saveControls)
         self.feed_label = self.findChild(QLabel, "lb_feed")
@@ -56,13 +56,18 @@ class Customization(QMainWindow):
             self.findChild(QComboBox, "combo_right").setCurrentText(controls["right"])
             self.findChild(QComboBox, "combo_fire").setCurrentText(controls["fire"])
             
-
+    def back(self):
+        self.feed_label.setText("")
+        self.pager.setCurrentIndex(self.pager.currentIndex()-1)
+        
 
     @staticmethod
     def mapControls(d : dict):
         new_d = {}
         for key in d:
             val = f'K_{d[key]}'
+            if val == "K_":
+                break
             new_d[key] = getattr(pygame, val)
         return new_d        
 
