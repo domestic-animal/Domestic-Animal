@@ -64,10 +64,12 @@ class Customization(QMainWindow):
     @staticmethod
     def mapControls(d : dict):
         new_d = {}
+        default = {"up" : pygame.K_UP, "down" : pygame.K_DOWN, 
+                   "left" : pygame.K_LEFT, "right" : pygame.K_RIGHT, "fire" : pygame.K_SPACE}
         for key in d:
             val = f'K_{d[key]}'
             if val == "K_":
-                break
+                return default
             new_d[key] = getattr(pygame, val)
         return new_d        
 
