@@ -33,8 +33,8 @@ class normalGameEngine:
         self.gameAssets = gameAssets
         #controls
         self.settings = settings
-        #self.PLAYER_CONTROLS = [settings.left,settings.right,settings.up,settings.down]
-        self.PLAYER_CONTROLS = [settings[0], settings[1], settings[2], settings[3]]
+        self.PLAYER_CONTROLS = [settings["left"],settings["right"],settings["up"],settings["down"]]
+        #self.PLAYER_CONTROLS = [settings[0], settings[1], settings[2], settings[3]]
         ###############################
         #self.PLAYER_CONTROLS = settings
         #################################
@@ -55,6 +55,7 @@ class normalGameEngine:
 
         gameObserver = observer()
         Enemies=self.level.getwave(0.5)
+
         pl1=player(300,600,we,self.playerAssets[0],self.settings,1000,7)
         def redraw_window():
             #background
@@ -75,7 +76,7 @@ class normalGameEngine:
             if len(Enemies)==0:
                 Enemies=self.level.getwave(0.5)
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_SPACE]: # shoot
+            if keys[self.settings["fire"]]: # shoot
                 Bullet=pl1.shoot()
                 if Bullet!= None:
                     Bullets.append(Bullet)

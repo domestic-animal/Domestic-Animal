@@ -7,7 +7,7 @@ sys.path.insert(0, './assets_handler')
 
 class engineController:
 
-    def __init__(self,assets,profile,settings,backgrounds, mode= -1,gameState = "game"):
+    def __init__(self,assets,profile,backgrounds, mode= -1,gameState = "game"):
         self.profile = profile
         self.lvlSelector = levelSelector()
         self.settings = profile.get_controls()
@@ -55,8 +55,9 @@ class engineController:
                 BG = self.Background[0]
                 
             ##################
+                print(self.settings)
                 level = self.lvlSelector.getLevel(self.mode,self.diff,ENEMY_SKINS,BULLET_SHIP_SKINS)
-                self.currEngine = normalGameEngine(self.WIN,level,self.diff,profile = self.profile,
+                self.currEngine = normalGameEngine(self.WIN,level,self.diff,profile = self.profile,settings = self.settings,
                 playerAssets= [PLAYER_SHIP_SKINS[0], BULLET_SHIP_SKINS[0]],enemyAssets=[ENEMY_SKINS[5]],gameAssets=[BG])
             elif self.gameState == "menu":
                 self.currEngine = self.Engines[1]
