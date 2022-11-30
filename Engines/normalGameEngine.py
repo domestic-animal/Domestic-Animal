@@ -11,7 +11,7 @@ from weapon import weapon
 from bullet import bullet
 from Engines.observer import observer
 from enemyFactory import enemyFactory
-from level import endlesslevel
+from Engines.level import endlesslevel
 from Engines.level import endlesslevel
 
 class normalGameEngine:

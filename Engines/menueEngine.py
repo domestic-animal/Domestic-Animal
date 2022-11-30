@@ -1,7 +1,7 @@
 import pygame
 
-from menue_componenets.pause import pauseMenue
-from menue_componenets.start_menue import startMenue
+from menue_components.pause import pauseMenue
+from menue_components.start_menue import startMenue
 
 
 class menu:
@@ -16,6 +16,7 @@ class menu:
     # 1: pause menue
     # 2: start menue
     def create_menue(self, type=1):
+
         if type == 1:
             self.menue = pauseMenue(self.screen, self.WIDTH, self.HEIGHT)
         elif type == 2:
@@ -23,6 +24,8 @@ class menu:
         self.buttons = self.menue.create_pause_buttons()
 
     def start(self):
+        pygame.init()
+
         # rum menue engine
         runMenue = True
         selection = ""
