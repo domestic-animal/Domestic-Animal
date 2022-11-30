@@ -2,15 +2,15 @@ import os
 import random
 import pygame
 import sys
-from level import level
+from Engines.level import level
 #from observer import observer as observe
 sys.path.insert(0, './Entities')
 from player import player
 from weapon import weapon
 from bullet import bullet
-from observer import observer
+from Engines.observer import observer
 from enemyFactory import enemyFactory
-from level import endlesslevel
+from Engines.level import endlesslevel
 class normalGameEngine:
    
 # Player player
@@ -33,7 +33,8 @@ class normalGameEngine:
         self.gameAssets = gameAssets
         #controls
         self.settings = settings
-        self.PLAYER_CONTROLS = [pygame.K_a,pygame.K_d,pygame.K_w,pygame.K_s]
+        #self.PLAYER_CONTROLS = [settings.left,settings.right,settings.up,settings.down]
+        self.PLAYER_CONTROLS = [settings[0], settings[1], settings[2], settings[3]]
         ###############################
         #self.PLAYER_CONTROLS = settings
         #################################
@@ -101,10 +102,10 @@ class normalGameEngine:
             gameObserver.off_screen(Bullets)
             
             if pl1.health <= 0:
-               quit() 
+               break 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    quit()
+                    break
 
 
 

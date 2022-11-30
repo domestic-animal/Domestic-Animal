@@ -5,75 +5,33 @@ from enemyFactory import enemyFactory
 from enemy import enemy
 
 class level:
-    def __init__(self,diff):
+    def __init__(self,diff,ENEMY_SKINS,BULLET_SKINS):
         self.waves=[]
         self.index=None
         self.diff=diff
+        self.ENEMY_SKINS = ENEMY_SKINS
+        self.BULLET_SKINS = BULLET_SKINS
 
     def getwave(self,time):
         pass
 
-
-class randomround():
-    def easyround(self):
-        x=random.random()
-        if x<0.7:
-            return 1
-        elif x>0.7 and x<0.9:
-            return 2
-        else:
-            return 3   
-
-    def mediuamround(self):
-        x=random.random()
-        if x<0.2:
-            return 1
-        elif x>0.2 and x<0.9:
-            return 2
-        else:
-            return 3  
-
-    def hardround(self):
-        x=random.random()
-        if x<0.1:
-            return 1
-        elif x>0.1 and x<0.3:
-            return 2
-        else:
-            return 3
-
-    def getnumber(self,diff):
-        if diff==1:
-            return self.easyround()
-        if diff==2:
-            return self.mediuamround()
-        else:
-            return self.hardround()
-
-
-
 class endlesslevel(level):
-    def __init__(self, diff):
-        super().__init__(diff)
-        self.rand=randomround()
+    def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS):
+        super().__init__(diff, ENEMY_SKINS, BULLET_SKINS)
                    
-    def getwave(self, time):
-        if time>1:
-            self.diff=2
-        elif time>2:
-             self.diff=3
+    def getwave(self,time):
         enemies=[]
-        factor=enemyFactory()
-        x=20
+        factor=enemyFactory(self.BULLET_SKINS,self.ENEMY_SKINS)
+        x=15
         y=0
-        threshy=400
+        threshy=450
         for _ in range(5):
             threshy-=50
             for _ in range(5):
                 type=random.choice(["d","c"])
-                enemy=factor.create(type,self.rand.getnumber(self.diff),x,y,(600,threshy))
+                enemy=factor.create(type,(self.diff),x,y,(600,threshy))
                 enemies.append(enemy)
-                x+=20
+                x+=25
         return enemies
 
 

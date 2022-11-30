@@ -69,7 +69,7 @@ class Launcher(QMainWindow):
 		self.hide()
 		assets, backgrounds = self.manager.load_assets()
 		self.controller = engineController(settings=self.controls, profile= self.profile, assets = assets, backgrounds = backgrounds)
-		self.game_thread.setController(self.contoller)
+		self.game_thread.setController(self.controller)
 		if self.storyButton.isChecked():
 			#start vs mode
 			

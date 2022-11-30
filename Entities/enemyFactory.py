@@ -10,17 +10,14 @@ from weapon import weapon
 from bullet import bullet
 import random
 class enemyFactory:
-    enemySheet = pygame.image.load(os.path.join(".","assets", "Enemies_26x26_[6,2].png"))
-    bulletSheet = pygame.image.load(os.path.join(".", "assets", "Bullets_10x16_[4,2].png"))
-    ENEMY_SKINS = SpriteSheet(enemySheet,26,26,2,2,6).skin
-    BULLET_SKINS = SpriteSheet(bulletSheet,10,16,1,2,4).skin
-    DOG = ENEMY_SKINS[2]
+    def __init__(self, BULLET_SKINS, ENEMY_SKINS):
+        self.DOG = ENEMY_SKINS[2]
 
-    CAT = ENEMY_SKINS[1]
+        self.CAT = ENEMY_SKINS[1]
 
-    CAT_LASER = BULLET_SKINS[2]
+        self.CAT_LASER = BULLET_SKINS[0]
 
-    DOG_LASER = BULLET_SKINS[1]
+        self.DOG_LASER = BULLET_SKINS[0]
         
     def create(self,type,diff,x,y,threshold):
         if type=="d":
