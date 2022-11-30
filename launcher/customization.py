@@ -5,6 +5,7 @@ from PyQt5.QtCore import *
 from PyQt5 import uic
 from file.profile import Profile
 import os
+import pygame
 
 class Customization(QMainWindow):
     control_signal = pyqtSignal(dict)
@@ -35,7 +36,7 @@ class Customization(QMainWindow):
         
         if(self.validateControls(controls)):
             self.feed_label.setText("Saved Sucessfully !")
-            self.control_signal.emit(controls)
+            self.control_signal.emit(Customization.mapControls(controls))
         else:
             self.feed_label.setText("Invalid. Controls must be unique.")
 
@@ -54,8 +55,16 @@ class Customization(QMainWindow):
             self.findChild(QComboBox, "combo_left").setCurrentText(controls["left"])
             self.findChild(QComboBox, "combo_right").setCurrentText(controls["right"])
             self.findChild(QComboBox, "combo_fire").setCurrentText(controls["fire"])
+            
 
-        
+
+    @staticmethod
+    def mapControls(d : dict):
+        new_d = {}
+        for key in d:
+            val = f'K_{d[key]}'
+            new_d[key] = getattr(pygame, val)
+        return new_d        
 
     @staticmethod
     def validateControls(l : dict)->bool:

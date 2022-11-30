@@ -197,30 +197,30 @@ border-radius: 3px;</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="2">
-     <widget class="QComboBox" name="combo_down">
+    <item row="1" column="2">
+     <widget class="QComboBox" name="combo_up">
       <property name="styleSheet">
        <string notr="true">border: 2px solid green;
 border-radius: 3px;</string>
       </property>
       <item>
        <property name="text">
-        <string>Arrow up</string>
+        <string>UP</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow down</string>
+        <string>DOWN</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow left</string>
+        <string>LEFT</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow right</string>
+        <string>RIGHT</string>
        </property>
       </item>
       <item>
@@ -355,7 +355,7 @@ border-radius: 3px;</string>
       </item>
       <item>
        <property name="text">
-        <string>Space</string>
+        <string>SPACE</string>
        </property>
       </item>
       <item>
@@ -385,30 +385,30 @@ border-radius: 3px;</string>
       </item>
      </widget>
     </item>
-    <item row="1" column="2">
-     <widget class="QComboBox" name="combo_up">
+    <item row="2" column="2">
+     <widget class="QComboBox" name="combo_down">
       <property name="styleSheet">
        <string notr="true">border: 2px solid green;
 border-radius: 3px;</string>
       </property>
       <item>
        <property name="text">
-        <string>Arrow up</string>
+        <string>UP</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow down</string>
+        <string>DOWN</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow left</string>
+        <string>LEFT</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow right</string>
+        <string>RIGHT</string>
        </property>
       </item>
       <item>
@@ -543,7 +543,7 @@ border-radius: 3px;</string>
       </item>
       <item>
        <property name="text">
-        <string>Space</string>
+        <string>SPACE</string>
        </property>
       </item>
       <item>
@@ -581,22 +581,22 @@ border-radius: 3px;</string>
       </property>
       <item>
        <property name="text">
-        <string>Arrow up</string>
+        <string>UP</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow down</string>
+        <string>DOWN</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow left</string>
+        <string>LEFT</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow right</string>
+        <string>RIGHT</string>
        </property>
       </item>
       <item>
@@ -731,7 +731,7 @@ border-radius: 3px;</string>
       </item>
       <item>
        <property name="text">
-        <string>Space</string>
+        <string>SPACE</string>
        </property>
       </item>
       <item>
@@ -769,22 +769,22 @@ border-radius: 3px;</string>
       </property>
       <item>
        <property name="text">
-        <string>Arrow up</string>
+        <string>UP</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow down</string>
+        <string>DOWN</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow left</string>
+        <string>LEFT</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow right</string>
+        <string>RIGHT</string>
        </property>
       </item>
       <item>
@@ -919,7 +919,7 @@ border-radius: 3px;</string>
       </item>
       <item>
        <property name="text">
-        <string>Space</string>
+        <string>SPACE</string>
        </property>
       </item>
       <item>
@@ -957,22 +957,22 @@ border-radius: 3px;</string>
       </property>
       <item>
        <property name="text">
-        <string>Arrow up</string>
+        <string>UP</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow down</string>
+        <string>DOWN</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow left</string>
+        <string>LEFT</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Arrow right</string>
+        <string>RIGHT</string>
        </property>
       </item>
       <item>
@@ -1107,7 +1107,7 @@ border-radius: 3px;</string>
       </item>
       <item>
        <property name="text">
-        <string>Space</string>
+        <string>SPACE</string>
        </property>
       </item>
       <item>
