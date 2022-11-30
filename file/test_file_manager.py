@@ -2,22 +2,104 @@ import pytest
 import os
 import filepath
 from file_manager import FileManager
+from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
+file_manager = FileManager()
+
+import random, string
+
+
+def random_string(length):
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(length))
+
+
+def remove_profiles():
+    p_path = os.path.join(filepath.ROOT_DIR, "profiles", 'profiles.txt')
+    os.chmod(p_path, S_IWUSR | S_IREAD)
+    os.remove(p_path)
+
 
 def test_file_creation():
-    file_manager = FileManager()
     name = "name"
     file_manager.create_profile(name)
-    path = os.path.join(os.path.dirname(os.getcwd()), "profiles", name + '.txt')
+    path = os.path.join(filepath.ROOT_DIR, "profiles", name + '.txt')
     assert os.path.exists(path)
+    file_manager.delete_profile("name")
+    remove_profiles()
+
+
+def test_file_creation_with_corrupted_profiles():
+    p_path = os.path.join(filepath.ROOT_DIR, "profiles", "profiles.txt")
+    with open(p_path, "w") as file:
+        file.write("corrupted data")
+    name = "name"
+    file_manager.create_profile(name)
+    path = os.path.join(filepath.ROOT_DIR, "profiles", name + '.txt')
+    assert os.path.exists(path)
+    file_manager.delete_profile("name")
+    remove_profiles()
+
+
+def test_profile_deletion():
+    file_manager.create_profile("test")
+    assert file_manager.delete_profile("test")
+    remove_profiles()
+
+
+def test_deletion_non_existed_profile():
+    assert not file_manager.delete_profile("not_exist")
+
+
+def test_load_corrupted_profile():
+    path = os.path.join(filepath.ROOT_DIR, "profiles", "corrupted.txt")
+    with open(path, "w") as file:
+        file.write("corrupted data")
+    assert not file_manager.load_profile("corrupted")
     os.remove(path)
 
 
-def test_file_creation_profiles_dir_removed():
-    os.remove(os.path.join(os.path.dirname(os.getcwd()), "profiles"))
-    file_manager = FileManager()
-    name = "name"
-    file_manager.create_profile(name)
-    path = os.path.join(os.path.dirname(os.getcwd()), "profiles", name + '.json')
-    assert os.path.exists(path)
+def test_load_corrupted_profiles_index():
+    path = os.path.join(filepath.ROOT_DIR, "profiles", "profiles.txt")
+    with open(path, "w") as file:
+        file.write("corrupted data")
+    assert not file_manager.get_profiles()
     os.remove(path)
+
+
+def test_save_profile():
+    p = file_manager.create_profile("testSave")
+    p.set_story_progress(10)
+    file_manager.save_profile(p)
+    p1 = file_manager.load_profile("testSave")
+    assert p1.get_story_progress() == 10
+    file_manager.delete_profile("testSave")
+    remove_profiles()
+
+
+def test_editing_file():
+    file_manager.create_profile("testEdit")
+    path = os.path.join(filepath.ROOT_DIR, "profiles", "testEdit" + '.txt')
+    try:
+        with open(path, "w") as openfile:
+            openfile.write("test edit file")
+    except PermissionError:
+        assert True
+    file_manager.delete_profile("testEdit")
+    remove_profiles()
+
+
+def test_get_profiles():
+    profiles = []
+    for i in range(0, 5):
+        p = random_string(5)
+        profiles.append(p)
+        file_manager.create_profile(p)
+        assert file_manager.get_profiles().sort() == profiles.sort()
+
+    for i in range(0, 5):
+        p = profiles.pop()
+        file_manager.delete_profile(p)
+        assert file_manager.get_profiles().sort() == profiles.sort()
+    remove_profiles()
+
 
