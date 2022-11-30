@@ -1,9 +1,11 @@
+from assets_handler.spritesheet import SpriteSheet
 from file.profile import Profile
 import filepath
 import os
 import json
 import pygame
 from cryptography.fernet import Fernet
+
 
 class FileManager:
     def __init__(self):
@@ -104,18 +106,32 @@ class FileManager:
         profile.set_skins(json_object["skins"])
         return profile
 
-    def get_assets(self):
+    def load_assets(self):
         """
-        loads a profile from available user profiles
-        :param name(str): username of the required file
-        :return: True if profile is loaded successfully
+        loads assests images
+        :return: assets(list of Skin), backgrounds(list of Surface) if loaded successfully
                  False otherwise
         """
-        path = os.path.join(filepath.ROOT_DIR, "assets")
-        player_sheet = pygame.image.load(os.path.join(path, "Ships16x16[8,2].png"))
-        bullet_sheet = pygame.image.load(os.path.join(path, "assets", "Bullets10x16[4,2].png"))
-        nemy_sheet = pygame.image.load(os.path.join(path, "assets", "Enemies26x26[6,2].png"))
-        BG = pygame.image.load(os.path.join(path, "assets", "Backgrounds", "allBGstars_1024x1913.png"))
+        try:
+            path = os.path.join(filepath.ROOT_DIR, "Assets")
+            player_sheet = pygame.image.load(os.path.join(path, "Ships_16x16_[8,2].png"))
+            bullet_sheet = pygame.image.load(os.path.join(path, "Bullets_10x16_[4,2].png"))
+            enemy_sheet = pygame.image.load(os.path.join(path,  "Enemies_26x26_[6,2].png"))
+            PLAYER_SHIP_SKINS = SpriteSheet(player_sheet, 16, 16, 3, 2).skin
+            BULLET_SHIP_SKINS = SpriteSheet(bullet_sheet, 10, 16, 1, 2).skin
+            ENEMY_SKINS = SpriteSheet(enemy_sheet, 26, 26, 1, 2, 6).skin
+            assets = [PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS, ENEMY_SKINS]
+            background_imgs = ['allBGstars_1024x1913.png', 'fajrBG_1024x768.png',
+                               'landscapeBG_384x224.png', 'nightBGwithmoon_1024x768.png',
+                               'riverBG_256x320.png', 'spaceBG_256x224.png']
+            backgrounds = []
+            for img in background_imgs:
+                b_path = os.path.join(path,"Backgrounds", img)
+                BG = pygame.image.load(b_path)
+                backgrounds.append(BG)
+            return assets, backgrounds
+        except OSError:
+            return False
 
     def __create_new_file(self, name):
         """
@@ -143,5 +159,3 @@ class FileManager:
                 return True
         except OSError:
             return False
-
-

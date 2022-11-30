@@ -5,7 +5,35 @@ from PyQt5.QtCore import *
 from PyQt5 import uic
 from file.profile import Profile
 from file.file_manager import FileManager
+from Engines.engineController import engineController
+from launcher.customization import Customization
 import os
+import sys
+
+
+class Game_Thread(QThread):
+    deadSignal = pyqtSignal()
+    
+    def __init__(self, parent = None) -> None:
+        super().__init__(parent)
+        self.controller = None
+        
+    
+    def setController(self, e : engineController)->None:
+        self.controller = e		
+  
+    def run(self):
+        print("game thread running")
+        self.controller.run()
+        self.stop()
+
+    def stop(self):
+        print("thread killed")
+        self.deadSignal.emit()
+        self.quit()
+
+
+   
 
 
 class Launcher(QMainWindow):
@@ -13,6 +41,9 @@ class Launcher(QMainWindow):
 		super(Launcher,self).__init__()
 		uic.loadUi(os.path.join("launcher","ui","launcher.ui"),baseinstance=self, resource_suffix='_rc')
 		self.pager = pager
+		self.controller = None
+		self.game_thread = Game_Thread()
+		self.game_thread.deadSignal.connect(lambda : sys.exit())
 		self.storyButton = self.findChild(QRadioButton, "bt_story")
 		self.endlessButton = self.findChild(QRadioButton, "bt_endless")
 		self.vsButton = self.findChild(QRadioButton, "bt_vs")
@@ -36,12 +67,18 @@ class Launcher(QMainWindow):
 		self.profile = None
 
 	def handlePlayButton(self):
+		self.pager.hide()
+		assets, backgrounds = self.manager.load_assets()
+		self.controller = engineController(settings = Customization.mapControls(self.profile.get_controls()),
+                                     profile= self.profile, assets = assets, backgrounds = backgrounds)
+		self.game_thread.setController(self.controller)
 		if self.storyButton.isChecked():
 			#start vs mode
 			
 			print("story")
 		elif self.endlessButton.isChecked():
 			#start endless mode
+			self.game_thread.start()
 			print("endless")
 		else:
 			#start story mode
@@ -49,14 +86,11 @@ class Launcher(QMainWindow):
 
 	def catchProfile(self, s : Profile):
 		self.profile = 	s
-		print(self.profile.get_name())
 
 	def catchControls(self, c : dict):
 		self.controls = c
-		print(self.controls)
 		self.profile.set_controls(c)
-		print(self.profile.get_name())
-		print(self.manager.save_profile(self.profile))
+		self.manager.save_profile(self.profile)
 		
 		
 
