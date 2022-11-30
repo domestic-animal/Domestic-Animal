@@ -18,12 +18,13 @@ class normalGameEngine:
     def __init__(self, window, level,diff,playerAssets,profile,enemyAssets = [],
      gameAssets = [],settings=[pygame.K_a,pygame.K_d,pygame.K_w,pygame.K_s],powerUps =0) -> None:
         self.WIN=window
-        for i in playerAssets:
-            i.convert_alpha()
-        for i in enemyAssets:
-            i.convert_alpha()
-        for i in gameAssets:
-            i.convert_alpha()
+        # for i in playerAssets:
+        #     for j in i.frames:
+        #         j.convert_alpha()
+        # for i in enemyAssets:
+        #     i.convert_alpha()
+        # for i in gameAssets:
+        #     i.convert_alpha()
         # Player
         self.playerAssets = playerAssets
         # enemy
@@ -39,7 +40,7 @@ class normalGameEngine:
         #self.gameObserver = observe()
         self.level = level
         self.profile = profile
-        self.rats = pygame.image.load(os.path.join(".","assets", "pixel_ship_green_small.png")).convert_alpha()
+        self.rats = enemyAssets[0]
 
     def start(self):
 

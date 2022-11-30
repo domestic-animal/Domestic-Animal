@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./assets_handler",
+        "./Entities"
+    ]
+}

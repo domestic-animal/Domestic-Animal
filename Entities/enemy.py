@@ -8,11 +8,11 @@ class enemy(entity):
         self.damage=damage
         self.health = health
         self.weapon=weapon
-        self.mask = pygame.mask.from_surface(self.image)
+        #self.mask = pygame.mask.from_surface(self.image)
         self.threshold=threshold
 
-     def draw(self, window):
-        window.blit(self.image, (self.x, self.y))
+    # def draw(self, window):
+     #   window.blit(self.image, (self.x, self.y))
     
      def shoot(self):
          return self.weapon.shoot(self.x,self.y, 0)
@@ -37,7 +37,7 @@ class cat(enemy):
     def move(self):
     
         if(self.y >= self.threshold[1]):
-            if(self.x+self.velocity < 0 or self.x+self.velocity > self.threshold[0]-self.image.get_width()):
+            if(self.x+self.velocity < 0 or self.x+self.velocity > self.threshold[0]-self.skin.frames[0].get_width()):
                 self.velocity *= -1
             self.x+= self.velocity
         else:
