@@ -90,6 +90,7 @@ class Launcher(QMainWindow):
 	def catchControls(self, c : dict):
 		self.controls = c
 		self.profile.set_controls(c)
+		self.manager.save_profile(self.profile)
 		
 		
 
