@@ -21,4 +21,3 @@ def test_file_creation_profiles_dir_removed():
     assert os.path.exists(path)
     os.remove(path)
 
-def
