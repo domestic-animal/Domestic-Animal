@@ -30,7 +30,7 @@ class startMenue():
                     # TODO : start game
                     runM = False
                     selection = "start"
-                    pass
+
                 if buttons[1].isOver(pos):
                     # TODO : handle load function
                     pass
@@ -39,7 +39,9 @@ class startMenue():
                     pass
                 if buttons[3].isOver(pos):
                     # TODO : close program
-                    pass
+                    runM = False
+                    selection = "runAway"
+
             if e.type == pygame.MOUSEMOTION:
                 for b in buttons:
                     if b.isOver(pos):

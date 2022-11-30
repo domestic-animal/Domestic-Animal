@@ -21,7 +21,7 @@ class enemyFactory:
         
     def create(self,type,diff,x,y,threshold):
         if type=="d":
-            w = weapon(self.DOG_LASER, 1, int(700/diff),20*diff,3*diff)
+            w = weapon(self.DOG_LASER, 1, int(650/diff),15*diff,2*diff)
             return enemy.dog(x,5*diff,y,w,self.DOG,100*diff,3*diff,threshold)
         elif  type=="c":
             w = weapon(self.CAT_LASER, 1, int(500/diff),20*diff,2*diff)

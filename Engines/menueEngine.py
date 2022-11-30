@@ -35,9 +35,10 @@ class menu:
 
             # handle events with current position
             runMenue,selection = self.menue.handle_events(event, pos, self.buttons)
-
+            
             # draw buttons on the screen
             for b in self.buttons:
                 b.draw(self.screen)
 
             pygame.display.update()
+        return selection

@@ -12,20 +12,28 @@ class engineController:
         self.profile = profile
         self.lvlSelector = levelSelector()
         self.settings = settings
-        self.states = []
+        self.states = ""
         self.assets = assets
         self.mode = mode
         self.diff = 1
         self.gameState = gameState
         self.Background = backgrounds
+        self.WIDTH, self.HEIGHT = 600, 800
+        self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT))
         
     
-    WIDTH, HEIGHT = 600, 800
-    WIN = pygame.display.set_mode((WIDTH, HEIGHT))
     def run(self):
+        
+        
         while True:
+            self.WIN.blit(self.Background[1], (0, 0))
             self.switch()
-            self.gameState = self.currEngine.start()
+            self.states = self.currEngine.start()
+            self.gameState = self.states
+            if self.states == "start":
+                self.gameState = "game"
+            if self.states == "runAway" :
+                break
             
 
     def switch(self):
@@ -55,9 +63,7 @@ class engineController:
                 playerAssets= [PLAYER_SHIP_SKINS[0], BULLET_SHIP_SKINS[0]],enemyAssets=[ENEMY_SKINS[5]],gameAssets=[BG])
             elif self.gameState == "menu":
                 self.currEngine = menu(self.WIN, self.WIDTH, self.HEIGHT)
-                self.currEngine.create_menue(1)
+                self.currEngine.create_menue(2)
             else:
                 self.currEngine = self.Engine[2]
 
-#e = engineController()
-#e.run()
