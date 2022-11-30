@@ -1,4 +1,5 @@
 from file.profile import Profile
+import filepath
 import os
 import json
 import pygame
@@ -8,7 +9,7 @@ class FileManager:
     def __init__(self):
         pass
 
-    __p_dir = os.path.join(os.getcwd(), "profiles")
+    __p_dir = os.path.join(filepath.ROOT_DIR, "projects")
     __fernet = Fernet(b'lBW8DUQf7LkNAuDhTGeBCPHfytQ6dJP7TjVTM5_KlwE=')
 
     def create_profile(self, name):
@@ -110,14 +111,11 @@ class FileManager:
         :return: True if profile is loaded successfully
                  False otherwise
         """
-        assets_dir = os.path.join(os.path.dirname(os.getcwd()), "Assets")
-        assets = os.listdir(assets_dir)
-        assets_images = []
-        for asset in assets:
-            if os.path.isfile(asset):
-                img = pygame.image.load(os.path.join(assets_dir, asset))
-                assets_images.append(img)
-        return assets_images
+        path = os.path.join(filepath.ROOT_DIR, "assets")
+        player_sheet = pygame.image.load(os.path.join(path, "Ships16x16[8,2].png"))
+        bullet_sheet = pygame.image.load(os.path.join(path, "assets", "Bullets10x16[4,2].png"))
+        nemy_sheet = pygame.image.load(os.path.join(path, "assets", "Enemies26x26[6,2].png"))
+        BG = pygame.image.load(os.path.join(path, "assets", "Backgrounds", "allBGstars_1024x1913.png"))
 
     def __create_new_file(self, name):
         """
