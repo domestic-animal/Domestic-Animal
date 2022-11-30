@@ -56,7 +56,7 @@ class normalGameEngine:
         gameObserver = observer()
         Enemies=self.level.getwave(0.5)
 
-        pl1=player(300,600,we,self.playerAssets[0],self.settings,1000,7)
+        pl1=player(300,600,we,self.playerAssets[0],self.PLAYER_CONTROLS,1000,7)
         def redraw_window():
             #background
             self.WIN.blit(self.gameAssets[0], (0,0))

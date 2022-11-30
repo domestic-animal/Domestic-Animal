@@ -7,10 +7,10 @@ sys.path.insert(0, './assets_handler')
 
 class engineController:
 
-    def __init__(self,assets,profile,backgrounds, mode= -1,gameState = "game"):
+    def __init__(self,assets,profile,settings,backgrounds, mode= -1,gameState = "game"):
         self.profile = profile
         self.lvlSelector = levelSelector()
-        self.settings = profile.get_controls()
+        self.settings = settings
         self.states = []
         self.assets = assets
         self.mode = mode
