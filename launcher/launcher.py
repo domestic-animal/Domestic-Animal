@@ -69,15 +69,17 @@ class Launcher(QMainWindow):
 	def handlePlayButton(self):
 		self.pager.hide()
 		assets, backgrounds = self.manager.load_assets()
-		self.controller = engineController(settings = Customization.mapControls(self.profile.get_controls()),
-                                     profile= self.profile, assets = assets, backgrounds = backgrounds)
-		self.game_thread.setController(self.controller)
+		
 		if self.storyButton.isChecked():
 			#start vs mode
 			
 			print("story")
 		elif self.endlessButton.isChecked():
 			#start endless mode
+			# for now the intialization is done here don't forget to move it up after loading the assets
+			self.controller = engineController(settings = Customization.mapControls(self.profile.get_controls()),
+                                     profile= self.profile, assets = assets, backgrounds = backgrounds)
+			self.game_thread.setController(self.controller)
 			self.game_thread.start()
 			print("endless")
 		else:
