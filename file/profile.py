@@ -58,5 +58,26 @@ class Profile:
     def get_current_skin(self):
         return self.__current_skin
 
-    def add_skin(self, skin_path):
-        self.__skins.append(skin_path)
+    def get_profile(self):
+        return {
+            "name": self.__name,
+            "achievements": self.__achievements,
+            "controls": self.__controls,
+            "story_progress": self.__story_progress,
+            "unlocked_weapons": self.__unlocked_weapons,
+            "current_weapon": self.__current_weapon,
+            "skins": self.__skins,
+            "current_skin": self.__current_skin
+        }
+
+    def set_profile(self, json_object):
+        self.__name = json_object["name"]
+        self.__controls = json_object["controls"]
+        self.__achievements = json_object["achievements"]
+        self.__current_weapon = json_object["current_weapon"]
+        self.__unlocked_weapons = json_object["unlocked_weapons"]
+        self.__story_progress = json_object["story_progress"]
+        self.__current_skin = json_object["current_skin"]
+        self.__skins = json_object["skins"]
+
+

@@ -7,18 +7,20 @@ class Skin():
     def __init__(self, images, cooldown):
         """
         Constructor: sets the class attributes
+
+        :param images: Array of the frames
+        :param cooldown: Refresh rate for the animation
         """
-        self.frames = images
-        self.last_update = pygame.time.get_ticks()
-        #self.mask = pygame.mask.from_surface(self.frames[0])
-        self.animation_cooldown = cooldown
-        self.currframe = 0
+        self.frames = images                        # Array of the frames
+        self.last_update = pygame.time.get_ticks()  # The last time a refresh has done
+        self.animation_cooldown = cooldown          # Refresh rate between frames
+        self.currframe = 0                          # Current frame displayed
     
     def updateAnimation(self):
         """
-        function to apply the animation using the skin's frames.
+        Function to apply the animation using the skin's frames.
         
-        returns the next frame image to display after a specified cooldown
+        Returns the next frame image to display after a specified cooldown
         """
         current_time = pygame.time.get_ticks()
         if current_time - self.last_update >= self.animation_cooldown:
