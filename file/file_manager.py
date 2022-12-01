@@ -7,6 +7,7 @@ import pygame
 from cryptography.fernet import Fernet, InvalidToken
 from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
 
+
 class FileManager:
     def __init__(self):
         pass
@@ -30,10 +31,10 @@ class FileManager:
             p_path = os.path.join(self.__p_dir, "profiles.txt")
             profiles = [name]
             if os.path.exists(p_path):
-                    p = self.__read_file("profiles")
-                    if p is not None and p != "C":
-                        profiles = p["profiles"]
-                        profiles.append(name)
+                p = self.__read_file("profiles")
+                if p is not None and p != "C":
+                    profiles = p["profiles"]
+                    profiles.append(name)
             if profiles is None or not self.__write_file({"profiles": profiles}, p_path):
                 self.delete_profile(name)
                 return False
@@ -79,30 +80,30 @@ class FileManager:
     def delete_profile(self, name):
         """
         deletes a profile from available user profiles
-        :param name(str): username of the required profile
+        :param name: (str) username of the required profile
         :return: True if profile is deleted successfully
                  False otherwise
         """
         path = os.path.join(self.__p_dir, name + ".txt")
         if os.path.exists(path):
             try:
-                p_path = os.path.join(self.__p_dir, "profiles" + ".txt")
-                if os.path.exists(p_path):
-                    profiles = self.get_profiles()
-                    if profiles:
-                        profiles.remove(name)
-                    self.__write_file({"profiles": profiles}, p_path)
                 os.chmod(path, S_IWUSR | S_IREAD)
                 os.remove(path)
-                return True
             except OSError:
                 return False
+        p_path = os.path.join(self.__p_dir, "profiles" + ".txt")
+        if os.path.exists(p_path):
+            profiles = self.get_profiles()
+            if profiles and name in profiles:
+                profiles.remove(name)
+                self.__write_file({"profiles": profiles}, p_path)
+            return True
         return False
 
     def load_profile(self, name):
         """
         loads a profile from available user profiles
-        :param name(str): username of the required file
+        :param name: (str) username of the required file
         :return: True if profile is loaded successfully
                  False otherwise
         """
@@ -110,14 +111,7 @@ class FileManager:
         if json_object is None or json_object == "C":
             return False
         profile = Profile()
-        profile.set_name(json_object["name"])
-        profile.set_controls(json_object["controls"])
-        profile.set_achievements(json_object["achievements"])
-        profile.set_current_weapon(json_object["current_weapon"])
-        profile.set_unlocked_weapons(json_object["unlocked_weapons"])
-        profile.set_story_progress(json_object["story_progress"])
-        profile.set_current_skin(json_object["current_skin"])
-        profile.set_skins(json_object["skins"])
+        profile.set_profile(json_object)
         return profile
 
     def load_assets(self):
@@ -130,7 +124,7 @@ class FileManager:
             path = os.path.join(filepath.ROOT_DIR, "Assets")
             player_sheet = pygame.image.load(os.path.join(path, "Ships_16x16_[8,2].png"))
             bullet_sheet = pygame.image.load(os.path.join(path, "Bullets_10x16_[4,2].png"))
-            enemy_sheet = pygame.image.load(os.path.join(path,  "Enemies_26x26_[6,2].png"))
+            enemy_sheet = pygame.image.load(os.path.join(path, "Enemies_26x26_[6,2].png"))
             PLAYER_SHIP_SKINS = SpriteSheet(player_sheet, 16, 16, 3, 2).skin
             BULLET_SHIP_SKINS = SpriteSheet(bullet_sheet, 10, 16, 1.2, 2).skin
             ENEMY_SKINS = SpriteSheet(enemy_sheet, 26, 26, 1.75, 2, 6).skin
@@ -140,7 +134,7 @@ class FileManager:
                                'riverBG_256x320.png', 'spaceBG_256x224.png']
             backgrounds = []
             for img in background_imgs:
-                b_path = os.path.join(path,"Backgrounds", img)
+                b_path = os.path.join(path, "Backgrounds", img)
                 BG = pygame.image.load(b_path)
                 backgrounds.append(BG)
             return assets, backgrounds
