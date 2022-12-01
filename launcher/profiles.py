@@ -25,7 +25,7 @@ class Profiles(QMainWindow):
         
         ##read the profiles
         self.profiles = self.fileManager.get_profiles()
-        if self.profiles is False:
+        if self.profiles is False or self.profiles is None:
             self.profiles = []
         self.setup_profiles()
         
@@ -77,6 +77,15 @@ class Profiles(QMainWindow):
         
     def preformCreation(self, i: int):
         name = self.create_edit[i].text()
+        
+        
+        
+        if len(name) == 0:
+            self.label.setText("Empty names not allowed")
+            return
+        if name  in self.profiles:
+            self.label.setText("profile already exists")
+            return
         
         p = self.fileManager.create_profile(name)
         if p is False:
