@@ -1,16 +1,15 @@
-import pytest
 import os
 import filepath
 from file_manager import FileManager
-from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
+from profile import Profile
+from stat import S_IREAD, S_IWUSR
 file_manager = FileManager()
-
 import random, string
 
 
 def random_string(length):
     letters = string.ascii_lowercase
-    return ''.join(random.choice(letters) for i in range(length))
+    return ''.join(random.choice(letters) for _ in range(length))
 
 
 def remove_profiles():
@@ -76,6 +75,13 @@ def test_save_profile():
     remove_profiles()
 
 
+def test_save_non_existed_profile():
+    p = Profile()
+    p.set_name("testNotExist")
+    p.set_story_progress(10)
+    assert not file_manager.save_profile(p)
+
+
 def test_editing_file():
     file_manager.create_profile("testEdit")
     path = os.path.join(filepath.ROOT_DIR, "profiles", "testEdit" + '.txt')
@@ -95,11 +101,9 @@ def test_get_profiles():
         profiles.append(p)
         file_manager.create_profile(p)
         assert file_manager.get_profiles().sort() == profiles.sort()
-
     for i in range(0, 5):
         p = profiles.pop()
         file_manager.delete_profile(p)
         assert file_manager.get_profiles().sort() == profiles.sort()
     remove_profiles()
-
 
