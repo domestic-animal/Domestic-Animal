@@ -29,7 +29,10 @@ class menu:
         # rum menue engine
         runMenue = True
         selection = ""
+        clock = pygame.time.Clock()
+        FPS = 60
         while runMenue:
+            clock.tick(FPS)
             pos = pygame.mouse.get_pos()
             event = pygame.event.get()
 
