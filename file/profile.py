@@ -70,3 +70,14 @@ class Profile:
             "current_skin": self.__current_skin
         }
 
+    def set_profile(self, json_object):
+        self.__name = json_object["name"]
+        self.__controls = json_object["controls"]
+        self.__achievements = json_object["achievements"]
+        self.__current_weapon = json_object["current_weapon"]
+        self.__unlocked_weapons = json_object["unlocked_weapons"]
+        self.__story_progress = json_object["story_progress"]
+        self.__current_skin = json_object["current_skin"]
+        self.__skins = json_object["skins"]
+
+
