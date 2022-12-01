@@ -4,7 +4,7 @@ import string
 from stat import S_IREAD, S_IWUSR
 import filepath
 from file.file_manager import FileManager
-from profile import Profile
+from file.profile import Profile
 
 file_manager = FileManager()
 
