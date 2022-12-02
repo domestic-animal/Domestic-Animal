@@ -4,8 +4,19 @@ sys.path.insert(0, './Entities')
 from enemyFactory import enemyFactory
 from enemy import enemy
 
+
+"""level abstract class
+
+"""
 class level:
     def __init__(self,diff,ENEMY_SKINS,BULLET_SKINS):
+        """constructor
+
+        Args:
+            diff (int): difficulity of the level
+            ENEMY_SKINS (list of skins): Enemy skin assets
+            BULLET_SKINS (list of skins): bullet skin assets
+        """
         self.waves=[]
         self.index=None
         self.diff=diff
@@ -15,11 +26,22 @@ class level:
     def getwave(self,time):
         pass
 
+"""endless level impements the level abstract class
+"""
 class endlesslevel(level):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS)
                    
+    
     def getwave(self,time):
+        """generates random waves every time it gets called
+
+        Args:
+            time (int): difficulity increases with time
+
+        Returns:
+            list of enemies
+        """
         enemies=[]
         factor=enemyFactory(self.BULLET_SKINS,self.ENEMY_SKINS)
         x=20
