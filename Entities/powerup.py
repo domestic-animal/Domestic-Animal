@@ -15,6 +15,9 @@ class PowerUp(entity):
     def add_powerup(self,player):
         pass
 
+    def off_screen(self,height):
+        return not(self.y <= height)
+
 class DamagePowerUP(PowerUp):
     
     def __init__(self, x, y,image,velocity,threshold):

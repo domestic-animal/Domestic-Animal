@@ -9,7 +9,6 @@ class player(entity):
         self.max_health=health
         self.input=input
         self.ScoreMultiplayer=1
-        #self.mask = pygame.mask.from_surface(self.image)
         self.cool_down=0
 
      def draw(self, window):

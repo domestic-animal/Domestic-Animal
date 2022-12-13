@@ -41,7 +41,7 @@ class engineController:
         self.WIDTH, self.HEIGHT = 600, 800
         self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT))
         
-    
+
     def run(self):
         """
             run function to run the engine controller to start the game
@@ -68,29 +68,19 @@ class engineController:
             """
             ## if the game state is game 
             if self.gameState == "game":
-                ## convert all assets for optimizations
                 PLAYER_SHIP_SKINS = self.assets[0]
-                for i in PLAYER_SHIP_SKINS:
-                    i.frames[0].convert_alpha()
-                    i.frames[1].convert_alpha()
-
                 BULLET_SHIP_SKINS = self.assets[1]
-                for i in BULLET_SHIP_SKINS:
-                    i.frames[0].convert_alpha()
-                    i.frames[1].convert_alpha()
-
                 ENEMY_SKINS = self.assets[2]
-                for i in ENEMY_SKINS:
-                    i.frames[0].convert_alpha()
-                    i.frames[1].convert_alpha()
-
+                self.convert(PLAYER_SHIP_SKINS,BULLET_SHIP_SKINS,ENEMY_SKINS)
                 BG = self.Background[0]
                 
             # get the chosen level from the level selector
                 level = self.lvlSelector.getLevel(self.mode,self.diff,ENEMY_SKINS,BULLET_SHIP_SKINS)
             # assign the current Engine to be the normal game engine
-                self.currEngine = normalGameEngine(self.WIN,level,self.diff,profile = self.profile,settings = self.settings,
-                playerAssets= [PLAYER_SHIP_SKINS[0], BULLET_SHIP_SKINS[0]],enemyAssets=[ENEMY_SKINS[5]],gameAssets=[BG])
+                self.currEngine = normalGameEngine(window =self.WIN,level =level,
+                diff = self.diff,profile = self.profile,settings1 = self.settings,
+                playerAssets= [PLAYER_SHIP_SKINS[0], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[3]],
+                enemyAssets=[ENEMY_SKINS[5]],gameAssets=[BG])
             
             #if the game state is opening a menu
             elif self.gameState == "menu":
@@ -99,3 +89,23 @@ class engineController:
                 #create the main menu
                 self.currEngine.create_menue(2)
 
+    def convert(self, PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS,ENEMY_SKINS):
+   ## convert all assets for optimizations
+                for i in PLAYER_SHIP_SKINS:
+                    i.frames[0].convert_alpha()
+                    i.frames[1].convert_alpha()
+
+                for i in BULLET_SHIP_SKINS:
+                    i.frames[0].convert_alpha()
+                    i.frames[1].convert_alpha()
+
+                for i in ENEMY_SKINS:
+                    i.frames[0].convert_alpha()
+                    i.frames[1].convert_alpha()
+
+
+    def getGameState(self):
+        if self.gameState == "game":
+            return self.currEngine.getGameState()
+        else:
+            None

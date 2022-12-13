@@ -12,16 +12,18 @@ sys.path.insert(0, './Entities')
 from player import player
 from weapon import weapon
 from bullet import bullet
+from powerfactory import PowerUpFactory
 from Engines.observer import observer
 from Engines.level import endlesslevel
 from Engines.menueEngine import menu
+from Engines.gameState import gameState
 class normalGameEngine:
 
     # Player player
 
-    def __init__(self,window, level, diff, playerAssets, profile, enemyAssets=[],
-                 gameAssets=[], settings=[pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s], powerUps=0,
-                 ):
+    def __init__(self,window, level,profile, playerAssets , enemyAssets,
+                 gameAssets, settings1, powerUps=0,
+                 diff = 1,score=0,is_coop=2):
         """
             Constructor
 
@@ -36,14 +38,19 @@ class normalGameEngine:
             settings: player's controls
             powerUps: how many powerups are allowed
         """
+
         self.WIN = window
         self.playerAssets = playerAssets
         self.enemyAssets = enemyAssets
         self.gameAssets = gameAssets
-        self.settings = settings
-        self.PLAYER_CONTROLS = [settings["left"],settings["right"],settings["up"],settings["down"]]
+        self.settings1 = settings1
+        self.settings2 = settings1
+        self.PLAYER1_CONTROLS = [settings1["left"],settings1["right"],settings1["up"],settings1["down"]]
+        self.PLAYER2_CONTROLS =  [settings1["left"],settings1["right"],settings1["up"],settings1["down"]]
         self.level = level
         self.profile = profile
+        self.is_coop=is_coop
+        self.diff = diff
 
         #rat enemy for higher difficulty
         self.rats = enemyAssets[0]
@@ -51,44 +58,113 @@ class normalGameEngine:
         self.menuengine = menu(self.WIN, 600,800)
         self.menuengine.create_menue(1)
 
+        #constant attributes
+        self.Enemies = []
+        self.Bullets = []
+        self.Players = []
+        self.powerup=[]
+        self.score=score
+        self.gameObserver = observer()
+        self.main_font = pygame.font.SysFont("comicsans", 70)
+
+
+    def create_player(self):
+        
+        #player Entity
+        we1 = weapon(self.playerAssets[1], -1, damage=200, fire_rate=10)
+        pl1=player(300,600,we1,self.playerAssets[0],self.PLAYER1_CONTROLS,1000,7)
+        
+        self.Players.append(pl1)
+        if self.is_coop==2:
+            we2 = weapon(self.playerAssets[3], -1, damage=200, fire_rate=10)
+            pl2=player(400,600,we2,self.playerAssets[2],self.PLAYER2_CONTROLS,1000,7)
+            self.Players.append(pl2)
+    
+    def move_entities(self,keys):
+        #detect player movement
+            for player in self.Players:
+                player.move(keys, 600, 800)
+
+            #move enemies and shoot
+            for enemy in self.Enemies:
+                enemy.move()
+                Bullet = enemy.shoot()
+                if Bullet != None:
+                    self.Bullets.append(Bullet)
+            
+            #move bullets
+            for bullet in self.Bullets:
+                bullet.move()
+    def shoot(self,keys):
+            if keys[self.settings1["fire"]]: 
+                Bullet=self.Players[0].shoot()
+                if Bullet!= None:
+                    self.Bullets.append(Bullet)
+            if keys[self.settings2["fire"]]:
+                Bullet=self.Players[1].shoot()
+                if Bullet!= None:
+                    self.Bullets.append(Bullet)
+    
+    def inviciblility_cooldown(self):
+        for player in self.Players:
+            if player.cool_down > 0:
+                   player.cool_down -= 1
+
+    def generate_rat(self):
+            # to do : with difficulity
+        if (random.randint(0, 10* 60) == 1):
+            player = random.choice(self.Players)
+            rat_movement = random.choice([(0, 1), (600, -1)])
+            rat = bullet(rat_movement[0], player.y, self.rats, 500, 5, rat_movement[1], 1)
+            self.Bullets.append(rat)
+    
+    # function to get the current game score
+    def getGameState(self):
+        return gameState(self.Bullets,self.Players, self.Enemies, self.diff,1,-1,pygame.time.Clock().get_time())
+
+     # function to draw  the window
+    def redraw_window(self):
+            """
+                drawing function to redraw every frame
+            """
+            # drawing background
+            self.WIN.blit(self.gameAssets[0], (0, 0))
+            scores_label = self.main_font.render(f"score: {self.score}", 1, (255,255,255))
+            self.WIN.blit(scores_label,(10, 10))
+            # drawing player
+            for i in self.Players:
+                i.draw(self.WIN)
+            #drawing Enemies
+            for i in self.Enemies:
+                i.draw(self.WIN)
+            #drawing bullets
+            for i in self.Bullets:
+                i.draw(self.WIN)
+            #update the display
+            pygame.display.update()
+
+    # function to create the power ups the power 
+    # def insertpowerup(self):
+    #     if (random.randint(0, 10* 60) == 1):
+    #         powers=["h","d","s","r","i"]
+    #         choice=random.choice(powers)
+    #         self.powerFactory.create
+
+            
+        
+
     def start(self):
         """
             function used to start the game engine 
         """
         ####    Intitalization      ####
         #################################
+        self.create_player()
         #storage lists
-        Enemies = []
-        Bullets = []
-        # Player = []
         FPS = 60
         clock = pygame.time.Clock()
-        gameObserver = observer()
-
-        #player Entity
-        we = weapon(self.playerAssets[1], -1, damage=200, fire_rate=10)
-        pl1=player(300,600,we,self.playerAssets[0],self.PLAYER_CONTROLS,1000,7)
-
         #generate the wave
-        Enemies=self.level.getwave(1)
-
-        def redraw_window():
-            """
-                drawing function to redraw every frame
-            """
-            # drawing background
-            self.WIN.blit(self.gameAssets[0], (0, 0))
-            # drawing player
-            pl1.draw(self.WIN)
-            #drawing Enemies
-            for i in Enemies:
-                i.draw(self.WIN)
-            #drawing bullets
-            for i in Bullets:
-                i.draw(self.WIN)
-            #update the display
-            pygame.display.update()
-
+        self.Enemies=self.level.getwave(1)
 
         ####    Main game loop      ####
         ################################
@@ -96,48 +172,29 @@ class normalGameEngine:
             #drawing FPS
             clock.tick(FPS)
             #draw everything
-            redraw_window()
-
+            self.redraw_window()
             #generate a new wave when the wave is cleared
-            if len(Enemies) == 0:
-                Enemies = self.level.getwave(1)
+            if len(self.Enemies) == 0:
+                self.Enemies = self.level.getwave(1)
 
             #detect the keys pressed
             keys = pygame.key.get_pressed()
             # detect shooting
-            if keys[self.settings["fire"]]: 
-                Bullet=pl1.shoot()
-                if Bullet!= None:
-                    Bullets.append(Bullet)
-
-            #detect player movement
-            pl1.move(keys, 600, 800)
-            #move enemies and shoot
-            for i in Enemies:
-                i.move()
-                Bullet = i.shoot()
-                if Bullet != None:
-                    Bullets.append(Bullet)
-            #move bullets
-            for i in Bullets:
-                i.move()
-            if pl1.cool_down > 0:
-                pl1.cool_down -= 1
-
+            self.shoot(keys)
+            #move entities 
+            self.move_entities(keys)
+            #reduce invicibity cooldowns
+            self.inviciblility_cooldown()
             ##generate rat
-            # to do : with difficulity
-            if (random.randint(0, 10* 60) == 1):
-                rat_movement = random.choice([(0, 1), (600, -1)])
-                rat = bullet(rat_movement[0], pl1.y, self.rats, 500, 5, rat_movement[1], 1)
-                Bullets.append(rat)
+            self.generate_rat()
             
             #observe game state and update it accordingly
             #observe collisions
-            gameObserver.collision(Bullets, Enemies, pl1)
+            self.gameObserver.collision(self.Bullets, self.Enemies, self.Players)
             #observe dead enemies
-            gameObserver.dead(Enemies)
+            self.score+=self.gameObserver.dead(self.Enemies,self.Players)
             #observe offscreen bullets
-            gameObserver.off_screen(Bullets)
+            self.gameObserver.off_screen(self.Bullets)
 
 
             #pasue menu
@@ -148,10 +205,13 @@ class normalGameEngine:
                 if selection == "runAway":
                     return "menu"
                     
-
             #on death or quitting
-            if pl1.health <= 0:
-                return "menu"
+            if self.is_coop > 1:
+                if self.Players[0].health <= 0 and self.Players[1].health <= 0:
+                        return "menu"
+            else:
+                if self.Players[0].health <= 0:
+                    return "menu"
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return "runAway"

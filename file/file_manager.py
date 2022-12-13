@@ -125,8 +125,8 @@ class FileManager:
             player_sheet = pygame.image.load(os.path.join(path, "Ships_16x16_[8,2].png"))
             bullet_sheet = pygame.image.load(os.path.join(path, "Bullets_10x16_[4,2].png"))
             enemy_sheet = pygame.image.load(os.path.join(path, "Enemies_26x26_[6,2].png"))
-            PLAYER_SHIP_SKINS = SpriteSheet(player_sheet, 16, 16, 3, 2).skin
-            BULLET_SHIP_SKINS = SpriteSheet(bullet_sheet, 10, 16, 1.2, 2).skin
+            PLAYER_SHIP_SKINS = SpriteSheet(player_sheet, 16, 16, 3, 2,8).skin
+            BULLET_SHIP_SKINS = SpriteSheet(bullet_sheet, 10, 16, 1.2, 2,4).skin
             ENEMY_SKINS = SpriteSheet(enemy_sheet, 26, 26, 1.75, 2, 6).skin
             assets = [PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS, ENEMY_SKINS]
             background_imgs = ['allBGstars_1024x1913.png', 'fajrBG_1024x768.png',
