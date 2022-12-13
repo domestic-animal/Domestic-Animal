@@ -7,7 +7,7 @@ from powerup import HealthPowerUP
 from powerup import ImmunityPowerUP
 from powerup import FireRatePowerUP
 from powerup import ScorePowerUP
-from powerupfactory import PowerUpFactory
+from powerfactory import PowerUpFactory
 
 sys.path.insert(0, './assets_handler')
 from spritesheet import SpriteSheet
