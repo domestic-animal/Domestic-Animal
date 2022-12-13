@@ -8,6 +8,7 @@ class player(entity):
         self.weapon=weapon
         self.max_health=health
         self.input=input
+        self.ScoreMultiplayer=1
         #self.mask = pygame.mask.from_surface(self.image)
         self.cool_down=0
 

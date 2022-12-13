@@ -18,7 +18,7 @@ class bullet(entity):
     def off_screen(self,width,height):
         return not(self.y <= height and self.y >= 0) or not (self.x <= width and self.x >= 0)
 
-    def damage(self,entity):
+    def Objectdamage(self,entity):
         entity.health-=self.damage
         self.y=-40
 
