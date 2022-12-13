@@ -5,9 +5,9 @@ name: Python application
 
 on:
   push:
-    branches: [ "milestone1" ]
+    branches: [ "milestone2" ]
   pull_request:
-    branches: [ "milestone1" ]
+    branches: [ "milestone2" ]
 
 
 permissions:
