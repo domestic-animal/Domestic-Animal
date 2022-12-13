@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
 from launcher.customization import Customization
 from launcher.profiles import Profiles
 from launcher.launcher import Launcher
@@ -8,7 +9,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     widget = QtWidgets.QStackedWidget()
     manager = FileManager()
-    
+    # widget.setWindowFlag(Qt.FramelessWindowHint); #for borderless window  
     ui = Launcher(widget, manager)
     c = Customization(widget)
     p = Profiles(widget, manager)

@@ -14,144 +14,189 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QPushButton{
-	border: 2px solid;
-	border-radius: 15px;
-	background-color: rgb(79, 255, 53);
-	font-size: 20px;
-}
-QPushButton::hover{
-	background-color: red;
-}
-QPushButton::pressed{
-	background-color: red;
-	border: 10px solid green;
-}
-
-QRadioButton{
-	font-size: 20px;
-	font: 16pt &quot;Purisa&quot;;
-}</string>
+   <string notr="true">background-color:qlineargradient(spread:reflect, x1:0.084, y1:0.0454545, x2:0.474, y2:0.499591, stop:0.401832 rgba(34, 124, 112, 255), stop:1 rgba(136, 164, 124, 255))
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <property name="styleSheet">
+    <string notr="true">QFrame{
+background-color: transparent;
+}</string>
+   </property>
+   <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>-10</x>
-      <y>25</y>
-      <width>811</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Purisa</family>
-      <pointsize>22</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-      <underline>false</underline>
-      <kerning>true</kerning>
-     </font>
-    </property>
-    <property name="text">
-     <string>Welcome to Domestic Animal</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="bt_custom">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>340</y>
-      <width>400</width>
-      <height>75</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Purisa</family>
-      <pointsize>-1</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Customize Controls</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="bt_play">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>160</y>
-      <width>400</width>
-      <height>75</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Purisa</family>
-      <pointsize>-1</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Play</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="bt_story">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>250</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Story</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="bt_endless">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>250</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Endless</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="bt_vs">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>250</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>VS</string>
-    </property>
-   </widget>
-   <widget class="QToolButton" name="bt_back">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>71</width>
-      <height>42</height>
+      <x>-1</x>
+      <y>-1</y>
+      <width>801</width>
+      <height>601</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: black</string>
+     <string notr="true">QWidget{
+background-color: transparent;
+}
+QLabel{
+font: 25pt &quot;Kristen ITC&quot;;
+border: 0px;
+}
+QPushButton{
+color: rgb(28, 49, 94);
+border: 2px solid rgb(28, 49, 94);
+border-radius: 5px;
+font: 16pt &quot;Kristen ITC&quot;;
+}
+QPushButton::hover{
+background-color: rgb(230, 226, 195);
+}
+QPushButton:pressed{
+background-color:  rgb(28, 49, 94);
+}
+QToolButton{
+background-color: rgb(136, 164, 124);
+border: 1px solid;
+border-radius: 5px;
+}
+QToolButton::hover{
+background-color: rgb(230, 226, 195);
+}
+QRadioButton{
+font: 16pt &quot;Kristen ITC&quot;;
+}
+</string>
     </property>
-    <property name="text">
-     <string>...</string>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
     </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="bt_play">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>160</y>
+       <width>400</width>
+       <height>75</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Kristen ITC</family>
+       <pointsize>16</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Play</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="bt_vs">
+     <property name="geometry">
+      <rect>
+       <x>520</x>
+       <y>250</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>VS</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="bt_endless">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>250</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Endless</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="bt_story">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>250</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Story</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_custom">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>350</y>
+       <width>400</width>
+       <height>75</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Kristen ITC</family>
+       <pointsize>16</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Customize Controls</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>811</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Kristen ITC</family>
+       <pointsize>25</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="text">
+      <string>Welcome to Domestic Animal</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="bt_back">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>71</width>
+       <height>42</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>
