@@ -2,8 +2,6 @@ import sys
 import pygame
 import os
 sys.path.insert(0, './Entities')
-from player import player
-from weapon import weapon
 from powerup import DamagePowerUP
 from powerup import HealthPowerUP
 from powerup import ImmunityPowerUP
