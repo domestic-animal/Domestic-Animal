@@ -1,4 +1,4 @@
-import PowerUp
+import powerup
 class PowerUpFactory:
 
     def __init__(self, health, damage,score,rate,immune):
@@ -11,19 +11,19 @@ class PowerUpFactory:
         
     def create(self,type,x,y,velocity,threshold):
         if type=="h":
-            return PowerUp.HealthPowerUP(x,y,self.health_image,velocity,threshold)
+            return powerup.HealthPowerUP(x,y,self.health_image,velocity,threshold)
 
         elif type=="d":
-            return PowerUp.DamagePowerUP(x,y,self.damage_image,velocity,threshold)
+            return powerup.DamagePowerUP(x,y,self.damage_image,velocity,threshold)
 
         elif type=="s":
-            return PowerUp.ScorePowerUP(x,y,self.score_image,velocity,threshold)
+            return powerup.ScorePowerUP(x,y,self.score_image,velocity,threshold)
 
         elif type=="r":
-            return PowerUp.FireRatePowerUP(x,y,self.rate_image,velocity,threshold)
+            return powerup.FireRatePowerUP(x,y,self.rate_image,velocity,threshold)
 
         elif type=="i":
-            return PowerUp.ImmunityPowerUP(x,y,self.immune_image,velocity,threshold)
+            return powerup.ImmunityPowerUP(x,y,self.immune_image,velocity,threshold)
             
         else: 
             return None

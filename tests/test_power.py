@@ -2,12 +2,13 @@ import sys
 import pygame
 import os
 sys.path.insert(0, './Entities')
+
 from player import player
 from weapon import weapon
-from Entities.PowerUp import DamagePowerUP
-from Entities.PowerUp import HealthPowerUP
-from Entities.PowerUp import FireRatePowerUP
-from Entities.PowerUp import ScorePowerUP
+from powerup import DamagePowerUP
+from powerup import HealthPowerUP
+from powerup import FireRatePowerUP
+from powerup import ScorePowerUP
 
 sys.path.insert(0, './assets_handler')
 from spritesheet import SpriteSheet
