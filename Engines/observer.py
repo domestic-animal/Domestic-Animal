@@ -45,14 +45,12 @@ class observer:
             if i.is_friendly<0:
                 for j in enemies:
                     if self.is_collide(i,j):
-                        j.health-=i.damage
-                        i.y=-40
+                        i.damage(j)
                         break
             #if the bullets are not friendly (1)
             else:
                 if player.cool_down <=0 and self.is_collide(i,player):
-                    player.health-=i.damage
-                    i.y=-40
+                   i.damage(player)
         # if the player collided with an enemy there is some invinciblity frames
         if player.cool_down <=0:
             for i in enemies:
