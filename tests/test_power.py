@@ -1,18 +1,17 @@
 import sys
-sys.path.insert(0, './Entities')
-sys.path.insert(0, './assets_handler')
-from player import player
-from weapon import weapon
-
-from PowerUp import DamagePowerUP
-from PowerUp import HealthPowerUP
-
-from PowerUp import FireRatePowerUP
-from PowerUp import ScorePowerUP
-from spritesheet import SpriteSheet
-
 import pygame
 import os
+sys.path.insert(0, './Entities')
+from player import player
+from weapon import weapon
+from PowerUp import DamagePowerUP
+from PowerUp import HealthPowerUP
+from PowerUp import FireRatePowerUP
+from PowerUp import ScorePowerUP
+
+sys.path.insert(0, './assets_handler')
+from spritesheet import SpriteSheet
+
 enemy_sheet = pygame.image.load(os.path.join("Assets", "Enemies_26x26_[6,2].png"))
 png = SpriteSheet(enemy_sheet,26,26,1,2,6).skin[0]
 PLAYER_CONTROLS=[]
