@@ -23,1166 +23,1193 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QPushButton{
-	border: 5px solid;
-	border-radius: 15px;
-	background-color: rgb(79, 255, 53);
-	font: 16pt &quot;Purisa&quot;;
-}
-QPushButton::hover{
-	background-color: red;
-}
-QPushButton::pressed{
-	background-color: red;
-	border: 10px solid green;
-}
-QLabel{
-font: 16pt &quot;Purisa&quot;;
-}
-QComboBox{
-font: 16pt &quot;Purisa&quot;;
-}
-QToolButton{
-	background-color: black;
-}</string>
+   <string notr="true">background-color:qlineargradient(spread:reflect, x1:0.084, y1:0.0454545, x2:0.474, y2:0.499591, stop:0.401832 rgba(34, 124, 112, 255), stop:1 rgba(136, 164, 124, 255))</string>
   </property>
-  <widget class="QWidget" name="gridLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>190</y>
-     <width>671</width>
-     <height>401</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0">
-    <property name="sizeConstraint">
-     <enum>QLayout::SetDefaultConstraint</enum>
-    </property>
-    <item row="4" column="1">
-     <widget class="QLabel" name="label_4">
-      <property name="font">
-       <font>
-        <family>Purisa</family>
-        <pointsize>16</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-        <kerning>true</kerning>
-       </font>
-      </property>
-      <property name="text">
-       <string>Right</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QLabel" name="label_2">
-      <property name="font">
-       <font>
-        <family>Purisa</family>
-        <pointsize>16</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-        <kerning>true</kerning>
-       </font>
-      </property>
-      <property name="text">
-       <string>Fire</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLabel" name="label_3">
-      <property name="font">
-       <font>
-        <family>Purisa</family>
-        <pointsize>16</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-        <kerning>true</kerning>
-       </font>
-      </property>
-      <property name="text">
-       <string>Up</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QComboBox" name="comboBox_7">
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid green;
-border-radius: 3px;</string>
-      </property>
-      <item>
-       <property name="text">
-        <string>Player 1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Player 2</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLabel" name="label_6">
-      <property name="font">
-       <font>
-        <family>Purisa</family>
-        <pointsize>16</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-        <kerning>true</kerning>
-       </font>
-      </property>
-      <property name="text">
-       <string>Left</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLabel" name="label_5">
-      <property name="font">
-       <font>
-        <family>Purisa</family>
-        <pointsize>16</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-        <kerning>true</kerning>
-       </font>
-      </property>
-      <property name="text">
-       <string>Down</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QLabel" name="label_8">
-      <property name="font">
-       <font>
-        <family>Purisa</family>
-        <pointsize>16</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-        <kerning>true</kerning>
-       </font>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
-     <widget class="QComboBox" name="combo_up">
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid green;
-border-radius: 3px;</string>
-      </property>
-      <item>
-       <property name="text">
-        <string>UP</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>DOWN</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LEFT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RIGHT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>q</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>w</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>e</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>r</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>t</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>y</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>u</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>i</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>o</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>p</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>a</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>s</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>d</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>f</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>g</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>h</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>j</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>k</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>l</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>m</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>n</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>b</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>v</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>c</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>x</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>z</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>SPACE</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LCTRL</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LALT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RCTRL</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RALT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LSHIFT</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item row="2" column="2">
-     <widget class="QComboBox" name="combo_down">
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid green;
-border-radius: 3px;</string>
-      </property>
-      <item>
-       <property name="text">
-        <string>UP</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>DOWN</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LEFT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RIGHT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>q</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>w</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>e</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>r</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>t</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>y</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>u</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>i</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>o</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>p</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>a</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>s</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>d</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>f</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>g</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>h</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>j</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>k</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>l</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>m</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>n</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>b</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>v</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>c</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>x</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>z</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>SPACE</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LCTRL</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LALT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RCTRL</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RALT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LSHIFT</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item row="3" column="2">
-     <widget class="QComboBox" name="combo_left">
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid green;
-border-radius: 3px;</string>
-      </property>
-      <item>
-       <property name="text">
-        <string>UP</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>DOWN</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LEFT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RIGHT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>q</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>w</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>e</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>r</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>t</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>y</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>u</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>i</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>o</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>p</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>a</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>s</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>d</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>f</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>g</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>h</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>j</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>k</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>l</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>m</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>n</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>b</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>v</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>c</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>x</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>z</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>SPACE</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LCTRL</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LALT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RCTRL</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RALT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LSHIFT</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item row="4" column="2">
-     <widget class="QComboBox" name="combo_right">
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid green;
-border-radius: 3px;</string>
-      </property>
-      <item>
-       <property name="text">
-        <string>UP</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>DOWN</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LEFT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RIGHT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>q</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>w</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>e</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>r</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>t</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>y</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>u</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>i</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>o</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>p</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>a</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>s</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>d</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>f</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>g</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>h</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>j</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>k</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>l</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>m</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>n</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>b</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>v</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>c</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>x</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>z</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>SPACE</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LCTRL</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LALT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RCTRL</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RALT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LSHIFT</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item row="6" column="2">
-     <widget class="QComboBox" name="combo_fire">
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid green;
-border-radius: 3px;</string>
-      </property>
-      <item>
-       <property name="text">
-        <string>UP</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>DOWN</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LEFT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RIGHT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>q</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>w</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>e</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>r</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>t</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>y</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>u</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>i</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>o</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>p</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>a</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>s</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>d</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>f</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>g</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>h</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>j</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>k</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>l</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>m</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>n</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>b</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>v</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>c</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>x</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>z</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>SPACE</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LCTRL</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LALT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RCTRL</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RALT</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LSHIFT</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QToolButton" name="bt_back">
+  <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>71</width>
-     <height>42</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>...</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lb_feed">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>10</y>
-     <width>421</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="bt_save">
-   <property name="geometry">
-    <rect>
-     <x>650</x>
-     <y>10</y>
-     <width>141</width>
-     <height>41</height>
+     <width>801</width>
+     <height>601</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">QWidget{
+background-color: transparent;
+}
+QLabel{
+font: 18pt &quot;Kristen ITC&quot;;
+border: 0px;
+}
+QPushButton{
+color: rgb(28, 49, 94);
+border: 2px solid rgb(28, 49, 94);
+border-radius: 5px;
+font: 16pt &quot;Kristen ITC&quot;;
+}
+QPushButton::hover{
+background-color: rgb(230, 226, 195);
+}
+QPushButton::pressed{
+background-color:  rgb(28, 49, 94);
+}
+QToolButton{
+background-color: rgb(136, 164, 124);
+border: 1px solid;
+border-radius: 5px;
+}
+QToolButton::hover{
+background-color: rgb(230, 226, 195);
+}
+QRadioButton{
+font: 16pt &quot;Kristen ITC&quot;;
+}
+QComboBox{
+color: rgb(28, 49, 94);
+border: 2px groove rgb(28, 49, 94);
+border-radius: 5px;
+font: 16pt &quot;Kristen ITC&quot;;
+}
+QComboBox::drop-down{
+background-color: rgb(230, 226, 195);
+border: 0px solid;
+border-radius: 4px;
+}
+QComboBox:editable {
+    background-color: rgb(230, 226, 195);
+}</string>
    </property>
-   <property name="text">
-    <string>Save</string>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
    </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>571</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <property name="rightMargin">
+      <number>50</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="3" column="1">
+      <widget class="QComboBox" name="combo_left">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <item>
+        <property name="text">
+         <string>LEFT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>UP</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DOWN</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RIGHT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>q</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>w</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>e</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>r</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>t</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>y</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>u</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>i</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>o</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>p</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>a</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>s</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>d</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>f</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>g</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>h</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>j</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>k</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>l</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>m</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>n</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>b</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>v</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>c</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>x</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>z</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SPACE</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LCTRL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LALT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RCTRL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RALT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LSHIFT</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QComboBox" name="combo_right">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <item>
+        <property name="text">
+         <string>RIGHT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>UP</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DOWN</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LEFT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>q</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>w</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>e</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>r</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>t</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>y</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>u</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>i</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>o</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>p</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>a</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>s</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>d</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>f</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>g</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>h</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>j</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>k</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>l</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>m</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>n</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>b</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>v</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>c</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>x</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>z</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SPACE</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LCTRL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LALT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RCTRL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RALT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LSHIFT</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <family>Kristen ITC</family>
+         <pointsize>18</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="text">
+        <string>Fire</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="font">
+        <font>
+         <family>Kristen ITC</family>
+         <pointsize>18</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="text">
+        <string>Left</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="combo_up">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <item>
+        <property name="text">
+         <string>UP</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DOWN</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LEFT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RIGHT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>q</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>w</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>e</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>r</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>t</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>y</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>u</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>i</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>o</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>p</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>a</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>s</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>d</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>f</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>g</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>h</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>j</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>k</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>l</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>m</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>n</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>b</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>v</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>c</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>x</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>z</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SPACE</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LCTRL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LALT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RCTRL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RALT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LSHIFT</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="combo_down">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <item>
+        <property name="text">
+         <string>DOWN</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>UP</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LEFT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RIGHT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>q</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>w</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>e</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>r</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>t</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>y</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>u</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>i</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>o</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>p</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>a</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>s</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>d</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>f</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>g</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>h</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>j</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>k</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>l</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>m</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>n</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>b</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>v</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>c</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>x</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>z</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SPACE</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LCTRL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LALT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RCTRL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RALT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LSHIFT</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="font">
+        <font>
+         <family>Kristen ITC</family>
+         <pointsize>18</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="text">
+        <string>Down</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="font">
+        <font>
+         <family>Kristen ITC</family>
+         <pointsize>18</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="text">
+        <string>Right</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="font">
+        <font>
+         <family>Kristen ITC</family>
+         <pointsize>18</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="text">
+        <string>Up</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QComboBox" name="combo_fire">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <item>
+        <property name="text">
+         <string>SPACE</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>UP</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DOWN</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LEFT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RIGHT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>q</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>w</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>e</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>r</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>t</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>y</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>u</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>i</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>o</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>p</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>a</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>s</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>d</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>f</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>g</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>h</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>j</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>k</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>l</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>m</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>n</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>b</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>v</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>c</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>x</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>z</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LCTRL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LALT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RCTRL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RALT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LSHIFT</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="lb_feed">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>10</y>
+      <width>421</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_save">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>10</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Save</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="bt_back">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>71</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_7">
+    <property name="geometry">
+     <rect>
+      <x>611</x>
+      <y>70</y>
+      <width>171</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">padding-left:0px;</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Player 1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Player 2</string>
+     </property>
+    </item>
+   </widget>
   </widget>
  </widget>
  <resources/>
