@@ -4,10 +4,10 @@ import os
 sys.path.insert(0, './Entities')
 from player import player
 from weapon import weapon
-from PowerUp import DamagePowerUP
-from PowerUp import HealthPowerUP
-from PowerUp import FireRatePowerUP
-from PowerUp import ScorePowerUP
+from Entities.PowerUp import DamagePowerUP
+from Entities.PowerUp import HealthPowerUP
+from Entities.PowerUp import FireRatePowerUP
+from Entities.PowerUp import ScorePowerUP
 
 sys.path.insert(0, './assets_handler')
 from spritesheet import SpriteSheet
