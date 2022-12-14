@@ -20,7 +20,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:qlineargradient(spread:reflect, x1:0.084, y1:0.0454545, x2:0.474, y2:0.499591, stop:0.401832 rgba(34, 124, 112, 255), stop:1 rgba(136, 164, 124, 255))</string>
+   <string notr="true">background-color:qradialgradient(spread:reflect, cx:0.480198, cy:0.506, radius:0.5, fx:0.955, fy:0.511364, stop:0.401832 rgba(34, 124, 112, 255), stop:1 rgba(136, 164, 124, 255))</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
@@ -42,16 +42,15 @@ border-radius: 10px;
     <property name="styleSheet">
      <string notr="true">QWidget{
 background-color: transparent;
+font: 16pt &quot;Kristen ITC&quot;;
 }
 QLabel{
-font: 75 14pt &quot;Terminal&quot;;
 border: 0px;
 }
 QPushButton{
 color: rgb(28, 49, 94);
 border: 2px solid rgb(28, 49, 94);
 border-radius: 5px;
-font: 16pt &quot;Kristen ITC&quot;;
 }
 QPushButton::hover{
 background-color: rgb(230, 226, 195);
@@ -67,14 +66,10 @@ border-radius: 5px;
 QToolButton::hover{
 background-color: rgb(230, 226, 195);
 }
-QRadioButton{
-font: 16pt &quot;Kristen ITC&quot;;
-}
 QLineEdit{
 color: rgb(28, 49, 94);
 border: 2px groove rgb(28, 49, 94);
 border-radius: 5px;
-font: 16pt &quot;Kristen ITC&quot;;
 }
 QLineEdit::focus{
 background-color: rgb(230, 226, 195);
@@ -91,7 +86,7 @@ background-color: rgb(230, 226, 195);
       <rect>
        <x>620</x>
        <y>30</y>
-       <width>111</width>
+       <width>141</width>
        <height>31</height>
       </rect>
      </property>
@@ -129,9 +124,9 @@ background-color: rgb(230, 226, 195);
      </property>
      <property name="font">
       <font>
-       <family>Terminal</family>
-       <pointsize>14</pointsize>
-       <weight>9</weight>
+       <family>Kristen ITC</family>
+       <pointsize>16</pointsize>
+       <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>
       </font>
