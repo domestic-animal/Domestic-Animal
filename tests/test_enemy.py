@@ -12,7 +12,7 @@ ENEMY_SKINS = SpriteSheet(enemy_sheet,26,26,1,2,6).skin
 
 def test_dog_noraml():
 	#assumtion
-	temp=dog(10,50,20,None,ENEMY_SKINS[0],50,20,(500,500))
+	temp=dog(10,50,20,None,ENEMY_SKINS[0],50,20,(500,500),20)
 	
 	# action
 	temp.move()
@@ -21,7 +21,7 @@ def test_dog_noraml():
 
 def test_dog_threash():
 	#assumtion
-	temp = dog(10,50,500,None,ENEMY_SKINS[0],50,20,(500,500))
+	temp = dog(10,50,500,None,ENEMY_SKINS[0],50,20,(500,500),20)
 
 	# action
 	temp.move()
@@ -30,7 +30,7 @@ def test_dog_threash():
 
 def test_cat_noraml():
 	#assumtion
-	temp=cat(10,50,20,None,ENEMY_SKINS[0],50,20,(500,500))
+	temp=cat(10,50,20,None,ENEMY_SKINS[0],50,20,(500,500),20)
 	
 	# action
 	temp.move()
@@ -39,7 +39,7 @@ def test_cat_noraml():
 	
 def test_cat_threash():
 	#assumtion
-	temp=cat(100,50,510,None,ENEMY_SKINS[0],50,40,(500,510))
+	temp=cat(100,50,510,None,ENEMY_SKINS[0],50,40,(500,510),20)
 	
 	# action
 	temp.move()
@@ -48,7 +48,7 @@ def test_cat_threash():
 	
 def test_cat_threash_2():
 	#assumtion
-	temp=cat(470,50,510,None,ENEMY_SKINS[0],50,40,(500,510))
+	temp=cat(470,50,510,None,ENEMY_SKINS[0],50,40,(500,510),20)
 	
 	# action
 	temp.move()

@@ -3,16 +3,13 @@ import random
 from entity import entity
 class enemy(entity):
 
-     def __init__(self, x,damage, y,weapon,image,health,velocity,threshold):
+     def __init__(self, x,damage, y,weapon,image,health,velocity,threshold,score):
         super().__init__(x,y,image,velocity)
         self.damage=damage
         self.health = health
         self.weapon=weapon
-        #self.mask = pygame.mask.from_surface(self.image)
         self.threshold=threshold
-
-    # def draw(self, window):
-     #   window.blit(self.image, (self.x, self.y))
+        self.score=score
     
      def shoot(self):
          return self.weapon.shoot(self.x,self.y, 0)
@@ -23,8 +20,8 @@ class enemy(entity):
 
 class dog(enemy):
 
-    def __init__(self, x, damage, y, weapon, img, health, velocity, threshold):
-        super().__init__(x, damage, y, weapon, img, health, velocity, threshold)
+    def __init__(self, x, damage, y, weapon, img, health, velocity, threshold,score):
+        super().__init__(x, damage, y, weapon, img, health, velocity, threshold,score)
     def move(self):
         if self.y<self.threshold[1]:
             self.y=self.y+self.velocity
@@ -32,8 +29,8 @@ class dog(enemy):
         
 class cat(enemy):
 
-    def __init__(self, x, damage, y, weapon, img, health, velocity, threshold):
-        super().__init__(x, damage, y, weapon, img, health, velocity, threshold)
+    def __init__(self, x, damage, y, weapon, img, health, velocity, threshold,score):
+        super().__init__(x, damage, y, weapon, img, health, velocity, threshold,score)
     def move(self):
     
         if(self.y >= self.threshold[1]):
