@@ -72,13 +72,13 @@ class normalGameEngine:
     def create_player(self):
         
         #player Entity
-        we1 = weapon(self.playerAssets[1], -1, damage=200, fire_rate=10)
-        pl1=player(300,600,we1,self.playerAssets[0],self.PLAYER1_CONTROLS,1000,7)
-        
+        we1 = weapon(self.playerAssets[1], -1, damage=45, fire_rate=20)
+        pl1=player(300,600,we1,self.playerAssets[0],self.PLAYER1_CONTROLS,200,7)
         self.Players.append(pl1)
+
         if self.is_coop==2:
-            we2 = weapon(self.playerAssets[3], -1, damage=200, fire_rate=10)
-            pl2=player(400,600,we2,self.playerAssets[2],self.PLAYER2_CONTROLS,1000,7)
+            we2 = weapon(self.playerAssets[3], -1, damage=45, fire_rate=20)
+            pl2=player(400,600,we2,self.playerAssets[2],self.PLAYER2_CONTROLS,200,7)
             self.Players.append(pl2)
     
     def move_entities(self,keys):
@@ -100,6 +100,8 @@ class normalGameEngine:
             #move powerups
             for powers in self.powerup:
                 powers.move()
+
+
     def shoot(self,keys):
             if keys[self.settings1["fire"]]: 
                 Bullet=self.Players[0].shoot()
@@ -110,17 +112,19 @@ class normalGameEngine:
                 if Bullet!= None:
                     self.Bullets.append(Bullet)
     
+
     def inviciblility_cooldown(self):
         for player in self.Players:
             if player.cool_down > 0:
                    player.cool_down -= 1
 
+
     def generate_rat(self):
             # to do : with difficulity
-        if (random.randint(0, 10* 60) == 1):
+        if (random.randint(0, (12/self.diff)* 60) == 1):
             player = random.choice(self.Players)
             rat_movement = random.choice([(0, 1), (600, -1)])
-            rat = bullet(rat_movement[0], player.y, self.rats, 500, 5, rat_movement[1], 1)
+            rat = bullet(rat_movement[0], player.y, self.rats, 20*self.diff, 5*self.diff, rat_movement[1], 1)
             self.Bullets.append(rat)
     
     # function to get the current game score
@@ -154,15 +158,12 @@ class normalGameEngine:
 
     # function to create the power ups the power 
     def insertpowerup(self):
-      if (random.randint(0, 10* 60) == 1):
+      if (random.randint(0, (12/self.diff)* 60) == 1):
             powers=["h","d","s","r","i"]
             choice=random.choice(powers)
             x=random.randint(50,550)
             z=self.powerFactory.create(choice,x,-50,self.is_coop)
-            self.powerup.append(z)
-            print(choice)
-
-            
+            self.powerup.append(z)            
         
 
     def start(self):
@@ -227,6 +228,7 @@ class normalGameEngine:
             else:
                 if self.Players[0].health <= 0:
                     return "menu"
+            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return "runAway"

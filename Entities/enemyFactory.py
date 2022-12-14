@@ -22,9 +22,9 @@ class enemyFactory:
     def create(self,type,diff,x,y,threshold):
         if type=="d":
             w = weapon(self.DOG_LASER, 1, int(650/diff),15*diff,2*diff)
-            return enemy.dog(x, 5*diff, y, w,  self.DOG,  100*diff,  3*diff,  threshold,  20*diff)
+            return enemy.dog(x, 5*diff, y, w,  self.DOG,  100*diff,  5*diff,  threshold,  15*diff)
         elif  type=="c":
-            w = weapon(self.CAT_LASER, 1, int(500/diff),20*diff,2*diff)
+            w = weapon(self.CAT_LASER, 1, int(550/diff),20*diff,2*diff)
             return enemy.cat(x,  7*diff,  y,  w,  self.CAT,  50*diff,  5*diff,  threshold,  10*diff)
        # elif  type=="r":
         #    w = weapon(self.YELLOW_LASER, 1, int(230/diff),20*diff,2*diff)

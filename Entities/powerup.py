@@ -42,7 +42,7 @@ class ImmunityPowerUP(PowerUp):
         super().__init__(x,y,image,velocity,threshold)
     
     def add_powerup(self,player):
-        player.cool_down=10*60     
+        player.cool_down=5*60     
 
 
 class FireRatePowerUP(PowerUp):
