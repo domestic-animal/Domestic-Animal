@@ -113,7 +113,7 @@ class vsobserver(observer):
             #if the bullets are friendly (-1)
             if bullet.is_friendly>0:
                 if self.is_collide(players[1],bullet):
-                  bullet.Objectdamage(players[0])
+                  bullet.Objectdamage(players[1])
             else:
                 if self.is_collide(players[0],bullet):
-                  bullet.Objectdamage(players[1])
+                  bullet.Objectdamage(players[0])

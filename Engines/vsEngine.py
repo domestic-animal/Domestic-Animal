@@ -84,11 +84,6 @@ class vsGameEngine:
                 if Bullet!= None:
                     self.Bullets.append(Bullet)
 
-    
-    # function to get the current game score
-    def getGameState(self):
-        return gameState(self.score,self.Bullets,self.Players, self.Enemies,"normal",self.diff,self.exit,self.level.number,pygame.time.Clock().get_time())
-
      # function to draw  the window
     def redraw_window(self):
             """
@@ -152,17 +147,17 @@ class vsGameEngine:
                     pass
                 if selection == "runAway":
                     self.exit = 1
-                    return ["menu", self.getGameState()]
+                    return ["menu"]
                     
             #on death or quitting
             if self.Players[0].health <= 0 or self.Players[1].health <= 0:
                     self.exit = 1
-                    return ["menu", self.getGameState()]
+                    return ["menu"]
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.exit = 1
-                    return ["runAway" , self.getGameState()]
+                    return ["runAway" ]
                     
 
 
