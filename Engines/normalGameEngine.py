@@ -23,7 +23,7 @@ class normalGameEngine:
 
     def __init__(self,window, level,profile, playerAssets , enemyAssets,
                  gameAssets, settings1, powerUps=0,
-                 diff = 1,score=0,is_coop=2):
+                 diff = 1,score=0,is_coop=1):
         """
             Constructor
 
@@ -65,7 +65,8 @@ class normalGameEngine:
         self.powerup=[]
         self.score=score
         self.gameObserver = observer()
-        self.main_font = pygame.font.SysFont("comicsans", 70)
+        self.powerFactory=PowerUpFactory(self.playerAssets[2],self.playerAssets[2],self.playerAssets[2],self.playerAssets[2],self.playerAssets[2])
+        self.main_font = pygame.font.SysFont("comicsans", 40)
 
 
     def create_player(self):
@@ -95,12 +96,16 @@ class normalGameEngine:
             #move bullets
             for bullet in self.Bullets:
                 bullet.move()
+
+            #move powerups
+            for powers in self.powerup:
+                powers.move()
     def shoot(self,keys):
             if keys[self.settings1["fire"]]: 
                 Bullet=self.Players[0].shoot()
                 if Bullet!= None:
                     self.Bullets.append(Bullet)
-            if keys[self.settings2["fire"]]:
+            if self.is_coop==2 and  keys[self.settings2["fire"]]:
                 Bullet=self.Players[1].shoot()
                 if Bullet!= None:
                     self.Bullets.append(Bullet)
@@ -140,15 +145,22 @@ class normalGameEngine:
             #drawing bullets
             for i in self.Bullets:
                 i.draw(self.WIN)
+            #drawing powerups
+            for i in self.powerup:
+                i.draw(self.WIN)
             #update the display
             pygame.display.update()
 
+
     # function to create the power ups the power 
-    # def insertpowerup(self):
-    #     if (random.randint(0, 10* 60) == 1):
-    #         powers=["h","d","s","r","i"]
-    #         choice=random.choice(powers)
-    #         self.powerFactory.create
+    def insertpowerup(self):
+      if (random.randint(0, 10* 60) == 1):
+            powers=["h","d","s","r","i"]
+            choice=random.choice(powers)
+            x=random.randint(50,550)
+            z=self.powerFactory.create(choice,x,-50,self.is_coop)
+            self.powerup.append(z)
+            print(choice)
 
             
         
@@ -187,6 +199,8 @@ class normalGameEngine:
             self.inviciblility_cooldown()
             ##generate rat
             self.generate_rat()
+            #generate power up
+            self.insertpowerup()
             
             #observe game state and update it accordingly
             #observe collisions
@@ -195,7 +209,8 @@ class normalGameEngine:
             self.score+=self.gameObserver.dead(self.Enemies,self.Players)
             #observe offscreen bullets
             self.gameObserver.off_screen(self.Bullets)
-
+            #insert power up
+            self.gameObserver.powerUpdate(self.powerup,self.Players)
 
             #pasue menu
             if keys[pygame.K_ESCAPE]: # shoot

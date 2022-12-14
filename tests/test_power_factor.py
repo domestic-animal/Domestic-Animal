@@ -21,12 +21,12 @@ def test_power_factor():
     factor=PowerUpFactory(png,png,png,png,png)
 
     #action
-    health=factor.create("h",100,100,100,1000)
-    damage=factor.create("d",100,100,100,1000)
-    Score=factor.create("s",100,100,100,1000)
-    rate=factor.create("r",100,100,100,1000)
-    immue=factor.create("i",100,100,100,1000)
-    none=factor.create("k",100,100,100,1000)
+    health=factor.create("h",100,100,1)
+    damage=factor.create("d",100,100,1)
+    Score=factor.create("s",100,100,1)
+    rate=factor.create("r",100,100,1)
+    immue=factor.create("i",100,100,1)
+    none=factor.create("k",100,100,1)
   
     assert  isinstance(health, HealthPowerUP) and isinstance(damage, DamagePowerUP) and isinstance(Score, ScorePowerUP) and isinstance(rate, FireRatePowerUP) and isinstance(immue, ImmunityPowerUP) and none==None
 

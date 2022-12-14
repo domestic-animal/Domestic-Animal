@@ -25,7 +25,7 @@ class DamagePowerUP(PowerUp):
     
     def add_powerup(self,player):
         x=player.weapon.damage
-        if x <self.threshold:
+        if x <260/self.threshold:
             player.weapon.damage=x+10
 
 class HealthPowerUP(PowerUp):
@@ -52,8 +52,8 @@ class FireRatePowerUP(PowerUp):
     
     def add_powerup(self,player):
         x=player.weapon.fire_rate
-        if x <self.threshold:
-            player.weapon.fire_rate=x+5
+        if x > 1:
+            player.weapon.fire_rate=x-1
 
 
 
@@ -64,5 +64,5 @@ class ScorePowerUP(PowerUp):
     
     def add_powerup(self,player):
         x=player.ScoreMultiplayer
-        if x <self.threshold:
+        if x <10/self.threshold:
             player.ScoreMultiplayer=x+1
