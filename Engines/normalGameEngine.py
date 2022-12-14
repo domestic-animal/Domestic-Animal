@@ -22,7 +22,7 @@ class normalGameEngine:
     # Player player
 
     def __init__(self,window, level,profile, playerAssets , enemyAssets,
-                 gameAssets, settings1, setting2=None,powerUps=0,
+                 gameAssets, settings1, settings2,powerUps=0,
                  diff = 1,score=0,is_coop=1):
         """
             Constructor
@@ -44,9 +44,9 @@ class normalGameEngine:
         self.enemyAssets = enemyAssets
         self.gameAssets = gameAssets
         self.settings1 = settings1
-        self.settings2 = settings1
+        self.settings2 = settings2
         self.PLAYER1_CONTROLS = [settings1["left"],settings1["right"],settings1["up"],settings1["down"]]
-        self.PLAYER2_CONTROLS =  [settings1["left"],settings1["right"],settings1["up"],settings1["down"]]
+        self.PLAYER2_CONTROLS =  [settings2["left"],settings2["right"],settings2["up"],settings2["down"]]
         self.level = level
         self.profile = profile
         self.is_coop=is_coop

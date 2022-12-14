@@ -15,7 +15,7 @@ class vsGameEngine:
 
     # Player player
 
-    def __init__(self,window,profile, playerAssets ,gameAssets, settings1):
+    def __init__(self,window,profile, playerAssets ,gameAssets, settings1,settings2):
         """
             Constructor
 
@@ -35,9 +35,9 @@ class vsGameEngine:
         self.playerAssets = playerAssets
         self.gameAssets = gameAssets
         self.settings1 = settings1
-        self.settings2 = settings1
+        self.settings2 = settings2
         self.PLAYER1_CONTROLS = [settings1["left"],settings1["right"],settings1["up"],settings1["down"]]
-        self.PLAYER2_CONTROLS =  [settings1["left"],settings1["right"],settings1["up"],settings1["down"]]
+        self.PLAYER2_CONTROLS =  [settings2["left"],settings2["right"],settings2["up"],settings2["down"]]
         self.profile = profile
 
         # pause menu

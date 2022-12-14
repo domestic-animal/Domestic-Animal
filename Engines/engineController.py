@@ -14,7 +14,7 @@ game engine
 """
 class engineController:
 
-    def __init__(self,assets,profile,settings,backgrounds, mode= 0,ControllerState = "menu"):
+    def __init__(self,assets,profile,filemanager,settings1,settings2,backgrounds, mode= 0,ControllerState = "menu"):
         """Constructor
 
         Args:
@@ -25,8 +25,10 @@ class engineController:
             mode (int, optional): game mode Defaults to -1 for endless.
             gameState (str, optional): controls whether we are in a menu or in a game Defaults to "menu".
         """
+        self.filemanager = filemanager
         self.profile = profile
-        self.settings = settings
+        self.settings1 = settings1
+        self.settings2 = settings2
         self.assets = assets
         self.mode = mode
         self.controllerState = ControllerState
@@ -84,12 +86,12 @@ class engineController:
                     level = self.lvlSelector.getLevel(self.mode,self.diff,ENEMY_SKINS,BULLET_SHIP_SKINS)
             # assign the current Engine to be the normal game engine
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
-                    diff = self.diff,profile = self.profile,settings1 = self.settings,
+                    diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
                     playerAssets= [PLAYER_SHIP_SKINS[0], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[3]],
                     enemyAssets=[ENEMY_SKINS[5]],gameAssets=[BG])
                 elif self.mode == 0:
                     self.WIN = pygame.display.set_mode(( self.HEIGHT, self.WIDTH),pygame.RESIZABLE)
-                    self.currEngine = vsGameEngine(window =self.WIN,profile = self.profile,settings1 = self.settings,
+                    self.currEngine = vsGameEngine(window =self.WIN,profile = self.profile,settings1 = self.settings1,settings2 = self.settings2,
                     playerAssets= [PLAYER_SHIP_SKINS[0], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[3]],gameAssets=[BG])
             #if the game state is opening a menu
             elif self.controllerState == "menu":
