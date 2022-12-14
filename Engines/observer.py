@@ -31,7 +31,9 @@ class observer:
         offset_y = obj2.y - obj1.y
         return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) != None
 
-
+class gameobserver(observer):
+    def __init__(self):
+        pass
     def collision(self,bullets,enemies,players):
         """checks if all object have collided with something or not
 
@@ -93,3 +95,25 @@ class observer:
                     break
             if power.off_screen(800):
                 powerup.remove(power)
+
+
+class vsobserver(observer):
+    def __init__(self):
+        pass
+    def collision(self,bullets,players):
+        """checks if all object have collided with something or not
+
+        Args:
+            bullets (bullet list): list of current bullets
+            enemies (enemy list): list of current enemies
+            player (player): current player
+        """
+        # loop on all bullets and damage the enemy or player
+        for bullet in bullets:
+            #if the bullets are friendly (-1)
+            if bullet.is_friendly>0:
+                if self.is_collide(players[1],bullet):
+                  bullet.Objectdamage(players[0])
+            else:
+                if self.is_collide(players[0],bullet):
+                  bullet.Objectdamage(players[1])

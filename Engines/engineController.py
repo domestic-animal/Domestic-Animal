@@ -1,10 +1,10 @@
 import pygame
-import os
 import sys
 
 from Engines.levelSelector import levelSelector
 from Engines.normalGameEngine import normalGameEngine
 from Engines.menueEngine import menu
+from Engines.vsEngine import vsGameEngine
 sys.path.insert(0, './assets_handler')
 
 """Engine controller controls the flow of the game and 
@@ -14,7 +14,7 @@ game engine
 """
 class engineController:
 
-    def __init__(self,assets,profile,settings,backgrounds, mode= -1,gameState = "menu"):
+    def __init__(self,assets,profile,settings,backgrounds, mode= 0,ControllerState = "menu"):
         """Constructor
 
         Args:
@@ -29,17 +29,18 @@ class engineController:
         self.settings = settings
         self.assets = assets
         self.mode = mode
-        self.gameState = gameState
+        self.controllerState = ControllerState
         self.Background = backgrounds
         #level selector to select a certain level to load
         self.lvlSelector = levelSelector()
         # returned states from the engines
-        self.states = ""
+        self.gameState=None
+        self.states = []
         #difficulity
         self.diff = 1
         #window to draw objects on
         self.WIDTH, self.HEIGHT = 600, 800
-        self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT))
+        self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT),pygame.RESIZABLE)
         
 
     def run(self):
@@ -54,12 +55,16 @@ class engineController:
             self.switch()
             #start the selected engine
             self.states = self.currEngine.start()
+            self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT),pygame.RESIZABLE)
             #get the new state
-            self.gameState = self.states
-            if self.states == "start":
-                self.gameState = "game"
-            if self.states == "runAway" :
+            if len(self.states) >1:
+                self.gameState = self.states[1]
+            if self.states[0] == "start":
+                self.controllerState = "game"
+            if self.states[0] == "runAway" :
                 break
+            if self.states[0] == "menu":
+                self.controllerState = "menu"
             
 
     def switch(self):
@@ -67,23 +72,27 @@ class engineController:
             
             """
             ## if the game state is game 
-            if self.gameState == "game":
+            if self.controllerState == "game":
                 PLAYER_SHIP_SKINS = self.assets[0]
                 BULLET_SHIP_SKINS = self.assets[1]
                 ENEMY_SKINS = self.assets[2]
                 self.convert(PLAYER_SHIP_SKINS,BULLET_SHIP_SKINS,ENEMY_SKINS)
                 BG = self.Background[0]
                 
+                if self.mode == -1:
             # get the chosen level from the level selector
-                level = self.lvlSelector.getLevel(self.mode,self.diff,ENEMY_SKINS,BULLET_SHIP_SKINS)
+                    level = self.lvlSelector.getLevel(self.mode,self.diff,ENEMY_SKINS,BULLET_SHIP_SKINS)
             # assign the current Engine to be the normal game engine
-                self.currEngine = normalGameEngine(window =self.WIN,level =level,
-                diff = self.diff,profile = self.profile,settings1 = self.settings,
-                playerAssets= [PLAYER_SHIP_SKINS[0], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[3]],
-                enemyAssets=[ENEMY_SKINS[5]],gameAssets=[BG])
-            
+                    self.currEngine = normalGameEngine(window =self.WIN,level =level,
+                    diff = self.diff,profile = self.profile,settings1 = self.settings,
+                    playerAssets= [PLAYER_SHIP_SKINS[0], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[3]],
+                    enemyAssets=[ENEMY_SKINS[5]],gameAssets=[BG])
+                elif self.mode == 0:
+                    self.WIN = pygame.display.set_mode(( self.HEIGHT, self.WIDTH),pygame.RESIZABLE)
+                    self.currEngine = vsGameEngine(window =self.WIN,profile = self.profile,settings1 = self.settings,
+                    playerAssets= [PLAYER_SHIP_SKINS[0], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[3]],gameAssets=[BG])
             #if the game state is opening a menu
-            elif self.gameState == "menu":
+            elif self.controllerState == "menu":
                 #assign the current engine to be the menu engine
                 self.currEngine = menu(self.WIN, self.WIDTH, self.HEIGHT)
                 #create the main menu
@@ -105,7 +114,7 @@ class engineController:
 
 
     def getGameState(self):
-        if self.gameState == "game":
+        if self.controllerState == "game":
             return self.currEngine.getGameState()
         else:
-            None
+            return self.gameState

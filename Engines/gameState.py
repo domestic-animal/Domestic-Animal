@@ -1,7 +1,8 @@
 class gameState():
 
-    def __init__(self,score,bullets,players,enemies,gamemode,difficulty,isExit,level,time):
-
+    def __init__(self,powerups,score,bullets,players,enemies,gamemode,difficulty,isExit,level,time):
+        
+        self.powerups=powerups
         self.bullets=bullets
         self.players=players
         self.enemies=enemies

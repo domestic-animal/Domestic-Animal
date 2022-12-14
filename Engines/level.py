@@ -18,7 +18,7 @@ class level:
             BULLET_SKINS (list of skins): bullet skin assets
         """
         self.waves=[]
-        self.index=None
+        self.number=None
         self.diff=diff
         self.ENEMY_SKINS = ENEMY_SKINS
         self.BULLET_SKINS = BULLET_SKINS
@@ -31,7 +31,7 @@ class level:
 class endlesslevel(level):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS)
-                   
+        self.number=-1
     
     def getwave(self,time):
         """generates random waves every time it gets called
@@ -56,6 +56,7 @@ class endlesslevel(level):
                 enemies.append(enemy)
                 x+=35
         return enemies
+
 
 
 
