@@ -15,6 +15,9 @@ class PowerUp(entity):
     def add_powerup(self,player):
         pass
 
+    def off_screen(self,height):
+        return not(self.y <= height)
+
 class DamagePowerUP(PowerUp):
     
     def __init__(self, x, y,image,velocity,threshold):
@@ -22,7 +25,7 @@ class DamagePowerUP(PowerUp):
     
     def add_powerup(self,player):
         x=player.weapon.damage
-        if x <self.threshold:
+        if x <260/self.threshold:
             player.weapon.damage=x+10
 
 class HealthPowerUP(PowerUp):
@@ -39,7 +42,7 @@ class ImmunityPowerUP(PowerUp):
         super().__init__(x,y,image,velocity,threshold)
     
     def add_powerup(self,player):
-        player.cool_down=10*60     
+        player.cool_down=5*60     
 
 
 class FireRatePowerUP(PowerUp):
@@ -49,8 +52,8 @@ class FireRatePowerUP(PowerUp):
     
     def add_powerup(self,player):
         x=player.weapon.fire_rate
-        if x <self.threshold:
-            player.weapon.fire_rate=x+5
+        if x > 1:
+            player.weapon.fire_rate=x-1
 
 
 
@@ -61,5 +64,5 @@ class ScorePowerUP(PowerUp):
     
     def add_powerup(self,player):
         x=player.ScoreMultiplayer
-        if x <self.threshold:
+        if x <10/self.threshold:
             player.ScoreMultiplayer=x+1

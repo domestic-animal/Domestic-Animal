@@ -23,7 +23,7 @@ def test_health():
 	#assumtion
     we = weapon(png, -1, damage=50, fire_rate=10)
     testobj=player(300,600,we,png,PLAYER_CONTROLS,1000,7)
-    power=HealthPowerUP(300,600,png,500,100)
+    power=HealthPowerUP(300,600,png,500,1)
 	
 	# action
     testobj.health-=500
@@ -36,7 +36,7 @@ def test_damage():
 	#assumtion
     we = weapon(png, -1, damage=50, fire_rate=10)
     testobj=player(300,600,we,png,PLAYER_CONTROLS,1000,7)
-    power=DamagePowerUP(300,600,png,500,100)
+    power=DamagePowerUP(300,600,png,500,1)
 	
 	# action
     power.add_powerup(testobj)
@@ -48,7 +48,7 @@ def test_damage_2():
 	#assumtion
     we = weapon(png, -1, damage=50, fire_rate=10)
     testobj=player(300,600,we,png,PLAYER_CONTROLS,1000,7)
-    power=DamagePowerUP(300,600,png,500,100)
+    power=DamagePowerUP(300,600,png,500,1)
 	
 	# action
     power.add_powerup(testobj)
@@ -59,9 +59,9 @@ def test_damage_2():
 
 def test_damage_threashhold():
 	#assumtion
-    we = weapon(png, -1, damage=80, fire_rate=10)
+    we = weapon(png, -1, damage=260, fire_rate=10)
     testobj=player(300,600,we,png,PLAYER_CONTROLS,1000,7)
-    power=DamagePowerUP(300,600,png,500,100)
+    power=DamagePowerUP(300,600,png,500,1)
 	
 	# action
     power.add_powerup(testobj)
@@ -70,16 +70,43 @@ def test_damage_threashhold():
     power.add_powerup(testobj)
     power.add_powerup(testobj)
     power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
 
-    assert testobj.weapon.damage==100
+    assert testobj.weapon.damage==260
 
+def test_damage_threashhold2():
+	#assumtion
+    we = weapon(png, -1, damage=130, fire_rate=10)
+    testobj=player(300,600,we,png,PLAYER_CONTROLS,1000,7)
+    power=DamagePowerUP(300,600,png,500,2)
+	
+	# action
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+
+    assert testobj.weapon.damage==130
 
 ## test score power up
 def test_score():
 	#assumtion
     we = weapon(png, -1, damage=50, fire_rate=10)
     testobj=player(300,600,we,png,PLAYER_CONTROLS,1000,7)
-    power=ScorePowerUP(300,600,png,500,10)
+    power=ScorePowerUP(300,600,png,500,1)
 	
 	# action
     power.add_powerup(testobj)
@@ -91,7 +118,7 @@ def test_score_2():
 	#assumtion
     we = weapon(png, -1, damage=50, fire_rate=10)
     testobj=player(300,600,we,png,PLAYER_CONTROLS,1000,7)
-    power=ScorePowerUP(300,600,png,500,10)
+    power=ScorePowerUP(300,600,png,500,1)
 	
 	# action
     power.add_powerup(testobj)
@@ -104,7 +131,7 @@ def test_score_threashhold():
 	#assumtion
     we = weapon(png, -1, damage=50, fire_rate=10)
     testobj=player(300,600,we,png,PLAYER_CONTROLS,1000,7)
-    power=ScorePowerUP(300,600,png,500,10)
+    power=ScorePowerUP(300,600,png,500,1)
 	
 	# action
     power.add_powerup(testobj)
@@ -129,6 +156,34 @@ def test_score_threashhold():
 	
     assert testobj.ScoreMultiplayer==10
 
+def test_score_threashhold2():
+	#assumtion
+    we = weapon(png, -1, damage=50, fire_rate=10)
+    testobj=player(300,600,we,png,PLAYER_CONTROLS,1000,7)
+    power=ScorePowerUP(300,600,png,500,2)
+	
+	# action
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+    power.add_powerup(testobj)
+
+	
+    assert testobj.ScoreMultiplayer==5
 
 
 ## test fire rate of the powerups	
@@ -136,31 +191,31 @@ def test_rate():
 	#assumtion
     we = weapon(png, -1, damage=50, fire_rate=10)
     testobj=player(300,600,we,png,PLAYER_CONTROLS,1000,7)
-    power=FireRatePowerUP(300,600,png,500,40)
+    power=FireRatePowerUP(300,600,png,500,1)
 	
 	# action
     power.add_powerup(testobj)
 	
-    assert testobj.weapon.fire_rate==15
+    assert testobj.weapon.fire_rate==9
 
 
 def test_rate_2():
 	#assumtion
     we = weapon(png, -1, damage=50, fire_rate=10)
     testobj=player(300,600,we,png,PLAYER_CONTROLS,1000,7)
-    power=FireRatePowerUP(300,600,png,500,40)
+    power=FireRatePowerUP(300,600,png,500,1)
 	
 	# action
     power.add_powerup(testobj)
     power.add_powerup(testobj)
 	
-    assert testobj.weapon.fire_rate==20
+    assert testobj.weapon.fire_rate==8
 
 def test_rate_threashhold():
 	#assumtion
     we = weapon(png, -1, damage=50, fire_rate=10)
     testobj=player(300,600,we,png,PLAYER_CONTROLS,1000,7)
-    power=FireRatePowerUP(300,600,png,500,40)
+    power=FireRatePowerUP(300,600,png,500,1)
 	
 	# action
     power.add_powerup(testobj)
@@ -186,4 +241,4 @@ def test_rate_threashhold():
     power.add_powerup(testobj)
     power.add_powerup(testobj)
 	
-    assert testobj.weapon.fire_rate==40
+    assert testobj.weapon.fire_rate==1

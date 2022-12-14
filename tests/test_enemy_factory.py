@@ -16,7 +16,7 @@ BULLET_SHIP_SKINS = SpriteSheet(bullet_sheet,10,16,1,2).skin
 
 def test_right_instance():
     
-    factor=enemyFactory(BULLET_SHIP_SKINS,ENEMY_SKINS)
+    factor=enemyFactory(ENEMY_SKINS,ENEMY_SKINS)
     
     temp1=factor.create("d",1,50,50,(600,600))
     

@@ -44,4 +44,4 @@ class menu:
                 b.draw(self.screen)
 
             pygame.display.update()
-        return selection
+        return [selection]
