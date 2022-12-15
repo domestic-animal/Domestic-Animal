@@ -2,14 +2,17 @@
 class Profile:
 
     __name = ""
-    __player_controls = {"left": "", "right": "", "up": "", "down": "", "fire": ""}
-    __co_player_controls = {"left": "", "right": "", "up": "", "down": "", "fire": ""}
+    __player_controls = {"left": "LEFT", "right": "RIGHT", "up": "UP", "down": "DOWN", "fire": "SPACE"}
+    __co_player_controls = {"left": "a", "right": "d", "up": "w", "down": "s", "fire": "LCTRL"}
     __achievements = []
     __story_progress = 0
     __unlocked_weapons = []
     __current_weapon = ""
+    __co_player_weapon = ""
     __skins = []
     __current_skin = ""
+    __coins = 0
+    __endless_score = 0
 
     def set_name(self, name):
         self.__name = name
@@ -54,6 +57,12 @@ class Profile:
     def get_current_weapon(self):
         return self.__current_weapon
 
+    def get_co_player_weapon(self):
+        return self.__co_player_weapon
+
+    def set_co_player_weapon(self, weapon):
+        self.__co_player_weapon = weapon
+
     def set_skins(self, skins):
         self.__skins = skins
 
@@ -66,6 +75,13 @@ class Profile:
     def get_current_skin(self):
         return self.__current_skin
 
+    def set_coins(self, coins):
+        self.__coins = coins
+
+    def get_coins(self):
+        return self.__coins
+
+
     def get_profile(self):
         return {
             "name": self.__name,
@@ -75,8 +91,10 @@ class Profile:
             "story_progress": self.__story_progress,
             "unlocked_weapons": self.__unlocked_weapons,
             "current_weapon": self.__current_weapon,
+            "co_player_weapon": self.__co_player_weapon,
             "skins": self.__skins,
-            "current_skin": self.__current_skin
+            "current_skin": self.__current_skin,
+            "coins": self.__coins
         }
 
     def set_profile(self, json_object):
@@ -85,9 +103,12 @@ class Profile:
         self.__co_player_controls = json_object["co_player_controls"]
         self.__achievements = json_object["achievements"]
         self.__current_weapon = json_object["current_weapon"]
+        self.__co_player_weapon = json_object["co_player_weapon"]
         self.__unlocked_weapons = json_object["unlocked_weapons"]
         self.__story_progress = json_object["story_progress"]
         self.__current_skin = json_object["current_skin"]
         self.__skins = json_object["skins"]
+        self.__coins = json_object["coins"]
+
 
 
