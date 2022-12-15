@@ -6,7 +6,9 @@ from PyQt5 import uic
 from file.profile import Profile
 from file.file_manager import FileManager
 from Engines.engineController import engineController
+from Engines.gameState import gameState
 from launcher.customization import Customization
+from launcher.Auto_saver import Auto_Save_Thread
 import os
 import sys
 
@@ -53,7 +55,9 @@ class Launcher(QMainWindow):
 		self.controller = None # controller
 		self.manager = manager # file manager
 		self.game_thread = Game_Thread() # game thread
-		self.game_thread.deadSignal.connect(lambda : sys.exit())
+		self.auto_save = Auto_Save_Thread()# auto save thread
+		self.game_thread.deadSignal.connect(self.pager.show)
+		self.game_thread.deadSignal.connect(self.auto_save.stop)
 		self.storyButton = self.findChild(QRadioButton, "bt_story")
 		self.endlessButton = self.findChild(QRadioButton, "bt_endless")
 		self.vsButton = self.findChild(QRadioButton, "bt_vs")
@@ -82,24 +86,31 @@ class Launcher(QMainWindow):
  	'''
 	def handlePlayButton(self):
 		self.pager.hide()
-		# load assets
-		assets, backgrounds = self.manager.load_assets()
-		
+		mode  = 0;
 		if self.storyButton.isChecked():
 			#start vs mode
-			
+			mode = 1
 			print("story")
 		elif self.endlessButton.isChecked():
 			#start endless mode
-			# for now the intialization is done here don't forget to move it up after loading the assets
-			self.controller = engineController(settings = Customization.mapControls(self.profile.get_controls()),
-                                     profile= self.profile, assets = assets, backgrounds = backgrounds)
-			self.game_thread.setController(self.controller)
-			self.game_thread.start()
+			mode = -1
 			print("endless")
 		else:
 			#start story mode
+			mode = 0
 			print("vs")
+
+		# load assets
+		assets, backgrounds = self.manager.load_assets()
+  
+		self.controller = engineController(settings1 = Customization.mapControls(self.profile.get_controls()),
+                                     profile= self.profile, assets = assets, backgrounds = backgrounds, mode=mode,
+                                    filemanager= self.manager, settings2=Customization.mapControls(self.profile.get_controls()))
+
+		self.game_thread.setController(self.controller)
+		self.game_thread.start()
+		self.auto_save.setController(self.controller)
+		self.auto_save.start()
 
 	def catchProfile(self, s : Profile):
 		self.profile = 	s
@@ -107,6 +118,9 @@ class Launcher(QMainWindow):
 	def catchControls(self, c : dict):
 		self.profile.set_controls(c)
 		self.manager.save_profile(self.profile)
+  
+	def catchSave(self, state: gameState): 
+		pass
 		
 		
 

@@ -3,6 +3,7 @@ from PyQt5.QtCore import Qt
 from launcher.customization import Customization
 from launcher.profiles import Profiles
 from launcher.launcher import Launcher
+from launcher.saveUI import SaveUI
 from file.file_manager import FileManager
 
 if __name__ == "__main__":
@@ -13,12 +14,14 @@ if __name__ == "__main__":
     ui = Launcher(widget, manager)
     c = Customization(widget)
     p = Profiles(widget, manager)
+    save_ui = SaveUI(widget, manager)
     c.control_signal.connect(ui.catchControls)
     p.profile_signal.connect(ui.catchProfile)
     p.profile_signal.connect(c.getProfile)
     widget.addWidget(p)
     widget.addWidget(ui)
     widget.addWidget(c)
+    widget.add(save_ui)
     widget.setFixedSize(800,600)
     widget.show()
     
