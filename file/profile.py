@@ -2,7 +2,8 @@
 class Profile:
 
     __name = ""
-    __controls = {"left": "", "right": "", "up": "", "down": "", "fire": ""}
+    __player_controls = {"left": "", "right": "", "up": "", "down": "", "fire": ""}
+    __co_player_controls = {"left": "", "right": "", "up": "", "down": "", "fire": ""}
     __achievements = []
     __story_progress = 0
     __unlocked_weapons = []
@@ -17,10 +18,17 @@ class Profile:
         return self.__name
 
     def set_controls(self, controls):
-        self.__controls = controls
+        self.__player_controls = controls
 
     def get_controls(self):
-        return self.__controls
+        return self.__player_controls
+
+    def set_co_player_controls(self, controls):
+        self.__co_player_controls = controls
+
+    def get_co_player_controls(self):
+        return self.__co_player_controls
+
 
     def set_achievements(self, achievements):
         self.__achievements = achievements
@@ -62,7 +70,8 @@ class Profile:
         return {
             "name": self.__name,
             "achievements": self.__achievements,
-            "controls": self.__controls,
+            "controls": self.__player_controls,
+            "co_player_controls": self.__co_player_controls,
             "story_progress": self.__story_progress,
             "unlocked_weapons": self.__unlocked_weapons,
             "current_weapon": self.__current_weapon,
@@ -72,7 +81,8 @@ class Profile:
 
     def set_profile(self, json_object):
         self.__name = json_object["name"]
-        self.__controls = json_object["controls"]
+        self.__player_controls = json_object["controls"]
+        self.__co_player_controls = json_object["co_player_controls"]
         self.__achievements = json_object["achievements"]
         self.__current_weapon = json_object["current_weapon"]
         self.__unlocked_weapons = json_object["unlocked_weapons"]
