@@ -1187,7 +1187,7 @@ QComboBox:editable {
      <string>...</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_7">
+   <widget class="QComboBox" name="combo_player">
     <property name="geometry">
      <rect>
       <x>611</x>

@@ -115,8 +115,11 @@ class Launcher(QMainWindow):
 	def catchProfile(self, s : Profile):
 		self.profile = 	s
 
-	def catchControls(self, c : dict):
-		self.profile.set_controls(c)
+	def catchControls(self, c : dict, index: int):
+		if index == 0:
+			self.profile.set_controls(c)
+		else:
+			self.profile.set_co_player_controls(c)
 		self.manager.save_profile(self.profile)
   
 	def catchSave(self, state: gameState): 

@@ -21,7 +21,7 @@ if __name__ == "__main__":
     widget.addWidget(p)
     widget.addWidget(ui)
     widget.addWidget(c)
-    widget.add(save_ui)
+    widget.addWidget(save_ui)
     widget.setFixedSize(800,600)
     widget.show()
     
