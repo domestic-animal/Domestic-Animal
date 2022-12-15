@@ -84,7 +84,6 @@ class FileManager:
         if os.path.exists(path):
             try:
                 os.chmod(path, S_IWUSR | S_IREAD)
-                print(os.path.join(self.__p_dir, name))
                 shutil.rmtree(os.path.join(self.__p_dir, name), ignore_errors=True)
             except OSError:
                 return False
@@ -104,7 +103,7 @@ class FileManager:
         :return: True if profile is loaded successfully
                  False otherwise
         """
-        json_object = self.__read_file(name)
+        json_object = self.__read_file(os.path.join(name, name))
         if json_object is None or json_object == "C":
             return False
         profile = Profile()
@@ -153,7 +152,7 @@ class FileManager:
 
     def __read_file(self, filename):
         try:
-            with open(os.path.join(self.__p_dir, filename,filename + ".txt"), 'rb') as openfile:
+            with open(os.path.join(self.__p_dir, filename + ".txt"), 'rb') as openfile:
                 file = self.__fernet.decrypt(openfile.read())
                 json_object = json.loads(file.decode())
                 return json_object
@@ -164,15 +163,3 @@ class FileManager:
 
 
 
-file_manager = FileManager()
-x = file_manager.create_profile("toto")
-print(x)
-#x = file_manager.delete_profile("toto")
-print(x)
-
-
-
-x = file_manager.load_profile("toto")
-
-
-print(x)
