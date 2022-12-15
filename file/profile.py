@@ -2,8 +2,8 @@
 class Profile:
 
     __name = ""
-    __player_controls = {"left": "", "right": "", "up": "", "down": "", "fire": ""}
-    __co_player_controls = {"left": "", "right": "", "up": "", "down": "", "fire": ""}
+    __player_controls = {"left": "LEFT", "right": "RIGHT", "up": "UP", "down": "DOWN", "fire": "SPACE"}
+    __co_player_controls = {"left": "a", "right": "d", "up": "w", "down": "s", "fire": "LCTRL"}
     __achievements = []
     __story_progress = 0
     __unlocked_weapons = []

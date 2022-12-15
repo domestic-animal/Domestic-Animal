@@ -64,8 +64,11 @@ class Launcher(QMainWindow):
 		self.storyButton.setChecked(True)
 		
 		# customization button setup
-		self.customButton = self.findChild(QPushButton, "bt_custom")
-		self.customButton.clicked.connect(lambda : self.pager.setCurrentIndex(self.pager.currentIndex()+1))
+		self.findChild(QPushButton, "bt_custom").clicked.connect(
+      		lambda : self.pager.setCurrentIndex(self.pager.currentIndex()+1))
+  
+		self.findChild(QPushButton, "bt_saves").clicked.connect(
+      		lambda : self.pager.setCurrentIndex(self.pager.currentIndex()+2))
 
 		#back button setup
 		self.back_button = self.findChild(QToolButton, "bt_back")
@@ -109,8 +112,9 @@ class Launcher(QMainWindow):
 
 		self.game_thread.setController(self.controller)
 		self.game_thread.start()
-		self.auto_save.setController(self.controller)
-		self.auto_save.start()
+		if mode != 0:
+			self.auto_save.setController(self.controller)
+			self.auto_save.start()
 
 	def catchProfile(self, s : Profile):
 		self.profile = 	s

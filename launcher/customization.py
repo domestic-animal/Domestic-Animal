@@ -4,7 +4,6 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5 import uic
 from file.profile import Profile
-from functools import partial
 import os
 import pygame
 
@@ -40,13 +39,18 @@ class Customization(QMainWindow):
         controls["down"] = self.findChild(QComboBox, "combo_down").currentText()
         controls["left"] = self.findChild(QComboBox, "combo_left").currentText()
         controls["right"] = self.findChild(QComboBox, "combo_right").currentText()
-        controls["fire"]=self.findChild(QComboBox, "combo_fire").currentText()
+        controls["fire"]= self.findChild(QComboBox, "combo_fire").currentText()
         
         if self.validateControls(controls):
             self.feed_label.setText("Saved Sucessfully !")
             self.control_signal.emit(controls, self.combo_player.currentIndex())
+            if self.combo_player.currentIndex() == 0:
+                self.controls = controls
+            else:
+                self.co_controls = controls
         else:
             self.feed_label.setText("Invalid. Controls must be unique.")
+        
 
     '''
     a function that loads the controls once the profile is selected

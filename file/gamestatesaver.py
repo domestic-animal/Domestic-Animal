@@ -77,10 +77,10 @@ class GameStateSaver:
 
 
 
-game = gameState
+# game = gameState
 
-saver = GameStateSaver()
+# saver = GameStateSaver()
 
-saver.save_story_game_state("soso", gameState)
-t = saver.load_saved_story("soso")
-print(t)
+# saver.save_story_game_state("soso", gameState)
+# t = saver.load_saved_story("soso")
+# print(t)

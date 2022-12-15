@@ -150,7 +150,7 @@ border-radius: 5px;
        </layout>
       </item>
       <item row="1" column="1">
-       <widget class="Line" name="line_3">
+       <widget class="Line" name="line2">
         <property name="styleSheet">
          <string notr="true">background-color:red;</string>
         </property>
@@ -171,7 +171,7 @@ border-radius: 5px;
          <number>0</number>
         </property>
         <item>
-         <widget class="QLabel" name="label_12">
+         <widget class="QLabel" name="title2">
           <property name="minimumSize">
            <size>
             <width>520</width>
@@ -201,23 +201,10 @@ border-radius: 5px;
         </property>
        </widget>
       </item>
-      <item row="2" column="2">
-       <widget class="QToolButton" name="start2">
-        <property name="minimumSize">
-         <size>
-          <width>90</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>...</string>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QLabel" name="label_10">
+         <widget class="QLabel" name="title3">
           <property name="minimumSize">
            <size>
             <width>520</width>
@@ -246,7 +233,7 @@ border-radius: 5px;
          </size>
         </property>
         <property name="text">
-         <string>Empty</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -305,7 +292,7 @@ border-radius: 5px;
       <item row="3" column="0">
        <widget class="QLabel" name="save3_name">
         <property name="text">
-         <string>Save 2</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -323,7 +310,10 @@ border-radius: 5px;
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="Line" name="line_7">
+       <widget class="Line" name="line3">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color:red;</string>
         </property>
@@ -335,6 +325,19 @@ border-radius: 5px;
         </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QToolButton" name="start2">
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>...</string>
         </property>
        </widget>
       </item>
@@ -379,7 +382,7 @@ border-radius: 5px;
       <item row="1" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
-         <widget class="QLabel" name="label_14">
+         <widget class="QLabel" name="title1">
           <property name="minimumSize">
            <size>
             <width>520</width>
@@ -435,7 +438,7 @@ border-radius: 5px;
            <string notr="true">font-size: 16px;</string>
           </property>
           <property name="text">
-           <string>level 1</string>
+           <string/>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -463,7 +466,7 @@ border-radius: 5px;
            <string notr="true">font-size: 16px;</string>
           </property>
           <property name="text">
-           <string>25/12/2022</string>
+           <string/>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -473,7 +476,7 @@ border-radius: 5px;
        </layout>
       </item>
       <item row="2" column="1">
-       <widget class="Line" name="line_8">
+       <widget class="Line" name="line1">
         <property name="styleSheet">
          <string notr="true">background-color:red;</string>
         </property>

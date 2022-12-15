@@ -3,6 +3,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from Engines.engineController import engineController
+from file.gamestatesaver import GameStateSaver
 
 class Auto_Save_Thread(QThread):
     
@@ -21,6 +22,8 @@ class Auto_Save_Thread(QThread):
     def run(self):
         # thread's main function
         print("auto save started")
+        saver = GameStateSaver()
+        mode = self.controller.mode
         mutex = QMutex() #mutex lock for synchronization safety
         while self.ThreadActive:
             self.msleep(2500)
@@ -28,7 +31,10 @@ class Auto_Save_Thread(QThread):
             state = self.controller.getGameState()
             mutex.unlock()
             if state is not None:
-                print(state.Score)
+                if mode == -1:
+                    saver.autosave_endless(self.controller.profile.get_name(),state)
+                else:
+                    saver.autosave_story(self.controller.profile.get_name(),state)
 
     def stop(self):
         # stop the thread on finish

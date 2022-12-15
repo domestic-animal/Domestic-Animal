@@ -90,7 +90,7 @@ font: 16pt &quot;Kristen ITC&quot;;
       </font>
      </property>
      <property name="text">
-      <string>Play</string>
+      <string>New Game</string>
      </property>
     </widget>
     <widget class="QRadioButton" name="bt_vs">
@@ -136,7 +136,7 @@ font: 16pt &quot;Kristen ITC&quot;;
      <property name="geometry">
       <rect>
        <x>200</x>
-       <y>350</y>
+       <y>420</y>
        <width>400</width>
        <height>75</height>
       </rect>
@@ -195,6 +195,28 @@ font: 16pt &quot;Kristen ITC&quot;;
      </property>
      <property name="text">
       <string>...</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_saves">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>310</y>
+       <width>400</width>
+       <height>75</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Kristen ITC</family>
+       <pointsize>16</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Saved Games</string>
      </property>
     </widget>
    </widget>
