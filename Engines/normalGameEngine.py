@@ -237,11 +237,13 @@ class normalGameEngine:
             #on death or quitting
             if self.is_coop > 1:
                 if self.Players[0].health <= 0 and self.Players[1].health <= 0:
+                    self.gameover = 1
                     self.exit = 1
                     return ["menu", self.getGameState()]
             else:
                 if self.Players[0].health <= 0:
                     self.exit = 1
+                    self.gameover = 1
                     return ["menu", self.getGameState()]
             
             for event in pygame.event.get():
