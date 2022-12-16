@@ -43,13 +43,13 @@ class Skin():
     def convert_to_string_list(self, surface_list):
         surface_string = []
         for surface in surface_list:
-            s = (pygame.image.tostring(surface, "RGB"), surface.get_size())
+            s = (pygame.image.tostring(surface, "RGBA"), surface.get_size())
             surface_string.append(s)
         return surface_string
 
     def convert_to_surface_list(self, surface_strings):
         surfaces = []
         for surface in surface_strings:
-            s = pygame.image.fromstring(surface[0], surface[1], "RGB")
+            s = pygame.image.fromstring(surface[0], surface[1], "RGBA")
             surfaces.append(s)
         return surfaces
