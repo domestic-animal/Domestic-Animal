@@ -11,6 +11,7 @@ from Engines.level import level
 sys.path.insert(0, './Entities')
 from player import player
 from weapon import weapon
+import datetime
 from bullet import bullet
 from powerfactory import PowerUpFactory
 from Engines.observer import gameobserver
@@ -130,7 +131,7 @@ class normalGameEngine:
     
     # function to get the current game score
     def getGameState(self):
-        return gameState(self.powerup,self.score,self.Bullets,self.Players, self.Enemies,"normal",self.diff,self.exit,self.level.number,pygame.time.Clock().get_time())
+        return gameState(self.powerup,self.score,self.Bullets,self.Players, self.Enemies,self.diff,self.exit,self.level.number,datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
 
      # function to draw  the window
     def redraw_window(self):
@@ -179,7 +180,7 @@ class normalGameEngine:
         clock = pygame.time.Clock()
         #generate the wave
         self.Enemies=self.level.getwave(1)
-
+        print(datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
         ####    Main game loop      ####
         ################################
         while True:

@@ -45,3 +45,6 @@ class menu:
 
             pygame.display.update()
         return [selection]
+
+    def getGameState(self):
+        return None

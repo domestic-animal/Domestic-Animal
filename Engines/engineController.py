@@ -64,6 +64,7 @@ class engineController:
             if self.states[0] == "start":
                 self.controllerState = "game"
             if self.states[0] == "runAway" :
+                pygame.display.quit()
                 break
             if self.states[0] == "menu":
                 self.controllerState = "menu"
