@@ -10,6 +10,14 @@ class Button:
         self.width = width
         self.height = height
         self.text = text
+    def __init__(self, color, x, y, width, height, text,price):
+        self.color = color
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.text = text
+        self.price = price
 
     def draw(self, win, outline=None):
         # Call this method to draw the button on the screen

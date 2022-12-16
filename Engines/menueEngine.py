@@ -2,25 +2,29 @@ import pygame
 
 from menue_components.pause import pauseMenue
 from menue_components.start_menue import startMenue
+from menue_components.market import market
 
 
 class menu:
 
-    def __init__(self, screen, WIDTH, HEIGHT):
+    def __init__(self, screen, WIDTH, HEIGHT, profile):
         self.buttons = []
         self.menue = None
         self.WIDTH = WIDTH
         self.HEIGHT = HEIGHT
         self.screen = screen
+        self.profile = profile
 
     # 1: pause menue
     # 2: start menue
-    def create_menue(self, type=1):
-
+    # 3 : market menue
+    def create_menue(self, type=1, profile = None):
         if type == 1:
             self.menue = pauseMenue(self.screen, self.WIDTH, self.HEIGHT)
         elif type == 2:
             self.menue = startMenue(self.screen, self.WIDTH, self.HEIGHT)
+        elif type == 3:
+            self.menue = market(self.screen, self.WIDTH, self.HEIGHT, profile)
         self.buttons = self.menue.create_pause_buttons()
 
     def start(self):

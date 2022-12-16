@@ -11,10 +11,10 @@ class startMenue():
 
     def create_pause_buttons(self):
         created_buttons = []
-        start = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 500, 100, 40, "start")
-        load = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 420, 100, 40, "load")
-        market = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 360, 100, 40, "market")
-        runAway = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 300, 100, 40, "exit")
+        start = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 500, 100, 40, "start", price=0)
+        load = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 420, 100, 40, "load", price=0)
+        market = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 360, 100, 40, "market", price=0)
+        runAway = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 300, 100, 40, "exit", price=0)
         created_buttons.append(start)
         created_buttons.append(load)
         created_buttons.append(market)
@@ -35,8 +35,9 @@ class startMenue():
                     # TODO : handle load function
                     pass
                 if buttons[2].isOver(pos):
-                    # TODO : go market
-                    pass
+                    runM = False
+                    selection = "market"
+
                 if buttons[3].isOver(pos):
                     # TODO : close program
                     runM = False

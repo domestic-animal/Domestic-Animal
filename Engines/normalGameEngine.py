@@ -56,7 +56,7 @@ class normalGameEngine:
         #rat enemy for higher difficulty
         self.rats = enemyAssets[0]
         # pause menu
-        self.menuengine = menu(self.WIN, 600,800)
+        self.menuengine = menu(self.WIN, 600,800,self.profile)
         self.menuengine.create_menue(1)
 
         #constant attributes
