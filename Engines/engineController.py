@@ -68,6 +68,11 @@ class engineController:
                 break
             if self.states[0] == "menu":
                 self.controllerState = "menu"
+            if self.states[0] == "market":
+                market = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile)
+                market.create_menue(3, self.profile)
+                self.states = market.start()
+                
             
 
     def switch(self):
@@ -97,9 +102,9 @@ class engineController:
             #if the game state is opening a menu
             elif self.controllerState == "menu":
                 #assign the current engine to be the menu engine
-                self.currEngine = menu(self.WIN, self.WIDTH, self.HEIGHT)
+                self.currEngine = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile)
                 #create the main menu
-                self.currEngine.create_menue(2)
+                self.currEngine.create_menue(2, self.profile)
 
     def convert(self, PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS,ENEMY_SKINS):
    ## convert all assets for optimizations
