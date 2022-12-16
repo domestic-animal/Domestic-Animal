@@ -23,7 +23,7 @@ class normalGameEngine:
     # Player player
 
     def __init__(self,window, level,profile, playerAssets , enemyAssets,
-                 gameAssets, settings1, settings2,powerUps=0,
+                 gameAssets, settings1, settings2,gameState=None,powerUps=0,
                  diff = 1,score=0,is_coop=1):
         """
             Constructor
@@ -39,7 +39,7 @@ class normalGameEngine:
             settings: player's controls
             powerUps: how many powerups are allowed
         """
-
+        self.gameState = gameState
         self.WIN = window
         self.playerAssets = playerAssets
         self.enemyAssets = enemyAssets
@@ -60,6 +60,7 @@ class normalGameEngine:
         self.menuengine.create_menue(1)
 
         #constant attributes
+        self.gameover = 0
         self.exit = 0
         self.Enemies = []
         self.Bullets = []
@@ -131,8 +132,15 @@ class normalGameEngine:
     
     # function to get the current game score
     def getGameState(self):
-        return gameState(self.powerup,self.score,self.Bullets,self.Players, self.Enemies,self.diff,self.exit,self.level.number,datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
+        return gameState(self.powerup,self.score,self.Bullets,self.Players, self.Enemies,self.diff,self.exit,self.level.number,datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),self.gameover)
 
+    def loadGameState(self):
+            self.Bullets = self.gameState.bullets
+            self.powerup = self.gameState.powerups
+            self.score = self.gameState.Score
+            self.Players = self.gameState.players
+            self.Enemies = self.gameState.enemies
+            
      # function to draw  the window
     def redraw_window(self):
             """
@@ -174,13 +182,15 @@ class normalGameEngine:
         """
         ####    Intitalization      ####
         #################################
-        self.create_player()
+        if self.gameState == None:
+            self.create_player()
+            self.Enemies=self.level.getwave(1)
+        else:
+            self.loadGameState()
         #storage lists
         FPS = 60
         clock = pygame.time.Clock()
         #generate the wave
-        self.Enemies=self.level.getwave(1)
-        print(datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
         ####    Main game loop      ####
         ################################
         while True:

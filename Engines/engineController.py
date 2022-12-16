@@ -14,7 +14,7 @@ game engine
 """
 class engineController:
 
-    def __init__(self,assets,profile,filemanager,settings1,settings2,backgrounds, mode= 0,ControllerState = "menu"):
+    def __init__(self,assets,profile,filemanager,settings1,settings2,backgrounds, mode= 0,gameState=None):
         """Constructor
 
         Args:
@@ -31,12 +31,12 @@ class engineController:
         self.settings2 = settings2
         self.assets = assets
         self.mode = mode
-        self.controllerState = ControllerState
+        self.controllerState = "menu"
         self.Background = backgrounds
         #level selector to select a certain level to load
         self.lvlSelector = levelSelector()
         # returned states from the engines
-        self.gameState=None
+        self.gameState=gameState
         self.states = []
         #difficulity
         self.diff = 1
@@ -89,7 +89,7 @@ class engineController:
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
                     diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
                     playerAssets= [PLAYER_SHIP_SKINS[0], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[3]],
-                    enemyAssets=[ENEMY_SKINS[5]],gameAssets=[BG])
+                    enemyAssets=[ENEMY_SKINS[5]],gameAssets=[BG], gameState=self.gameState)
                 elif self.mode == 0:
                     self.WIN = pygame.display.set_mode(( self.HEIGHT, self.WIDTH),pygame.RESIZABLE)
                     self.currEngine = vsGameEngine(window =self.WIN,profile = self.profile,settings1 = self.settings1,settings2 = self.settings2,

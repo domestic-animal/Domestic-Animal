@@ -122,14 +122,14 @@ class Launcher(QMainWindow):
 			self.profile.set_co_player_controls(c)
 		self.manager.save_profile(self.profile)
 
-	def startGame(self, mode : int, state : str = "menu") -> None:
+	def startGame(self, mode : int, state = None) -> None:
 		# load assets
 		assets, backgrounds = self.manager.load_assets()
   
 		self.controller = engineController(settings1 = Customization.mapControls(self.profile.get_controls()),
                                      profile= self.profile, assets = assets, backgrounds = backgrounds, mode=mode,
                                     filemanager= self.manager, settings2=Customization.mapControls(self.profile.get_controls()),
-									ControllerState= state)
+									gameState= state)
 
 		self.game_thread.setController(self.controller)
 		self.game_thread.start()
