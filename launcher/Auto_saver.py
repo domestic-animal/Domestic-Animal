@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from Engines.engineController import engineController
 from file.gamestatesaver import GameStateSaver
+import copy
 
 class Auto_Save_Thread(QThread):
     
@@ -28,7 +29,7 @@ class Auto_Save_Thread(QThread):
         while self.ThreadActive:
             self.msleep(2500)
             mutex.lock()
-            state = self.controller.getGameState()
+            state = copy.deepcopy(self.controller.getGameState())
             mutex.unlock()
             if state is not None:
                 if mode == -1:

@@ -37,7 +37,7 @@ class Game_Thread(QThread):
 
     def stop(self):
         # stop the thread on finish
-        print("thread killed")
+        print("game thread finished")
         self.deadSignal.emit()
         self.quit()
 
@@ -102,6 +102,13 @@ class Launcher(QMainWindow):
 			#start story mode
 			mode = 0
 			print("vs")
+		if(self.game_thread.isFinished()):
+			print("thread re-created")
+			self.game_thread = Game_Thread()
+			self.game_thread.deadSignal.connect(self.pager.widget(3).setup_view)
+			self.game_thread.deadSignal.connect(self.pager.show)
+			self.auto_save = Auto_Save_Thread()
+			self.game_thread.deadSignal.connect(self.auto_save.stop)
 		self.startGame(mode)
 
 

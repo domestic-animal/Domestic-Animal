@@ -36,7 +36,7 @@ class SaveUI(QMainWindow):
               
             
     def setup_view(self)->None:
-        print("called**********")
+        print("updating save ui")
         self.states = []
         self.states.append(self.loader.load_saved_story(self.profile.get_name()))
         self.states.append(self.loader.load_autosaved_story(self.profile.get_name()))
