@@ -35,36 +35,39 @@ class SaveUI(QMainWindow):
             self.findChild(QToolButton, f'start{i}').clicked.connect(partial(self.handle_choose_save,i))  
               
             
-    def setup_view(self, name : str)->None:
-        states = []
-        states.append(self.loader.load_saved_story(name))
-        states.append(self.loader.load_autosaved_story(name))
-        states.append(self.loader.load_autosaved_endless(name))
+    def setup_view(self)->None:
+        print("called**********")
+        self.states = []
+        self.states.append(self.loader.load_saved_story(self.profile.get_name()))
+        self.states.append(self.loader.load_autosaved_story(self.profile.get_name()))
+        self.states.append(self.loader.load_autosaved_endless(self.profile.get_name()))
         
-        for i, state in enumerate(states):
+        for i, state in enumerate(self.states):
             if state is None:
                 self.findChild(QLabel, f'title{i+1}').hide()
                 self.findChild(QWidget, f'line{i+1}').hide()
                 self.findChild(QToolButton, f'start{i+1}').hide()
                 self.findChild(QLabel, f'save{i+1}_crash').setText("")
+                self.findChild(QLabel, f'save{i+1}_date').setText("")
+                self.findChild(QLabel, f'save{i+1}_info').setText("")
             else:
                 self.findChild(QLabel, f'title{i+1}').show()
                 self.findChild(QWidget, f'line{i+1}').show()
                 self.findChild(QToolButton, f'start{i+1}').show()
-                self.findChild(QLabel, f'save{i+1}_date').setText(str("date: " + state.time))
-                self.findChild(QLabel, f'save{i+1}_info').setText(str("score : " + state.score))
+                self.findChild(QLabel, f'save{i+1}_date').setText(f"time: {state.time}")
+                self.findChild(QLabel, f'save{i+1}_info').setText(f"score : {state.Score}")
                 if state.isExit == 0:
                     self.findChild(QLabel, f'save{i+1}_crash').setText("crash")
                 else:
                     self.findChild(QLabel, f'save{i+1}_crash').setText("")
                 
-                if state.gamemode == "normal":
+                if state.level != -1:
                     self.findChild(QLabel, f'title{i+1}').setText(f'story   (level {state.level})')
         
   
     def handle_choose_save(self, i : int) -> None:
-        print(i)
+        self.load_signal.emit(self.states[i-1])
         
     def getProfile(self, p : Profile) -> None:
         self.profile = p
-        self.setup_view(p.get_name())
+        self.setup_view()

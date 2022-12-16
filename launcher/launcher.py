@@ -102,19 +102,8 @@ class Launcher(QMainWindow):
 			#start story mode
 			mode = 0
 			print("vs")
+		self.startGame(mode)
 
-		# load assets
-		assets, backgrounds = self.manager.load_assets()
-  
-		self.controller = engineController(settings1 = Customization.mapControls(self.profile.get_controls()),
-                                     profile= self.profile, assets = assets, backgrounds = backgrounds, mode=mode,
-                                    filemanager= self.manager, settings2=Customization.mapControls(self.profile.get_controls()))
-
-		self.game_thread.setController(self.controller)
-		self.game_thread.start()
-		if mode != 0:
-			self.auto_save.setController(self.controller)
-			self.auto_save.start()
 
 	def catchProfile(self, s : Profile):
 		self.profile = 	s
@@ -125,9 +114,29 @@ class Launcher(QMainWindow):
 		else:
 			self.profile.set_co_player_controls(c)
 		self.manager.save_profile(self.profile)
+
+	def startGame(self, mode : int, state : str = "menu") -> None:
+		# load assets
+		assets, backgrounds = self.manager.load_assets()
   
+		self.controller = engineController(settings1 = Customization.mapControls(self.profile.get_controls()),
+                                     profile= self.profile, assets = assets, backgrounds = backgrounds, mode=mode,
+                                    filemanager= self.manager, settings2=Customization.mapControls(self.profile.get_controls()),
+									ControllerState= state)
+
+		self.game_thread.setController(self.controller)
+		self.game_thread.start()
+		if mode != 0:
+			self.auto_save.setController(self.controller)
+			self.auto_save.start()
+
+
 	def catchSave(self, state: gameState): 
-		pass
+		if(state.level == -1):
+			self.startGame(-1, state)
+		else:
+			self.startGame(1, state)
+		
 		
 		
 

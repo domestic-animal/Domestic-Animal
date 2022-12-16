@@ -19,6 +19,8 @@ if __name__ == "__main__":
     p.profile_signal.connect(ui.catchProfile)
     p.profile_signal.connect(c.getProfile)
     p.profile_signal.connect(save_ui.getProfile)
+    ui.game_thread.deadSignal.connect(save_ui.setup_view)
+    save_ui.load_signal.connect(ui.catchSave)
     widget.addWidget(p)
     widget.addWidget(ui)
     widget.addWidget(c)
