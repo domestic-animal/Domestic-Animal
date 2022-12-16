@@ -83,7 +83,7 @@ class GameStateSaver:
 
     def __write_pickle_file(self, object, path):
         try:
-            with open(path, 'wb') as pickle_file:F
+            with open(path, 'wb') as pickle_file:
                 pickle.dump(object, pickle_file)
                 return True
         except (IOError, OSError, pickle.PickleError, pickle.UnpicklingError):
