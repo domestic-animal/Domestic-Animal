@@ -119,9 +119,9 @@ class Launcher(QMainWindow):
 		if(self.game_thread.isFinished()):
 			print("threads re-created")
 			self.game_thread = Game_Thread()
-			self.game_thread.deadSignal.connect(self.pager.widget(3).setup_view)
 			self.game_thread.deadSignal.connect(self.pager.show)
 			self.auto_save = Auto_Save_Thread()
+			self.auto_save.deadSignal.connect(self.pager.widget(3).setup_view)
 			self.game_thread.deadSignal.connect(self.auto_save.stop)
 
 	def startGame(self, mode : int, state = None) -> None:

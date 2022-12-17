@@ -8,6 +8,8 @@ import copy
 
 class Auto_Save_Thread(QThread):
     
+    deadSignal = pyqtSignal()
+
     def __init__(self, parent = None) -> None:
         super().__init__(parent)
         self.controller = None
@@ -51,7 +53,8 @@ class Auto_Save_Thread(QThread):
     def stop(self):
         # stop the thread on finish
         self.ThreadActive = False
-        self.msleep(500)
+        self.msleep(300)
         self.save()
+        self.deadSignal.emit()
         print("auto save thread finished")
         self.quit()
