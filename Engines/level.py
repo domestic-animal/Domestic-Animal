@@ -46,7 +46,7 @@ class endlesslevel(level):
         factor=enemyFactory(self.BULLET_SKINS,self.ENEMY_SKINS)
         x=20
         y=0
-        threshy=450
+        threshy=500
         for _ in range(8):
             threshy-=50
             x=20
@@ -58,6 +58,132 @@ class endlesslevel(level):
         return enemies
 
 
+"""
+this is level one 
+"""
+#level 1 
+class levelOne(level):
+    def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS):
+        super().__init__(diff, ENEMY_SKINS, BULLET_SKINS)
+        self.number=1
+        self.waveNumber=0
+        self.makewaves()
+    
+    def makewaves(self):
+
+        factor=enemyFactory(self.BULLET_SKINS,self.ENEMY_SKINS)
+        x=20
+        y=0
+        threshy=500
+        for _ in range(2):
+            enemies=[]
+            for _ in range(8):
+                threshy-=50
+                x=20
+                for _ in range(10):
+                    enemy=factor.create("d",(self.diff),x,y,(600,threshy))
+                    enemies.append(enemy)
+                    x+=35
+            self.waves.append(enemies)
+            
+    def getwave(self,time):
+        """generates determinstic waves every time it gets called
+
+        Returns:
+            list of waves
+        """
+        if self.waveNumber<len(self.waves)-1:
+            self.waveNumber+=1
+            return self.waves[self.waveNumber-1]
+        else:
+            return None
+
+
+"""
+this is level two 
+"""
+#level 2
+class levelTwo(level):
+    def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS):
+        super().__init__(diff, ENEMY_SKINS, BULLET_SKINS)
+        self.number=1
+        self.waveNumber=0
+        self.makewaves()
+    
+    def makewaves(self):
+        
+        factor=enemyFactory(self.BULLET_SKINS,self.ENEMY_SKINS)
+        x=20
+        y=0
+        threshy=500
+        for _ in range(2):
+            enemies=[]
+            for _ in range(8):
+                threshy-=50
+                x=20
+                for _ in range(10):
+                    enemy=factor.create("c",(self.diff),x,y,(600,threshy))
+                    enemies.append(enemy)
+                    x+=35
+            self.waves.append(enemies)
+
+    def getwave(self,time):
+        """generates determinstic waves every time it gets called
+
+        Returns:
+            list of waves
+        """
+        if self.waveNumber<len(self.waves)-1:
+            self.waveNumber+=1
+            return self.waves[self.waveNumber-1]
+        else:
+            return None
+
+
+"""
+this is level three 
+"""
+#level 3
+class levelThree(level):
+    def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS):
+        super().__init__(diff, ENEMY_SKINS, BULLET_SKINS)
+        self.number=1
+        self.waveNumber=0
+        self.makewaves()
+    
+    def makewaves(self):
+        
+        factor=enemyFactory(self.BULLET_SKINS,self.ENEMY_SKINS)
+        x=20
+        y=0
+        threshy=500
+        type="c"
+        for _ in range(4):
+            enemies=[]
+            for _ in range(8):
+                threshy-=50
+                x=20
+                if type=="c":
+                    type="d"
+                else:
+                    type="c"
+                for _ in range(10):
+                    enemy=factor.create(type,(self.diff),x,y,(600,threshy))
+                    enemies.append(enemy)
+                    x+=35
+            self.waves.append(enemies)
+            
+    def getwave(self,time):
+        """generates determinstic waves every time it gets called
+
+        Returns:
+            list of waves
+        """
+        if self.waveNumber<len(self.waves)-1:
+            self.waveNumber+=1
+            return self.waves[self.waveNumber-1]
+        else:
+            return None
 
 
         

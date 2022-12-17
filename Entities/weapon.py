@@ -24,7 +24,7 @@ class weapon:
                 self.cool_down_counter += 1
 
             if self.cool_down_counter == 0:
-                b = bullet(x+15, y, self.bullet_img,self.damage, self.velocity, ishorizontal,self.enemyWeapon)
+                b = bullet(x+14, y, self.bullet_img,self.damage, self.velocity, ishorizontal,self.enemyWeapon)
                 self.cool_down_counter = 1
                 return b
         return None

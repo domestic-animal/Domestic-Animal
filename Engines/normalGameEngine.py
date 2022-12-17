@@ -23,8 +23,8 @@ class normalGameEngine:
     # Player player
 
     def __init__(self,window, level,profile, playerAssets , enemyAssets,
-                 gameAssets, settings1, settings2,gameState=None,powerUps=0,
-                 diff = 1,score=0,is_coop=1):
+                 gameAssets, powerUpsAssets,settings1, settings2,gameState=None,
+                 diff = 1,score=0,is_coop=1, fileManager=None):
         """
             Constructor
 
@@ -37,8 +37,8 @@ class normalGameEngine:
             enemyAssets: enemy Assets to be drawn on the window
             gameAssets: any extra assets such as background
             settings: player's controls
-            powerUps: how many powerups are allowed
         """
+        self.fileManager = fileManager
         self.gameState = gameState
         self.WIN = window
         self.playerAssets = playerAssets
@@ -54,7 +54,7 @@ class normalGameEngine:
         self.diff = diff
 
         #rat enemy for higher difficulty
-        self.rats = enemyAssets[0]
+        self.RAT_SKINS = enemyAssets[0]
         # pause menu
         self.menuengine = menu(self.WIN, 600,800)
         self.menuengine.create_menue(1)
@@ -68,19 +68,19 @@ class normalGameEngine:
         self.powerup=[]
         self.score=score
         self.gameObserver = gameobserver()
-        self.powerFactory=PowerUpFactory(self.playerAssets[2],self.playerAssets[2],self.playerAssets[2],self.playerAssets[2],self.playerAssets[2])
+        self.powerFactory=PowerUpFactory(powerUpsAssets[0],powerUpsAssets[1],powerUpsAssets[2],powerUpsAssets[3],powerUpsAssets[4])
         self.main_font = pygame.font.SysFont("comicsans", 40)
 
 
     def create_player(self):
         
         #player Entity
-        we1 = weapon(self.playerAssets[1], -1, damage=45, fire_rate=25)
+        we1 = weapon(self.playerAssets[1], -1, damage=45, fire_rate=20)
         pl1=player(300,600,we1,self.playerAssets[0],self.PLAYER1_CONTROLS,200,7)
         self.Players.append(pl1)
 
         if self.is_coop==2:
-            we2 = weapon(self.playerAssets[3], -1, damage=45, fire_rate=25)
+            we2 = weapon(self.playerAssets[3], -1, damage=45, fire_rate=20)
             pl2=player(400,600,we2,self.playerAssets[2],self.PLAYER2_CONTROLS,200,7)
             self.Players.append(pl2)
     
@@ -127,7 +127,8 @@ class normalGameEngine:
         if (random.randint(0, (12/self.diff)* 60) == 1):
             player = random.choice(self.Players)
             rat_movement = random.choice([(0, 1), (600, -1)])
-            rat = bullet(rat_movement[0], player.y, self.rats, 20*self.diff, 5*self.diff, rat_movement[1], 1)
+            RAT_SKIN = random.choice([self.RAT_SKINS[5], self.RAT_SKINS[4]])
+            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 20*self.diff, 5*self.diff, rat_movement[1], 1)
             self.Bullets.append(rat)
     
     # function to get the current game score
@@ -196,6 +197,8 @@ class normalGameEngine:
         #generate the wave
         ####    Main game loop      ####
         ################################
+        curr=datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        seconds_in_day = 24 * 60 * 60
         while True:
             #drawing FPS
             clock.tick(FPS)
@@ -228,6 +231,7 @@ class normalGameEngine:
             #insert power up
             self.gameObserver.powerUpdate(self.powerup,self.Players)
 
+            #for endless
             #pasue menu
             if keys[pygame.K_ESCAPE]: # shoot
                 selection = self.menuengine.start()
@@ -249,10 +253,6 @@ class normalGameEngine:
                     self.gameover = 1
                     return ["menu", self.getGameState()]
             
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.exit = 1
-                    return ["runAway" , self.getGameState()]
                     
 
 
