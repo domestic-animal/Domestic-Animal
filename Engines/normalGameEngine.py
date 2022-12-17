@@ -6,7 +6,6 @@ import sys
     Normal Game Engine that runs both the Story mode
     and the Endless mode using the level given
 """
-from Engines.level import level
 #from observer import observer as observe
 sys.path.insert(0, './Entities')
 from player import player
@@ -15,7 +14,6 @@ import datetime
 from bullet import bullet
 from powerfactory import PowerUpFactory
 from Engines.observer import gameobserver
-from Engines.level import endlesslevel
 from Engines.menueEngine import menu
 from Engines.gameState import gameState
 class normalGameEngine:
@@ -69,7 +67,8 @@ class normalGameEngine:
         self.score=score
         self.gameObserver = gameobserver()
         self.powerFactory=PowerUpFactory(powerUpsAssets[0],powerUpsAssets[1],powerUpsAssets[2],powerUpsAssets[3],powerUpsAssets[4])
-        self.main_font = pygame.font.SysFont("comicsans", 40)
+        self.main_font = pygame.font.Font(os.path.join(".","launcher","assets","game.ttf"), 40)
+        #self.main_font = pygame.font.SysFont("comicsans", 40)
 
 
     def create_player(self):
@@ -124,11 +123,11 @@ class normalGameEngine:
 
     def generate_rat(self):
             # to do : with difficulity
-        if (random.randint(0, (12/self.diff)* 60) == 1):
+        if (random.randint(0, (18/self.diff)* 60) == 1):
             player = random.choice(self.Players)
             rat_movement = random.choice([(0, 1), (600, -1)])
             RAT_SKIN = random.choice([self.RAT_SKINS[5], self.RAT_SKINS[4]])
-            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 20*self.diff, 5*self.diff, rat_movement[1], 1)
+            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 30*self.diff, 5*self.diff, rat_movement[1], 1)
             self.Bullets.append(rat)
     
     # function to get the current game score
@@ -172,13 +171,23 @@ class normalGameEngine:
 
     # function to create the power ups the power 
     def insertpowerup(self):
-      if (random.randint(0, (12/self.diff)* 60) == 1):
+      if (random.randint(0, (18/self.diff)* 60) == 1):
             powers=["h","d","s","r","i"]
             choice=random.choice(powers)
             x=random.randint(50,550)
             z=self.powerFactory.create(choice,x,-50,self.is_coop)
             self.powerup.append(z)            
-        
+    
+
+    def endlessDiffculty(self,curr):  
+        seconds_in_day = 24 * 60 * 60
+        now=datetime.datetime.now()
+        gt=divmod((now-curr).seconds * seconds_in_day + (now-curr).seconds, 60)
+        if gt[0]>5 and gt[0]<10:
+            self.diff=2
+        elif gt[0]>10:
+            self.diff=3
+
 
     def start(self):
         """
@@ -197,8 +206,8 @@ class normalGameEngine:
         #generate the wave
         ####    Main game loop      ####
         ################################
-        curr=datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-        seconds_in_day = 24 * 60 * 60
+        curr=datetime.datetime.now()
+      
         while True:
             #drawing FPS
             clock.tick(FPS)
@@ -206,7 +215,11 @@ class normalGameEngine:
             self.redraw_window()
             #generate a new wave when the wave is cleared
             if len(self.Enemies) == 0:
-                self.Enemies = self.level.getwave(1)
+                self.Enemies = self.level.getwave(self.diff)
+                if self.Enemies==None:
+                    self.profile.set_story_progress(self.profile.get_story_progress()+1)
+                    self.profile.set_coins(self.profile.get_coins()+self.score)
+                    return self.score
 
             #detect the keys pressed
             keys = pygame.key.get_pressed()
@@ -244,16 +257,24 @@ class normalGameEngine:
             #on death or quitting
             if self.is_coop > 1:
                 if self.Players[0].health <= 0 and self.Players[1].health <= 0:
+                    if self.level==-1:
+                        self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
                     self.gameover = 1
                     self.exit = 1
                     return ["menu", self.getGameState()]
             else:
                 if self.Players[0].health <= 0:
+                    if self.level==-1:
+                        self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
                     self.exit = 1
                     self.gameover = 1
                     return ["menu", self.getGameState()]
-            
                     
+            if self.level==-1:
+                self.endlessDiffculty(curr)
+
+
+
 
 
 

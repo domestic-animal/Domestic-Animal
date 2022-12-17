@@ -28,7 +28,6 @@ class vsGameEngine:
             enemyAssets: enemy Assets to be drawn on the window
             gameAssets: any extra assets such as background
             settings: player's controls
-            powerUps: how many powerups are allowed
         """
 
         self.WIN = window
@@ -53,11 +52,17 @@ class vsGameEngine:
     def create_player(self):
         
         #player Entity
-        we1 = weapon(self.playerAssets[1], 1, damage=45, fire_rate=25)
+        self.playerAssets[1].rotate(-1)
+        we1 = weapon(self.playerAssets[1], 1, damage=45, fire_rate=15)
+
+        self.playerAssets[0].rotate(-1)
         pl1=player(200,295,we1,self.playerAssets[0],self.PLAYER1_CONTROLS,250,7,1)
         self.Players.append(pl1)
 
-        we2 = weapon(self.playerAssets[3], -1, damage=45, fire_rate=25)
+        self.playerAssets[3].rotate(1)
+        we2 = weapon(self.playerAssets[3], -1, damage=45, fire_rate=15)
+
+        self.playerAssets[2].rotate(1)
         pl2=player(600,295,we2,self.playerAssets[2],self.PLAYER2_CONTROLS,250,7,-1)
         self.Players.append(pl2)
     
@@ -143,23 +148,16 @@ class vsGameEngine:
             #pasue menu
             if keys[pygame.K_ESCAPE]: # shoot
                 selection = self.menuengine.start()
-                if selection == "save":
+                if selection[0] == "save":
                     pass
-                if selection == "runAway":
-                    self.exit = 1
+                if selection[0] == "runAway":
                     return ["menu"]
                     
             #on death or quitting
             if self.Players[0].health <= 0 or self.Players[1].health <= 0:
-                    self.exit = 1
                     return ["menu"]
-            
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.exit = 1
-                    return ["runAway" ]
-                    
 
 
-
+    def getGameState():
+        return None
             

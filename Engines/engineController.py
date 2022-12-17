@@ -136,6 +136,10 @@ class engineController:
                 for i in BOSSES:
                     i.frames[0].convert_alpha()
                     i.frames[1].convert_alpha()
+                    i.frames[2].convert_alpha()
+                    i.frames[3].convert_alpha()
+                    i.frames[4].convert_alpha()
+                    i.frames[5].convert_alpha()
                
                 
 
