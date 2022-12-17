@@ -51,5 +51,7 @@ class Auto_Save_Thread(QThread):
     def stop(self):
         # stop the thread on finish
         self.ThreadActive = False
+        self.msleep(500)
+        self.save()
         print("auto save thread finished")
         self.quit()
