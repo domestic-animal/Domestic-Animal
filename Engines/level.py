@@ -1,8 +1,8 @@
 import random
 import sys
 sys.path.insert(0, './Entities')
-from enemyFactory import enemyFactory
-from enemy import enemy
+from Entities.enemyFactory import enemyFactory
+from Entities.enemy import enemy
 
 
 """level abstract class
@@ -30,6 +30,8 @@ class level:
 class storylevel(level):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS):
             super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS)
+            self.waveNumber=0
+            self.waves = [];
 
     def getwave(self,timediffuclty):
         """generates determinstic waves every time it gets called
@@ -39,8 +41,10 @@ class storylevel(level):
         """
         if self.waveNumber<len(self.waves)-1:
             self.waveNumber+=1
+            print("returning wave")
             return self.waves[self.waveNumber-1]
         else:
+            print("returning none")
             return None
 """endless level impements the level abstract class
 """
@@ -90,6 +94,7 @@ class levelOne(storylevel):
         x=20
         y=0
         threshy=400
+        print("making waves")
         for _ in range(2):
             enemies=[]
             for _ in range(6):

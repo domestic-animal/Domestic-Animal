@@ -8,11 +8,11 @@ import sys
 """
 #from observer import observer as observe
 sys.path.insert(0, './Entities')
-from player import player
-from weapon import weapon
+from Entities.player import player
+from Entities.weapon import weapon
 import datetime
-from bullet import  bullet
-from powerfactory import PowerUpFactory
+from Entities.bullet import  bullet
+from Entities.powerfactory import PowerUpFactory
 from Engines.observer import gameobserver
 from Engines.menueEngine import menu
 from Engines.gameState import gameState
@@ -74,13 +74,11 @@ class normalGameEngine:
         
         #player Entity
        
-        we1 = weapon(self.playerAssets[1], -1, damage=45, fire_rate=20,bullettype=2)
-        pl1=player(300,600,we1,self.playerAssets[0],self.PLAYER1_CONTROLS,200,12)
+        pl1=player(300,600,3,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7)
         self.Players.append(pl1)
 
         if self.is_coop==2:
-            we2 = weapon(self.playerAssets[3], -1, damage=45, fire_rate=20)
-            pl2=player(400,600,we2,self.playerAssets[2],self.PLAYER2_CONTROLS,200,7)
+            pl2=player(400,600,1,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,200,7)
             self.Players.append(pl2)
     
     def move_entities(self,keys):
@@ -127,7 +125,7 @@ class normalGameEngine:
             player = random.choice(self.Players)
             rat_movement = random.choice([(0, 1), (600, -1)])
             RAT_SKIN = random.choice([self.RAT_SKINS[5], self.RAT_SKINS[4]])
-            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 30*self.diff, 5*self.diff, rat_movement[1], 1)
+            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 30*self.diff, 5*self.diff, rat_movement[1], 0,1)
             self.Bullets.append(rat)
     
     # function to get the current game score
@@ -195,11 +193,11 @@ class normalGameEngine:
         """
         ####    Intitalization      ####
         #################################
-        if self.gameState == None:
+        if self.gameState != None and self.gameState.gameover !=1:
+            self.loadGameState()
+        else:
             self.create_player()
             self.Enemies=self.level.getwave(1)
-        else:
-            self.loadGameState()
         #storage lists
         FPS = 60
         clock = pygame.time.Clock()

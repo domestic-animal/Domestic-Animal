@@ -4,17 +4,18 @@ import copy
 from entity import entity
 class bullet(entity):
 
-    def __init__(self,x,y,image, damage, velocity, ishorizontal,is_friendly):
+    def __init__(self,x,y,image, damage, velocity, ishorizontal,isvertical,is_friendly):
         super().__init__(x,y,image,velocity)
         self.damage = damage
         self.ishorizontal = ishorizontal
+        self.isvertical = isvertical
         self.is_friendly = is_friendly
         self.collisions = 1
     
 
     def move(self):
         if self.ishorizontal == 0:
-            self.y += self.is_friendly*self.velocity
+            self.y += self.isvertical*self.velocity
         else:
             self.x += self.velocity*self.ishorizontal
 
@@ -27,8 +28,8 @@ class bullet(entity):
 
 class zapper(bullet):
 
-    def __init__(self,x,y,image, damage, velocity, ishorizontal,is_friendly):
-        super().__init__(x,y,image, damage, velocity, ishorizontal,is_friendly)
+    def __init__(self,x,y,image, damage, velocity, ishorizontal,isvertical,is_friendly):
+        super().__init__(x,y,image, damage, velocity, ishorizontal,isvertical,is_friendly)
         self.collisions = 6
 
     def Objectdamage(self, entity):
@@ -47,8 +48,8 @@ class zapper(bullet):
 
 class penetrate(bullet):
     
-    def __init__(self,x,y,image, damage, velocity, ishorizontal,is_friendly):
-        super().__init__(x,y,image, damage, velocity, ishorizontal,is_friendly)
+    def __init__(self,x,y,image, damage, velocity, ishorizontal,isvertical,is_friendly):
+        super().__init__(x,y,image, damage, velocity, ishorizontal,isvertical,is_friendly)
         self.collisions = 10
 
 

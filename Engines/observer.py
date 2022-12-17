@@ -45,7 +45,7 @@ class gameobserver(observer):
         # loop on all bullets and damage the enemy or player
         for bullet in bullets:
             #if the bullets are friendly (-1)
-            if bullet.is_friendly<0:
+            if bullet.is_friendly==0:
                 for enemy in enemies:
                     if self.is_collide(bullet,enemy):
                         bullet.Objectdamage(enemy)

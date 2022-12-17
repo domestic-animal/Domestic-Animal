@@ -25,24 +25,24 @@ class enemyFactory:
 
     def create(self,type,diff,x,y,threshold):
         if type=="d":
-            w = weapon(self.DOG_LASER, 1, int(700/diff),15*diff,2*diff)
+            w = weapon(self.DOG_LASER, 1, 0,1,int(700/diff),15*diff,2*diff)
             typeSkin=random.randint(1,2)
             if(typeSkin==1):
                 return enemy.dog(x, 5*diff, y, w,  self.DOG,  100*diff,  5*diff,  threshold,  15*diff)
             return enemy.dog(x, 5*diff, y, w,  self.DOG2,  100*diff,  5*diff,  threshold,  15*diff)
         elif  type=="c":
-            w = weapon(self.CAT_LASER, 1, int(600/diff),20*diff,2*diff)
+            w = weapon(self.CAT_LASER, 1,0,1, int(600/diff),20*diff,2*diff)
             typeSkin=random.randint(1,2)
             if(typeSkin==1):
                 return enemy.cat(x,  7*diff,  y,  w,  self.CAT,  50*diff,  5*diff,  threshold,  10*diff)
             return enemy.cat(x,  7*diff,  y,  w,  self.CAT2,  50*diff,  5*diff,  threshold,  10*diff)
         elif type =="bd":
-            w = weapon(self.DOG_LASER2, 1, int(200/diff),20*diff,5*diff)
-            w2 = weapon(self.DOG_LASER, 1, int(450/diff),40*diff,2*diff)
-            w3 = weapon(self.DOG_LASER, 1, int(450/diff),40*diff,2*diff)
+            w = weapon(self.DOG_LASER2, 1,0,1, int(200/diff),20*diff,5*diff)
+            w2 = weapon(self.DOG_LASER, 1, 0,1,int(450/diff),40*diff,2*diff)
+            w3 = weapon(self.DOG_LASER, 1, 0,1,int(450/diff),40*diff,2*diff)
             return enemy.bossDog(x,  20*diff,  y,  w, w2, w3,self.BOSSDOG,  250*diff,  15*diff,  threshold,  70*diff)
         elif type == "bc":
-            w = weapon(self.CAT_LASER2, 1, int(200/diff),20*diff,5*diff)
+            w = weapon(self.CAT_LASER2, 1, 0,1,int(100/diff),20*diff,5*diff)
             return enemy.bossCat(x,  20*diff,  y,  w,self.BOSSCAT,  250*diff,  15*diff,  threshold,  70*diff)
         else: 
             return None

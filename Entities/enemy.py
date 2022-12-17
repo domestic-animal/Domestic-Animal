@@ -12,7 +12,7 @@ class enemy(entity):
         self.score=score
     
      def shoot(self):
-         return self.weapon.shoot(self.x,self.y, 0)
+         return self.weapon.shoot(self.x,self.y)
 
      def move(self):
         pass
@@ -55,12 +55,12 @@ class bossDog(enemy):
 
     def shoot(self):
         if random.random()<0.7:
-            return self.weapon.shoot( self.x+(self.skin.frames[0].get_width()/2), self.y+self.skin.frames[0].get_height(),0 )
+            return self.weapon.shoot( self.x+(self.skin.frames[0].get_width()/2), self.y+self.skin.frames[0].get_height())
         else:
             if random.random()<0.5:
-                 return self.weapon2.shoot( self.x, self.y+self.skin.frames[0].get_height(),0 )
+                 return self.weapon2.shoot( self.x, self.y+self.skin.frames[0].get_height())
             else:
-                return self.weapo3.shoot( self.x+self.skin.frames[0].get_width(), self.y+self.skin.frames[0].get_height(),0 )
+                return self.weapo3.shoot( self.x+self.skin.frames[0].get_width(), self.y+self.skin.frames[0].get_height() )
 
 
 
@@ -71,23 +71,28 @@ class bossCat(enemy):
         super().__init__(x, damage, y, weapon, img, health, velocity, threshold,score)
     def move(self):
     
-        if(self.y >= self.threshold[1] and self.x >= self.threshold[0]):
+        if(self.y+self.skin.frame[0].get_height() >= self.threshold[1] and self.x+self.skin.frame[0].get_width() >= self.threshold[0]):
             self.x-= self.velocity
         elif(self.y <=0 and self.x <=0):
             self.x += self.velocity
-        elif(self.x <= 0 and self.y >= self.threshold[1]):
+        elif(self.x <= 0 and self.y+self.skin.frame[0].get_height() >= self.threshold[1]):
             self.y -= self.velocity
-        elif(self.x >= self.threshold[0] and self.y <=0):
+        elif(self.x+self.skin.frame[0].get_width() >= self.threshold[0] and self.y <=0):
             self.y += self.velocity
     
 
     def shoot(self):
-        if(self.y <=0 and self.x <=0):
-            self.weapon.shoot(self.x,self.y,0)
-        elif(self.x <= 0 and self.y >= self.threshold[1]):
-            self.weapon.shoot(self.x,self.y,-1)
-        elif(self.x >= self.threshold[0] and self.y <=0):
-            self.weapon.shoot(self.x,self.y, 1)
+        if(self.y+self.skin.frame[0].get_height() >= self.threshold[1] and self.x+self.skin.frame[0].get_width() >= self.threshold[0]):
+            self.weapon.ishorizontal = 0
+            self.weapon.isvertical = -1
+        elif(self.y <=0 and self.x <=0):
+            self.weapon.ishorizontal = 0
+            self.weapon.isvertical = 1
+        elif(self.x <= 0 and self.y+self.skin.frame[0].get_height() >= self.threshold[1]):
+            self.weapon.ishorizontal = 1
+        elif(self.x+self.skin.frame[0].get_width() >= self.threshold[0] and self.y <=0):
+            self.weapon.ishorizontal = -1
+        self.weapon.shoot(self.x,self.y)
         
 
         
