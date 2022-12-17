@@ -131,7 +131,7 @@ class Launcher(QMainWindow):
   
 		self.controller = engineController(settings1 = Customization.mapControls(self.profile.get_controls()),
                                      profile= self.profile, assets = assets, backgrounds = backgrounds, mode=mode,
-                                    filemanager= self.manager, settings2=Customization.mapControls(self.profile.get_controls()),
+                                    filemanager= self.manager, settings2=Customization.mapControls(self.profile.get_co_player_controls()),
 									gameState= state)
 
 		self.game_thread.setController(self.controller)
