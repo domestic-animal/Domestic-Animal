@@ -100,6 +100,15 @@ class gameobserver(observer):
 class vsobserver(observer):
     def __init__(self):
         pass
+    def off_screen(self,bullets):
+        """checks if bullets are off screen it removes them
+
+        Args:
+            bullets (list of bullets): current list of bullets 
+        """
+        for bullet in bullets[:]:
+            if bullet.off_screen(800,600):
+                bullets.remove(bullet)
     def collision(self,bullets,players):
         """checks if all object have collided with something or not
 

@@ -151,10 +151,18 @@ class vsGameEngine:
                 if selection[0] == "save":
                     pass
                 if selection[0] == "runAway":
+                    self.playerAssets[1].rotate(1)
+                    self.playerAssets[0].rotate(1)
+                    self.playerAssets[3].rotate(-1)
+                    self.playerAssets[2].rotate(-1)
                     return ["menu"]
                     
             #on death or quitting
             if self.Players[0].health <= 0 or self.Players[1].health <= 0:
+                    self.playerAssets[1].rotate(1)
+                    self.playerAssets[0].rotate(1)
+                    self.playerAssets[3].rotate(-1)
+                    self.playerAssets[2].rotate(-1)
                     return ["menu"]
 
 
