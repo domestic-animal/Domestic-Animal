@@ -68,14 +68,13 @@ class normalGameEngine:
         self.gameObserver = gameobserver()
         self.powerFactory=PowerUpFactory(powerUpsAssets[0],powerUpsAssets[1],powerUpsAssets[2],powerUpsAssets[3],powerUpsAssets[4])
         self.main_font = pygame.font.Font(os.path.join(".","launcher","assets","game.ttf"), 40)
-        #self.main_font = pygame.font.SysFont("comicsans", 40)
 
 
     def create_player(self):
         
         #player Entity
         we1 = weapon(self.playerAssets[1], -1, damage=45, fire_rate=20)
-        pl1=player(300,600,we1,self.playerAssets[0],self.PLAYER1_CONTROLS,200,7)
+        pl1=player(300,600,we1,self.playerAssets[0],self.PLAYER1_CONTROLS,200,12)
         self.Players.append(pl1)
 
         if self.is_coop==2:
