@@ -132,7 +132,9 @@ class normalGameEngine:
     
     # function to get the current game score
     def getGameState(self):
-        return gameState(self.powerup,self.score,self.Bullets,self.Players, self.Enemies,self.diff,self.exit,self.level.number,datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),self.gameover)
+        return gameState(self.powerup,self.score,self.Bullets,self.Players, self.Enemies
+        ,self.diff,self.exit,self.level.number,datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        ,self.gameover,self.is_coop)
 
     def loadGameState(self):
             self.Bullets = self.gameState.bullets
@@ -140,6 +142,7 @@ class normalGameEngine:
             self.score = self.gameState.Score
             self.Players = self.gameState.players
             self.Enemies = self.gameState.enemies
+            self.is_coop = self.gameState.is_coop
             
      # function to draw  the window
     def redraw_window(self):
