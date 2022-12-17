@@ -16,6 +16,18 @@ class Skin():
         self.animation_cooldown = cooldown          # Refresh rate between frames
         self.currframe = 0                          # Current frame displayed
     
+    def rotate(self, r):
+        """
+        Function to rotate all the frames of the specific skin
+
+        :param r: number of (90-degree)s to rotate the images (anti-clockwise -> +ve, clockwise -> -ve)
+        """
+        n = len(self.frames)
+        frames = [0] * n
+        for i in range(n):
+            frames[i] = pygame.transform.rotate(self.frames[i], 90 * r)
+        self.frames = frames
+
     def updateAnimation(self):
         """
         Function to apply the animation using the skin's frames.
