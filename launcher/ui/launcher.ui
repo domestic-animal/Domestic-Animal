@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:qlineargradient(spread:reflect, x1:0.084, y1:0.0454545, x2:0.474, y2:0.499591, stop:0.401832 rgba(34, 124, 112, 255), stop:1 rgba(136, 164, 124, 255))
+   <string notr="true">background-color:qconicalgradient(cx:0.5, cy:0.5, angle:310.1, stop:0 rgba(136, 164, 124, 255))
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -36,15 +36,10 @@ background-color: transparent;
      <string notr="true">QWidget{
 background-color: transparent;
 }
-QLabel{
-font: 25pt &quot;Kristen ITC&quot;;
-border: 0px;
-}
 QPushButton{
 color: rgb(28, 49, 94);
 border: 2px solid rgb(28, 49, 94);
 border-radius: 5px;
-font: 16pt &quot;Kristen ITC&quot;;
 }
 QPushButton::hover{
 background-color: rgb(230, 226, 195);
@@ -59,9 +54,6 @@ border-radius: 5px;
 }
 QToolButton::hover{
 background-color: rgb(230, 226, 195);
-}
-QRadioButton{
-font: 16pt &quot;Kristen ITC&quot;;
 }
 </string>
     </property>
@@ -80,17 +72,8 @@ font: 16pt &quot;Kristen ITC&quot;;
        <height>75</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <family>Kristen ITC</family>
-       <pointsize>16</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-      </font>
-     </property>
      <property name="text">
-      <string>Play</string>
+      <string>New Game</string>
      </property>
     </widget>
     <widget class="QRadioButton" name="bt_vs">
@@ -111,7 +94,7 @@ font: 16pt &quot;Kristen ITC&quot;;
       <rect>
        <x>350</x>
        <y>250</y>
-       <width>101</width>
+       <width>151</width>
        <height>31</height>
       </rect>
      </property>
@@ -124,7 +107,7 @@ font: 16pt &quot;Kristen ITC&quot;;
       <rect>
        <x>200</x>
        <y>250</y>
-       <width>81</width>
+       <width>141</width>
        <height>31</height>
       </rect>
      </property>
@@ -136,19 +119,10 @@ font: 16pt &quot;Kristen ITC&quot;;
      <property name="geometry">
       <rect>
        <x>200</x>
-       <y>350</y>
+       <y>420</y>
        <width>400</width>
        <height>75</height>
       </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Kristen ITC</family>
-       <pointsize>16</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-      </font>
      </property>
      <property name="text">
       <string>Customize Controls</string>
@@ -163,16 +137,8 @@ font: 16pt &quot;Kristen ITC&quot;;
        <height>51</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <family>Kristen ITC</family>
-       <pointsize>25</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-       <underline>false</underline>
-       <kerning>true</kerning>
-      </font>
+     <property name="styleSheet">
+      <string notr="true">font-size: 30px;</string>
      </property>
      <property name="text">
       <string>Welcome to Domestic Animal</string>
@@ -195,6 +161,19 @@ font: 16pt &quot;Kristen ITC&quot;;
      </property>
      <property name="text">
       <string>...</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_saves">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>310</y>
+       <width>400</width>
+       <height>75</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Saved Games</string>
      </property>
     </widget>
    </widget>

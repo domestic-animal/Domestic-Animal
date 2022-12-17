@@ -3,6 +3,7 @@ import random
 import string
 from stat import S_IREAD, S_IWUSR
 import filepath
+import shutil
 from file.file_manager import FileManager
 from file.profile import Profile
 
@@ -23,8 +24,8 @@ def remove_profiles():
 def test_file_creation():
     name = "name"
     file_manager.create_profile(name)
-    path = os.path.join(filepath.ROOT_DIR, "profiles", name + '.txt')
-    assert os.path.exists(path) and file_manager.get_profiles() == ["name"]
+    path = os.path.join(filepath.ROOT_DIR, "profiles", name, name + '.txt')
+    assert os.path.exists(path) and name in file_manager.get_profiles()
     file_manager.delete_profile("name")
     remove_profiles()
 
@@ -35,7 +36,7 @@ def test_file_creation_with_corrupted_profiles():
         file.write("corrupted data")
     name = "name"
     file_manager.create_profile(name)
-    path = os.path.join(filepath.ROOT_DIR, "profiles", name + '.txt')
+    path = os.path.join(filepath.ROOT_DIR, "profiles", name, name + '.txt')
     assert os.path.exists(path) and file_manager.get_profiles() == ["name"]
     file_manager.delete_profile("name")
     remove_profiles()
@@ -61,11 +62,13 @@ def test_profile_deletion_corrupted_profiles_index():
 
 
 def test_load_corrupted_profile():
-    path = os.path.join(filepath.ROOT_DIR, "profiles", "corrupted.txt")
+    dir = os.path.join(filepath.ROOT_DIR, "profiles", "corrupted")
+    os.mkdir(dir)
+    path = os.path.join(filepath.ROOT_DIR, "profiles", "corrupted", "corrupted.txt")
     with open(path, "w") as file:
         file.write("corrupted data")
     assert not file_manager.load_profile("corrupted")
-    os.remove(path)
+    shutil.rmtree(dir, ignore_errors=True)
 
 
 def test_load_corrupted_profiles_index():
@@ -95,7 +98,7 @@ def test_save_non_existed_profile():
 
 def test_editing_file():
     file_manager.create_profile("testEdit")
-    path = os.path.join(filepath.ROOT_DIR, "profiles", "testEdit" + '.txt')
+    path = os.path.join(filepath.ROOT_DIR, "profiles", "testEdit", "testEdit" + '.txt')
     try:
         with open(path, "w") as openfile:
             openfile.write("test edit file")

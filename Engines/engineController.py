@@ -14,7 +14,7 @@ game engine
 """
 class engineController:
 
-    def __init__(self,assets,profile,filemanager,settings1,settings2,backgrounds, mode= 0,ControllerState = "menu"):
+    def __init__(self,assets,profile,filemanager,settings1,settings2,backgrounds, mode= 0,gameState=None):
         """Constructor
 
         Args:
@@ -31,12 +31,12 @@ class engineController:
         self.settings2 = settings2
         self.assets = assets
         self.mode = mode
-        self.controllerState = ControllerState
+        self.controllerState = "menu"
         self.Background = backgrounds
         #level selector to select a certain level to load
         self.lvlSelector = levelSelector()
         # returned states from the engines
-        self.gameState=None
+        self.gameState=gameState
         self.states = []
         #difficulity
         self.diff = 1
@@ -64,6 +64,7 @@ class engineController:
             if self.states[0] == "start":
                 self.controllerState = "game"
             if self.states[0] == "runAway" :
+                pygame.display.quit()
                 break
             if self.states[0] == "menu":
                 self.controllerState = "menu"
@@ -73,27 +74,30 @@ class engineController:
             """switching function to switch between game engines
             
             """
-            ## if the game state is game 
+            ## if the controller state is game 
             if self.controllerState == "game":
                 PLAYER_SHIP_SKINS = self.assets[0]
                 BULLET_SHIP_SKINS = self.assets[1]
                 ENEMY_SKINS = self.assets[2]
                 self.convert(PLAYER_SHIP_SKINS,BULLET_SHIP_SKINS,ENEMY_SKINS)
+                PLAYER_ASSETS =[PLAYER_SHIP_SKINS[0], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[3]]
                 BG = self.Background[0]
-                
+
+                #Endless mode
                 if self.mode == -1:
-            # get the chosen level from the level selector
+                    # get the chosen level from the level selector
                     level = self.lvlSelector.getLevel(self.mode,self.diff,ENEMY_SKINS,BULLET_SHIP_SKINS)
-            # assign the current Engine to be the normal game engine
+                    # assign the current Engine to be the normal game engine
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
                     diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
-                    playerAssets= [PLAYER_SHIP_SKINS[0], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[3]],
-                    enemyAssets=[ENEMY_SKINS[5]],gameAssets=[BG])
+                    playerAssets= PLAYER_ASSETS,enemyAssets=[ENEMY_SKINS[5]],gameAssets=[BG], gameState=self.gameState)
+                #Versus mode
                 elif self.mode == 0:
                     self.WIN = pygame.display.set_mode(( self.HEIGHT, self.WIDTH),pygame.RESIZABLE)
-                    self.currEngine = vsGameEngine(window =self.WIN,profile = self.profile,settings1 = self.settings1,settings2 = self.settings2,
-                    playerAssets= [PLAYER_SHIP_SKINS[0], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[3]],gameAssets=[BG])
-            #if the game state is opening a menu
+                    self.currEngine = vsGameEngine(window =self.WIN,profile = self.profile,settings1 = self.settings1,
+                    settings2 = self.settings2,playerAssets= PLAYER_ASSETS,gameAssets=[BG])
+            
+            #if the controller state is opening a menu
             elif self.controllerState == "menu":
                 #assign the current engine to be the menu engine
                 self.currEngine = menu(self.WIN, self.WIDTH, self.HEIGHT)
@@ -101,7 +105,7 @@ class engineController:
                 self.currEngine.create_menue(2)
 
     def convert(self, PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS,ENEMY_SKINS):
-   ## convert all assets for optimizations
+                ## convert all assets for optimizations
                 for i in PLAYER_SHIP_SKINS:
                     i.frames[0].convert_alpha()
                     i.frames[1].convert_alpha()

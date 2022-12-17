@@ -8,7 +8,7 @@ import os
 import pygame
 
 class Customization(QMainWindow):
-    control_signal = pyqtSignal(dict)
+    control_signal = pyqtSignal(dict, int)
 
     def __init__(self, pager : QStackedWidget):
         super(Customization,self).__init__()
@@ -18,6 +18,10 @@ class Customization(QMainWindow):
 
         self.back_button = self.findChild(QToolButton, "bt_back")
         self.back_button.clicked.connect(self.back)
+        
+        #load player combobox
+        self.combo_player = self.findChild(QComboBox, "combo_player")
+        self.combo_player.currentIndexChanged.connect(self.set_default_controls)
         
         self.findChild(QPushButton, "bt_save").clicked.connect(self.saveControls)
         self.feed_label = self.findChild(QLabel, "lb_feed")
@@ -35,34 +39,46 @@ class Customization(QMainWindow):
         controls["down"] = self.findChild(QComboBox, "combo_down").currentText()
         controls["left"] = self.findChild(QComboBox, "combo_left").currentText()
         controls["right"] = self.findChild(QComboBox, "combo_right").currentText()
-        controls["fire"]=self.findChild(QComboBox, "combo_fire").currentText()
+        controls["fire"]= self.findChild(QComboBox, "combo_fire").currentText()
         
-        if(self.validateControls(controls)):
+        if self.validateControls(controls):
             self.feed_label.setText("Saved Sucessfully !")
-            self.control_signal.emit(controls)
+            self.control_signal.emit(controls, self.combo_player.currentIndex())
+            if self.combo_player.currentIndex() == 0:
+                self.controls = controls
+            else:
+                self.co_controls = controls
         else:
             self.feed_label.setText("Invalid. Controls must be unique.")
+        
 
     '''
-    a function that setups the view of the controls once the profile is selected
-    it loads controls set by the user or default values
+    a function that loads the controls once the profile is selected
     paramter(p) : the selected profile
     '''
-    def getProfile(self, p : Profile):
+    def getProfile(self, p : Profile) -> None:
         #load controls
-        controls = p.get_controls()
-        if controls["up"] == "":
-            self.findChild(QComboBox, "combo_up").setCurrentIndex(0)
-            self.findChild(QComboBox, "combo_down").setCurrentIndex(0)
-            self.findChild(QComboBox, "combo_left").setCurrentIndex(0)
-            self.findChild(QComboBox, "combo_right").setCurrentIndex(0)
-            self.findChild(QComboBox, "combo_fire").setCurrentIndex(0)
+        self.controls = p.get_controls()
+        self.co_controls = p.get_co_player_controls()
+        #the default behaviour is displaying the controls of the first player
+        self.set_default_controls()
+    '''
+    a function that sets the default value of the combo-boxes based on which player is selected 
+    '''
+    def set_default_controls(self) -> None:
+        if self.combo_player.currentIndex() == 0 :
+            self.findChild(QComboBox, "combo_up").setCurrentText(self.controls["up"])
+            self.findChild(QComboBox, "combo_down").setCurrentText(self.controls["down"])
+            self.findChild(QComboBox, "combo_left").setCurrentText(self.controls["left"])
+            self.findChild(QComboBox, "combo_right").setCurrentText(self.controls["right"])
+            self.findChild(QComboBox, "combo_fire").setCurrentText(self.controls["fire"])
         else:
-            self.findChild(QComboBox, "combo_up").setCurrentText(controls["up"])
-            self.findChild(QComboBox, "combo_down").setCurrentText(controls["down"])
-            self.findChild(QComboBox, "combo_left").setCurrentText(controls["left"])
-            self.findChild(QComboBox, "combo_right").setCurrentText(controls["right"])
-            self.findChild(QComboBox, "combo_fire").setCurrentText(controls["fire"])
+            self.findChild(QComboBox, "combo_up").setCurrentText(self.co_controls["up"])
+            self.findChild(QComboBox, "combo_down").setCurrentText(self.co_controls["down"])
+            self.findChild(QComboBox, "combo_left").setCurrentText(self.co_controls["left"])
+            self.findChild(QComboBox, "combo_right").setCurrentText(self.co_controls["right"])
+            self.findChild(QComboBox, "combo_fire").setCurrentText(self.co_controls["fire"])
+            
         
     '''
     a function that handles the click on 'back' button

@@ -11,6 +11,7 @@ from Engines.level import level
 sys.path.insert(0, './Entities')
 from player import player
 from weapon import weapon
+import datetime
 from bullet import bullet
 from powerfactory import PowerUpFactory
 from Engines.observer import gameobserver
@@ -22,7 +23,7 @@ class normalGameEngine:
     # Player player
 
     def __init__(self,window, level,profile, playerAssets , enemyAssets,
-                 gameAssets, settings1, settings2,powerUps=0,
+                 gameAssets, settings1, settings2,gameState=None,powerUps=0,
                  diff = 1,score=0,is_coop=1):
         """
             Constructor
@@ -38,7 +39,7 @@ class normalGameEngine:
             settings: player's controls
             powerUps: how many powerups are allowed
         """
-
+        self.gameState = gameState
         self.WIN = window
         self.playerAssets = playerAssets
         self.enemyAssets = enemyAssets
@@ -59,6 +60,7 @@ class normalGameEngine:
         self.menuengine.create_menue(1)
 
         #constant attributes
+        self.gameover = 0
         self.exit = 0
         self.Enemies = []
         self.Bullets = []
@@ -130,8 +132,18 @@ class normalGameEngine:
     
     # function to get the current game score
     def getGameState(self):
-        return gameState(self.powerup,self.score,self.Bullets,self.Players, self.Enemies,"normal",self.diff,self.exit,self.level.number,pygame.time.Clock().get_time())
+        return gameState(self.powerup,self.score,self.Bullets,self.Players, self.Enemies
+        ,self.diff,self.exit,self.level.number,datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        ,self.gameover,self.is_coop)
 
+    def loadGameState(self):
+            self.Bullets = self.gameState.bullets
+            self.powerup = self.gameState.powerups
+            self.score = self.gameState.Score
+            self.Players = self.gameState.players
+            self.Enemies = self.gameState.enemies
+            self.is_coop = self.gameState.is_coop
+            
      # function to draw  the window
     def redraw_window(self):
             """
@@ -173,13 +185,15 @@ class normalGameEngine:
         """
         ####    Intitalization      ####
         #################################
-        self.create_player()
+        if self.gameState == None:
+            self.create_player()
+            self.Enemies=self.level.getwave(1)
+        else:
+            self.loadGameState()
         #storage lists
         FPS = 60
         clock = pygame.time.Clock()
         #generate the wave
-        self.Enemies=self.level.getwave(1)
-
         ####    Main game loop      ####
         ################################
         while True:
@@ -226,11 +240,13 @@ class normalGameEngine:
             #on death or quitting
             if self.is_coop > 1:
                 if self.Players[0].health <= 0 and self.Players[1].health <= 0:
+                    self.gameover = 1
                     self.exit = 1
                     return ["menu", self.getGameState()]
             else:
                 if self.Players[0].health <= 0:
                     self.exit = 1
+                    self.gameover = 1
                     return ["menu", self.getGameState()]
             
             for event in pygame.event.get():

@@ -6,6 +6,7 @@ import json
 import pygame
 from cryptography.fernet import Fernet, InvalidToken
 from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
+import shutil
 
 
 class FileManager:
@@ -22,11 +23,15 @@ class FileManager:
         :return: object of class Profile if the profile is created successfully
         False otherwise
         """
-        u_path = os.path.join(self.__p_dir, name + ".txt")
         profile = Profile()
         profile.set_name(name)
         if not os.path.exists(self.__p_dir):
             os.mkdir(self.__p_dir)
+        try:
+            os.mkdir(os.path.join(self.__p_dir, name))
+        except OSError:
+            return False
+        u_path = os.path.join(self.__p_dir,name , name + ".txt")
         if self.__write_file(profile.get_profile(), u_path):
             p_path = os.path.join(self.__p_dir, "profiles.txt")
             profiles = [name]
@@ -49,19 +54,10 @@ class FileManager:
         :return: True if profile is saved successfully
         False otherwise
         """
-        u_path = os.path.join(self.__p_dir, profile.get_name() + ".txt")
+        u_path = os.path.join(self.__p_dir, profile.get_name(), profile.get_name() + ".txt")
         if not os.path.exists(u_path):
             return False
-        new_profile = {
-            "name": profile.get_name(),
-            "achievements": profile.get_achievements(),
-            "controls": profile.get_controls(),
-            "story_progress": profile.get_story_progress(),
-            "unlocked_weapons": profile.get_unlocked_weapons(),
-            "current_weapon": profile.get_current_weapon(),
-            "skins": profile.get_skins(),
-            "current_skin": profile.get_current_skin()
-        }
+        new_profile = profile.get_profile()
         return self.__write_file(new_profile, u_path)
 
     def get_profiles(self):
@@ -84,11 +80,11 @@ class FileManager:
         :return: True if profile is deleted successfully
                  False otherwise
         """
-        path = os.path.join(self.__p_dir, name + ".txt")
+        path = os.path.join(self.__p_dir, name, name + ".txt")
         if os.path.exists(path):
             try:
                 os.chmod(path, S_IWUSR | S_IREAD)
-                os.remove(path)
+                shutil.rmtree(os.path.join(self.__p_dir, name), ignore_errors=True)
             except OSError:
                 return False
         p_path = os.path.join(self.__p_dir, "profiles" + ".txt")
@@ -107,7 +103,7 @@ class FileManager:
         :return: True if profile is loaded successfully
                  False otherwise
         """
-        json_object = self.__read_file(name)
+        json_object = self.__read_file(os.path.join(name, name))
         if json_object is None or json_object == "C":
             return False
         profile = Profile()
@@ -164,3 +160,6 @@ class FileManager:
             return "C"
         except OSError:
             return None
+
+
+
