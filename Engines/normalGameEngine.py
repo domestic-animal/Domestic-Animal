@@ -11,7 +11,7 @@ sys.path.insert(0, './Entities')
 from player import player
 from weapon import weapon
 import datetime
-from bullet import bullet
+from bullet import  bullet
 from powerfactory import PowerUpFactory
 from Engines.observer import gameobserver
 from Engines.menueEngine import menu
@@ -73,7 +73,8 @@ class normalGameEngine:
     def create_player(self):
         
         #player Entity
-        we1 = weapon(self.playerAssets[1], -1, damage=45, fire_rate=20)
+       
+        we1 = weapon(self.playerAssets[1], -1, damage=45, fire_rate=20,bullettype=2)
         pl1=player(300,600,we1,self.playerAssets[0],self.PLAYER1_CONTROLS,200,12)
         self.Players.append(pl1)
 
@@ -122,7 +123,7 @@ class normalGameEngine:
 
     def generate_rat(self):
             # to do : with difficulity
-        if (random.randint(0, (18/self.diff)* 60) == 1):
+        if (random.randint(0, (18/self.diff)* 60) == 1 and (self.level.number>4 or self.level.number ==-1)):
             player = random.choice(self.Players)
             rat_movement = random.choice([(0, 1), (600, -1)])
             RAT_SKIN = random.choice([self.RAT_SKINS[5], self.RAT_SKINS[4]])
@@ -182,9 +183,9 @@ class normalGameEngine:
         seconds_in_day = 24 * 60 * 60
         now=datetime.datetime.now()
         gt=divmod((now-curr).seconds * seconds_in_day + (now-curr).seconds, 60)
-        if gt[0]>5 and gt[0]<10:
+        if gt[0]>2 and gt[0]<6:
             self.diff=2
-        elif gt[0]>10:
+        elif gt[0]>6:
             self.diff=3
 
 
@@ -218,7 +219,7 @@ class normalGameEngine:
                 if self.Enemies==None:
                     self.profile.set_story_progress(self.profile.get_story_progress()+1)
                     self.profile.set_coins(self.profile.get_coins()+self.score)
-                    return self.score
+                    return ["start", self.getGameState()]
 
             #detect the keys pressed
             keys = pygame.key.get_pressed()

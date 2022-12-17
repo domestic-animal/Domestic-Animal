@@ -1,4 +1,6 @@
+import random
 import pygame
+import copy
 from entity import entity
 class bullet(entity):
 
@@ -7,6 +9,7 @@ class bullet(entity):
         self.damage = damage
         self.ishorizontal = ishorizontal
         self.is_friendly = is_friendly
+        self.collisions = 1
     
 
     def move(self):
@@ -22,4 +25,37 @@ class bullet(entity):
         entity.health-=self.damage
         self.y=-40
 
+class zapper(bullet):
+
+    def __init__(self,x,y,image, damage, velocity, ishorizontal,is_friendly):
+        super().__init__(x,y,image, damage, velocity, ishorizontal,is_friendly)
+        self.collisions = 6
+
+    def Objectdamage(self, entity):
+        entity.health-=self.damage
+        self.collisions-=1
         
+        if self.collisions==0:
+            self.y=-40
+        if  self.ishorizontal==0:
+            go=random.choice([1,-1])
+            self.ishorizontal=go
+            #self.skin.rotate(1)
+        else:
+            #self.skin.rotate(-1)
+            self.ishorizontal=0
+
+class penetrate(bullet):
+    
+    def __init__(self,x,y,image, damage, velocity, ishorizontal,is_friendly):
+        super().__init__(x,y,image, damage, velocity, ishorizontal,is_friendly)
+        self.collisions = 10
+
+
+    def Objectdamage(self, entity):
+        entity.health-=self.damage
+        self.collisions-= 1
+        
+        if(self.collisions) <= 0:
+            self.y=-40
+

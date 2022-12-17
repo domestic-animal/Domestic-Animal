@@ -92,7 +92,7 @@ class engineController:
                 #Endless mode
                 if self.mode == -1:
                     # get the chosen level from the level selector
-                    level = self.lvlSelector.getLevel(self.mode,self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS)
+                    level = self.lvlSelector.getLevel(self.mode,self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES)
                     # assign the current Engine to be the normal game engine
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
                     diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
@@ -103,6 +103,15 @@ class engineController:
                     self.WIN = pygame.display.set_mode(( self.HEIGHT, self.WIDTH),pygame.RESIZABLE)
                     self.currEngine = vsGameEngine(window =self.WIN,profile = self.profile,settings1 = self.settings1,
                     settings2 = self.settings2,playerAssets= PLAYER_ASSETS,gameAssets=[BG])
+
+                elif self.mode > 0:
+                    # get the chosen level from the level selector
+                    level = self.lvlSelector.getLevel(self.profile.get_story_progress(),self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES)
+                    # assign the current Engine to be the normal game engine
+                    self.currEngine = normalGameEngine(window =self.WIN,level =level,
+                    diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
+                    playerAssets= PLAYER_ASSETS,enemyAssets=ENEMY_ASSETS,gameAssets= GAME_ASSETS,
+                     gameState=self.gameState,powerUpsAssets = POWER_UPS,fileManager=self.filemanager )
             
             #if the controller state is opening a menu
             elif self.controllerState == "menu":
