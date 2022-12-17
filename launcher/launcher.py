@@ -57,7 +57,6 @@ class Launcher(QMainWindow):
 		self.game_thread = Game_Thread() # game thread
 		self.auto_save = Auto_Save_Thread()# auto save thread
 		self.game_thread.deadSignal.connect(self.pager.show)
-		self.game_thread.deadSignal.connect(self.auto_save.stop)
 		self.storyButton = self.findChild(QRadioButton, "bt_story")
 		self.endlessButton = self.findChild(QRadioButton, "bt_endless")
 		self.vsButton = self.findChild(QRadioButton, "bt_vs")
@@ -115,20 +114,20 @@ class Launcher(QMainWindow):
 			self.profile.set_co_player_controls(c)
 		self.manager.save_profile(self.profile)
 
-	def setup_threads(self):
+	def setup_threads(self, mode : int) -> None:
 		if(self.game_thread.isFinished()):
 			print("threads re-created")
 			self.game_thread = Game_Thread()
 			self.game_thread.deadSignal.connect(self.pager.show)
-			self.auto_save = Auto_Save_Thread()
-			self.auto_save.deadSignal.connect(self.pager.widget(3).setup_view)
-			self.game_thread.deadSignal.connect(self.auto_save.stop)
+			if mode != 0:
+				self.auto_save = Auto_Save_Thread()
+				self.auto_save.deadSignal.connect(self.pager.widget(3).setup_view)
 
 	def startGame(self, mode : int, state = None) -> None:
 		# load assets
 		assets, backgrounds = self.manager.load_assets()
 
-		self.setup_threads()
+		self.setup_threads(mode)
   
 		self.controller = engineController(settings1 = Customization.mapControls(self.profile.get_controls()),
                                      profile= self.profile, assets = assets, backgrounds = backgrounds, mode=mode,
@@ -138,6 +137,7 @@ class Launcher(QMainWindow):
 		self.game_thread.setController(self.controller)
 		self.game_thread.start()
 		if mode != 0:
+			self.game_thread.deadSignal.connect(self.auto_save.stop)
 			self.auto_save.setController(self.controller)
 			self.auto_save.start()
 
