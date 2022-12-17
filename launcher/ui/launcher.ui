@@ -36,15 +36,10 @@ background-color: transparent;
      <string notr="true">QWidget{
 background-color: transparent;
 }
-QLabel{
-font: 25pt &quot;Kristen ITC&quot;;
-border: 0px;
-}
 QPushButton{
 color: rgb(28, 49, 94);
 border: 2px solid rgb(28, 49, 94);
 border-radius: 5px;
-font: 16pt &quot;Kristen ITC&quot;;
 }
 QPushButton::hover{
 background-color: rgb(230, 226, 195);
@@ -59,9 +54,6 @@ border-radius: 5px;
 }
 QToolButton::hover{
 background-color: rgb(230, 226, 195);
-}
-QRadioButton{
-font: 16pt &quot;Kristen ITC&quot;;
 }
 </string>
     </property>
@@ -79,15 +71,6 @@ font: 16pt &quot;Kristen ITC&quot;;
        <width>400</width>
        <height>75</height>
       </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Kristen ITC</family>
-       <pointsize>16</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-      </font>
      </property>
      <property name="text">
       <string>New Game</string>
@@ -124,7 +107,7 @@ font: 16pt &quot;Kristen ITC&quot;;
       <rect>
        <x>200</x>
        <y>250</y>
-       <width>81</width>
+       <width>141</width>
        <height>31</height>
       </rect>
      </property>
@@ -141,15 +124,6 @@ font: 16pt &quot;Kristen ITC&quot;;
        <height>75</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <family>Kristen ITC</family>
-       <pointsize>16</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-      </font>
-     </property>
      <property name="text">
       <string>Customize Controls</string>
      </property>
@@ -163,16 +137,8 @@ font: 16pt &quot;Kristen ITC&quot;;
        <height>51</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <family>Kristen ITC</family>
-       <pointsize>25</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-       <underline>false</underline>
-       <kerning>true</kerning>
-      </font>
+     <property name="styleSheet">
+      <string notr="true">font-size: 30px;</string>
      </property>
      <property name="text">
       <string>Welcome to Domestic Animal</string>
@@ -205,15 +171,6 @@ font: 16pt &quot;Kristen ITC&quot;;
        <width>400</width>
        <height>75</height>
       </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Kristen ITC</family>
-       <pointsize>16</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-      </font>
      </property>
      <property name="text">
       <string>Saved Games</string>

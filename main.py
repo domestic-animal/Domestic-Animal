@@ -5,9 +5,14 @@ from launcher.profiles import Profiles
 from launcher.launcher import Launcher
 from launcher.saveUI import SaveUI
 from file.file_manager import FileManager
+import os
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
+    id = QtGui.QFontDatabase.addApplicationFont(os.path.join("launcher","assets","game.ttf"))
+    families = QtGui.QFontDatabase.applicationFontFamilies(id)
+    font = QtGui.QFont(families[0], 16)
+    app.setFont(font)
     widget = QtWidgets.QStackedWidget()
     manager = FileManager()
     # widget.setWindowFlag(Qt.FramelessWindowHint); #for borderless window  

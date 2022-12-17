@@ -102,13 +102,6 @@ class Launcher(QMainWindow):
 			#start story mode
 			mode = 0
 			print("vs")
-		if(self.game_thread.isFinished()):
-			print("thread re-created")
-			self.game_thread = Game_Thread()
-			self.game_thread.deadSignal.connect(self.pager.widget(3).setup_view)
-			self.game_thread.deadSignal.connect(self.pager.show)
-			self.auto_save = Auto_Save_Thread()
-			self.game_thread.deadSignal.connect(self.auto_save.stop)
 		self.startGame(mode)
 
 
@@ -122,9 +115,20 @@ class Launcher(QMainWindow):
 			self.profile.set_co_player_controls(c)
 		self.manager.save_profile(self.profile)
 
+	def setup_threads(self):
+		if(self.game_thread.isFinished()):
+			print("threads re-created")
+			self.game_thread = Game_Thread()
+			self.game_thread.deadSignal.connect(self.pager.widget(3).setup_view)
+			self.game_thread.deadSignal.connect(self.pager.show)
+			self.auto_save = Auto_Save_Thread()
+			self.game_thread.deadSignal.connect(self.auto_save.stop)
+
 	def startGame(self, mode : int, state = None) -> None:
 		# load assets
 		assets, backgrounds = self.manager.load_assets()
+
+		self.setup_threads()
   
 		self.controller = engineController(settings1 = Customization.mapControls(self.profile.get_controls()),
                                      profile= self.profile, assets = assets, backgrounds = backgrounds, mode=mode,
@@ -139,9 +143,9 @@ class Launcher(QMainWindow):
 
 
 	def catchSave(self, state: gameState): 
-		if(state.level == -1):
+		if(state.level == -1):#endless
 			self.startGame(-1, state)
-		else:
+		else:#story
 			self.startGame(1, state)
 		
 		

@@ -12,6 +12,7 @@ class Auto_Save_Thread(QThread):
         super().__init__(parent)
         self.controller = None
         self.ThreadActive = True
+        self.saver = GameStateSaver()
         
     '''
     a function that sets the engine controller
@@ -19,23 +20,33 @@ class Auto_Save_Thread(QThread):
     '''
     def setController(self, e : engineController)->None:
         self.controller = e		
+        self.name = self.controller.profile.get_name()
+        self.mode = self.controller.mode
   
     def run(self):
         # thread's main function
         print("auto save started")
-        saver = GameStateSaver()
-        mode = self.controller.mode
-        mutex = QMutex() #mutex lock for synchronization safety
+        self.mutex = QMutex() #mutex lock for synchronization safety
         while self.ThreadActive:
             self.msleep(2500)
-            mutex.lock()
-            state = copy.deepcopy(self.controller.getGameState())
-            mutex.unlock()
-            if state is not None:
-                if mode == -1:
-                    saver.autosave_endless(self.controller.profile.get_name(),state)
+            self.save()
+
+        
+    def save(self):
+        self.mutex.lock()
+        state = copy.deepcopy(self.controller.getGameState())
+        self.mutex.unlock()
+        if state is not None:
+            if self.mode == -1:
+                if(state.gameover == 0):
+                    self.saver.autosave_endless(self.name,state)
                 else:
-                    saver.autosave_story(self.controller.profile.get_name(),state)
+                    self.saver.delete_autosaved_endless(self.name)
+            else:
+                if(state.gameover == 0):
+                    self.saver.autosave_story(self.name,state)
+                else:
+                    self.saver.delete_autosaved_story(self.name)
 
     def stop(self):
         # stop the thread on finish

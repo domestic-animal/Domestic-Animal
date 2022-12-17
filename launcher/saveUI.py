@@ -66,6 +66,8 @@ class SaveUI(QMainWindow):
         
   
     def handle_choose_save(self, i : int) -> None:
+        self.pager.setCurrentIndex(1)
+        self.pager.hide()
         self.load_signal.emit(self.states[i-1])
         
     def getProfile(self, p : Profile) -> None:

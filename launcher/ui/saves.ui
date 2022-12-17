@@ -36,7 +36,7 @@ background-color: transparent;
 background-color: transparent;
 }
 QLabel{
-font: 25pt &quot;Kristen ITC&quot;;
+/*font: 25pt &quot;Kristen ITC&quot;;*/
 color :  black;
 }
 QToolButton{
