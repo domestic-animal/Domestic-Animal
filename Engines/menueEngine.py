@@ -45,7 +45,7 @@ class menu:
             
             # draw buttons on the screen
             for b in self.buttons:
-                b.draw(self.screen)
+                b.draw(self.screen,True)
 
             pygame.display.update()
         return [selection]

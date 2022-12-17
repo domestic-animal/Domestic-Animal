@@ -43,7 +43,7 @@ class market():
                 if buttons[2].isOver(pos):
                     # TODO : handle quit function to quit game or return to start menue
                     runM = False
-                    selection = "runAway"
+                    selection = "menu"
             if e.type == pygame.MOUSEMOTION:
                 for b in buttons:
                     if b.isOver(pos):

@@ -33,7 +33,8 @@ class startMenue():
 
                 if buttons[1].isOver(pos):
                     # TODO : handle load function
-                    pass
+                    selection = "load"
+                    
                 if buttons[2].isOver(pos):
                     runM = False
                     selection = "market"
