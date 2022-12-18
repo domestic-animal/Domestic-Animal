@@ -39,12 +39,10 @@ class storylevel(level):
         Returns:
             list of waves
         """
-        if self.waveNumber<len(self.waves)-1:
+        if self.waveNumber<len(self.waves):
             self.waveNumber+=1
-            print("returning wave")
             return self.waves[self.waveNumber-1]
         else:
-            print("returning none")
             return None
 """endless level impements the level abstract class
 """
@@ -94,7 +92,6 @@ class levelOne(storylevel):
         x=20
         y=0
         threshy=400
-        print("making waves")
         for _ in range(2):
             enemies=[]
             for _ in range(6):
@@ -283,7 +280,7 @@ this is level seven
 class levelSeven(storylevel):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS)
-        self.number=6
+        self.number=7
         self.waveNumber=0
         self.makewaves()
     
@@ -320,15 +317,16 @@ this is level Eight
 class levelEight(storylevel):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS)
-        self.number=6
+        self.number=8
         self.waveNumber=0
         self.makewaves()
     
     def makewaves(self):
         factor=enemyFactory(self.BULLET_SKINS,self.ENEMY_SKINS, self.BOSSES_SKINS )
-        x=20
+        x=250
         y=0
-        threshy=500
-        boss_cat = factor.create("bc", self.diff,x,y,(600,threshy))
+        threshy= 250
+        boss_cat = factor.create("bc", self.diff,x,y,(600,800))
         boss_dog = factor.create("bd", self.diff,x,y,(600,threshy))
         self.waves.append([boss_cat,boss_dog])
+        print(self.waves)

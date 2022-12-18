@@ -42,8 +42,8 @@ class enemyFactory:
             w3 = weapon(self.DOG_LASER, 1, 0,1,int(450/diff),40*diff,2*diff)
             return enemy.bossDog(x,  20*diff,  y,  w, w2, w3,self.BOSSDOG,  250*diff,  15*diff,  threshold,  70*diff)
         elif type == "bc":
-            w = weapon(self.CAT_LASER2, 1, 0,1,int(100/diff),20*diff,5*diff)
-            return enemy.bossCat(x,  20*diff,  y,  w,self.BOSSCAT,  250*diff,  15*diff,  threshold,  70*diff)
+            w = weapon(self.CAT_LASER2, 1, 0,1,int(1/diff),20*diff,5*diff)
+            return enemy.bossCat(x,  20*diff,  y,  w,self.BOSSCAT,  250*diff,  15*diff,  threshold,  40*diff)
         else: 
             return None
 

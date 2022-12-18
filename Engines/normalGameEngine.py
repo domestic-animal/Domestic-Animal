@@ -215,6 +215,8 @@ class normalGameEngine:
             if len(self.Enemies) == 0:
                 self.Enemies = self.level.getwave(self.diff)
                 if self.Enemies==None:
+                    self.gameover = 1
+                    self.exit = 1
                     self.profile.set_story_progress(self.profile.get_story_progress()+1)
                     self.profile.set_coins(self.profile.get_coins()+self.score)
                     return ["start", self.getGameState()]

@@ -128,7 +128,7 @@ class FileManager:
             BULLET_SHIP_SKINS = SpriteSheet(bullet_sheet, 10, 16, 1.2, 2,4).skin
             ENEMY_SKINS = SpriteSheet(enemy_sheet, 26, 26, 1.75, 2, 6).skin
             POWER_UP_SKINS = SpriteSheet(power_sheet,31,31,1.5, 2,5).skin
-            BOSSES_SKINS =  SpriteSheet(bosses_sheet,31,31,1, 6,2).skin
+            BOSSES_SKINS =  SpriteSheet(bosses_sheet,138,192,1, 6,2).skin
             ENEMY_BULLET_SKINS = SpriteSheet(enemy_bullet_sheet, 15, 24, 1.2,3,4).skin
             assets = [PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS, ENEMY_SKINS, POWER_UP_SKINS,BOSSES_SKINS,ENEMY_BULLET_SKINS]
             background_imgs = ['allBGstars_1024x1913.png', 'fajrBG_1024x768.png',

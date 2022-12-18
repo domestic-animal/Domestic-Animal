@@ -106,7 +106,7 @@ class engineController:
 
                 elif self.mode > 0:
                     # get the chosen level from the level selector
-                    level = self.lvlSelector.getLevel(self.profile.get_story_progress(),self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES)
+                    level = self.lvlSelector.getLevel(7,self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES)
                     # assign the current Engine to be the normal game engine
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
                     diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
