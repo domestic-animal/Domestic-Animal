@@ -12,35 +12,41 @@ class market():
 
     def create_pause_buttons(self):
         created_buttons = []
-        skin = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 400, 100, 40, "skin",20)
-        weapon = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 340, 100, 40, "weapon",12)
-        runAway = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 280, 100, 40, "return", price=0)
-        created_buttons.append(skin)
-        created_buttons.append(weapon)
-        created_buttons.append(runAway)
+        
+        created_buttons.append(Button((20, 20, 100), self.WIDTH / 6 - 50, self.HEIGHT -700, 100, 40, "skin1",20))
+        created_buttons.append(Button((20, 20, 100), self.WIDTH / 6 - 50, self.HEIGHT -640, 100, 40, "skin1",20))
+        created_buttons.append(Button((20, 20, 100), self.WIDTH / 6 - 50, self.HEIGHT -580, 100, 40, "skin1",20))
+        created_buttons.append(Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 700, 100, 40, "weapon1",12))
+        created_buttons.append(Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 640, 100, 40, "weapon2",12))
+        created_buttons.append(Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 580, 100, 40, "weapon3",12))
+        created_buttons.append(Button((20, 20, 100), self.WIDTH - self.WIDTH / 6 - 50, self.HEIGHT - 700, 100, 40, "upgrade1", price=30))
+        created_buttons.append(Button((20, 20, 100), self.WIDTH - self.WIDTH / 6 - 50, self.HEIGHT - 640, 100, 40, "upgrade2", price=35))
+        created_buttons.append(Button((20, 20, 100), self.WIDTH - self.WIDTH / 6 - 50, self.HEIGHT - 580, 100, 40, "upgrade3", price=40))
+        created_buttons.append(Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 220, 100, 40, "return", price=0))
         return created_buttons
 
     # skins , weapon , upgrades
+    def handle_button(self, b):
+        if self.profile.get_coins() >= b.price :
+            print("your coins is : ", self.profile.get_coins())
+            print("buy")
+            rem = self.profile.get_coins()- b.price
+            print("your coins is : ", rem)
+            self.profile.set_coins(rem)
+        else:
+            print("no coins")
+        
 
     def handle_events(self, events, pos, buttons):
         selection = ""
         runM = True
         for e in events:
             if e.type == pygame.MOUSEBUTTONDOWN:
-                if buttons[0].isOver(pos):
-                    if self.profile.get_coins() > buttons[0].price :
-                        print("your coins is : ", self.profile.get_coins())
-                        print("buy skin")
-                        rem = self.profile.get_coins()-buttons[0].price
-                        print("your coins is : ", rem)
-                        self.profile.set_coins(rem)
-                    else:
-                        print("no coins")
+                for i in range (len(buttons)):
+                    if buttons[i].isOver(pos):
+                        self.handle_button(buttons[i])
 
-                if buttons[1].isOver(pos):
-                    print(" buy weapon")
-
-                if buttons[2].isOver(pos):
+                if buttons[len(buttons)-1].isOver(pos):
                     # TODO : handle quit function to quit game or return to start menue
                     runM = False
                     selection = "menu"

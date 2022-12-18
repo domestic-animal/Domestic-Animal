@@ -70,6 +70,8 @@ class engineController:
                 self.controllerState = "menu"
             if self.states[0] == "market":
                 self.controllerState = "market"
+            if self.states[0] == "inventory":
+                self.controllerState = "inventory"
         
                 
             
@@ -109,6 +111,11 @@ class engineController:
                 market = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile)
                 market.create_menue(3, self.profile)
                 self.currEngine = market
+            
+            elif self.controllerState == "inventory":
+                inventory = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile)
+                inventory.create_menue(4,self.profile)
+                self.currEngine = inventory
 
     def convert(self, PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS,ENEMY_SKINS):
    ## convert all assets for optimizations

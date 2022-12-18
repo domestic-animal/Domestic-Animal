@@ -14,10 +14,12 @@ class startMenue():
         start = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 500, 100, 40, "start", price=0)
         load = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 420, 100, 40, "load", price=0)
         market = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 360, 100, 40, "market", price=0)
-        runAway = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 300, 100, 40, "exit", price=0)
+        inventory = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 300, 100, 40, "inventory", price=0)
+        runAway = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 240, 100, 40, "exit", price=0)
         created_buttons.append(start)
         created_buttons.append(load)
         created_buttons.append(market)
+        created_buttons.append(inventory)
         created_buttons.append(runAway)
         return created_buttons
 
@@ -40,6 +42,11 @@ class startMenue():
                     selection = "market"
 
                 if buttons[3].isOver(pos):
+                    # TODO : display inventory
+                    runM = False
+                    selection = "inventory"
+
+                if buttons[4].isOver(pos):
                     # TODO : close program
                     runM = False
                     selection = "runAway"
