@@ -58,6 +58,7 @@ class engineController:
             #start the selected engine
             self.states = self.currEngine.start()
             self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT),pygame.RESIZABLE)
+            self.filemanager.save_profile(self.profile)
             #get the new state
             if len(self.states) >1:
                 self.gameState = self.states[1]

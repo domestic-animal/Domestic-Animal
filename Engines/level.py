@@ -188,7 +188,7 @@ class levelFour(storylevel):
         for _ in range(5):
             enemies=[]
             if _ == 4:
-                boss_dog = factor.create("bd", self.diff,x,y,(600,threshy))
+                boss_dog = factor.create("bd", self.diff,200,0,(600,210))
                 enemies.append(boss_dog)
             else:
                 for _ in range(7):
@@ -293,7 +293,7 @@ class levelSeven(storylevel):
         for _ in range(6):
             enemies=[]
             if _ == 5:
-                boss_cat = factor.create("bc", self.diff,x,y,(600,800))
+                boss_cat = factor.create("bc", self.diff,200,0,(600,800))
                 enemies.append(boss_cat)
             else:
                 for _ in range(9):
@@ -323,9 +323,9 @@ class levelEight(storylevel):
     
     def makewaves(self):
         factor=enemyFactory(self.BULLET_SKINS,self.ENEMY_SKINS, self.BOSSES_SKINS )
-        x=250
+        x= 200
         y=0
-        threshy= 250
+        threshy= 210
         boss_cat = factor.create("bc", self.diff,x,y,(600,800))
         boss_dog = factor.create("bd", self.diff,x,y,(600,threshy))
         self.waves.append([boss_cat,boss_dog])
