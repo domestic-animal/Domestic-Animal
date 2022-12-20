@@ -1,7 +1,8 @@
 import pygame
-
+from Assets import *
+from assets_handler.spritesheet import SpriteSheet
 from menue_components.button import Button
-import os
+
 
 class inventory():
     def __init__(self ,screen, WIDTH, HEIGHT, profile):
@@ -24,11 +25,14 @@ class inventory():
 
     def create_pause_buttons(self):
         created_buttons = []
-        achievments = Button((20, 20, 100), self.WIDTH / 6 - 50, self.HEIGHT - 400, 100, 40, "skin",20)
-        unlocked_weapons = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 400, 100, 40, "weapon",12)
+        #achievments = Button((20, 20, 100), self.WIDTH / 6 - 50, self.HEIGHT - 400, 100, 40, "skin",20)
+        unlocked_weapons = []
+        unlocked_weapons = self.profile.get_unlocked_weapons()
+        for i in range(len(unlocked_weapons)) :
+            created_buttons.append(Button((20,20,100),self.WIDTH / 2 - 50, self.HEIGHT - 400-i*60,100 , 40 ,"weapon" ,12)) 
+
         skins = Button((20, 20, 100), self.WIDTH - self.WIDTH / 6 - 50, self.HEIGHT - 400, 100, 40, "return", price=0)
-        created_buttons.append(achievments)
-        created_buttons.append(unlocked_weapons)
+        #Screated_buttons.append(achievments)
         created_buttons.append(skins)
         return created_buttons
 

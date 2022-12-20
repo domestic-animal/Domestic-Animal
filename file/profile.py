@@ -7,11 +7,11 @@ class Profile:
     __achievements = []
     __story_progress = 0
     __unlocked_weapons = []
-    __current_weapon = ""
-    __co_player_weapon = ""
+    __current_weapon = 0
+    __co_player_weapon = 0
     __skins = []
-    __current_skin = ""
-    __coins = 0
+    __current_skin = 0
+    __coins = 10000
     __endless_score = 0
 
     def set_name(self, name):

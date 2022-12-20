@@ -1,7 +1,8 @@
 import pygame
-
+from Assets import *
+from assets_handler.spritesheet import SpriteSheet
 from menue_components.button import Button
-import os
+
 
 class pauseMenue():
     def __init__(self ,screen, WIDTH, HEIGHT):
@@ -11,9 +12,10 @@ class pauseMenue():
 
     def create_pause_buttons(self):
         created_buttons = []
-        cont = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 400, 100, 40, "continue", price=0)
-        save = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 340, 100, 40, "save", price=0)
-        runAway = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 280, 100, 40, "quit", price=0)
+        button_image = SpriteSheet(pygame.image.load("Assets\Buttons_64x22_[13,1].png"),64, 22, 2, 1, 13 ).skin
+        cont = Button(self.WIDTH / 2 - 50, self.HEIGHT - 400, 128, 44, price=0, image = button_image[11], number = 0)
+        save = Button(self.WIDTH / 2 - 50, self.HEIGHT - 340, 128, 44, price=0, image = button_image[2], number = 0)
+        runAway = Button( self.WIDTH / 2 - 50, self.HEIGHT - 280, 128, 44, price=0, image = button_image[5], number = 0)
         created_buttons.append(cont)
         created_buttons.append(save)
         created_buttons.append(runAway)
@@ -34,11 +36,5 @@ class pauseMenue():
                     # TODO : handle quit function to quit game or return to start menue
                     runM = False
                     selection = "runAway"
-            if e.type == pygame.MOUSEMOTION:
-                for b in buttons:
-                    if b.isOver(pos):
-                        b.color = (0, 255, 0)
-                    else:
-                        b.color = (20, 20, 100)
 
         return runM ,selection

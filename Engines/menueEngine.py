@@ -4,7 +4,8 @@ from menue_components.pause import pauseMenue
 from menue_components.start_menue import startMenue
 from menue_components.market import market
 from menue_components.inventory import inventory
-
+from assets_handler import spritesheet
+from Assets import *
 
 class menu:
 
@@ -48,7 +49,7 @@ class menu:
             
             # draw buttons on the screen
             for b in self.buttons:
-                b.draw(self.screen,True)
+                b.draw(self.screen)
 
             pygame.display.update()
         return [selection]

@@ -1,5 +1,6 @@
 import pygame
-
+from Assets import *
+from assets_handler.spritesheet import SpriteSheet
 from menue_components.button import Button
 
 
@@ -11,11 +12,12 @@ class startMenue():
 
     def create_pause_buttons(self):
         created_buttons = []
-        start = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 500, 100, 40, "start", price=0)
-        load = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 420, 100, 40, "load", price=0)
-        market = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 360, 100, 40, "market", price=0)
-        inventory = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 300, 100, 40, "inventory", price=0)
-        runAway = Button((20, 20, 100), self.WIDTH / 2 - 50, self.HEIGHT - 240, 100, 40, "exit", price=0)
+        button_image = SpriteSheet(pygame.image.load("Assets\Buttons_64x22_[13,1].png"),64, 22, 2, 1, 13 ).skin
+        start = Button( self.WIDTH / 2 - 50, self.HEIGHT - 500, 128, 44, price=0, image = button_image[0], number = 0)
+        load = Button( self.WIDTH / 2 - 50, self.HEIGHT - 420, 128, 44, price=0, image = button_image[1], number = 0)
+        market = Button( self.WIDTH / 2 - 50, self.HEIGHT - 360, 128, 44, price=0, image = button_image[3], number = 0)
+        inventory = Button( self.WIDTH / 2 - 50, self.HEIGHT - 300, 128, 44, price=0, image = button_image[12], number = 0) # assigned random
+        runAway = Button( self.WIDTH / 2 - 50, self.HEIGHT - 240, 128, 44, price=0, image = button_image[5], number = 0)
         created_buttons.append(start)
         created_buttons.append(load)
         created_buttons.append(market)
@@ -50,12 +52,5 @@ class startMenue():
                     # TODO : close program
                     runM = False
                     selection = "runAway"
-
-            if e.type == pygame.MOUSEMOTION:
-                for b in buttons:
-                    if b.isOver(pos):
-                        b.color = (0, 255, 0)
-                    else:
-                        b.color = (20, 20, 100)
         return runM ,selection
 
