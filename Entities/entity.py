@@ -18,16 +18,12 @@ class entity:
     def __getstate__(self):
         state = self.__dict__.copy()
         mask = state.pop("mask")
-        surface = mask.to_surface()
-        state["mask_string"] = (pygame.image.tostring(surface, "RGB"), surface.get_size())
+        surface = mask.to_surface(unsetcolor="blue", unsetsurface=None)
+        state["mask_string"] = (pygame.image.tostring(surface, "RGBA"), surface.get_size())
         return state
 
     def __setstate__(self, state):
         surface = state.pop("mask_string")
-        s = pygame.image.fromstring(surface[0], surface[1], "RGB")
+        s = pygame.image.fromstring(surface[0], surface[1], "RGBA")
         state["mask"] = pygame.mask.from_surface(s)
         self.__dict__.update(state)
-
-
-
-        

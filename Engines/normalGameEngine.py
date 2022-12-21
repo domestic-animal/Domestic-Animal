@@ -6,16 +6,14 @@ import sys
     Normal Game Engine that runs both the Story mode
     and the Endless mode using the level given
 """
-from Engines.level import level
 #from observer import observer as observe
 sys.path.insert(0, './Entities')
-from player import player
-from weapon import weapon
+from Entities.player import player
+from Entities.weapon import weapon
 import datetime
-from bullet import bullet
-from powerfactory import PowerUpFactory
+from Entities.bullet import  bullet
+from Entities.powerfactory import PowerUpFactory
 from Engines.observer import gameobserver
-from Engines.level import endlesslevel
 from Engines.menueEngine import menu
 from Engines.gameState import gameState
 class normalGameEngine:
@@ -23,8 +21,8 @@ class normalGameEngine:
     # Player player
 
     def __init__(self,window, level,profile, playerAssets , enemyAssets,
-                 gameAssets, settings1, settings2,gameState=None,powerUps=0,
-                 diff = 1,score=0,is_coop=1):
+                 gameAssets, powerUpsAssets,settings1, settings2,gameState=None,
+                 diff = 1,score=0,is_coop=1, fileManager=None):
         """
             Constructor
 
@@ -37,8 +35,8 @@ class normalGameEngine:
             enemyAssets: enemy Assets to be drawn on the window
             gameAssets: any extra assets such as background
             settings: player's controls
-            powerUps: how many powerups are allowed
         """
+        self.fileManager = fileManager
         self.gameState = gameState
         self.WIN = window
         self.playerAssets = playerAssets
@@ -54,7 +52,7 @@ class normalGameEngine:
         self.diff = diff
 
         #rat enemy for higher difficulty
-        self.rats = enemyAssets[0]
+        self.RAT_SKINS = enemyAssets[0]
         # pause menu
         self.menuengine = menu(self.WIN, 600,800,self.profile)
         self.menuengine.create_menue(1)
@@ -68,20 +66,19 @@ class normalGameEngine:
         self.powerup=[]
         self.score=score
         self.gameObserver = gameobserver()
-        self.powerFactory=PowerUpFactory(self.playerAssets[2],self.playerAssets[2],self.playerAssets[2],self.playerAssets[2],self.playerAssets[2])
-        self.main_font = pygame.font.SysFont("comicsans", 40)
+        self.powerFactory=PowerUpFactory(powerUpsAssets[0],powerUpsAssets[1],powerUpsAssets[2],powerUpsAssets[3],powerUpsAssets[4])
+        self.main_font = pygame.font.Font(os.path.join(".","launcher","assets","game.ttf"), 40)
 
 
     def create_player(self):
         
         #player Entity
-        we1 = weapon(self.playerAssets[1], -1, damage=45, fire_rate=25)
-        pl1=player(300,600,we1,self.playerAssets[0],self.PLAYER1_CONTROLS,200,7)
+       
+        pl1=player(300,600,3,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7)
         self.Players.append(pl1)
 
         if self.is_coop==2:
-            we2 = weapon(self.playerAssets[3], -1, damage=45, fire_rate=25)
-            pl2=player(400,600,we2,self.playerAssets[2],self.PLAYER2_CONTROLS,200,7)
+            pl2=player(400,600,1,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,200,7)
             self.Players.append(pl2)
     
     def move_entities(self,keys):
@@ -124,15 +121,18 @@ class normalGameEngine:
 
     def generate_rat(self):
             # to do : with difficulity
-        if (random.randint(0, (12/self.diff)* 60) == 1):
+        if (random.randint(0, (18/self.diff)* 60) == 1 and (self.level.number>4 or self.level.number ==-1)):
             player = random.choice(self.Players)
             rat_movement = random.choice([(0, 1), (600, -1)])
-            rat = bullet(rat_movement[0], player.y, self.rats, 20*self.diff, 5*self.diff, rat_movement[1], 1)
+            RAT_SKIN = random.choice([self.RAT_SKINS[5], self.RAT_SKINS[4]])
+            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 30*self.diff, 5*self.diff, rat_movement[1], 0,1)
             self.Bullets.append(rat)
     
     # function to get the current game score
     def getGameState(self):
-        return gameState(self.powerup,self.score,self.Bullets,self.Players, self.Enemies,self.diff,self.exit,self.level.number,datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),self.gameover)
+        return gameState(self.powerup,self.score,self.Bullets,self.Players, self.Enemies
+        ,self.diff,self.exit,self.level.number,datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        ,self.gameover,self.is_coop)
 
     def loadGameState(self):
             self.Bullets = self.gameState.bullets
@@ -140,6 +140,7 @@ class normalGameEngine:
             self.score = self.gameState.Score
             self.Players = self.gameState.players
             self.Enemies = self.gameState.enemies
+            self.is_coop = self.gameState.is_coop
             
      # function to draw  the window
     def redraw_window(self):
@@ -168,13 +169,23 @@ class normalGameEngine:
 
     # function to create the power ups the power 
     def insertpowerup(self):
-      if (random.randint(0, (12/self.diff)* 60) == 1):
+      if (random.randint(0, (18/self.diff)* 60) == 1):
             powers=["h","d","s","r","i"]
             choice=random.choice(powers)
             x=random.randint(50,550)
             z=self.powerFactory.create(choice,x,-50,self.is_coop)
             self.powerup.append(z)            
-        
+    
+
+    def endlessDiffculty(self,curr):  
+        seconds_in_day = 24 * 60 * 60
+        now=datetime.datetime.now()
+        gt=divmod((now-curr).seconds * seconds_in_day + (now-curr).seconds, 60)
+        if gt[0]>2 and gt[0]<6:
+            self.diff=2
+        elif gt[0]>6:
+            self.diff=3
+
 
     def start(self):
         """
@@ -182,17 +193,19 @@ class normalGameEngine:
         """
         ####    Intitalization      ####
         #################################
-        if self.gameState == None:
+        if self.gameState != None and self.gameState.gameover !=1:
+            self.loadGameState()
+        else:
             self.create_player()
             self.Enemies=self.level.getwave(1)
-        else:
-            self.loadGameState()
         #storage lists
         FPS = 60
         clock = pygame.time.Clock()
         #generate the wave
         ####    Main game loop      ####
         ################################
+        curr=datetime.datetime.now()
+      
         while True:
             #drawing FPS
             clock.tick(FPS)
@@ -200,7 +213,13 @@ class normalGameEngine:
             self.redraw_window()
             #generate a new wave when the wave is cleared
             if len(self.Enemies) == 0:
-                self.Enemies = self.level.getwave(1)
+                self.Enemies = self.level.getwave(self.diff)
+                if self.Enemies==None:
+                    self.gameover = 1
+                    self.exit = 1
+                    self.profile.set_story_progress(self.profile.get_story_progress()+1)
+                    self.profile.set_coins(self.profile.get_coins()+self.score)
+                    return ["start", self.getGameState()]
 
             #detect the keys pressed
             keys = pygame.key.get_pressed()
@@ -225,6 +244,7 @@ class normalGameEngine:
             #insert power up
             self.gameObserver.powerUpdate(self.powerup,self.Players)
 
+            #for endless
             #pasue menu
             if keys[pygame.K_ESCAPE]: # shoot
                 selection = self.menuengine.start()
@@ -237,20 +257,24 @@ class normalGameEngine:
             #on death or quitting
             if self.is_coop > 1:
                 if self.Players[0].health <= 0 and self.Players[1].health <= 0:
+                    if self.level==-1:
+                        self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
                     self.gameover = 1
                     self.exit = 1
                     return ["menu", self.getGameState()]
             else:
                 if self.Players[0].health <= 0:
+                    if self.level==-1:
+                        self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
                     self.exit = 1
                     self.gameover = 1
                     return ["menu", self.getGameState()]
-            
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.exit = 1
-                    return ["runAway" , self.getGameState()]
                     
+            if self.level==-1:
+                self.endlessDiffculty(curr)
+
+
+
 
 
 

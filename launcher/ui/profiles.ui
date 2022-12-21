@@ -42,10 +42,6 @@ border-radius: 10px;
     <property name="styleSheet">
      <string notr="true">QWidget{
 background-color: transparent;
-font: 16pt &quot;Kristen ITC&quot;;
-}
-QLabel{
-border: 0px;
 }
 QPushButton{
 color: rgb(28, 49, 94);
@@ -100,7 +96,7 @@ background-color: rgb(230, 226, 195);
     <widget class="QLabel" name="lb_feed">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>230</x>
        <y>10</y>
        <width>371</width>
        <height>71</height>
@@ -112,24 +108,21 @@ background-color: rgb(230, 226, 195);
      <property name="text">
       <string/>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="label_c">
      <property name="geometry">
       <rect>
        <x>20</x>
        <y>10</y>
-       <width>221</width>
+       <width>251</width>
        <height>71</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <family>Kristen ITC</family>
-       <pointsize>16</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-      </font>
+     <property name="styleSheet">
+      <string notr="true">border: none;</string>
      </property>
      <property name="text">
       <string>Choose a profile: </string>

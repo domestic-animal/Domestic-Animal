@@ -39,14 +39,14 @@
 background-color: transparent;
 }
 QLabel{
-font: 18pt &quot;Kristen ITC&quot;;
+/*font: 18pt &quot;Kristen ITC&quot;;*/
 border: 0px;
 }
 QPushButton{
 color: rgb(28, 49, 94);
 border: 2px solid rgb(28, 49, 94);
 border-radius: 5px;
-font: 16pt &quot;Kristen ITC&quot;;
+/*font: 16pt &quot;Kristen ITC&quot;;*/
 }
 QPushButton::hover{
 background-color: rgb(230, 226, 195);
@@ -62,14 +62,11 @@ border-radius: 5px;
 QToolButton::hover{
 background-color: rgb(230, 226, 195);
 }
-QRadioButton{
-font: 16pt &quot;Kristen ITC&quot;;
-}
 QComboBox{
 color: rgb(28, 49, 94);
 border: 2px groove rgb(28, 49, 94);
 border-radius: 5px;
-font: 16pt &quot;Kristen ITC&quot;;
+/*font: 16pt &quot;Kristen ITC&quot;;*/
 }
 QComboBox::drop-down{
 background-color: rgb(230, 226, 195);
