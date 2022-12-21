@@ -6,6 +6,7 @@ import json
 import pygame
 from cryptography.fernet import Fernet, InvalidToken
 from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
+import shutil
 
 
 class FileManager:
@@ -22,11 +23,15 @@ class FileManager:
         :return: object of class Profile if the profile is created successfully
         False otherwise
         """
-        u_path = os.path.join(self.__p_dir, name + ".txt")
         profile = Profile()
         profile.set_name(name)
         if not os.path.exists(self.__p_dir):
             os.mkdir(self.__p_dir)
+        try:
+            os.mkdir(os.path.join(self.__p_dir, name))
+        except OSError:
+            return False
+        u_path = os.path.join(self.__p_dir,name , name + ".txt")
         if self.__write_file(profile.get_profile(), u_path):
             p_path = os.path.join(self.__p_dir, "profiles.txt")
             profiles = [name]
@@ -49,19 +54,10 @@ class FileManager:
         :return: True if profile is saved successfully
         False otherwise
         """
-        u_path = os.path.join(self.__p_dir, profile.get_name() + ".txt")
+        u_path = os.path.join(self.__p_dir, profile.get_name(), profile.get_name() + ".txt")
         if not os.path.exists(u_path):
             return False
-        new_profile = {
-            "name": profile.get_name(),
-            "achievements": profile.get_achievements(),
-            "controls": profile.get_controls(),
-            "story_progress": profile.get_story_progress(),
-            "unlocked_weapons": profile.get_unlocked_weapons(),
-            "current_weapon": profile.get_current_weapon(),
-            "skins": profile.get_skins(),
-            "current_skin": profile.get_current_skin()
-        }
+        new_profile = profile.get_profile()
         return self.__write_file(new_profile, u_path)
 
     def get_profiles(self):
@@ -84,11 +80,11 @@ class FileManager:
         :return: True if profile is deleted successfully
                  False otherwise
         """
-        path = os.path.join(self.__p_dir, name + ".txt")
+        path = os.path.join(self.__p_dir, name, name + ".txt")
         if os.path.exists(path):
             try:
                 os.chmod(path, S_IWUSR | S_IREAD)
-                os.remove(path)
+                shutil.rmtree(os.path.join(self.__p_dir, name), ignore_errors=True)
             except OSError:
                 return False
         p_path = os.path.join(self.__p_dir, "profiles" + ".txt")
@@ -107,7 +103,7 @@ class FileManager:
         :return: True if profile is loaded successfully
                  False otherwise
         """
-        json_object = self.__read_file(name)
+        json_object = self.__read_file(os.path.join(name, name))
         if json_object is None or json_object == "C":
             return False
         profile = Profile()
@@ -125,10 +121,16 @@ class FileManager:
             player_sheet = pygame.image.load(os.path.join(path, "Ships_16x16_[8,2].png"))
             bullet_sheet = pygame.image.load(os.path.join(path, "Bullets_10x16_[4,2].png"))
             enemy_sheet = pygame.image.load(os.path.join(path, "Enemies_26x26_[6,2].png"))
-            PLAYER_SHIP_SKINS = SpriteSheet(player_sheet, 16, 16, 3, 2).skin
-            BULLET_SHIP_SKINS = SpriteSheet(bullet_sheet, 10, 16, 1.2, 2).skin
+            power_sheet = pygame.image.load(os.path.join(path, "Powerups_31x31_[5,2].png"))
+            bosses_sheet = pygame.image.load(os.path.join(path, "Bosses_138x192_[2,6].png"))
+            enemy_bullet_sheet = pygame.image.load(os.path.join(path, "EnemiesBullets_15x24_[4,3].png"))
+            PLAYER_SHIP_SKINS = SpriteSheet(player_sheet, 16, 16, 2.5, 2,8).skin
+            BULLET_SHIP_SKINS = SpriteSheet(bullet_sheet, 10, 16, 1.2, 2,4).skin
             ENEMY_SKINS = SpriteSheet(enemy_sheet, 26, 26, 1.75, 2, 6).skin
-            assets = [PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS, ENEMY_SKINS]
+            POWER_UP_SKINS = SpriteSheet(power_sheet,31,31,1.5, 2,5).skin
+            BOSSES_SKINS =  SpriteSheet(bosses_sheet,138,192,1, 6,2).skin
+            ENEMY_BULLET_SKINS = SpriteSheet(enemy_bullet_sheet, 15, 24, 1.2,3,4).skin
+            assets = [PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS, ENEMY_SKINS, POWER_UP_SKINS,BOSSES_SKINS,ENEMY_BULLET_SKINS]
             background_imgs = ['allBGstars_1024x1913.png', 'fajrBG_1024x768.png',
                                'landscapeBG_384x224.png', 'nightBGwithmoon_1024x768.png',
                                'riverBG_256x320.png', 'spaceBG_256x224.png']
@@ -164,3 +166,6 @@ class FileManager:
             return "C"
         except OSError:
             return None
+
+
+

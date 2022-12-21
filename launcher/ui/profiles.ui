@@ -20,76 +20,125 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QLabel{
-font: 16pt &quot;Purisa&quot;;
-}
-QPushButton{
-color: green;
-background-color: black;
-border: 2px green;
-border-radius: 3px;
-font: 16pt &quot;Purisa&quot;;
-}
-QRadioButton{
-font: 26pt &quot;Purisa&quot;;
-}
-QLineEdit{
-font: 26pt &quot;Purisa&quot;;
-}</string>
+   <string notr="true">background-color:qradialgradient(spread:reflect, cx:0.480198, cy:0.506, radius:0.5, fx:0.955, fy:0.511364, stop:0.401832 rgba(34, 124, 112, 255), stop:1 rgba(136, 164, 124, 255))</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>221</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Choose a profile: </string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="bt_continue">
-    <property name="geometry">
-     <rect>
-      <x>630</x>
-      <y>30</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>Continue</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="gridLayoutWidget">
+   <property name="styleSheet">
+    <string notr="true">QFrame{
+background-color: transparent;
+border: 1px ridge black;
+border-radius: 10px;
+}</string>
+   </property>
+   <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>80</y>
-      <width>771</width>
-      <height>511</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout"/>
-   </widget>
-   <widget class="QLabel" name="lb_feed">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
       <y>10</y>
-      <width>371</width>
-      <height>71</height>
+      <width>781</width>
+      <height>581</height>
      </rect>
     </property>
-    <property name="text">
-     <string/>
+    <property name="styleSheet">
+     <string notr="true">QWidget{
+background-color: transparent;
+}
+QPushButton{
+color: rgb(28, 49, 94);
+border: 2px solid rgb(28, 49, 94);
+border-radius: 5px;
+}
+QPushButton::hover{
+background-color: rgb(230, 226, 195);
+}
+QPushButton::pressed{
+background-color:  rgb(28, 49, 94);
+}
+QToolButton{
+background-color: rgb(136, 164, 124);
+border: 1px solid;
+border-radius: 5px;
+}
+QToolButton::hover{
+background-color: rgb(230, 226, 195);
+}
+QLineEdit{
+color: rgb(28, 49, 94);
+border: 2px groove rgb(28, 49, 94);
+border-radius: 5px;
+}
+QLineEdit::focus{
+background-color: rgb(230, 226, 195);
+}</string>
     </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="bt_continue">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>30</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Continue</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_feed">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>10</y>
+       <width>371</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: 0px;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_c">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>251</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;</string>
+     </property>
+     <property name="text">
+      <string>Choose a profile: </string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>761</width>
+       <height>481</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout"/>
+    </widget>
    </widget>
   </widget>
  </widget>

@@ -6,7 +6,9 @@ from PyQt5 import uic
 from file.profile import Profile
 from file.file_manager import FileManager
 from Engines.engineController import engineController
+from Engines.gameState import gameState
 from launcher.customization import Customization
+from launcher.Auto_saver import Auto_Save_Thread
 import os
 import sys
 
@@ -35,7 +37,7 @@ class Game_Thread(QThread):
 
     def stop(self):
         # stop the thread on finish
-        print("thread killed")
+        print("game thread finished")
         self.deadSignal.emit()
         self.quit()
 
@@ -53,15 +55,19 @@ class Launcher(QMainWindow):
 		self.controller = None # controller
 		self.manager = manager # file manager
 		self.game_thread = Game_Thread() # game thread
-		self.game_thread.deadSignal.connect(lambda : sys.exit())
+		self.auto_save = Auto_Save_Thread()# auto save thread
+		self.game_thread.deadSignal.connect(self.pager.show)
 		self.storyButton = self.findChild(QRadioButton, "bt_story")
 		self.endlessButton = self.findChild(QRadioButton, "bt_endless")
 		self.vsButton = self.findChild(QRadioButton, "bt_vs")
 		self.storyButton.setChecked(True)
 		
 		# customization button setup
-		self.customButton = self.findChild(QPushButton, "bt_custom")
-		self.customButton.clicked.connect(lambda : self.pager.setCurrentIndex(self.pager.currentIndex()+1))
+		self.findChild(QPushButton, "bt_custom").clicked.connect(
+      		lambda : self.pager.setCurrentIndex(self.pager.currentIndex()+1))
+  
+		self.findChild(QPushButton, "bt_saves").clicked.connect(
+      		lambda : self.pager.setCurrentIndex(self.pager.currentIndex()+2))
 
 		#back button setup
 		self.back_button = self.findChild(QToolButton, "bt_back")
@@ -82,31 +88,66 @@ class Launcher(QMainWindow):
  	'''
 	def handlePlayButton(self):
 		self.pager.hide()
-		# load assets
-		assets, backgrounds = self.manager.load_assets()
-		
+		mode  = 0;
 		if self.storyButton.isChecked():
 			#start vs mode
-			
+			mode = 1
 			print("story")
 		elif self.endlessButton.isChecked():
 			#start endless mode
-			# for now the intialization is done here don't forget to move it up after loading the assets
-			self.controller = engineController(settings = Customization.mapControls(self.profile.get_controls()),
-                                     profile= self.profile, assets = assets, backgrounds = backgrounds)
-			self.game_thread.setController(self.controller)
-			self.game_thread.start()
+			mode = -1
 			print("endless")
 		else:
 			#start story mode
+			mode = 0
 			print("vs")
+		self.startGame(mode)
+
 
 	def catchProfile(self, s : Profile):
 		self.profile = 	s
 
-	def catchControls(self, c : dict):
-		self.profile.set_controls(c)
+	def catchControls(self, c : dict, index: int):
+		if index == 0:
+			self.profile.set_controls(c)
+		else:
+			self.profile.set_co_player_controls(c)
 		self.manager.save_profile(self.profile)
+
+	def setup_threads(self, mode : int) -> None:
+		if(self.game_thread.isFinished()):
+			print("threads re-created")
+			self.game_thread = Game_Thread()
+			self.game_thread.deadSignal.connect(self.pager.show)
+			if mode != 0:
+				self.auto_save = Auto_Save_Thread()
+				self.auto_save.deadSignal.connect(self.pager.widget(3).setup_view)
+
+	def startGame(self, mode : int, state = None) -> None:
+		# load assets
+		assets, backgrounds = self.manager.load_assets()
+
+		self.setup_threads(mode)
+  
+		self.controller = engineController(settings1 = Customization.mapControls(self.profile.get_controls()),
+                                     profile= self.profile, assets = assets, backgrounds = backgrounds, mode=mode,
+                                    filemanager= self.manager, settings2=Customization.mapControls(self.profile.get_co_player_controls()),
+									gameState= state)
+
+		self.game_thread.setController(self.controller)
+		self.game_thread.start()
+		if mode != 0:
+			self.game_thread.deadSignal.connect(self.auto_save.stop)
+			self.auto_save.setController(self.controller)
+			self.auto_save.start()
+
+
+	def catchSave(self, state: gameState): 
+		if(state.level == -1):#endless
+			self.startGame(-1, state)
+		else:#story
+			self.startGame(1, state)
+		
 		
 		
 

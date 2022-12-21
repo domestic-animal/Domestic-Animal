@@ -44,4 +44,7 @@ class menu:
                 b.draw(self.screen)
 
             pygame.display.update()
-        return selection
+        return [selection]
+
+    def getGameState(self):
+        return None
