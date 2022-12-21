@@ -54,7 +54,7 @@ class normalGameEngine:
         #rat enemy for higher difficulty
         self.RAT_SKINS = enemyAssets[0]
         # pause menu
-        self.menuengine = menu(self.WIN, 600,800,self.profile)
+        self.menuengine = menu(self.WIN, 600,800,self.profile,self.gameAssets[0])
         self.menuengine.create_menue(1)
 
         #constant attributes
@@ -74,11 +74,11 @@ class normalGameEngine:
         
         #player Entity
        
-        pl1=player(300,600,3,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7)
+        pl1=player(300,600,self.profile.get_current_weapon(),(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7)
         self.Players.append(pl1)
 
         if self.is_coop==2:
-            pl2=player(400,600,1,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,200,7)
+            pl2=player(400,600,self.profile.get_co_player_weapon(),(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,200,7)
             self.Players.append(pl2)
     
     def move_entities(self,keys):

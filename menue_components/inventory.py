@@ -2,10 +2,11 @@ import pygame
 from Assets import *
 from assets_handler.spritesheet import SpriteSheet
 from menue_components.button import Button
+from file.profile import Profile
 
 
 class inventory():
-    def __init__(self ,screen, WIDTH, HEIGHT, profile):
+    def __init__(self ,screen, WIDTH, HEIGHT, profile :Profile):
         self.WIDTH = WIDTH
         self.HEIGHT = HEIGHT
         self.screen = screen
@@ -61,28 +62,20 @@ class inventory():
         runM = True
         for e in events:
             if e.type == pygame.MOUSEBUTTONDOWN:
-                if buttons[0].isOver(pos):
-                    if self.profile.get_coins() > buttons[0].price :
-                        print("your coins is : ", self.profile.get_coins())
-                        print("buy skin")
-                        rem = self.profile.get_coins()-buttons[0].price
-                        print("your coins is : ", rem)
-                        self.profile.set_coins(rem)
-                    else:
-                        print("no coins")
-
-                if buttons[1].isOver(pos):
-                    print(" buy weapon")
-
-                if buttons[2].isOver(pos):
-                    # TODO : handle quit function to quit game or return to start menue
-                    runM = False
-                    selection = "menu"
-            if e.type == pygame.MOUSEMOTION:
                 for b in buttons:
                     if b.isOver(pos):
-                        b.color = (0, 255, 0)
-                    else:
-                        b.color = (20, 20, 100)
+                        self.handle_button(b)
 
+                    if b.number ==7 and b.isOver(pos):
+                        # TODO : handle quit function to quit game or return to start menue
+                        runM = False
+                        selection = "menu"
         return runM ,selection
+
+    def handle_button(self, b):
+        if b.number <= 3:
+            self.profile.set_current_skin(b.number*2)
+                # self.profile.set_current_skin(b.number)
+        else: 
+            self.profile.set_current_weapon(b.number-4)
+            self.profile.set_co_player_weapon(b.number-4)

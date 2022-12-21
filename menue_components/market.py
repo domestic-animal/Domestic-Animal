@@ -45,29 +45,21 @@ class market():
 
     # skins , weapon , upgrades
     def handle_button(self, b):
-        if self.profile.get_coins() >= b.price :
-            print("your coins is : ", self.profile.get_coins())
-            print("buy")
+        if self.profile.get_coins() >= b.price and b.number != 7:
             rem = self.profile.get_coins()- b.price
-            print("your coins is : ", rem)
             self.profile.set_coins(rem)
             b.price = 0
             self.created_buttons.pop(b.number)
             if b.number <= 3:
                 skins = self.profile.get_skins()
                 skins.append(b.number*2)
-                print(b.number*2)
                 self.profile.set_skins(skins)
                 # self.profile.set_current_skin(b.number)
             else: 
                 weapons = self.profile.get_unlocked_weapons()
                 weapons.append(b.number-4)
-                print(b.number-4)
                 self.profile.set_unlocked_weapons(weapons)
                 # self.profile.set_current_weapon(b.number-4)
-
-        else:
-            print("no coins")
         
 
     def handle_events(self, events, pos, buttons):

@@ -92,7 +92,10 @@ class engineController:
 
                 self.convert(PLAYER_SHIP_SKINS,BULLET_SHIP_SKINS,ENEMY_SKINS,POWER_UPS,BOSSES,ENEMY_BULLET_SKINS)
                 #to be changed according to inventory menu
-                PLAYER_ASSETS =[PLAYER_SHIP_SKINS[2], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[3]]
+                PLAYER_ASSETS =[PLAYER_SHIP_SKINS[self.profile.get_current_skin()],
+                 BULLET_SHIP_SKINS[self.profile.get_current_weapon()],
+                 PLAYER_SHIP_SKINS[self.profile.get_current_skin()+1],
+                  BULLET_SHIP_SKINS[self.profile.get_co_player_weapon()]]
                 BG = self.Background[0]
                 ENEMY_ASSETS = [ENEMY_SKINS,BOSSES,ENEMY_BULLET_SKINS]
                 GAME_ASSETS = [BG,POWER_UPS]
