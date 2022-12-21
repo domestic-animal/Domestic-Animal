@@ -1,6 +1,6 @@
 import os
 import shutil
-from gamestatesaver import GameStateSaver
+from file.gamestatesaver import GameStateSaver
 from tests.gamestatechecker import check_game_state, create_random_game_state , create_profiles_path
 from filepath import ROOT_DIR
 state_saver = GameStateSaver()
