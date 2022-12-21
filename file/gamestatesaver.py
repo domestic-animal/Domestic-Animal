@@ -42,15 +42,15 @@ class GameStateSaver:
     def __autosave_game_state(self, game_state, autosave_path, backup_path):
         if not os.path.exists(autosave_path):
             self.__write_pickle_file(game_state, autosave_path)
+            self.__write_pickle_file(game_state, backup_path)
         else:
             prev_state = self.__read_pickle_file(autosave_path)
-
             if prev_state is not None:
                 self.__write_pickle_file(prev_state, backup_path)
                 self.__write_pickle_file(game_state, autosave_path)
-
             else:
                 self.__write_pickle_file(game_state, autosave_path)
+                self.__write_pickle_file(game_state, backup_path)
 
     def __load_autosaved_state(self, autosave_path, backup_path):
         autosave = self.__read_pickle_file(autosave_path)
