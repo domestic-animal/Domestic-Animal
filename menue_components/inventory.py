@@ -6,10 +6,27 @@ from menue_components.button import Button
 
 class inventory():
     def __init__(self ,screen, WIDTH, HEIGHT, profile):
-         self.WIDTH = WIDTH
-         self.HEIGHT = HEIGHT
-         self.screen = screen
-         self.profile = profile
+        self.WIDTH = WIDTH
+        self.HEIGHT = HEIGHT
+        self.screen = screen
+        self.profile = profile
+        self.created_buttons = []
+        self.skin_image = SpriteSheet(pygame.image.load("Assets\Ships_16x16_[8,2].png"),16, 16, 5, 1, 8 ).skin
+        self.weapon_image = SpriteSheet(pygame.image.load("Assets\Bullets_10x16_[4,2].png"), 10, 16, 5, 1, 4).skin
+        self.button_image = SpriteSheet(pygame.image.load("Assets\Buttons_64x22_[13,1].png"),64, 22, 2, 1, 13 ).skin
+
+        self.skin1 =  Button( self.WIDTH / 6 - 50, self.HEIGHT -700, 80, 80, price=1000, image = self.skin_image[0], number=0)
+        self.skin2 = Button(self.WIDTH / 6 - 50, self.HEIGHT -600, 80, 80, price=1500, image = self.skin_image[2], number=1)
+        self.skin3 = Button(self.WIDTH / 6 - 50, self.HEIGHT -500, 80, 80, price=2000, image = self.skin_image[4], number=2)
+        self.skin4= Button(self.WIDTH / 6 - 50, self.HEIGHT -400, 80, 80, price=3000, image = self.skin_image[6], number=3)
+
+        self.skins= [self.skin1,self.skin2,self.skin3,self.skin4]
+
+        self.weapon1= Button(self.WIDTH - self.WIDTH / 6 - 50, self.HEIGHT - 700, 50, 80, price=1000, image=self.weapon_image[0], number=4)
+        self.weapon2=Button(self.WIDTH - self.WIDTH / 6 - 50, self.HEIGHT - 600, 50, 80, price=2000, image=self.weapon_image[1], number=5)
+        self.weapon3=Button(self.WIDTH - self.WIDTH / 6 - 50, self.HEIGHT - 500, 50, 80, price=3000, image=self.weapon_image[2], number=6)
+        
+        self.weapons= [self.weapon1, self.weapon2,self.weapon3]
 
 # __name = ""
 #     __player_controls = {"left": "LEFT", "right": "RIGHT", "up": "UP", "down": "DOWN", "fire": "SPACE"}
@@ -24,17 +41,18 @@ class inventory():
 #     __coins = 0
 
     def create_pause_buttons(self):
-        created_buttons = []
-        #achievments = Button((20, 20, 100), self.WIDTH / 6 - 50, self.HEIGHT - 400, 100, 40, "skin",20)
-        unlocked_weapons = []
-        unlocked_weapons = self.profile.get_unlocked_weapons()
-        for i in range(len(unlocked_weapons)) :
-            created_buttons.append(Button((20,20,100),self.WIDTH / 2 - 50, self.HEIGHT - 400-i*60,100 , 40 ,"weapon" ,12)) 
+        skinsarr =self.profile.get_skins()
+        for i in range(4):
+            if ((i*2) in skinsarr):
+                self.created_buttons.append(self.skins[i])
 
-        skins = Button((20, 20, 100), self.WIDTH - self.WIDTH / 6 - 50, self.HEIGHT - 400, 100, 40, "return", price=0)
-        #Screated_buttons.append(achievments)
-        created_buttons.append(skins)
-        return created_buttons
+        weaparr =self.profile.get_unlocked_weapons()
+        for i in range(3):
+            if (i in weaparr):
+                self.created_buttons.append(self.weapons[i])
+                
+        self.created_buttons.append(Button( self.WIDTH / 2 - 50, self.HEIGHT - 240, 128, 44, price=1, image = self.button_image[8], number = 7))
+        return self.created_buttons
 
     # skins , weapon , upgrades
 

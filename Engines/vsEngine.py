@@ -40,7 +40,7 @@ class vsGameEngine:
         self.profile = profile
 
         # pause menu
-        self.menuengine = menu(self.WIN, 800,600)
+        self.menuengine = menu(self.WIN, 800,600,None)
         self.menuengine.create_menue(1)
 
         #constant attributes

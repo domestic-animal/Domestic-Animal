@@ -123,17 +123,17 @@ class engineController:
             #if the controller state is opening a menu
             elif self.controllerState == "menu":
                 #assign the current engine to be the menu engine
-                self.currEngine = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile)
+                self.currEngine = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0])
                 #create the main menu
                 self.currEngine.create_menue(2, self.profile)
             
             elif self.controllerState =="market":
-                market = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile)
+                market = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0])
                 market.create_menue(3, self.profile)
                 self.currEngine = market
             
             elif self.controllerState == "inventory":
-                inventory = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile)
+                inventory = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0])
                 inventory.create_menue(4,self.profile)
                 self.currEngine = inventory
 
