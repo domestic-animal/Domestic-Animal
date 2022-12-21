@@ -11,7 +11,7 @@ class SpriteSheet():
 	
 	def __init__(self, sheet, width, height, scale, frames_number, skins_number = 1, cooldown = 100):
 		"""
-		Constructor: sets the class attributes
+		Constructor: extracts the frames & sets the class attributes
 
 		:param sheet: The image containing the spritesheet (after converting)
 		:param width: The width of a single frame
@@ -25,14 +25,16 @@ class SpriteSheet():
 		self.skin = [0] * skins_number			# Array of the skins found in the spritesheet
 		# extracting the frames
 		for s in range(skins_number):
-			frame = [0, 0]
+			frame = [0] * frames_number
 			for f in range(frames_number):
 				frame[f] = self.get_image(width, height, scale, f, s)
-			self.skin[s] = Skin(frame, cooldown)
+			# if there is no animation (single frame) store the image directly,
+			# otherwise store it as Skin object 
+			self.skin[s] = frame[0] if frames_number == 1 else Skin(frame, cooldown)
 		self.width = width * scale   			# The width after scaling (for coordination purposes)
 		self.height = height * scale 			# The height after scaling (for coordination purposes)
 
-	def get_image(self, width, height, scale, f, s = 0):
+	def get_image(self, width, height, scale, f, s):
 		"""
 		Function to extract the image (width x height) from the stored
 		spritesheet as it's the (f)^th frame in the (s)^th skin.
