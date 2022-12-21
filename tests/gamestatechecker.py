@@ -26,12 +26,11 @@ def create_random_game_state():
     path = os.path.join(filepath.ROOT_DIR, "Assets")
     dummy_sheet = pygame.image.load(os.path.join(path, "Enemies_26x26_[6,2].png"))
     dummy_skins = SpriteSheet(dummy_sheet, 26, 26, 1.75, 2, 6).skin
-    we2 = weapon(dummy_skins[0], -1, damage=damage, fire_rate=fire_rate)
     player_postion = (random.randint(0, 600), random.randint(0, 400))
-    plyer = player(player_postion[0], player_postion[1], we2, dummy_skins[0], dummy_skins[0], 200, 7)
-    bullet = we2.shoot(player_postion[0], player_postion[1], -1)
+    plyer = player(player_postion[0], player_postion[1], 1, (dummy_skins[0],dummy_skins[0]), [1,2,3], 200, 7,1,130)
+    bullet = plyer.shoot()
     lvlSelector = levelSelector()
-    level = lvlSelector.getLevel(-1, 1, dummy_skins, dummy_skins)
+    level = lvlSelector.getLevel(-1, 1, dummy_skins, dummy_skins,dummy_skins)
     enemies = level.getwave(1)
 
     powerFactory = PowerUpFactory(dummy_skins[0], dummy_skins[0], dummy_skins[0], dummy_skins[0], dummy_skins[0])
