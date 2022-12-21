@@ -11,7 +11,7 @@ class Profile:
     __co_player_weapon = 0
     __skins = []
     __current_skin = 0
-    __coins = 10000
+    __coins = 100000
     __endless_score = 0
 
     def set_name(self, name):

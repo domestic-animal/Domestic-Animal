@@ -3,10 +3,10 @@ from weapon import weapon
 from entity import entity
 class player(entity):
 
-     def __init__(self, x, y,we,image,input, health,velocity,vs=0):
+     def __init__(self, x, y,we,image,input, health,velocity,vs=0,damage= 45):
         super().__init__(x,y,image[0],velocity)
         self.health = health
-        self.weapon=weapon(image[1], vs= vs,enemyWeapon=vs, damage=45,ishorizontal=vs,isvertical=-1,fire_rate=20,bullettype=we)
+        self.weapon=weapon(image[1], vs= vs,enemyWeapon=vs, damage=damage,ishorizontal=vs,isvertical=-1,fire_rate=20,bullettype=we)
         self.max_health=health
         self.input=input
         self.ScoreMultiplayer=1

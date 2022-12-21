@@ -92,7 +92,10 @@ class engineController:
 
                 self.convert(PLAYER_SHIP_SKINS,BULLET_SHIP_SKINS,ENEMY_SKINS,POWER_UPS,BOSSES,ENEMY_BULLET_SKINS)
                 #to be changed according to inventory menu
-                PLAYER_ASSETS =[PLAYER_SHIP_SKINS[2], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[3]]
+                PLAYER_ASSETS =[PLAYER_SHIP_SKINS[self.profile.get_current_skin()],
+                 BULLET_SHIP_SKINS[self.profile.get_current_weapon()],
+                 PLAYER_SHIP_SKINS[self.profile.get_current_skin()+1],
+                  BULLET_SHIP_SKINS[self.profile.get_co_player_weapon()]]
                 BG = self.Background[0]
                 ENEMY_ASSETS = [ENEMY_SKINS,BOSSES,ENEMY_BULLET_SKINS]
                 GAME_ASSETS = [BG,POWER_UPS]
@@ -123,17 +126,17 @@ class engineController:
             #if the controller state is opening a menu
             elif self.controllerState == "menu":
                 #assign the current engine to be the menu engine
-                self.currEngine = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile)
+                self.currEngine = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0])
                 #create the main menu
                 self.currEngine.create_menue(2, self.profile)
             
             elif self.controllerState =="market":
-                market = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile)
+                market = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0])
                 market.create_menue(3, self.profile)
                 self.currEngine = market
             
             elif self.controllerState == "inventory":
-                inventory = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile)
+                inventory = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0])
                 inventory.create_menue(4,self.profile)
                 self.currEngine = inventory
 

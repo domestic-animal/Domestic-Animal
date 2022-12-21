@@ -10,13 +10,19 @@ from Assets import *
 
 class menu:
 
+<<<<<<< HEAD
     def __init__(self, screen, WIDTH, HEIGHT, profile):
         self.buttons:Button = []
+=======
+    def __init__(self, screen, WIDTH, HEIGHT, profile,background):
+        self.buttons = []
+>>>>>>> 2f80677de4cf35b18d318ff64c6b81a1c8d6e4a6
         self.menue = None
         self.WIDTH = WIDTH
         self.HEIGHT = HEIGHT
         self.screen = screen
         self.profile = profile
+        self.background = background
 
     # 1: pause menue
     # 2: start menue
@@ -41,20 +47,28 @@ class menu:
         clock = pygame.time.Clock()
         FPS = 60
         while runMenue:
+            self.screen.blit(self.background, (0, 0))
+
             clock.tick(FPS)
             pos = pygame.mouse.get_pos()
             event = pygame.event.get()
-
             # handle events with current position
             runMenue,selection = self.menue.handle_events(event, pos, self.buttons)
-            
+            self.buttons = self.menue.create_pause_buttons()
             # draw buttons on the screen
             for b in self.buttons:
+<<<<<<< HEAD
                 # print(b.price)
                 if not b.price == 0:
                     b.draw(self.screen)
 
+=======
+                if b.price !=0 :
+                    b.draw(self.screen)
+>>>>>>> 2f80677de4cf35b18d318ff64c6b81a1c8d6e4a6
             pygame.display.update()
+
+            
         return [selection]
 
     def getGameState(self):
