@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
 "background-color: transparent;\n"
 "}\n"
 "QLabel{\n"
-"font: 25pt \"Kristen ITC\";\n"
+"/*font: 25pt \"Kristen ITC\";*/\n"
 "color :  black;\n"
 "}\n"
 "QToolButton{\n"

@@ -12,12 +12,12 @@ class market():
          self.profile = profile
 
     def create_pause_buttons(self):
-        created_buttons = []
+        created_buttons : Button = []
         skin_image = SpriteSheet(pygame.image.load("Assets\Ships_16x16_[8,2].png"),16, 16, 5, 1, 8 ).skin
         weapon_image = SpriteSheet(pygame.image.load("Assets\Bullets_10x16_[4,2].png"), 10, 16, 5, 1, 4).skin
         button_image = SpriteSheet(pygame.image.load("Assets\Buttons_64x22_[13,1].png"),64, 22, 2, 1, 13 ).skin
 
-        created_buttons.append(Button(self.WIDTH / 2 - 50, self.HEIGHT -780, 100, 40, price=0, image = button_image[3], number=0))
+        created_buttons.append(Button(self.WIDTH / 2 - 50, self.HEIGHT -780, 100, 40, price=1, image = button_image[3], number=0))
 
         created_buttons.append(Button( self.WIDTH / 6 - 50, self.HEIGHT -700, 80, 80, price=1000, image = skin_image[0], number=0))
         created_buttons.append(Button(self.WIDTH / 6 - 50, self.HEIGHT -600, 80, 80, price=1500, image = skin_image[2], number=1))
@@ -32,7 +32,7 @@ class market():
         # created_buttons.append(Button((20, 20, 100), self.WIDTH - self.WIDTH / 6 - 50, self.HEIGHT - 700, 100, 40, "upgrade1", price=30))
         # created_buttons.append(Button((20, 20, 100), self.WIDTH - self.WIDTH / 6 - 50, self.HEIGHT - 640, 100, 40, "upgrade2", price=35))
         # created_buttons.append(Button((20, 20, 100), self.WIDTH - self.WIDTH / 6 - 50, self.HEIGHT - 580, 100, 40, "upgrade3", price=40))
-        created_buttons.append(Button( self.WIDTH / 2 - 50, self.HEIGHT - 240, 128, 44, price=0, image = button_image[8], number = 0))
+        created_buttons.append(Button( self.WIDTH / 2 - 50, self.HEIGHT - 240, 128, 44, price=1, image = button_image[8], number = 0))
         return created_buttons
 
     # skins , weapon , upgrades
@@ -49,13 +49,11 @@ class market():
                 skins.append(b.number*2)
                 print(b.number*2)
                 self.profile.set_skins(skins)
-                # self.profile.set_current_skin(b.number)
             else: 
                 weapons = self.profile.get_unlocked_weapons()
                 weapons.append(b.number-4)
                 print(b.number-4)
                 self.profile.set_unlocked_weapons(weapons)
-                # self.profile.set_current_weapon(b.number-4)
 
         else:
             print("no coins")

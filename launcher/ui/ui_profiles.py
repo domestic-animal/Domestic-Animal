@@ -31,10 +31,6 @@ class Ui_MainWindow(object):
         self.frame.setGeometry(QtCore.QRect(10, 10, 781, 581))
         self.frame.setStyleSheet("QWidget{\n"
 "background-color: transparent;\n"
-"font: 16pt \"Kristen ITC\";\n"
-"}\n"
-"QLabel{\n"
-"border: 0px;\n"
 "}\n"
 "QPushButton{\n"
 "color: rgb(28, 49, 94);\n"
@@ -71,20 +67,15 @@ class Ui_MainWindow(object):
         self.bt_continue.setStyleSheet("")
         self.bt_continue.setObjectName("bt_continue")
         self.lb_feed = QtWidgets.QLabel(self.frame)
-        self.lb_feed.setGeometry(QtCore.QRect(240, 10, 371, 71))
+        self.lb_feed.setGeometry(QtCore.QRect(230, 10, 371, 71))
         self.lb_feed.setStyleSheet("border: 0px;")
         self.lb_feed.setText("")
+        self.lb_feed.setAlignment(QtCore.Qt.AlignCenter)
         self.lb_feed.setObjectName("lb_feed")
-        self.label = QtWidgets.QLabel(self.frame)
-        self.label.setGeometry(QtCore.QRect(20, 10, 221, 71))
-        font = QtGui.QFont()
-        font.setFamily("Kristen ITC")
-        font.setPointSize(16)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
+        self.label_c = QtWidgets.QLabel(self.frame)
+        self.label_c.setGeometry(QtCore.QRect(20, 10, 251, 71))
+        self.label_c.setStyleSheet("border: none;")
+        self.label_c.setObjectName("label_c")
         self.gridLayoutWidget = QtWidgets.QWidget(self.frame)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(10, 80, 761, 481))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
@@ -100,4 +91,4 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.bt_continue.setText(_translate("MainWindow", "Continue"))
-        self.label.setText(_translate("MainWindow", "Choose a profile: "))
+        self.label_c.setText(_translate("MainWindow", "Choose a profile: "))

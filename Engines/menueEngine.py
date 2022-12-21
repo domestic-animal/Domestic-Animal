@@ -3,6 +3,7 @@ import pygame
 from menue_components.pause import pauseMenue
 from menue_components.start_menue import startMenue
 from menue_components.market import market
+from menue_components.button import Button
 from menue_components.inventory import inventory
 from assets_handler import spritesheet
 from Assets import *
@@ -10,7 +11,7 @@ from Assets import *
 class menu:
 
     def __init__(self, screen, WIDTH, HEIGHT, profile):
-        self.buttons = []
+        self.buttons:Button = []
         self.menue = None
         self.WIDTH = WIDTH
         self.HEIGHT = HEIGHT
@@ -49,7 +50,9 @@ class menu:
             
             # draw buttons on the screen
             for b in self.buttons:
-                b.draw(self.screen)
+                # print(b.price)
+                if not b.price == 0:
+                    b.draw(self.screen)
 
             pygame.display.update()
         return [selection]

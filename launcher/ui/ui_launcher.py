@@ -27,15 +27,10 @@ class Ui_MainWindow(object):
         self.frame.setStyleSheet("QWidget{\n"
 "background-color: transparent;\n"
 "}\n"
-"QLabel{\n"
-"font: 25pt \"Kristen ITC\";\n"
-"border: 0px;\n"
-"}\n"
 "QPushButton{\n"
 "color: rgb(28, 49, 94);\n"
 "border: 2px solid rgb(28, 49, 94);\n"
 "border-radius: 5px;\n"
-"font: 16pt \"Kristen ITC\";\n"
 "}\n"
 "QPushButton::hover{\n"
 "background-color: rgb(230, 226, 195);\n"
@@ -51,22 +46,12 @@ class Ui_MainWindow(object):
 "QToolButton::hover{\n"
 "background-color: rgb(230, 226, 195);\n"
 "}\n"
-"QRadioButton{\n"
-"font: 16pt \"Kristen ITC\";\n"
-"}\n"
 "")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.bt_play = QtWidgets.QPushButton(self.frame)
         self.bt_play.setGeometry(QtCore.QRect(200, 160, 400, 75))
-        font = QtGui.QFont()
-        font.setFamily("Kristen ITC")
-        font.setPointSize(16)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.bt_play.setFont(font)
         self.bt_play.setObjectName("bt_play")
         self.bt_vs = QtWidgets.QRadioButton(self.frame)
         self.bt_vs.setGeometry(QtCore.QRect(520, 250, 81, 31))
@@ -75,29 +60,14 @@ class Ui_MainWindow(object):
         self.bt_endless.setGeometry(QtCore.QRect(350, 250, 151, 31))
         self.bt_endless.setObjectName("bt_endless")
         self.bt_story = QtWidgets.QRadioButton(self.frame)
-        self.bt_story.setGeometry(QtCore.QRect(200, 250, 81, 31))
+        self.bt_story.setGeometry(QtCore.QRect(200, 250, 141, 31))
         self.bt_story.setObjectName("bt_story")
         self.bt_custom = QtWidgets.QPushButton(self.frame)
         self.bt_custom.setGeometry(QtCore.QRect(200, 420, 400, 75))
-        font = QtGui.QFont()
-        font.setFamily("Kristen ITC")
-        font.setPointSize(16)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.bt_custom.setFont(font)
         self.bt_custom.setObjectName("bt_custom")
         self.label = QtWidgets.QLabel(self.frame)
         self.label.setGeometry(QtCore.QRect(0, 20, 811, 51))
-        font = QtGui.QFont()
-        font.setFamily("Kristen ITC")
-        font.setPointSize(25)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
-        font.setKerning(True)
-        self.label.setFont(font)
+        self.label.setStyleSheet("font-size: 30px;")
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.bt_back = QtWidgets.QToolButton(self.frame)
@@ -106,13 +76,6 @@ class Ui_MainWindow(object):
         self.bt_back.setObjectName("bt_back")
         self.bt_saves = QtWidgets.QPushButton(self.frame)
         self.bt_saves.setGeometry(QtCore.QRect(200, 310, 400, 75))
-        font = QtGui.QFont()
-        font.setFamily("Kristen ITC")
-        font.setPointSize(16)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.bt_saves.setFont(font)
         self.bt_saves.setObjectName("bt_saves")
         MainWindow.setCentralWidget(self.centralwidget)
 
