@@ -6,17 +6,15 @@ from menue_components.market import market
 from menue_components.button import Button
 from menue_components.inventory import inventory
 from assets_handler import spritesheet
+from menue_components.text_button import Text_Button
 from Assets import *
 
 class menu:
 
-<<<<<<< HEAD
-    def __init__(self, screen, WIDTH, HEIGHT, profile):
-        self.buttons:Button = []
-=======
+
     def __init__(self, screen, WIDTH, HEIGHT, profile,background):
-        self.buttons = []
->>>>>>> 2f80677de4cf35b18d318ff64c6b81a1c8d6e4a6
+        self.image_buttons : Button = []
+        self.text_buttons : Text_Button = []
         self.menue = None
         self.WIDTH = WIDTH
         self.HEIGHT = HEIGHT
@@ -27,6 +25,7 @@ class menu:
     # 1: pause menue
     # 2: start menue
     # 3 : market menue
+    # 4 : inventory
     def create_menue(self, type=1, profile = None):
         if type == 1:
             self.menue = pauseMenue(self.screen, self.WIDTH, self.HEIGHT)
@@ -36,7 +35,8 @@ class menu:
             self.menue = market(self.screen, self.WIDTH, self.HEIGHT, profile)
         elif type ==4:
             self.menue = inventory(self.screen, self.WIDTH, self.HEIGHT, profile)
-        self.buttons = self.menue.create_pause_buttons()
+        self.image_buttons = self.menue.create_pause_buttons()
+        self.text_buttons = self.menue.create_text_buttons()
 
     def start(self):
         pygame.init()
@@ -53,19 +53,14 @@ class menu:
             pos = pygame.mouse.get_pos()
             event = pygame.event.get()
             # handle events with current position
-            runMenue,selection = self.menue.handle_events(event, pos, self.buttons)
-            self.buttons = self.menue.create_pause_buttons()
+            runMenue,selection = self.menue.handle_events(event, pos, self.image_buttons)
+            self.image_buttons = self.menue.create_pause_buttons()
+            self.text_buttons = self.menue.create_text_buttons()
             # draw buttons on the screen
-            for b in self.buttons:
-<<<<<<< HEAD
-                # print(b.price)
-                if not b.price == 0:
-                    b.draw(self.screen)
-
-=======
-                if b.price !=0 :
-                    b.draw(self.screen)
->>>>>>> 2f80677de4cf35b18d318ff64c6b81a1c8d6e4a6
+            for b in self.image_buttons:
+                b.draw(self.screen)
+            for b in self.text_buttons:
+                b.draw(self.screen)
             pygame.display.update()
 
             
