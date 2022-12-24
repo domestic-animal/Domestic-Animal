@@ -5,6 +5,7 @@ from launcher.profiles import Profiles
 from launcher.launcher import Launcher
 from launcher.saveUI import SaveUI
 from file.file_manager import FileManager
+from launcher.leaderbord import Leaderboard
 import os
 
 if __name__ == "__main__":
@@ -20,6 +21,7 @@ if __name__ == "__main__":
     c = Customization(widget)
     p = Profiles(widget, manager)
     save_ui = SaveUI(widget)
+    Leaderboard = Leaderboard(widget)
     c.control_signal.connect(ui.catchControls)
     p.profile_signal.connect(ui.catchProfile)
     p.profile_signal.connect(c.getProfile)
@@ -30,6 +32,7 @@ if __name__ == "__main__":
     widget.addWidget(ui)
     widget.addWidget(c)
     widget.addWidget(save_ui)
+    widget.addWidget(Leaderboard)
     widget.setFixedSize(800,600)
     widget.show()
     
