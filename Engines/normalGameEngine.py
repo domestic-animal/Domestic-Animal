@@ -22,7 +22,7 @@ class normalGameEngine:
 
     def __init__(self,window, level,profile, playerAssets , enemyAssets,
                  gameAssets, powerUpsAssets,settings1, settings2,gameState=None,
-                 diff = 1,score=0,is_coop=1, fileManager=None):
+                 diff = 1,score=0,is_coop=2, fileManager=None):
         """
             Constructor
 
@@ -78,7 +78,7 @@ class normalGameEngine:
         self.Players.append(pl1)
 
         if self.is_coop==2:
-            pl2=player(400,600,1,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,200,7)
+            pl2=player(400,600,2,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,200,7)
             self.Players.append(pl2)
     
     def move_entities(self,keys):
@@ -149,8 +149,9 @@ class normalGameEngine:
             """
             # drawing background
             self.WIN.blit(self.gameAssets[0], (0, 0))
+            
             scores_label = self.main_font.render(f"score: {self.score}", 1, (255,255,255))
-            self.WIN.blit(scores_label,(10, 10))
+            self.WIN.blit(scores_label,(0, 0))
             # drawing player
             for i in self.Players:
                 i.draw(self.WIN)
@@ -252,6 +253,7 @@ class normalGameEngine:
                     pass
                 if selection[0] == "runAway":
                     self.exit = 1
+                    self.gameState = None
                     return ["menu", self.getGameState()]
                     
             #on death or quitting
@@ -261,6 +263,7 @@ class normalGameEngine:
                         self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
                     self.gameover = 1
                     self.exit = 1
+                    self.gameState = None
                     return ["menu", self.getGameState()]
             else:
                 if self.Players[0].health <= 0:
@@ -268,6 +271,7 @@ class normalGameEngine:
                         self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
                     self.exit = 1
                     self.gameover = 1
+                    self.gameState = None
                     return ["menu", self.getGameState()]
                     
             if self.level==-1:
