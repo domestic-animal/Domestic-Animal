@@ -94,7 +94,8 @@ class levelOne(storylevel):
         threshy=400
         for _ in range(2):
             enemies=[]
-            for _ in range(6):
+            threshy = 400
+            for _ in range(7):
                 threshy-=50
                 x=20
                 for _ in range(11):
@@ -125,7 +126,8 @@ class levelTwo(storylevel):
         threshy=400
         for _ in range(2):
             enemies=[]
-            for _ in range(6):
+            threshy=400
+            for _ in range(7):
                 threshy-=50
                 x=20
                 for _ in range(11):
@@ -154,6 +156,7 @@ class levelThree(storylevel):
         type="c"
         for _ in range(3):
             enemies=[]
+            threshy=500
             for _ in range(8):
                 threshy-=50
                 x=20
@@ -187,6 +190,7 @@ class levelFour(storylevel):
         type="c"
         for _ in range(5):
             enemies=[]
+            threshy=500
             if _ == 4:
                 boss_dog = factor.create("bd", self.diff,200,0,(600,210))
                 enemies.append(boss_dog)
@@ -224,6 +228,7 @@ class levelFive(storylevel):
         threshy=550
         type="d"
         for _ in range(5):
+            threshy=500
             enemies=[]
             for _ in range(9):
                     threshy-=50
@@ -258,6 +263,7 @@ class levelSix(storylevel):
         threshy=550
         type="d"
         for _ in range(6):
+            threshy=550
             enemies=[]
             for _ in range(9):
                     threshy-=50
@@ -292,6 +298,7 @@ class levelSeven(storylevel):
         type="d"
         for _ in range(6):
             enemies=[]
+            threshy=500
             if _ == 5:
                 boss_cat = factor.create("bc", self.diff,200,0,(600,800))
                 enemies.append(boss_cat)
