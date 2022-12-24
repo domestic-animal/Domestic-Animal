@@ -21,7 +21,7 @@ if __name__ == "__main__":
     c = Customization(widget)
     p = Profiles(widget, manager)
     save_ui = SaveUI(widget)
-    Leaderboard = Leaderboard(widget)
+    Leaderboard = Leaderboard(widget, manager)
     c.control_signal.connect(ui.catchControls)
     p.profile_signal.connect(ui.catchProfile)
     p.profile_signal.connect(c.getProfile)

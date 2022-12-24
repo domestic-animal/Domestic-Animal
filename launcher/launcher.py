@@ -69,6 +69,9 @@ class Launcher(QMainWindow):
 		self.findChild(QPushButton, "bt_saves").clicked.connect(
       		lambda : self.pager.setCurrentIndex(self.pager.currentIndex()+2))
 
+		self.findChild(QPushButton, "bt_leaderboard").clicked.connect(
+      		lambda : self.pager.setCurrentIndex(self.pager.currentIndex()+3))
+
 		#back button setup
 		self.back_button = self.findChild(QToolButton, "bt_back")
 		self.back_button.clicked.connect(lambda: self.pager.setCurrentIndex(self.pager.currentIndex()-1))
