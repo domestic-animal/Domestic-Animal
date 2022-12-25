@@ -92,8 +92,7 @@ QToolButton{
 border-radius: 5px;
 }
 QComboBox{
-border : 0;
-background: transparent;
+background-color: white;
 }</string>
     </property>
     <property name="frameShape">
@@ -121,7 +120,7 @@ background: transparent;
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>50</x>
        <y>100</y>
        <width>91</width>
        <height>31</height>
@@ -140,7 +139,7 @@ background: transparent;
     <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
-       <x>350</x>
+       <x>290</x>
        <y>100</y>
        <width>91</width>
        <height>31</height>
@@ -159,8 +158,8 @@ background: transparent;
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>610</x>
-       <y>90</y>
+       <x>510</x>
+       <y>100</y>
        <width>91</width>
        <height>31</height>
       </rect>
@@ -178,7 +177,7 @@ background: transparent;
     <widget class="QToolButton" name="bt_order">
      <property name="geometry">
       <rect>
-       <x>755</x>
+       <x>750</x>
        <y>100</y>
        <width>31</width>
        <height>31</height>
@@ -202,14 +201,11 @@ background-color: black;
     <widget class="QComboBox" name="combo">
      <property name="geometry">
       <rect>
-       <x>700</x>
-       <y>30</y>
-       <width>86</width>
-       <height>25</height>
+       <x>630</x>
+       <y>100</y>
+       <width>111</width>
+       <height>31</height>
       </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
      </property>
      <item>
       <property name="text">

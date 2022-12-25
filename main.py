@@ -1,5 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import Qt
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 from launcher.customization import Customization
 from launcher.profiles import Profiles
 from launcher.launcher import Launcher
@@ -28,6 +30,7 @@ if __name__ == "__main__":
     p.profile_signal.connect(save_ui.getProfile)
     ui.auto_save.deadSignal.connect(save_ui.setup_view)
     save_ui.load_signal.connect(ui.catchSave)
+    ui.findChild(QPushButton, "bt_leaderboard").clicked.connect(Leaderboard.setup_ui)
     widget.addWidget(p)
     widget.addWidget(ui)
     widget.addWidget(c)
