@@ -64,6 +64,7 @@ class normalGameEngine:
         self.Bullets = []
         self.Players = []
         self.powerup=[]
+        self.graveyard = []
         self.score=score
         self.gameObserver = gameobserver()
         self.powerFactory=PowerUpFactory(powerUpsAssets[0],powerUpsAssets[1],powerUpsAssets[2],powerUpsAssets[3],powerUpsAssets[4])
@@ -74,12 +75,12 @@ class normalGameEngine:
         
         #player Entity
        
-        pl1=player(300,600,3,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7)
-        self.Players.append(pl1)
+        self.pl1=player(300,600,3,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7)
+        self.Players.append(self.pl1)
 
         if self.is_coop==2:
-            pl2=player(400,600,2,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,200,7)
-            self.Players.append(pl2)
+            self.pl2=player(400,600,2,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,200,7)
+            self.Players.append(self.pl2)
     
     def move_entities(self,keys):
         #detect player movement
@@ -103,12 +104,12 @@ class normalGameEngine:
 
 
     def shoot(self,keys):
-            if keys[self.settings1["fire"]]: 
-                Bullet=self.Players[0].shoot()
+            if keys[self.settings1["fire"]]and self.pl1.dead ==0: 
+                Bullet=self.pl1.shoot()
                 if Bullet!= None:
                     self.Bullets.append(Bullet)
-            if self.is_coop==2 and  keys[self.settings2["fire"]]:
-                Bullet=self.Players[1].shoot()
+            if self.is_coop==2 and  keys[self.settings2["fire"]] and self.pl2.dead ==0:
+                Bullet=self.pl2.shoot()
                 if Bullet!= None:
                     self.Bullets.append(Bullet)
     
@@ -239,7 +240,7 @@ class normalGameEngine:
             #observe collisions
             self.gameObserver.collision(self.Bullets, self.Enemies, self.Players)
             #observe dead enemies
-            self.score+=self.gameObserver.dead(self.Enemies,self.Players)
+            self.score+=self.gameObserver.dead(self.Enemies,self.Players,self.graveyard)
             #observe offscreen bullets
             self.gameObserver.off_screen(self.Bullets)
             #insert power up
@@ -258,7 +259,7 @@ class normalGameEngine:
                     
             #on death or quitting
             if self.is_coop > 1:
-                if self.Players[0].health <= 0 and self.Players[1].health <= 0:
+                if len(self.graveyard) == 2:
                     if self.level==-1:
                         self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
                     self.gameover = 1
@@ -266,7 +267,7 @@ class normalGameEngine:
                     self.gameState = None
                     return ["menu", self.getGameState()]
             else:
-                if self.Players[0].health <= 0:
+                if len(self.graveyard) == 1:
                     if self.level==-1:
                         self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
                     self.exit = 1

@@ -60,7 +60,6 @@ class gameobserver(observer):
         for player in players:
             if player.cool_down <=0:
                 for enemy in enemies:
-                    for player in players:
                         if self.is_collide(enemy,player):
                                 enemy.health -= enemy.damage
                                 player.health -= enemy.damage
@@ -69,7 +68,7 @@ class gameobserver(observer):
 
         
     
-    def dead(self,enemies,players):
+    def dead(self,enemies,players, graveyard):
         """checks if the given list of enemies are dead
 
         Args:
@@ -83,6 +82,11 @@ class gameobserver(observer):
             if enemy.health<=0:
                 score=multi*enemy.score
                 enemies.remove(enemy)
+        for player in players:
+            if player.health <= 0:
+                graveyard.append(player)
+                player.dead = 1
+                players.remove(player)
         return score
 
 

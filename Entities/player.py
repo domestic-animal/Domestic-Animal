@@ -12,6 +12,7 @@ class player(entity):
         self.ScoreMultiplayer=1
         self.cool_down=0
         self.vs=vs
+        self.dead = 0
 
      def draw(self, window):
         super().draw(window)
