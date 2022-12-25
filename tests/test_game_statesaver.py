@@ -104,7 +104,7 @@ def test_load_autosaved():
     shutil.rmtree(test_path, ignore_errors=True)
 
 
-def test_load_autosaved_story_autosave_file_corrupted():
+def test_load_autosaved_autosave_file_corrupted():
     create_profiles_path()
     test_path = os.path.join(ROOT_DIR, "profiles", "test")
     os.mkdir(test_path)
@@ -120,7 +120,7 @@ def test_load_autosaved_story_autosave_file_corrupted():
     shutil.rmtree(test_path, ignore_errors=True)
 
 
-def test_load_autosaved_story_both_autosave_and_backup_files_corrupted():
+def test_load_autosaved_both_autosave_and_backup_files_corrupted():
     create_profiles_path()
     test_path = os.path.join(ROOT_DIR, "profiles", "test")
     os.mkdir(test_path)
