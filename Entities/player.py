@@ -12,6 +12,7 @@ class player(entity):
         self.ScoreMultiplayer=1
         self.cool_down=0
         self.vs=vs
+        self.dead = 0
 
      def draw(self, window):
         super().draw(window)
@@ -21,8 +22,11 @@ class player(entity):
          return self.weapon.shoot(self.x,self.y)
     
      def healthbar(self, window):
-        pygame.draw.rect(window, (255,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width(), 8))
-        pygame.draw.rect(window, (0,255,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width() * (self.health/self.max_health), 8))
+        if(self.cool_down > 0):
+            pygame.draw.rect(window, (0,0,255), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width(), 8))
+        else:
+            pygame.draw.rect(window, (0,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width(), 8))
+            pygame.draw.rect(window, (0,255,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width() * (self.health/self.max_health), 8))
 
 
      def move(self,keys,WIDTH,HEIGHT):
