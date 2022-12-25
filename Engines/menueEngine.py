@@ -7,6 +7,7 @@ from menue_components.button import Button
 from menue_components.inventory import inventory
 from assets_handler import spritesheet
 from menue_components.text_button import Text_Button
+from menue_components.levels import level
 from Assets import *
 
 class menu:
@@ -35,8 +36,9 @@ class menu:
             self.menue = market(self.screen, self.WIDTH, self.HEIGHT, profile)
         elif type ==4:
             self.menue = inventory(self.screen, self.WIDTH, self.HEIGHT, profile)
-        self.image_buttons = self.menue.create_pause_buttons()
-        self.text_buttons = self.menue.create_text_buttons()
+        elif type ==5:
+            self.menue = level(self.screen, self.WIDTH, self.HEIGHT, profile)
+        self.image_buttons, self.text_buttons = self.menue.create_pause_buttons()
 
     def start(self):
         pygame.init()
@@ -54,8 +56,7 @@ class menu:
             event = pygame.event.get()
             # handle events with current position
             runMenue,selection = self.menue.handle_events(event, pos, self.image_buttons)
-            self.image_buttons = self.menue.create_pause_buttons()
-            self.text_buttons = self.menue.create_text_buttons()
+            self.image_buttons, self.text_buttons = self.menue.create_pause_buttons()
             # draw buttons on the screen
             for b in self.image_buttons:
                 b.draw(self.screen)

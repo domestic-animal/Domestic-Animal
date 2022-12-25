@@ -9,9 +9,6 @@ class pauseMenue():
          self.WIDTH = WIDTH
          self.HEIGHT = HEIGHT
          self.screen = screen
-
-    def create_text_buttons(self):
-        return []
         
     def create_pause_buttons(self):
         created_buttons = []
@@ -23,7 +20,7 @@ class pauseMenue():
         created_buttons.append(cont)
         created_buttons.append(save)
         created_buttons.append(runAway)
-        return created_buttons
+        return created_buttons, []
 
     def handle_events(self, events, pos, buttons):
         selection = ""
@@ -34,8 +31,9 @@ class pauseMenue():
                     runM = False
                     selection = "continue"
                 if buttons[1].isOver(pos):
-                     # TODO : handle save function
+                     # handle save function
                      selection = "save"
+                     runM = False
                 if buttons[2].isOver(pos):
                     # TODO : handle quit function to quit game or return to start menue
                     runM = False
