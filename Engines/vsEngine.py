@@ -6,8 +6,8 @@ import sys
 """
 #from observer import observer as observe
 sys.path.insert(0, './Entities')
-from player import player
-from weapon import weapon
+from Entities.player import player
+from Entities.weapon import weapon
 from Engines.observer import vsobserver
 from Engines.menueEngine import menu
 from Engines.gameState import gameState
@@ -28,7 +28,6 @@ class vsGameEngine:
             enemyAssets: enemy Assets to be drawn on the window
             gameAssets: any extra assets such as background
             settings: player's controls
-            powerUps: how many powerups are allowed
         """
 
         self.WIN = window
@@ -53,12 +52,16 @@ class vsGameEngine:
     def create_player(self):
         
         #player Entity
-        we1 = weapon(self.playerAssets[1], 1, damage=45, fire_rate=25)
-        pl1=player(200,295,we1,self.playerAssets[0],self.PLAYER1_CONTROLS,250,7,1)
+        self.playerAssets[1].rotate(-1)
+
+        self.playerAssets[0].rotate(-1)
+        pl1=player(200,295,1,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,250,7,1)
         self.Players.append(pl1)
 
-        we2 = weapon(self.playerAssets[3], -1, damage=45, fire_rate=25)
-        pl2=player(600,295,we2,self.playerAssets[2],self.PLAYER2_CONTROLS,250,7,-1)
+        self.playerAssets[3].rotate(1)
+
+        self.playerAssets[2].rotate(1)
+        pl2=player(600,295,1,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,250,7,-1)
         self.Players.append(pl2)
     
     
@@ -143,23 +146,24 @@ class vsGameEngine:
             #pasue menu
             if keys[pygame.K_ESCAPE]: # shoot
                 selection = self.menuengine.start()
-                if selection == "save":
+                if selection[0] == "save":
                     pass
-                if selection == "runAway":
-                    self.exit = 1
+                if selection[0] == "runAway":
+                    self.playerAssets[1].rotate(1)
+                    self.playerAssets[0].rotate(1)
+                    self.playerAssets[3].rotate(-1)
+                    self.playerAssets[2].rotate(-1)
                     return ["menu"]
                     
             #on death or quitting
             if self.Players[0].health <= 0 or self.Players[1].health <= 0:
-                    self.exit = 1
+                    self.playerAssets[1].rotate(1)
+                    self.playerAssets[0].rotate(1)
+                    self.playerAssets[3].rotate(-1)
+                    self.playerAssets[2].rotate(-1)
                     return ["menu"]
-            
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.exit = 1
-                    return ["runAway" ]
-                    
 
 
-
+    def getGameState():
+        return None
             

@@ -121,10 +121,16 @@ class FileManager:
             player_sheet = pygame.image.load(os.path.join(path, "Ships_16x16_[8,2].png"))
             bullet_sheet = pygame.image.load(os.path.join(path, "Bullets_10x16_[4,2].png"))
             enemy_sheet = pygame.image.load(os.path.join(path, "Enemies_26x26_[6,2].png"))
-            PLAYER_SHIP_SKINS = SpriteSheet(player_sheet, 16, 16, 3, 2,8).skin
+            power_sheet = pygame.image.load(os.path.join(path, "Powerups_31x31_[5,2].png"))
+            bosses_sheet = pygame.image.load(os.path.join(path, "Bosses_138x192_[2,6].png"))
+            enemy_bullet_sheet = pygame.image.load(os.path.join(path, "EnemiesBullets_15x24_[4,3].png"))
+            PLAYER_SHIP_SKINS = SpriteSheet(player_sheet, 16, 16, 2.5, 2,8).skin
             BULLET_SHIP_SKINS = SpriteSheet(bullet_sheet, 10, 16, 1.2, 2,4).skin
             ENEMY_SKINS = SpriteSheet(enemy_sheet, 26, 26, 1.75, 2, 6).skin
-            assets = [PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS, ENEMY_SKINS]
+            POWER_UP_SKINS = SpriteSheet(power_sheet,31,31,1.5, 2,5).skin
+            BOSSES_SKINS =  SpriteSheet(bosses_sheet,138,192,1, 6,2).skin
+            ENEMY_BULLET_SKINS = SpriteSheet(enemy_bullet_sheet, 15, 24, 1.2,3,4).skin
+            assets = [PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS, ENEMY_SKINS, POWER_UP_SKINS,BOSSES_SKINS,ENEMY_BULLET_SKINS]
             background_imgs = ['allBGstars_1024x1913.png', 'fajrBG_1024x768.png',
                                'landscapeBG_384x224.png', 'nightBGwithmoon_1024x768.png',
                                'riverBG_256x320.png', 'spaceBG_256x224.png']

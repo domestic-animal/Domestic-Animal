@@ -45,7 +45,7 @@ class gameobserver(observer):
         # loop on all bullets and damage the enemy or player
         for bullet in bullets:
             #if the bullets are friendly (-1)
-            if bullet.is_friendly<0:
+            if bullet.is_friendly==0:
                 for enemy in enemies:
                     if self.is_collide(bullet,enemy):
                         bullet.Objectdamage(enemy)
@@ -60,7 +60,6 @@ class gameobserver(observer):
         for player in players:
             if player.cool_down <=0:
                 for enemy in enemies:
-                    for player in players:
                         if self.is_collide(enemy,player):
                                 enemy.health -= enemy.damage
                                 player.health -= enemy.damage
@@ -69,7 +68,7 @@ class gameobserver(observer):
 
         
     
-    def dead(self,enemies,players):
+    def dead(self,enemies,players, graveyard):
         """checks if the given list of enemies are dead
 
         Args:
@@ -83,6 +82,11 @@ class gameobserver(observer):
             if enemy.health<=0:
                 score=multi*enemy.score
                 enemies.remove(enemy)
+        for player in players:
+            if player.health <= 0:
+                graveyard.append(player)
+                player.dead = 1
+                players.remove(player)
         return score
 
 
@@ -100,6 +104,15 @@ class gameobserver(observer):
 class vsobserver(observer):
     def __init__(self):
         pass
+    def off_screen(self,bullets):
+        """checks if bullets are off screen it removes them
+
+        Args:
+            bullets (list of bullets): current list of bullets 
+        """
+        for bullet in bullets[:]:
+            if bullet.off_screen(800,600):
+                bullets.remove(bullet)
     def collision(self,bullets,players):
         """checks if all object have collided with something or not
 
