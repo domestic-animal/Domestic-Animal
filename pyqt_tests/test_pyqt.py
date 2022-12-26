@@ -48,3 +48,18 @@ def test_duplicate_profile(app, qtbot):
     qtbot.mouseClick(app.p.create_buttons[0], QtCore.Qt.LeftButton)
     
     assert app.p.lb_feed.text() == "profile already exists"
+    
+def test_game_thread(app, qtbot):
+     # create profile
+    qtbot.mouseClick(app.p.create_buttons[0], QtCore.Qt.LeftButton)
+    qtbot.keyPress(app.p.create_edit[0], QtCore.Qt.Key.Key_A)
+    qtbot.mouseClick(app.p.create_buttons[0], QtCore.Qt.LeftButton)
+    # check the profile
+    for b in app.p.radio_buttons:
+        if b.text() == "z":
+            b.setChecked(True)
+    # click continue
+    qtbot.mouseClick(app.p.findChild(QPushButton, "bt_continue"), QtCore.Qt.LeftButton)
+    
+    assert app.p.lb_feed.text() != "Choose a profile first"
+
