@@ -15,6 +15,7 @@ class staticAssetsFactory:
         self.BULLETS_IMAGE = pygame.image.load("Assets\Bullets_10x16_[4,2].png")
         self.POWERUPS_IMAGE = pygame.image.load("Assets\Powerups_31x31_[5,2].png")
         self.SHIPS_IMAGE = pygame.image.load("Assets\Ships_16x16_[8,2].png")
+        self.GAME_LOGO = pygame.image.load("Assets\Domestic_Animals_logo_64x32.png")
 
     def create_images(self, asset, scale = 1):
         """
@@ -35,5 +36,8 @@ class staticAssetsFactory:
 
         elif asset == "ships":
             ss = SpriteSheet(self.SHIPS_IMAGE, 16, 16, scale, 1, 8)
+        
+        elif asset == "logo":
+            ss = SpriteSheet(self.GAME_LOGO, 64, 32, scale, 1, 1)
 
         return ss.skin
