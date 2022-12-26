@@ -40,13 +40,13 @@ class vsGameEngine:
         self.profile = profile
 
         # pause menu
-        self.menuengine = menu(self.WIN, 800,600)
+        self.menuengine = menu(self.WIN, self.WIN.get_width(),self.WIN.get_height())
         self.menuengine.create_menue(1)
 
         #constant attributes
         self.Bullets = []
         self.Players = []
-        self.gameObserver = vsobserver()
+        self.gameObserver = vsobserver(self.WIN.get_width(),self.WIN.get_height())
 
 
     def create_player(self):
@@ -68,7 +68,7 @@ class vsGameEngine:
     def move_entities(self,keys):
         #detect player movement
             for player in self.Players:
-                player.move(keys, 800, 600)
+                player.move(keys, self.WIN.get_width(),self.WIN.get_height())
 
             #move bullets
             for bullet in self.Bullets:
