@@ -16,6 +16,9 @@ class Skin():
         self.animation_cooldown = cooldown          # Refresh rate between frames
         self.currframe = 0                          # Current frame displayed
     
+    def setCooldown(self, cooldown):
+        self.animation_cooldown = cooldown
+    
     def rotate(self, r):
         """
         Function to rotate all the frames of the specific skin

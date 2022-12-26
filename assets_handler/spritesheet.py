@@ -20,21 +20,20 @@ class SpriteSheet():
 		:param frames_number: Number of frames in the spritesheet (the column images)
 		:param skins_number: Number of skins in the spritesheet (the row images)
 		:param cooldown: Refresh rate for the animation
+		to be added -> :param Animated: A boolean to consider animation or not
 		"""
 		self.sheet = sheet 						# The sheet to extract the frames from
-		self.skin = [0] * skins_number			# Array of the skins found in the spritesheet
-		# extracting the frames
-		for s in range(skins_number):
-			frame = [0] * frames_number
-			for f in range(frames_number):
-				frame[f] = self.get_image(width, height, scale, f, s)
-			# if there is no animation (single frame) store the image directly,
-			# otherwise store it as Skin object 
-			self.skin[s] = frame[0] if frames_number == 1 else Skin(frame, cooldown)
-		self.width = width * scale   			# The width after scaling (for coordination purposes)
-		self.height = height * scale 			# The height after scaling (for coordination purposes)
+		skinsNumber = int(self.sheet.get_height() / height)
+		self.skin = [0] * skinsNumber			# Array of the skins found in the spritesheet
+		framesNumber = int(self.sheet.get_width() / width) if frames_number != 1 else 1
+		# Extracting the frames for each skin
+		for s in range(skinsNumber):
+			frames = [0] * framesNumber
+			for f in range(framesNumber):
+				frames[f] = self.extract_frame(width, height, scale, f, s)
+			self.skin[s] = Skin(frames, cooldown) if frames_number != 1 else frames[0]
 
-	def get_image(self, width, height, scale, f, s):
+	def extract_frame(self, width, height, scale, f, s):
 		"""
 		Function to extract the image (width x height) from the stored
 		spritesheet as it's the (f)^th frame in the (s)^th skin.
@@ -49,8 +48,10 @@ class SpriteSheet():
 		"""
 		image = pygame.Surface((width, height))
 		image.blit(self.sheet, (0, 0),
-					((f * width), (s * height),
-					 (f * width + width), (s * height + height)))
-		image = pygame.transform.scale(image, (width * scale, height * scale)) #scaling
-		image.set_colorkey((0, 0, 0)) #Transparency - removes black color
+					(	 
+					(f * width)		   , (s * height),
+					(f * width + width), (s * height + height)
+					))
+		image = pygame.transform.scale(image, (width * scale, height * scale)) # scaling
+		image.set_colorkey((0, 0, 0)) # Transparency - removes black color
 		return image
