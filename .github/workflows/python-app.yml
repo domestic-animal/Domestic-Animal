@@ -41,4 +41,4 @@ jobs:
         pytest ./tests
     - name: Test pyqt
       run: |
-        xvfb-run run -m pytest ./pyqt_tests
+        xvfb-run --auto-servernum pytest ./pyqt_tests
