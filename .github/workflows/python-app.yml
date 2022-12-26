@@ -43,4 +43,4 @@ jobs:
       env:
         QT_DEBUG_PLUGINS: 1
       run: |
-        sudo catchsegv xvfb-run --auto-servernum pytest run -m ./pyqt_tests
+        xvfb-run --auto-servernum pytest run -m ./pyqt_tests
