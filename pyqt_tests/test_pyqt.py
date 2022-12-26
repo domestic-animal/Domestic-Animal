@@ -3,6 +3,8 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import pytest
+import sys
+sys.path.insert(0, './')
 from main import GUI
 
 
