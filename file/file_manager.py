@@ -1,4 +1,4 @@
-from assets_handler.spritesheet import SpriteSheet
+from assets_handler.assetsFactory import assetsFactory
 from file.profile import Profile
 import filepath
 import os
@@ -113,35 +113,18 @@ class FileManager:
     def load_assets(self):
         """
         loads assests images
-        :return: assets(list of Skin), backgrounds(list of Surface) if loaded successfully
-                 False otherwise
+        :return: assets(list of Skin), backgrounds(list of Surface) 
         """
-        try:
-            path = os.path.join(filepath.ROOT_DIR, "Assets")
-            player_sheet = pygame.image.load(os.path.join(path, "Ships_16x16_[8,2].png"))
-            bullet_sheet = pygame.image.load(os.path.join(path, "Bullets_10x16_[4,2].png"))
-            enemy_sheet = pygame.image.load(os.path.join(path, "Enemies_26x26_[6,2].png"))
-            power_sheet = pygame.image.load(os.path.join(path, "Powerups_31x31_[5,2].png"))
-            bosses_sheet = pygame.image.load(os.path.join(path, "Bosses_138x192_[2,6].png"))
-            enemy_bullet_sheet = pygame.image.load(os.path.join(path, "EnemiesBullets_15x24_[4,3].png"))
-            PLAYER_SHIP_SKINS = SpriteSheet(player_sheet, 16, 16, 2.5, 2,8).skin
-            BULLET_SHIP_SKINS = SpriteSheet(bullet_sheet, 10, 16, 1.2, 2,4).skin
-            ENEMY_SKINS = SpriteSheet(enemy_sheet, 26, 26, 1.75, 2, 6).skin
-            POWER_UP_SKINS = SpriteSheet(power_sheet,31,31,1.5, 2,5).skin
-            BOSSES_SKINS =  SpriteSheet(bosses_sheet,138,192,1, 6,2).skin
-            ENEMY_BULLET_SKINS = SpriteSheet(enemy_bullet_sheet, 15, 24, 1.2,3,4).skin
-            assets = [PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS, ENEMY_SKINS, POWER_UP_SKINS,BOSSES_SKINS,ENEMY_BULLET_SKINS]
-            background_imgs = ['allBGstars_1024x1913.png', 'fajrBG_1024x768.png',
-                               'landscapeBG_384x224.png', 'nightBGwithmoon_1024x768.png',
-                               'riverBG_256x320.png', 'spaceBG_256x224.png']
-            backgrounds = []
-            for img in background_imgs:
-                b_path = os.path.join(path, "Backgrounds", img)
-                BG = pygame.image.load(b_path)
-                backgrounds.append(BG)
-            return assets, backgrounds
-        except OSError:
-            return False
+        factory=assetsFactory()
+        PLAYER_SHIP_SKINS = factory.create_skins("ships",2.5)
+        BULLET_SHIP_SKINS = factory.create_skins("bullets",1.2)
+        ENEMY_SKINS = factory.create_skins("enemies",1.5)
+        POWER_UP_SKINS = factory.create_skins("powerups",1.5)
+        BOSSES_SKINS =  factory.create_skins("bosses")
+        ENEMY_BULLET_SKINS = factory.create_skins("enemies_bullets")
+        assets = [PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS, ENEMY_SKINS, POWER_UP_SKINS,BOSSES_SKINS,ENEMY_BULLET_SKINS]
+        backgrounds = factory.create_backgrounds()
+        return assets, backgrounds
 
     def __write_file(self, file, path):
         try:
