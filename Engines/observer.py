@@ -4,8 +4,10 @@ import pygame
     state and updates it accordingly
 """
 class observer:
-    def __init__(self):
-        pass
+    def __init__(self,windowX,windowY):
+        self.windowX = windowX
+        self.windowY = windowY
+
     def off_screen(self,bullets):
         """checks if bullets are off screen it removes them
 
@@ -13,7 +15,7 @@ class observer:
             bullets (list of bullets): current list of bullets 
         """
         for bullet in bullets[:]:
-            if bullet.off_screen(600,800):
+            if bullet.off_screen(self.windowX,self.windowY):
                 bullets.remove(bullet)
 
 
@@ -29,11 +31,11 @@ class observer:
         """
         offset_x = obj2.x - obj1.x
         offset_y = obj2.y - obj1.y
-        return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) != None
+        return (obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) != None)
 
 class gameobserver(observer):
-    def __init__(self):
-        pass
+    def __init__(self,windowX,windowY):
+        super().__init__(windowX,windowY)
     def collision(self,bullets,enemies,players):
         """checks if all object have collided with something or not
 
@@ -43,33 +45,32 @@ class gameobserver(observer):
             player (player): current player
         """
         # loop on all bullets and damage the enemy or player
-        for bullet in bullets:
+        for Bullet in bullets:
             #if the bullets are friendly (-1)
-            if bullet.is_friendly==0:
-                for enemy in enemies:
-                    if self.is_collide(bullet,enemy):
-                        bullet.Objectdamage(enemy)
+            if Bullet.is_friendly==0:
+                for Enemy in enemies:
+                    if self.is_collide(Bullet,Enemy):
+                        Bullet.Objectdamage(Enemy)
                         break
             #if the bullets are not friendly (1)
             else:
-                for player in players:
-                    if player.cool_down <=0 and self.is_collide(bullet,player):
-                        bullet.Objectdamage(player)
+                for Player in players:
+                    if Player.cool_down <=0 and self.is_collide(Bullet,Player):
+                        Bullet.Objectdamage(Player)
 
         # if the player collided with an enemy there is some invinciblity frames
-        for player in players:
-            if player.cool_down <=0:
-                for enemy in enemies:
-                    for player in players:
-                        if self.is_collide(enemy,player):
-                                enemy.health -= enemy.damage
-                                player.health -= enemy.damage
-                                player.cool_down=30
+        for Player in players:
+            if Player.cool_down <=0:
+                for Enemy in enemies:
+                        if self.is_collide(Enemy,Player):
+                                Enemy.health -= Enemy.damage
+                                Player.health -= Enemy.damage
+                                Player.cool_down=30
 
 
         
     
-    def dead(self,enemies,players):
+    def dead(self,enemies,players, graveyard):
         """checks if the given list of enemies are dead
 
         Args:
@@ -77,38 +78,35 @@ class gameobserver(observer):
         """
         multi=0
         score=0
-        for player in players:
-            multi+=player.ScoreMultiplayer
-        for enemy in enemies[:]:
-            if enemy.health<=0:
-                score=multi*enemy.score
-                enemies.remove(enemy)
+        for Player in players:
+            multi+=Player.ScoreMultiplayer
+        for Enemy in enemies[:]:
+            if Enemy.health<=0:
+                score=multi*Enemy.score
+                enemies.remove(Enemy)
+        for Player in players:
+            if Player.health <= 0:
+                graveyard.append(Player)
+                Player.dead = 1
+                players.remove(Player)
         return score
 
 
     def powerUpdate(self,powerup,players):
-        for power in powerup[:]:
-            for player in players:
-                if self.is_collide(power,player):
-                    power.add_powerup(player)
-                    powerup.remove(power)
+        for Power in powerup[:]:
+            for Player in players:
+                if self.is_collide(Power,Player):
+                    Power.add_powerup(Player)
+                    powerup.remove(Power)
                     break
-            if power.off_screen(800):
-                powerup.remove(power)
+            if Power.off_screen(self.windowY):
+                powerup.remove(Power)
 
 
 class vsobserver(observer):
-    def __init__(self):
-        pass
-    def off_screen(self,bullets):
-        """checks if bullets are off screen it removes them
-
-        Args:
-            bullets (list of bullets): current list of bullets 
-        """
-        for bullet in bullets[:]:
-            if bullet.off_screen(800,600):
-                bullets.remove(bullet)
+    def __init__(self,windowX,windowY):
+        super().__init__(windowX,windowY)
+ 
     def collision(self,bullets,players):
         """checks if all object have collided with something or not
 
@@ -118,11 +116,11 @@ class vsobserver(observer):
             player (player): current player
         """
         # loop on all bullets and damage the enemy or player
-        for bullet in bullets:
+        for Bullet in bullets:
             #if the bullets are friendly (-1)
-            if bullet.is_friendly>0:
-                if self.is_collide(players[1],bullet):
-                  bullet.Objectdamage(players[1])
+            if Bullet.is_friendly>0:
+                if self.is_collide(players[1],Bullet):
+                  Bullet.Objectdamage(players[1])
             else:
-                if self.is_collide(players[0],bullet):
-                  bullet.Objectdamage(players[0])
+                if self.is_collide(players[0],Bullet):
+                  Bullet.Objectdamage(players[0])

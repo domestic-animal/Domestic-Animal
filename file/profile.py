@@ -13,6 +13,7 @@ class Profile:
     __current_skin = 0
     __coins = 100000
     __endless_score = 0
+    __endless_survival_time = 0
 
     def set_name(self, name):
         self.__name = name
@@ -81,6 +82,18 @@ class Profile:
     def get_coins(self):
         return self.__coins
 
+    def set_endless_score(self, score):
+        self.__endless_score = max(score, self.__endless_score)
+
+    def get_endless_score(self):
+        return self.__endless_score
+
+    def set_endless_survival_time(self, time):
+        self.__endless_survival_time = max(time, self.__endless_survival_time)
+
+    def get_endless_survival_time(self):
+        return self.__endless_survival_time
+
 
     def get_profile(self):
         return {
@@ -94,7 +107,9 @@ class Profile:
             "co_player_weapon": self.__co_player_weapon,
             "skins": self.__skins,
             "current_skin": self.__current_skin,
-            "coins": self.__coins
+            "coins": self.__coins,
+            "endless_score": self.__endless_score,
+            "endless_survival_time": self.__endless_survival_time
         }
 
     def set_profile(self, json_object):
@@ -109,6 +124,8 @@ class Profile:
         self.__current_skin = json_object["current_skin"]
         self.__skins = json_object["skins"]
         self.__coins = json_object["coins"]
+        self.__endless_score = json_object["endless_score"]
+        self.__endless_survival_time = json_object["endless_survival_time"]
 
 
 

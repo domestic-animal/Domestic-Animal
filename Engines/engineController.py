@@ -36,19 +36,29 @@ class engineController:
         #level selector to select a certain level to load
         self.lvlSelector = levelSelector()
         # returned states from the engines
-        self.gameState=gameState
+        self.gameStateLOADED=gameState
+        if(self.gameStateLOADED != None):
+            self.controllerState = "game"
+        self.gameState = None
         self.states = []
         #difficulity
         self.diff = 1
         #window to draw objects on
-        self.WIDTH, self.HEIGHT = 600, 800
-        self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT),pygame.RESIZABLE)
+        self.WIDTH, self.HEIGHT = 600, 700
+
+        self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT))
+        for i in range(len(self.Background)):
+           self.Background[i] = pygame.transform.scale(self.Background[i],self.WIN.get_size())
+           self.Background[i].convert_alpha()
+        pygame.init()
         
 
     def run(self):
         """
             run function to run the engine controller to start the game
         """    
+
+           
         ### Main logic loop ###
         while True:
             #draw a background
@@ -57,7 +67,7 @@ class engineController:
             self.switch()
             #start the selected engine
             self.states = self.currEngine.start()
-            self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT),pygame.RESIZABLE)
+            self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT))
             self.filemanager.save_profile(self.profile)
             #get the new state
             if len(self.states) >1:
@@ -94,36 +104,35 @@ class engineController:
 
                 self.convert(PLAYER_SHIP_SKINS,BULLET_SHIP_SKINS,ENEMY_SKINS,POWER_UPS,BOSSES,ENEMY_BULLET_SKINS)
                 #to be changed according to inventory menu
-                PLAYER_ASSETS =[PLAYER_SHIP_SKINS[self.profile.get_current_skin()],
-                 BULLET_SHIP_SKINS[self.profile.get_current_weapon()],
-                 PLAYER_SHIP_SKINS[self.profile.get_current_skin()+1],
-                  BULLET_SHIP_SKINS[self.profile.get_co_player_weapon()]]
+                PLAYER_ASSETS =[PLAYER_SHIP_SKINS[2], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[2]]
                 BG = self.Background[0]
                 ENEMY_ASSETS = [ENEMY_SKINS,BOSSES,ENEMY_BULLET_SKINS]
                 GAME_ASSETS = [BG,POWER_UPS]
                 #Endless mode
                 if self.mode == -1:
                     # get the chosen level from the level selector
-                    level = self.lvlSelector.getLevel(self.mode,self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES)
+                    level = self.lvlSelector.getLevel(self.mode,self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES,self.WIDTH,self.HEIGHT)
                     # assign the current Engine to be the normal game engine
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
                     diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
                     playerAssets= PLAYER_ASSETS,enemyAssets=ENEMY_ASSETS,gameAssets= GAME_ASSETS,
-                     gameState=self.gameState,powerUpsAssets = POWER_UPS,fileManager=self.filemanager )
+                     gameState=self.gameStateLOADED,powerUpsAssets = POWER_UPS,fileManager=self.filemanager )
+                    self.gameStateLOADED = None
                 #Versus mode
                 elif self.mode == 0:
-                    self.WIN = pygame.display.set_mode(( self.HEIGHT, self.WIDTH),pygame.RESIZABLE)
                     self.currEngine = vsGameEngine(window =self.WIN,profile = self.profile,settings1 = self.settings1,
                     settings2 = self.settings2,playerAssets= PLAYER_ASSETS,gameAssets=[BG])
 
                 elif self.mode > 0:
                     # get the chosen level from the level selector
-                    level = self.lvlSelector.getLevel(self.profile.get_story_progress(),self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES)
+                    level = self.lvlSelector.getLevel(self.profile.get_story_progress(),self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES,self.WIDTH,self.HEIGHT)
                     # assign the current Engine to be the normal game engine
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
                     diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
                     playerAssets= PLAYER_ASSETS,enemyAssets=ENEMY_ASSETS,gameAssets= GAME_ASSETS,
-                     gameState=self.gameState,powerUpsAssets = POWER_UPS,fileManager=self.filemanager )
+                     gameState=self.gameStateLOADED,powerUpsAssets = POWER_UPS,fileManager=self.filemanager )
+                    self.gameStateLOADED = None
+
             
             #if the controller state is opening a menu
             elif self.controllerState == "menu":

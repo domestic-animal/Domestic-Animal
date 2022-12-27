@@ -54,9 +54,10 @@ class bossDog(enemy):
     def draw(self, window):
         super().draw(window)
         self.healthbar(window)
+
     def healthbar(self, window):
-        pygame.draw.rect(window, (255,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width(), 8))
-        pygame.draw.rect(window, (0,255,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width() * (self.health/self.max_health), 8))
+        pygame.draw.rect(window, (0,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width(), 8))
+        pygame.draw.rect(window, (255,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width() * (self.health/self.max_health), 8))
 
     def move(self):
         if self.y<self.threshold[1]:
@@ -84,9 +85,11 @@ class bossCat(enemy):
     def draw(self, window):
         super().draw(window)
         self.healthbar(window)
+
     def healthbar(self, window):
-        pygame.draw.rect(window, (255,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width(), 8))
-        pygame.draw.rect(window, (0,255,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width() * (self.health/self.max_health), 8))
+        pygame.draw.rect(window, (0,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width(), 8))
+        pygame.draw.rect(window, (255,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width() * (self.health/self.max_health), 8))
+    
     def move(self):
     
         if(self.x+self.skin.frames[0].get_width() >= self.threshold[0] and self.y+self.skin.frames[0].get_height() < self.threshold[1]):
