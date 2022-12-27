@@ -26,6 +26,7 @@ jobs:
         python-version: "3.10"
     - name: Install dependencies
       run: |
+        sudo apt install -y xvfb x11-utils herbstluftwm libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xfixes0 xdotool
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
@@ -38,3 +39,9 @@ jobs:
     - name: Test with pytest
       run: |
         pytest ./tests
+    - name: Test pyqt
+      env:
+        QT_DEBUG_PLUGINS: 1
+        DISPLAY: :99.0
+      run: |
+        xvfb-run --auto-servernum pytest ./pyqt_tests
