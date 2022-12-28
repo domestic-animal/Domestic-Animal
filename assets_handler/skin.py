@@ -57,10 +57,20 @@ class Skin():
     def __getstate__(self):
         state = self.__dict__.copy()
         state["frames_string"] = self.convert_to_string_list(state.pop("frames"))
+        s = state.pop("sound")
+        if s is not None:
+            state["sound_raw"] = s.get_raw()
+        else:
+            state["sound_raw"] = None
         return state
 
     def __setstate__(self, state):
         state["frames"] = self.convert_to_surface_list(state.pop("frames_string"))
+        s = state.pop("sound_raw")
+        if s is not None:
+            state["sound"] = pygame.mixer.Sound(s)
+        else:
+            state["sound"] = None
         self.__dict__.update(state)
 
     def convert_to_string_list(self, surface_list):
