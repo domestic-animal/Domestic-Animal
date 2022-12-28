@@ -4,7 +4,6 @@ from assets_handler.music import Music
 import pygame
 
 ASSETS_FACTORY = assetsFactory()
-pygame.init()
 
 def test_animated_skins():
     

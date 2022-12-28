@@ -1,6 +1,9 @@
 from typing import MutableSequence
-import pygame.mixer as mix
+from pygame import mixer
 import random
+import pygame
+
+mixer.init()
 
 class Music():
     """
@@ -8,32 +11,31 @@ class Music():
     """
 
     def __init__(self, music: MutableSequence[str]):
-        mix.init()
         self.music = music  # Array of the music absolutePaths
         self.track = 0      # the current played track
         self.paused = False # Pause indicator
 
     def loadTrack(self, track = 0):
         """
-        Loads the wanted track into the pygame.mixer.music
+        Loads the wanted track into the pygame.mixerer.music
         
         :param track: the wanted track to play (-1 for random track)
         """
-        mix.music.unload()
+        mixer.music.unload()
         self.track = track
         if track == -1: #random track
             self.track = random.randint(0, len(self.music) - 1)
-        mix.music.load(self.music[self.track])
+        mixer.music.load(self.music[self.track])
 
     def play(self):
-        mix.music.play(-1)
+        mixer.music.play(-1)
 
     def pauseToggle(self):
         if not self.paused:
-            mix.music.pause()
+            mixer.music.pause()
         else:
-            mix.music.unpause()
+            mixer.music.unpause()
         self.paused = not self.paused
     
     def stop(self):
-        mix.music.stop()
+        mixer.music.stop()
