@@ -81,7 +81,6 @@ class assetsFactory:
         """
         ss: SpriteSheet = None
         if asset == "buttons":
-            sound = mixer.Sound(os.path.join(self.soundsPath, "buttonClick.wav"))
             BUTTONS_IMAGE = pygame.image.load(os.path.join(self.path, "Buttons_45x11_[23, 1].png"))
             ss = SpriteSheet(BUTTONS_IMAGE, 45, 11, scale, 1, 23)
 
@@ -103,6 +102,8 @@ class assetsFactory:
 
         return ss.skin if ss != None else None
 
+    def create_button_sound(self):
+        return mixer.Sound(os.path.join(self.soundsPath, "buttonClick.wav"))
 
     def create_music(self):
         """
