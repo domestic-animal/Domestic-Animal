@@ -1,9 +1,9 @@
+import os
+os.environ['SDL_AUDIODRIVER'] = 'dsp'
 from assets_handler.spritesheet import SpriteSheet
 from assets_handler.music import Music
 from pygame import mixer
 import filepath
-import os
-os.environ['SDL_AUDIODRIVER'] = 'dsp'
 import pygame
 
 mixer.init()

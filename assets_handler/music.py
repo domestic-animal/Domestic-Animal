@@ -1,8 +1,8 @@
+import os
+os.environ['SDL_AUDIODRIVER'] = 'dsp'
 from typing import MutableSequence
 from pygame import mixer
 import random
-import os
-os.environ['SDL_AUDIODRIVER'] = 'dsp'
 import pygame
 
 pygame.mixer.init()
