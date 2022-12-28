@@ -11,7 +11,6 @@ class assetsFactory:
     """
 
     def __init__(self):
-        pygame.mixer.init()
         self.path = os.path.join(filepath.ROOT_DIR, "Assets")       # The assets absolutePath
         self.soundsPath = os.path.join(self.path, "Sounds")         # The sounds absolutePath
 
