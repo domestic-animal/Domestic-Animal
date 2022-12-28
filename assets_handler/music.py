@@ -2,7 +2,7 @@ from typing import MutableSequence
 import random
 import pygame
 pygame.init()
-pygame.mixer.init()
+# pygame.mixer.init()
 
 class Music():
     """
@@ -20,7 +20,7 @@ class Music():
         
         :param track: the wanted track to play (-1 for random track)
         """
-        pygame.mixer.music.unload()
+        # pygame.mixer.music.unload()
         self.track = track
         if track == -1: #random track
             self.track = random.randint(0, len(self.music) - 1)
