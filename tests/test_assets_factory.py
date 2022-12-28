@@ -9,9 +9,6 @@ ASSETS_FACTORY = assetsFactory()
 def test_animated_skins():
     
     ships = ASSETS_FACTORY.create_skins("ships")
-    bullets = ASSETS_FACTORY.create_skins("bullets")
-    enemies = ASSETS_FACTORY.create_skins("enemies")
-    powerups = ASSETS_FACTORY.create_skins("powerups")
     bosses = ASSETS_FACTORY.create_skins("bosses")
     enemies_bullets = ASSETS_FACTORY.create_skins("enemies_bullets")
 
@@ -19,12 +16,6 @@ def test_animated_skins():
 
     for ship in ships:
         assert isinstance(ship, Skin)
-    for bullet in bullets:
-        assert isinstance(bullet, Skin)
-    for enemy in enemies:
-        assert isinstance(enemy, Skin)
-    for powerup in powerups:
-        assert isinstance(powerup, Skin)
     for boss in bosses:
         assert isinstance(boss, Skin)
     for enemy_bullet in enemies_bullets:

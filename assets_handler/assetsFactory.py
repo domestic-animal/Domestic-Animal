@@ -2,12 +2,10 @@ import sys
 sys.path.insert(0, './assets_handler')
 from assets_handler.spritesheet import SpriteSheet
 from assets_handler.music import Music
-import filepath
 import pygame
 from pygame import mixer
 import os
 pygame.init()
-# mixer.init()
 
 class assetsFactory:
     """

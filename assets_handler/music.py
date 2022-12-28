@@ -17,25 +17,25 @@ class Music():
 
     def loadTrack(self, track = 0):
         """
-        Loads the wanted track into the pygame.pygame.mixerer.music
+        Loads the wanted track into the pygame.mixer.music
         
         :param track: the wanted track to play (-1 for random track)
         """
-        # pygame.mixer.music.unload()
+        mixer.music.unload()
         self.track = track
         if track == -1: #random track
             self.track = random.randint(0, len(self.music) - 1)
-        pygame.mixer.music.load(self.music[self.track])
+        mixer.music.load(self.music[self.track])
 
     def play(self):
-        pygame.mixer.music.play(-1)
+        mixer.music.play(-1)
 
     def pauseToggle(self):
         if not self.paused:
-            pygame.mixer.music.pause()
+            mixer.music.pause()
         else:
-            pygame.mixer.music.unpause()
+            mixer.music.unpause()
         self.paused = not self.paused
     
     def stop(self):
-        pygame.mixer.music.stop()
+        mixer.music.stop()
