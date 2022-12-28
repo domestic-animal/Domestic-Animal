@@ -73,7 +73,7 @@ class normalGameEngine:
         self.gameObserver = gameobserver(self.WIN.get_width(),self.WIN.get_height())
         self.gamesaver = GameStateSaver()
         self.powerFactory=PowerUpFactory(gameAssets[1][0],gameAssets[1][1],gameAssets[1][2],gameAssets[1][3],gameAssets[1][4])
-        self.main_font = pygame.font.Font(os.path.join(".","launcher","assets","game.ttf"), 40)
+        self.main_font = pygame.font.Font(os.path.join(".","launcher","assets","game.ttf"), 30)
 
 
     def create_player(self):
@@ -145,9 +145,28 @@ class normalGameEngine:
             self.powerup = self.gameState.powerups
             self.score = self.gameState.Score
             self.Players = self.gameState.players
+            self.pl1 = self.gameState.players[0]
             self.Enemies = self.gameState.enemies
             self.is_coop = self.gameState.is_coop
-            
+            if(self.is_coop > 1):
+                self.pl2 = self.gameState.players[1]
+    # def game_over_menu(self):
+
+    def pause_menu(self):
+        while(True):
+            selection = self.menuengine.start()
+            if selection[0] == "save":
+                self.exit = 1
+                self.gamesaver.save_story(self.profile.get_name(),self.getGameState())
+                self.exit = 0
+            if selection[0] == "runAway":
+                self.exit = 1
+                self.gameState = None
+                return ["menu", self.getGameState()]
+            if selection[0] == "continue":
+                return None
+        
+                    
      # function to draw  the window
     def redraw_window(self):
             """
@@ -155,9 +174,13 @@ class normalGameEngine:
             """
             # drawing background
             self.WIN.blit(self.gameAssets[0], (0, 0))
-            
-            scores_label = self.main_font.render(f"score: {self.score}", 1, (255,255,255))
-            self.WIN.blit(scores_label,(0, 0))
+            if(self.level.number >= 0):
+                scores_label = self.main_font.render(f"score: {self.score}  level: {self.level.number+1}  wave:{self.level.waveNumber}"
+                        , 1, (255,255,255))
+                self.WIN.blit(scores_label,(0, 0))
+            else:
+                scores_label = self.main_font.render(f"score: {self.score}  wave:{self.level.waveNumber}", 1, (255,255,255))
+                self.WIN.blit(scores_label,(0, 0))
             # drawing player
             for i in self.Players:
                 i.draw(self.WIN)
@@ -213,7 +236,7 @@ class normalGameEngine:
         ################################
         curr=datetime.datetime.now()
         starttime = time.time()
-        print(f"start time {starttime}")
+        # print(f"start time {starttime}")
         while True:
             #drawing FPS
             clock.tick(FPS)
@@ -221,7 +244,7 @@ class normalGameEngine:
             self.redraw_window()
             #generate a new wave when the wave is cleared
             if len(self.Enemies) == 0:
-                print("requested wave")
+                # print("requested wave")
                 self.Enemies = self.level.getwave(self.diff)
                 if self.Enemies==None:
                     self.gameover = 1
@@ -255,15 +278,10 @@ class normalGameEngine:
             self.gameObserver.powerUpdate(self.powerup,self.Players)
 
             #pasue menu
-            if keys[pygame.K_ESCAPE]: # shoot
-                selection = self.menuengine.start()
-                if selection[0] == "save":
-                    self.gamesaver.save_story(self.profile.get_name(),self.getGameState())
-                if selection[0] == "runAway":
-                    self.exit = 1
-                    self.gameState = None
-                    return ["menu", self.getGameState()]
-                    
+            if keys[pygame.K_ESCAPE]: # pause
+                select = self.pause_menu()
+                if(select != None):
+                    return select
             #on death or quitting
             if self.is_coop > 1:
                 if len(self.graveyard) == 2:
@@ -281,7 +299,7 @@ class normalGameEngine:
                 if len(self.graveyard) == 1:
                     if self.level.number==-1:
                         endtime =time.time()
-                        print(f"end time {endtime}")
+                        # print(f"end time {endtime}")
                         self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
                         if(self.profile.get_endless_score() < self.score):
                             self.profile.set_endless_score(self.score)

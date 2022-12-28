@@ -135,7 +135,7 @@ class engineController:
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
                     diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
                     playerAssets= PLAYER_ASSETS,enemyAssets=ENEMY_ASSETS,gameAssets= GAME_ASSETS,
-                     gameState=self.gameStateLOADED,fileManager=self.filemanager,is_coop=2 )
+                     gameState=self.gameStateLOADED,fileManager=self.filemanager,is_coop=self.CO_OP )
                     self.gameStateLOADED = None
                 #Versus mode
                 elif self.mode == 0:

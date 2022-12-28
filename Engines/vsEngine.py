@@ -40,7 +40,7 @@ class vsGameEngine:
         self.profile = profile
 
         # pause menu
-        self.menuengine = menu(self.WIN, self.WIN.get_width(),self.WIN.get_height(),self.profile, self.gameAssets[0],0)
+        self.menuengine = menu(self.WIN, self.WIN.get_width(),self.WIN.get_height(),self.profile, self.gameAssets[0],-1)
         self.menuengine.create_menue(1)
 
         #constant attributes
@@ -55,13 +55,14 @@ class vsGameEngine:
         self.playerAssets[1].rotate(-1)
 
         self.playerAssets[0].rotate(-1)
-        pl1=player(200,295,1,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,250,7,1)
+        pl1=player(0,295,1,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,250,7,1)
         self.Players.append(pl1)
 
-        self.playerAssets[3].rotate(1)
+        # self.playerAssets[3].rotate(1)
 
         self.playerAssets[2].rotate(1)
-        pl2=player(600,295,1,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,250,7,-1)
+        pl2=player(self.WIN.get_width()-self.playerAssets[2].frames[0].get_width(),
+        295,1,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,250,7,-1)
         self.Players.append(pl2)
     
     
