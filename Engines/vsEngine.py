@@ -1,3 +1,4 @@
+import copy
 import pygame
 import sys
 """
@@ -58,11 +59,11 @@ class vsGameEngine:
         pl1=player(0,295,1,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,250,7,1)
         self.Players.append(pl1)
 
-        # self.playerAssets[3].rotate(1)
-
+        PLAYER2_BULLET = copy.deepcopy(self.playerAssets[3].rotate(1))
+        PLAYER2_BULLET.rotate(1)
         self.playerAssets[2].rotate(1)
         pl2=player(self.WIN.get_width()-self.playerAssets[2].frames[0].get_width(),
-        295,1,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,250,7,-1)
+        295,1,(self.playerAssets[2],PLAYER2_BULLET),self.PLAYER2_CONTROLS,250,7,-1)
         self.Players.append(pl2)
     
     

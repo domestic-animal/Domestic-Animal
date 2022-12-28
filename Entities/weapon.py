@@ -1,8 +1,6 @@
 import copy
 import pygame
-from bullet import bullet
-from bullet import zapper
-from bullet import penetrate
+from bullet import bullet, explosion,zapper,penetrate
 import random
 class weapon:
 
@@ -18,6 +16,8 @@ class weapon:
         self.ishorizontal = ishorizontal
         self.isvertical =isvertical
         self.vs = vs
+        if(self.bullettype == 1):
+            self.fire_rate = 100
     def shoot(self,x,y):
         if(self.enemyWeapon > 0) and self.vs == 0:
             if random.randrange(0, 2*self.fire_rate) == 1:
@@ -30,11 +30,14 @@ class weapon:
                 self.cool_down_counter += 1
 
             if self.cool_down_counter == 0:
+                self.bullet_img.playSound()
                 if(self.bullettype ==0 ):
                     b = bullet(x+14, y, self.bullet_img,self.damage, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
+                elif (self.bullettype == 1):
+                    b = explosion(x+14, y, self.bullet_img,self.damage/20, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
                 elif(self.bullettype == 2):
                     b = zapper(x+14, y, self.bullet_img,self.damage/7, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
-                else:
+                elif (self.bullettype == 3):
                     b = penetrate(x+14, y, self.bullet_img,self.damage/15, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
                 self.cool_down_counter = 1
                 return b

@@ -32,6 +32,7 @@ class cat(enemy):
 
     def __init__(self, x, damage, y, weapon, img, health, velocity, threshold,score):
         super().__init__(x, damage, y, weapon, img, health, velocity, threshold,score)
+        self.skin.sound.set_volume(10)    
     def move(self):
     
         
@@ -65,7 +66,7 @@ class bossDog(enemy):
 
 
     def shoot(self):
-        if random.random()<0.7:
+        if random.random()<0.85:
             return self.weapon.shoot( self.x+(self.skin.frames[0].get_width()/2), self.y+self.skin.frames[0].get_height())
         else:
             if random.random()<0.5:

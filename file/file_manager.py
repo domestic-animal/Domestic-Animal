@@ -122,7 +122,8 @@ class FileManager:
         POWER_UP_SKINS = factory.create_skins("powerups",1.5)
         BOSSES_SKINS =  factory.create_skins("bosses")
         ENEMY_BULLET_SKINS = factory.create_skins("enemies_bullets")
-        assets = [PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS, ENEMY_SKINS, POWER_UP_SKINS,BOSSES_SKINS,ENEMY_BULLET_SKINS]
+        MUSIC = factory.create_music()
+        assets = [PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS, ENEMY_SKINS, POWER_UP_SKINS,BOSSES_SKINS,ENEMY_BULLET_SKINS,MUSIC]
         backgrounds = factory.create_backgrounds()
         return assets, backgrounds
 

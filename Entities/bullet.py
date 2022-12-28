@@ -58,3 +58,27 @@ class penetrate(bullet):
         
         if(self.collisions) <= 0:
             self.y=-40
+
+class explosion(bullet):
+    
+    def __init__(self,x,y,image, damage, velocity, ishorizontal,isvertical,is_friendly):
+        super().__init__(x,y,image, damage, velocity, ishorizontal,isvertical,is_friendly)
+        self.collisions = 1
+        self.secondCollision = 6
+
+
+    def Objectdamage(self, entity):
+
+        if  self.collisions >0 :
+            self.collisions-= 1
+            entity.health-=self.damage
+            self.skin.scale((45,45))
+            self.mask= pygame.mask.from_surface(self.skin.frames[0])
+        elif self.secondCollision >0:
+            entity.health-=(self.damage/10)
+            self.secondCollision-= 1
+
+        if(self.collisions + self.secondCollision) <= 0:
+            self.skin.scale((5,4))
+            self.mask= pygame.mask.from_surface(self.skin.frames[0])
+            self.y=-40

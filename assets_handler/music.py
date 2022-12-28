@@ -39,3 +39,7 @@ class Music():
     
     def stop(self):
         mixer.music.stop()
+
+        
+    def setVolume(self, vol):
+        mixer.music.set_volume(vol)
