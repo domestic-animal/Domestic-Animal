@@ -33,23 +33,23 @@ class assetsFactory:
             ss = SpriteSheet(SHIPS_IMAGE, 16, 16, scale, 2, 8, cooldown)
 
         elif asset == "bullets": # 4 sounds
-            sounds = [  pygame.mixer.Sound(os.path.join(self.soundsPath, "pistonBullet.wav")),
-                        pygame.mixer.Sound(os.path.join(self.soundsPath, "fireballBullet.wav")),
-                        pygame.mixer.Sound(os.path.join(self.soundsPath, "electricBullet.wav")),
-                        pygame.mixer.Sound(os.path.join(self.soundsPath, "rocketBullet.wav"))  ]
+            sounds = [  mixer.Sound(os.path.join(self.soundsPath, "pistonBullet.wav")),
+                        mixer.Sound(os.path.join(self.soundsPath, "fireballBullet.wav")),
+                        mixer.Sound(os.path.join(self.soundsPath, "electricBullet.wav")),
+                        mixer.Sound(os.path.join(self.soundsPath, "rocketBullet.wav"))  ]
             BULLETS_IMAGE = pygame.image.load(os.path.join(self.path, "Bullets_10x16_[4,2].png"))
             ss = SpriteSheet(BULLETS_IMAGE, 10, 16, scale, 2, 4, cooldown, sounds)
 
         elif asset == "enemies": # 3 * 2 sounds
-            sound1 = [pygame.mixer.Sound(os.path.join(self.soundsPath, "catDefeated.wav"))] * 2
-            sound2 = [pygame.mixer.Sound(os.path.join(self.soundsPath, "dogDefeated.wav"))] * 2
-            sound3 = [pygame.mixer.Sound(os.path.join(self.soundsPath, "mouseIndicator.wav"))] * 2
+            sound1 = [mixer.Sound(os.path.join(self.soundsPath, "catDefeated.wav"))] * 2
+            sound2 = [mixer.Sound(os.path.join(self.soundsPath, "dogDefeated.wav"))] * 2
+            sound3 = [mixer.Sound(os.path.join(self.soundsPath, "mouseIndicator.wav"))] * 2
             sounds = sound1 + sound2 + sound3
             ENEMIES_IMAGE = pygame.image.load(os.path.join(self.path, "Enemies_26x26_[6,2].png"))
             ss = SpriteSheet(ENEMIES_IMAGE, 26, 26, scale, 2, 6, cooldown, sounds)
 
         elif asset == "powerups": # 1 * 5 sounds
-            sounds = [pygame.mixer.Sound(os.path.join(self.soundsPath, "pickPowerup.wav"))] * 5
+            sounds = [mixer.Sound(os.path.join(self.soundsPath, "pickPowerup.wav"))] * 5
             POWERUPS_IMAGE = pygame.image.load(os.path.join(self.path, "Powerups_31x31_[5,2].png"))
             ss = SpriteSheet(POWERUPS_IMAGE, 31, 31, scale, 2, 5, cooldown, sounds)
 
@@ -108,7 +108,7 @@ class assetsFactory:
         return ss.skin if ss != None else None
 
     def create_button_sound(self):
-        return pygame.mixer.Sound(os.path.join(self.soundsPath, "buttonClick.wav"))
+        return mixer.Sound(os.path.join(self.soundsPath, "buttonClick.wav"))
 
     def create_music(self):
         """
