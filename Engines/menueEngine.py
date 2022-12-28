@@ -1,11 +1,14 @@
 import pygame
 from menue_components.pause import pauseMenue
+from menue_components.gameover import gameoverMenu
 from menue_components.start_menue import startMenue
 from menue_components.market import market
 from menue_components.button import Button
 from menue_components.inventory import inventory
 from menue_components.text_button import Text_Button
 from menue_components.levels import level
+from menue_components.diffculity_menu import diffculityMenu
+
 from file.profile import Profile
 from Assets import *
 
@@ -38,6 +41,10 @@ class menu:
             self.menue = inventory(self.screen, self.WIDTH, self.HEIGHT, profile,self.game_mode)
         elif type ==5:
             self.menue = level(self.screen, self.WIDTH, self.HEIGHT, profile,self.game_mode)
+        elif type == 6:
+            self.menue = gameoverMenu(self.screen, self.WIDTH, self.HEIGHT,self.game_mode)
+        elif type == 7:
+            self.menue = diffculityMenu(self.screen, self.WIDTH, self.HEIGHT,self.game_mode)
         self.image_buttons, self.text_buttons = self.menue.create_pause_buttons()
 
     def start(self):

@@ -52,6 +52,7 @@ class endlesslevel(level):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY)
         self.number=-1
+        self.waveNumber=0
     
     def getwave(self,timediffuclty):
         """generates random waves every time it gets called
@@ -62,6 +63,7 @@ class endlesslevel(level):
         Returns:
             list of enemies
         """
+        self.waveNumber+=1
         enemies=[]
         factor=enemyFactory(self.BULLET_SKINS,self.ENEMY_SKINS, self.BOSSES_SKINS)
         x=20
@@ -85,7 +87,7 @@ this is level one
 class levelOne(storylevel):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY)
-        self.number=1
+        self.number=0
         self.waveNumber=0
         self.makewaves()
     
@@ -116,7 +118,7 @@ this is level two
 class levelTwo(storylevel):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY)
-        self.number=2
+        self.number=1
         self.waveNumber=0
         self.makewaves()
     
@@ -146,7 +148,7 @@ this is level three
 class levelThree(storylevel):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY)
-        self.number=3
+        self.number=2
         self.waveNumber=0
         self.makewaves()
     
@@ -180,7 +182,7 @@ this is level four
 class levelFour(storylevel):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY)
-        self.number=4
+        self.number=3
         self.waveNumber=0
         self.makewaves()
     
@@ -219,7 +221,7 @@ this is level five
 class levelFive(storylevel):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY)
-        self.number=5
+        self.number=4
         self.waveNumber=0
         self.makewaves()
     
@@ -254,7 +256,7 @@ this is level six
 class levelSix(storylevel):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY)
-        self.number=6
+        self.number=5
         self.waveNumber=0
         self.makewaves()
     
@@ -288,7 +290,7 @@ this is level seven
 class levelSeven(storylevel):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY)
-        self.number=7
+        self.number=6
         self.waveNumber=0
         self.makewaves()
     
@@ -326,7 +328,7 @@ this is level Eight
 class levelEight(storylevel):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY)
-        self.number=8
+        self.number=7
         self.waveNumber=0
         self.makewaves()
     
