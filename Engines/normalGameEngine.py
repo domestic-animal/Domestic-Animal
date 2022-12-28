@@ -59,7 +59,7 @@ class normalGameEngine:
         self.RAT_SKINS = enemyAssets[0]
         # pause menu
         self.menuengine = menu(self.WIN, self.WIN.get_width(),self.WIN.get_height(),self.profile, self.gameAssets[0],self.level.number)
-        self.menuengine.create_menue(1)
+        
 
         #constant attributes
         self.gameover = 0
@@ -153,6 +153,7 @@ class normalGameEngine:
     # def game_over_menu(self):
 
     def pause_menu(self):
+        self.menuengine.create_menue(1)
         while(True):
             selection = self.menuengine.start()
             if selection[0] == "save":
@@ -166,7 +167,14 @@ class normalGameEngine:
             if selection[0] == "continue":
                 return None
         
-                    
+    def game_over_menu(self):
+        self.menuengine.create_menue(6)
+        selection = self.menuengine.start()
+        self.exit = 1
+        self.gameover = 1
+        self.gameState = None
+        return ["menu", self.getGameState()]
+ 
      # function to draw  the window
     def redraw_window(self):
             """
@@ -291,10 +299,7 @@ class normalGameEngine:
                         if(self.profile.get_endless_score() < self.score):
                             self.profile.set_endless_score(self.score)
                         self.profile.set_endless_survival_time(endtime-starttime)
-                    self.gameover = 1
-                    self.exit = 1
-                    self.gameState = None
-                    return ["menu", self.getGameState()]
+                    return self.game_over_menu()
             else:
                 if len(self.graveyard) == 1:
                     if self.level.number==-1:
@@ -304,11 +309,7 @@ class normalGameEngine:
                         if(self.profile.get_endless_score() < self.score):
                             self.profile.set_endless_score(self.score)
                         self.profile.set_endless_survival_time(endtime-starttime)
-                        
-                    self.exit = 1
-                    self.gameover = 1
-                    self.gameState = None
-                    return ["menu", self.getGameState()]
+                    return self.game_over_menu()
                     
             if self.level==-1:
                 self.endlessDiffculty(curr)

@@ -1,3 +1,4 @@
+import random
 import pygame
 import sys
 
@@ -37,12 +38,12 @@ class engineController:
         self.lvlSelector = levelSelector()
         # returned states from the engines
         self.gameStateLOADED=gameState
-
         self.loadedLvl=profile.get_story_progress()
-
+        self.diff = 1
         if(self.gameStateLOADED != None):
             self.controllerState = "game"
             self.loadedLvl=gameState.level
+            self.diff==gameState.difficulty
         self.gameState = None
         self.states = []
         #difficulity
@@ -50,7 +51,6 @@ class engineController:
         #window to draw objects on
         self.WIDTH, self.HEIGHT = 600, 700
         self.CO_OP=1
-
         self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT))
         for i in range(len(self.Background)):
            self.Background[i] = pygame.transform.scale(self.Background[i],self.WIN.get_size())
@@ -67,7 +67,8 @@ class engineController:
         ### Main logic loop ###
         while True:
             #draw a background
-            self.WIN.blit(self.Background[1], (0, 0))
+            BG = random.choice(self.Background)
+            self.WIN.blit(BG, (0, 0))
             #switch between engines
             self.switch()
             #start the selected engine
@@ -99,6 +100,12 @@ class engineController:
                 self.controllerState = "inventory"
             elif self.states[0] == "level":
                 self.controllerState = "level"
+            elif self.states[0] == "diff":
+                self.controllerState = "diff"
+            elif self.controllerState == "diff":
+                if isinstance(self.states[0],int):
+                    self.diff=int(self.states[0])
+                self.controllerState = "menu"
             else:
                 self.loadedLvl=int(self.states[0])
                 self.controllerState = "game"
@@ -124,7 +131,7 @@ class engineController:
                 PLAYER_ASSETS =[PLAYER_SHIP_SKINS[self.profile.get_current_skin()] , BULLET_SHIP_SKINS[self.profile.get_current_weapon()],
                 PLAYER_SHIP_SKINS[self.profile.get_current_skin()+1], BULLET_SHIP_SKINS[self.profile.get_current_weapon()]]
 
-                BG = self.Background[2]
+                BG = random.choice(self.Background)
                 ENEMY_ASSETS = [ENEMY_SKINS,BOSSES,ENEMY_BULLET_SKINS]
                 GAME_ASSETS = [BG,POWER_UPS]
                 #Endless mode
@@ -174,6 +181,10 @@ class engineController:
                 lvl = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0],self.mode)
                 lvl.create_menue(5,self.profile)
                 self.currEngine = lvl
+            elif self.controllerState == "diff":
+                diffic = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0],self.mode)
+                diffic.create_menue(7)
+                self.currEngine = diffic
 
     def convert(self, PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS,ENEMY_SKINS, POWERUPS,BOSSES, ENEMY_BULLET_SKINS):
                 ## convert all assets for optimizations

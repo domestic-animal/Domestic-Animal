@@ -15,28 +15,16 @@ class gameoverMenu():
         
     def create_pause_buttons(self):
         created_buttons = []
-        factory= assetsFactory()
-        button_image = factory.create_images("buttons", 8)
-        text = Text_Button( self.WIDTH/2- 90,self.HEIGHT-440,180,44, text="Game Over!", font_size = 30,font_color = (255,255,255))
-        created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT - 400, 180, 44, price=1, image = button_image[6], number = 0))
-        created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT - 340, 180, 44, price=0, image = button_image[7], number = 1))
-        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 280, 180, 44, price=1, image = button_image[5], number = 2))
-        
-        return created_buttons, [text]
+        text = Text_Button( self.WIDTH/2- 90,self.HEIGHT-480,180,44, text="Game Over!", font_size = 50,font_color = (255,255,255)) 
+        text1 = Text_Button( self.WIDTH/2- 90,self.HEIGHT-400,180,44, text="Click anywhere to continue", font_size = 40,font_color = (255,255,255))       
+        return created_buttons, [text,text1]
 
     def handle_events(self, events, pos, buttons):
         selection = ""
         runM = True
         for e in events:
             if e.type == pygame.MOUSEBUTTONDOWN:
-                for b in buttons:
-                    if b.isOver(pos):
-                        runM = False
-                        if b.number == 0:
-                            selection = "continue" 
-                        elif b.number == 1 :
-                            selection = "save"
-                        elif b.number == 2 :
-                            selection = "runAway"
+                runM = False
+                selection = "runAway"
 
         return runM ,selection

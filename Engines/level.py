@@ -52,6 +52,7 @@ class endlesslevel(level):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY):
         super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY)
         self.number=-1
+        self.waveNumber=0
     
     def getwave(self,timediffuclty):
         """generates random waves every time it gets called
@@ -62,6 +63,7 @@ class endlesslevel(level):
         Returns:
             list of enemies
         """
+        self.waveNumber+=1
         enemies=[]
         factor=enemyFactory(self.BULLET_SKINS,self.ENEMY_SKINS, self.BOSSES_SKINS)
         x=20

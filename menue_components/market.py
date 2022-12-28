@@ -38,37 +38,37 @@ class market():
         skins = self.profile.get_skins()
         unlocked_weapons = self.profile.get_unlocked_weapons()
         if not self.search(skins, 0):
-            created_buttons.append(Button( self.WIDTH / 4 - 32, self.HEIGHT -550, 64, 64, price=1000, image = self.skin_image[0], number=0))
-            text_buttons.append(Text_Button(self.WIDTH / 4 - 50, self.HEIGHT -481, 60, 30,"1000"))
+            created_buttons.append(Button( self.WIDTH / 4 - 32, self.HEIGHT -550, 64, 64, price=10000, image = self.skin_image[0], number=0))
+            text_buttons.append(Text_Button(self.WIDTH / 4 - 50, self.HEIGHT -481, 60, 30,"10000"))
 
         if not self.search(skins, 1):
-            created_buttons.append(Button(self.WIDTH / 4 - 32, self.HEIGHT -441, 64, 64, price=1500, image = self.skin_image[2], number=1))
-            text_buttons.append(Text_Button(self.WIDTH / 4 - 50, self.HEIGHT -372, 60, 30,"1500"))
+            created_buttons.append(Button(self.WIDTH / 4 - 32, self.HEIGHT -441, 64, 64, price=15000, image = self.skin_image[2], number=1))
+            text_buttons.append(Text_Button(self.WIDTH / 4 - 50, self.HEIGHT -372, 60, 30,"15000"))
 
         if not self.search(skins, 2):
-            created_buttons.append(Button(self.WIDTH / 4 - 32, self.HEIGHT -332, 64, 64, price=2000, image = self.skin_image[4], number=2))
-            text_buttons.append(Text_Button(self.WIDTH / 4 - 50, self.HEIGHT -263, 60, 30,"2000"))
+            created_buttons.append(Button(self.WIDTH / 4 - 32, self.HEIGHT -332, 64, 64, price=20000, image = self.skin_image[4], number=2))
+            text_buttons.append(Text_Button(self.WIDTH / 4 - 50, self.HEIGHT -263, 60, 30,"20000"))
 
         if not self.search(skins, 3):
-            created_buttons.append(Button(self.WIDTH / 4 - 32, self.HEIGHT -223, 64, 64, price=3000, image = self.skin_image[6], number=3))
-            text_buttons.append(Text_Button(self.WIDTH / 4 - 50, self.HEIGHT -154, 60, 30,"3000"))
+            created_buttons.append(Button(self.WIDTH / 4 - 32, self.HEIGHT -223, 64, 64, price=30000, image = self.skin_image[6], number=3))
+            text_buttons.append(Text_Button(self.WIDTH / 4 - 50, self.HEIGHT -154, 60, 30,"30000"))
 
 
         if not self.search(unlocked_weapons, 0):
-            created_buttons.append(Button(self.WIDTH / (4/3) - 25, self.HEIGHT - 550, 50, 80, price=1000, image = self.weapon_image[0], number=4))
-            text_buttons.append(Text_Button(self.WIDTH / (4/3) - 50, self.HEIGHT -481, 60, 30,"1000"))
+            created_buttons.append(Button(self.WIDTH / (4/3) - 25, self.HEIGHT - 550, 50, 80, price=10000, image = self.weapon_image[0], number=4))
+            text_buttons.append(Text_Button(self.WIDTH / (4/3) - 50, self.HEIGHT -481, 60, 30,"10000"))
 
         if not self.search(unlocked_weapons, 1):
-            created_buttons.append(Button(self.WIDTH / (4/3) - 25, self.HEIGHT - 441, 50, 80, price=2000, image = self.weapon_image[1], number=5))
-            text_buttons.append(Text_Button(self.WIDTH / (4/3) - 50, self.HEIGHT -372, 60, 30,"2000"))
+            created_buttons.append(Button(self.WIDTH / (4/3) - 25, self.HEIGHT - 441, 50, 80, price=20000, image = self.weapon_image[1], number=5))
+            text_buttons.append(Text_Button(self.WIDTH / (4/3) - 50, self.HEIGHT -372, 60, 30,"20000"))
 
         if not self.search(unlocked_weapons, 2):
-            created_buttons.append(Button(self.WIDTH / (4/3) - 25, self.HEIGHT - 332, 50, 80, price=3000, image = self.weapon_image[2], number=6))
-            text_buttons.append(Text_Button(self.WIDTH / (4/3) - 50, self.HEIGHT -263, 60, 30,"3000"))
+            created_buttons.append(Button(self.WIDTH / (4/3) - 25, self.HEIGHT - 332, 50, 80, price=30000, image = self.weapon_image[2], number=6))
+            text_buttons.append(Text_Button(self.WIDTH / (4/3) - 50, self.HEIGHT -263, 60, 30,"30000"))
 
         if not self.search(unlocked_weapons, 3):
-            created_buttons.append(Button(self.WIDTH / (4/3) - 25, self.HEIGHT - 223, 50, 80 ,price=4000, image = self.weapon_image[3], number=7))
-            text_buttons.append(Text_Button(self.WIDTH / (4/3) - 50, self.HEIGHT -154, 60, 30,"4000"))
+            created_buttons.append(Button(self.WIDTH / (4/3) - 25, self.HEIGHT - 223, 50, 80 ,price=40000, image = self.weapon_image[3], number=7))
+            text_buttons.append(Text_Button(self.WIDTH / (4/3) - 50, self.HEIGHT -154, 60, 30,"40000"))
 
         created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 80, 180, 44, price=0, image = self.button_image[8], number = -1))
         
