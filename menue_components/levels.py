@@ -1,51 +1,49 @@
 import pygame
 from Assets import *
-from assets_handler.spritesheet import SpriteSheet
+from assets_handler.assetsFactory import assetsFactory
 from menue_components.button import Button
 from file.profile import Profile
 
 class level():
-    def __init__(self ,screen, WIDTH, HEIGHT, profile : Profile):
+    def __init__(self ,screen, WIDTH, HEIGHT, profile : Profile,mode):
         self.WIDTH = WIDTH
         self.HEIGHT = HEIGHT
         self.screen = screen
         self.profile = profile
 
-    def load_imagae(self):
-        self.button_image = SpriteSheet(pygame.image.load("Assets\Buttons_64x22_[13,1].png"),64, 22, 2, 1, 13 ).skin
-
     
     def create_pause_buttons(self):
-        self.load_imagae()
         created_buttons : Button = []
+        factory= assetsFactory()
+        button_image = factory.create_images("buttons", 4)
 
-        created_buttons.append(Button(self.WIDTH / 2 - 50, self.HEIGHT -780, 128, 44, price=0, image = self.button_image[9], number=-1))
+        created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT -680, 180, 44, price=0, image = button_image[14], number=-1))
         max_level = self.profile.get_story_progress() 
+        if max_level >= 0:
+            created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT -600, 180, 44, price=0, image = button_image[15], number=0))
+
         if max_level >= 1:
-            created_buttons.append(Button( self.WIDTH / 2 - 50, self.HEIGHT -670, 128, 44, price=0, image = self.button_image[0], number=1))
+            created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT -540, 180, 44, price=0, image = button_image[16], number=1))
 
         if max_level >= 2:
-            created_buttons.append(Button(self.WIDTH / 2 - 50, self.HEIGHT -595, 128, 44, price=0, image = self.button_image[1], number=2))
+            created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT -480, 180, 44, price=0, image = button_image[17], number=2))
 
         if max_level >= 3:
-            created_buttons.append(Button(self.WIDTH / 2 - 50, self.HEIGHT -520, 128, 44, price=0, image = self.button_image[2], number=3))
+            created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT -420, 180, 44, price=0, image = button_image[18], number=3))
 
         if max_level >= 4:
-            created_buttons.append(Button(self.WIDTH / 2 - 50, self.HEIGHT -445, 128, 44, price=0, image = self.button_image[3], number=4))
+            created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT - 360, 180, 44, price=0, image = button_image[19], number=4))
 
         if max_level >= 5:
-            created_buttons.append(Button(self.WIDTH / 2 - 50, self.HEIGHT - 370, 128, 44, price=0, image = self.button_image[4], number=5))
+            created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT - 300, 180, 44, price=0, image = button_image[20], number=5))
 
         if max_level >= 6:
-            created_buttons.append(Button(self.WIDTH / 2 - 50, self.HEIGHT - 295, 128, 44, price=0, image = self.button_image[5], number=6))
+            created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT - 240, 180, 44, price=0, image = button_image[21], number=6))
 
         if max_level >= 7:
-            created_buttons.append(Button(self.WIDTH / 2 - 50, self.HEIGHT - 220, 128, 44, price=0, image = self.button_image[6], number=7))
+            created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT - 180,180, 44, price=0, image = button_image[22], number=7))
 
-        if max_level >= 8:
-            created_buttons.append(Button(self.WIDTH / 2 - 50, self.HEIGHT - 145,128, 44, price=0, image = self.button_image[7], number=8))
-
-        created_buttons.append(Button( self.WIDTH / 2 - 50, self.HEIGHT - 60, 128, 44, price=0, image = self.button_image[8], number = -1))
+        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 80, 180, 44, price=0, image = button_image[8], number = -1))
         
         return created_buttons , []
       
