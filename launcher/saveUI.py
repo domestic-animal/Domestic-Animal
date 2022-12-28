@@ -39,8 +39,8 @@ class SaveUI(QMainWindow):
         print("updating save ui")
         self.states = []
         self.states.append(self.loader.load_saved_story(self.profile.get_name()))
-        self.states.append(self.loader.load_autosaved_story(self.profile.get_name()))
-        self.states.append(self.loader.load_autosaved_endless(self.profile.get_name()))
+        self.states.append(self.loader.load_autosaved_state(self.profile.get_name(), 1))
+        self.states.append(self.loader.load_autosaved_state(self.profile.get_name(), -1))
         
         for i, state in enumerate(self.states):
             if state is None:
