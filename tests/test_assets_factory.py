@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0, './assets_handler')
 from assets_handler.assetsFactory import assetsFactory
 from assets_handler.skin import Skin
 from assets_handler.music import Music
