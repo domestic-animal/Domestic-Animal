@@ -69,8 +69,8 @@ class assetsFactory:
         """
         ss: SpriteSheet = None
         if asset == "buttons":
-            BUTTONS_IMAGE = pygame.image.load(os.path.join(self.path, "Buttons_64x22_[13,1].png"))
-            ss = SpriteSheet(BUTTONS_IMAGE, 64, 22, scale, 1, 13)
+            BUTTONS_IMAGE = pygame.image.load(os.path.join(self.path, "Buttons_45x11_[23, 1].png"))
+            ss = SpriteSheet(BUTTONS_IMAGE, 45, 11, scale, 1, 23)
 
         elif asset == "ships":
             SHIPS_IMAGE = pygame.image.load(os.path.join(self.path, "Ships_16x16_[8,2].png"))

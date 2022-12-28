@@ -33,7 +33,7 @@ class storylevel(level):
     def __init__(self, diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY):
             super().__init__(diff, ENEMY_SKINS, BULLET_SKINS,BOSSES_SKINS, windowX, windowY)
             self.waveNumber=0
-            self.waves = [];
+            self.waves = []
 
     def getwave(self,timediffuclty):
         """generates determinstic waves every time it gets called

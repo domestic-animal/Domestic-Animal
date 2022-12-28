@@ -58,7 +58,7 @@ class normalGameEngine:
         #rat enemy for higher difficulty
         self.RAT_SKINS = enemyAssets[0]
         # pause menu
-        self.menuengine = menu(self.WIN, self.WIN.get_width(),self.WIN.get_height())
+        self.menuengine = menu(self.WIN, self.WIN.get_width(),self.WIN.get_height(),self.profile, self.gameAssets[0],self.level.number)
         self.menuengine.create_menue(1)
 
         #constant attributes
@@ -80,7 +80,7 @@ class normalGameEngine:
         
         #player Entity
        
-        self.pl1=player(200,600,1,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7,damage = 100)
+        self.pl1=player(200,600,3,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7,damage = 100)
         self.Players.append(self.pl1)
 
         if self.is_coop==2:

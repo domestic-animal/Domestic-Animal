@@ -79,6 +79,14 @@ class engineController:
                 break
             if self.states[0] == "menu":
                 self.controllerState = "menu"
+            if self.states[0] == "market":
+                self.controllerState = "market"
+            if self.states[0] == "inventory":
+                self.controllerState = "inventory"
+            if self.states[0] == "level":
+                self.controllerState = "level"
+        
+                
             
 
     def switch(self):
@@ -129,9 +137,23 @@ class engineController:
             #if the controller state is opening a menu
             elif self.controllerState == "menu":
                 #assign the current engine to be the menu engine
-                self.currEngine = menu(self.WIN, self.WIDTH, self.HEIGHT)
+                self.currEngine = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[1],self.mode)
                 #create the main menu
-                self.currEngine.create_menue(2)
+                self.currEngine.create_menue(2, self.profile)
+            
+            elif self.controllerState =="market":
+                market = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0],self.mode)
+                market.create_menue(3, self.profile)
+                self.currEngine = market
+            
+            elif self.controllerState == "inventory":
+                inventory = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0],self.mode)
+                inventory.create_menue(4,self.profile)
+                self.currEngine = inventory
+            elif self.controllerState == "level":
+                lvl = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0],self.mode)
+                lvl.create_menue(5,self.profile)
+                self.currEngine = lvl
 
     def convert(self, PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS,ENEMY_SKINS, POWERUPS,BOSSES, ENEMY_BULLET_SKINS):
                 ## convert all assets for optimizations
