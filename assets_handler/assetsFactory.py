@@ -5,14 +5,13 @@ import filepath
 import pygame
 import os
 
-mixer.init()
-
 class assetsFactory:
     """
     The factory class for loading the assets - images and sounds
     """
 
     def __init__(self):
+        mixer.init()
         self.path = os.path.join(filepath.ROOT_DIR, "Assets")       # The assets absolutePath
         self.soundsPath = os.path.join(self.path, "Sounds")         # The sounds absolutePath
 
