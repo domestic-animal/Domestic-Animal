@@ -1,7 +1,11 @@
+import sys
+sys.path.insert(0, './assets_handler')
 from assets_handler.spritesheet import SpriteSheet
-import filepath
+from assets_handler.music import Music
 import pygame
+from pygame import mixer
 import os
+pygame.init()
 
 class assetsFactory:
     """
@@ -9,7 +13,9 @@ class assetsFactory:
     """
 
     def __init__(self):
-        self.path = os.path.join(filepath.ROOT_DIR, "Assets")       # The assets absolutePath
+        self.path = os.path.abspath("Assets")   # The assets absolutePath
+        print("path:", self.path)
+        self.soundsPath = os.path.join(self.path, "Sounds")         # The sounds absolutePath
 
     def create_skins(self, asset, scale = 1, cooldown = 100):
         """
@@ -24,17 +30,26 @@ class assetsFactory:
             SHIPS_IMAGE = pygame.image.load(os.path.join(self.path, "Ships_16x16_[8,2].png"))
             ss = SpriteSheet(SHIPS_IMAGE, 16, 16, scale, 2, 8, cooldown)
 
-        elif asset == "bullets":
+        elif asset == "bullets": # 4 sounds
+            sounds = [  mixer.Sound(os.path.join(self.soundsPath, "pistonBullet.wav")),
+                        mixer.Sound(os.path.join(self.soundsPath, "fireballBullet.wav")),
+                        mixer.Sound(os.path.join(self.soundsPath, "electricBullet.wav")),
+                        mixer.Sound(os.path.join(self.soundsPath, "rocketBullet.wav"))  ]
             BULLETS_IMAGE = pygame.image.load(os.path.join(self.path, "Bullets_10x16_[4,2].png"))
-            ss = SpriteSheet(BULLETS_IMAGE, 10, 16, scale, 2, 4, cooldown)
+            ss = SpriteSheet(BULLETS_IMAGE, 10, 16, scale, 2, 4, cooldown, sounds)
 
-        elif asset == "enemies":
+        elif asset == "enemies": # 3 * 2 sounds
+            sound1 = [mixer.Sound(os.path.join(self.soundsPath, "catDefeated.wav"))] * 2
+            sound2 = [mixer.Sound(os.path.join(self.soundsPath, "dogDefeated.wav"))] * 2
+            sound3 = [mixer.Sound(os.path.join(self.soundsPath, "mouseIndicator.wav"))] * 2
+            sounds = sound1 + sound2 + sound3
             ENEMIES_IMAGE = pygame.image.load(os.path.join(self.path, "Enemies_26x26_[6,2].png"))
-            ss = SpriteSheet(ENEMIES_IMAGE, 26, 26, scale, 2, 6, cooldown)
+            ss = SpriteSheet(ENEMIES_IMAGE, 26, 26, scale, 2, 6, cooldown, sounds)
 
-        elif asset == "powerups":
+        elif asset == "powerups": # 1 * 5 sounds
+            sounds = [mixer.Sound(os.path.join(self.soundsPath, "pickPowerup.wav"))] * 5
             POWERUPS_IMAGE = pygame.image.load(os.path.join(self.path, "Powerups_31x31_[5,2].png"))
-            ss = SpriteSheet(POWERUPS_IMAGE, 31, 31, scale, 2, 5, cooldown)
+            ss = SpriteSheet(POWERUPS_IMAGE, 31, 31, scale, 2, 5, cooldown, sounds)
 
         elif asset == "bosses":
             BOSSES_IMAGE = pygame.image.load(os.path.join(self.path, "Bosses_138x192_[2,6].png"))
@@ -69,8 +84,8 @@ class assetsFactory:
         """
         ss: SpriteSheet = None
         if asset == "buttons":
-            BUTTONS_IMAGE = pygame.image.load(os.path.join(self.path, "Buttons_45x11_[23, 1].png"))
-            ss = SpriteSheet(BUTTONS_IMAGE, 45, 11, scale, 1, 23)
+            BUTTONS_IMAGE = pygame.image.load(os.path.join(self.path, "Buttons_45x11_[28,1].png"))
+            ss = SpriteSheet(BUTTONS_IMAGE, 45, 11, scale, 1, 28)
 
         elif asset == "ships":
             SHIPS_IMAGE = pygame.image.load(os.path.join(self.path, "Ships_16x16_[8,2].png"))
@@ -89,3 +104,17 @@ class assetsFactory:
             ss = SpriteSheet(GAME_LOGO, 64, 32, scale, 1, 1)
 
         return ss.skin if ss != None else None
+
+    def create_button_sound(self):
+        return mixer.Sound(os.path.join(self.soundsPath, "buttonClick.wav"))
+
+    def create_music(self):
+        """
+        Function to get the absolutePaths of music files
+        and returns (the Music object) that holds the handling logic for playing music
+        """
+        music = []
+        musicPath = os.path.join(self.path, "Music")
+        for piece in os.listdir(musicPath):
+            music.append(os.path.join(musicPath, piece))
+        return Music(music)
