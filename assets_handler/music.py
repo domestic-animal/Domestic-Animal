@@ -5,7 +5,7 @@ import os
 os.environ['SDL_AUDIODRIVER'] = 'dsp'
 import pygame
 
-mixer.init()
+pygame.mixer.init()
 
 class Music():
     """
