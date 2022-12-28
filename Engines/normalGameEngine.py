@@ -80,7 +80,7 @@ class normalGameEngine:
         
         #player Entity
        
-        self.pl1=player(200,600,1,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7,damage = 100)
+        self.pl1=player(200,600,3,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7,damage = 100)
         self.Players.append(self.pl1)
 
         if self.is_coop==2:

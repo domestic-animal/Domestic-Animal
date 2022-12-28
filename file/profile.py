@@ -5,13 +5,13 @@ class Profile:
     __player_controls = {"left": "LEFT", "right": "RIGHT", "up": "UP", "down": "DOWN", "fire": "SPACE"}
     __co_player_controls = {"left": "a", "right": "d", "up": "w", "down": "s", "fire": "LCTRL"}
     __achievements = []
-    __story_progress = 7
-    __unlocked_weapons = []
+    __story_progress = 3
+    __unlocked_weapons = [0]
     __current_weapon = 0
     __co_player_weapon = 0
-    __skins = []
+    __skins = [0]
     __current_skin = 0
-    __coins = 100000
+    __coins = 0
     __endless_score = 0
     __endless_survival_time = 0
 
