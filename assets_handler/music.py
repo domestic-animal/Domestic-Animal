@@ -3,7 +3,7 @@ import random
 import pygame
 from pygame import mixer
 pygame.init()
-mixer.init()
+# mixer.init()
 
 class Music():
     """
