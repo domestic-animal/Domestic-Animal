@@ -153,7 +153,7 @@ class engineController:
                 #Versus mode
                 elif self.mode == 0:
                     self.currEngine = vsGameEngine(window =self.WIN,profile = self.profile,settings1 = self.settings1,
-                    settings2 = self.settings2,playerAssets= PLAYER_ASSETS,gameAssets=[BG])
+                    settings2 = self.settings2,playerAssets= PLAYER_ASSETS,gameAssets=GAME_ASSETS)
 
                 elif self.mode > 0:
                     # get the chosen level from the level selector
