@@ -2,7 +2,7 @@ from typing import MutableSequence
 import random
 import pygame
 pygame.init()
-# pygame.mixer.init()
+pygame.mixer.init()
 
 class Music():
     """

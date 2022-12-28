@@ -6,7 +6,7 @@ import filepath
 import pygame
 import os
 pygame.init()
-# pygame.mixer.init()
+pygame.mixer.init()
 
 class assetsFactory:
     """
