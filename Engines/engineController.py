@@ -44,8 +44,12 @@ class engineController:
         #difficulity
         self.diff = 1
         #window to draw objects on
-        self.WIDTH, self.HEIGHT = 600, 800
-        self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT),pygame.RESIZABLE)
+        self.WIDTH, self.HEIGHT = 600, 700
+
+        self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT))
+        for i in range(len(self.Background)):
+           self.Background[i] = pygame.transform.scale(self.Background[i],self.WIN.get_size())
+           self.Background[i].convert_alpha()
         pygame.init()
         
 
@@ -53,15 +57,17 @@ class engineController:
         """
             run function to run the engine controller to start the game
         """    
+
+           
         ### Main logic loop ###
         while True:
             #draw a background
-            self.WIN.blit(self.Background[0], (0, 0))
+            self.WIN.blit(self.Background[1], (0, 0))
             #switch between engines
             self.switch()
             #start the selected engine
             self.states = self.currEngine.start()
-            self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT),pygame.RESIZABLE)
+            self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT))
             self.filemanager.save_profile(self.profile)
             #get the new state
             if len(self.states) >1:
@@ -73,6 +79,14 @@ class engineController:
                 break
             if self.states[0] == "menu":
                 self.controllerState = "menu"
+            if self.states[0] == "market":
+                self.controllerState = "market"
+            if self.states[0] == "inventory":
+                self.controllerState = "inventory"
+            if self.states[0] == "level":
+                self.controllerState = "level"
+        
+                
             
 
     def switch(self):
@@ -97,7 +111,7 @@ class engineController:
                 #Endless mode
                 if self.mode == -1:
                     # get the chosen level from the level selector
-                    level = self.lvlSelector.getLevel(self.mode,self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES)
+                    level = self.lvlSelector.getLevel(self.mode,self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES,self.WIDTH,self.HEIGHT)
                     # assign the current Engine to be the normal game engine
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
                     diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
@@ -106,13 +120,12 @@ class engineController:
                     self.gameStateLOADED = None
                 #Versus mode
                 elif self.mode == 0:
-                    self.WIN = pygame.display.set_mode(( self.HEIGHT, self.WIDTH),pygame.RESIZABLE)
                     self.currEngine = vsGameEngine(window =self.WIN,profile = self.profile,settings1 = self.settings1,
                     settings2 = self.settings2,playerAssets= PLAYER_ASSETS,gameAssets=[BG])
 
                 elif self.mode > 0:
                     # get the chosen level from the level selector
-                    level = self.lvlSelector.getLevel(self.profile.get_story_progress(),self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES)
+                    level = self.lvlSelector.getLevel(self.profile.get_story_progress(),self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES,self.WIDTH,self.HEIGHT)
                     # assign the current Engine to be the normal game engine
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
                     diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
@@ -124,9 +137,23 @@ class engineController:
             #if the controller state is opening a menu
             elif self.controllerState == "menu":
                 #assign the current engine to be the menu engine
-                self.currEngine = menu(self.WIN, self.WIDTH, self.HEIGHT)
+                self.currEngine = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[1],self.mode)
                 #create the main menu
-                self.currEngine.create_menue(2)
+                self.currEngine.create_menue(2, self.profile)
+            
+            elif self.controllerState =="market":
+                market = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0],self.mode)
+                market.create_menue(3, self.profile)
+                self.currEngine = market
+            
+            elif self.controllerState == "inventory":
+                inventory = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0],self.mode)
+                inventory.create_menue(4,self.profile)
+                self.currEngine = inventory
+            elif self.controllerState == "level":
+                lvl = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0],self.mode)
+                lvl.create_menue(5,self.profile)
+                self.currEngine = lvl
 
     def convert(self, PLAYER_SHIP_SKINS, BULLET_SHIP_SKINS,ENEMY_SKINS, POWERUPS,BOSSES, ENEMY_BULLET_SKINS):
                 ## convert all assets for optimizations
