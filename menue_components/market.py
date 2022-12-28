@@ -70,7 +70,7 @@ class market():
             created_buttons.append(Button(self.WIDTH / (4/3) - 25, self.HEIGHT - 223, 50, 80 ,price=40000, image = self.weapon_image[3], number=7))
             text_buttons.append(Text_Button(self.WIDTH / (4/3) - 50, self.HEIGHT -154, 60, 30,"40000"))
 
-        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 80, 180, 44, price=0, image = self.button_image[8], number = -1))
+        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 80, 180, 44, price=0, image = self.button_image[9], number = -1))
         
         return created_buttons , text_buttons
 

@@ -14,7 +14,6 @@ class assetsFactory:
 
     def __init__(self):
         self.path = os.path.abspath("Assets")   # The assets absolutePath
-        print("path:", self.path)
         self.soundsPath = os.path.join(self.path, "Sounds")         # The sounds absolutePath
 
     def create_skins(self, asset, scale = 1, cooldown = 100):

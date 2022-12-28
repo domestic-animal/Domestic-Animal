@@ -77,7 +77,7 @@ class inventory():
             if cur_weapon_number == 3:
                 text_buttons.append(Text_Button(self.WIDTH / (4/3) - 25-40, self.HEIGHT -223-64, 50, 80, ".", 200, (0,0,0)))
 
-        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 120, 128, 44, price=0, image = self.button_image[8], number = -1))
+        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 120, 128, 44, price=0, image = self.button_image[9], number = -1))
         
         return created_buttons , text_buttons
 

@@ -17,13 +17,13 @@ class startMenue():
 
         created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 500, 180, 44, price=0, image = button_image[0], number = 0)) #start single
         if self.mode != 0:#not VS mode
-            created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 420, 180, 44, price=0, image = button_image[0], number = 5)) #start multi
+            created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 420, 180, 44, price=0, image = button_image[1], number = 5)) #start multi
         if self.mode > 0 :#story game
-            created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 580, 180, 44, price=0, image = button_image[10], number = 6)) #diffculty
-            created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 340, 180, 44, price=0, image = button_image[14], number = 1)) #level
-        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 260, 180, 44, price=0, image = button_image[3], number = 2)) #market
-        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 180, 180, 44, price=0, image = button_image[13], number = 3)) #inventry
-        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 100, 180, 44, price=0, image = button_image[5], number = 4)) # exit
+            created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 580, 180, 44, price=0, image = button_image[24], number = 6)) #diffculty
+            created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 340, 180, 44, price=0, image = button_image[15], number = 1)) #level
+        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 260, 180, 44, price=0, image = button_image[4], number = 2)) #market
+        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 180, 180, 44, price=0, image = button_image[14], number = 3)) #inventry
+        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 100, 180, 44, price=0, image = button_image[6], number = 4)) # exit
         
         return created_buttons , []
 
