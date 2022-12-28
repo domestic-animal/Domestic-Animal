@@ -30,7 +30,7 @@ class weapon:
                 self.cool_down_counter += 1
 
             if self.cool_down_counter == 0:
-                if(self.bullettype ==1 ):
+                if(self.bullettype ==0 ):
                     b = bullet(x+14, y, self.bullet_img,self.damage, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
                 elif(self.bullettype == 2):
                     b = zapper(x+14, y, self.bullet_img,self.damage/7, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)

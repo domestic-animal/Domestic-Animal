@@ -25,7 +25,7 @@ class normalGameEngine:
     # Player player
 
     def __init__(self,window, level,profile:Profile, playerAssets , enemyAssets,
-                 gameAssets, powerUpsAssets,settings1, settings2,gameState=None,
+                 gameAssets,settings1, settings2,gameState=None,
                  diff = 1,score=0,is_coop=1, fileManager=None):
         """
             Constructor
@@ -72,7 +72,7 @@ class normalGameEngine:
         self.score=score
         self.gameObserver = gameobserver(self.WIN.get_width(),self.WIN.get_height())
         self.gamesaver = GameStateSaver()
-        self.powerFactory=PowerUpFactory(powerUpsAssets[0],powerUpsAssets[1],powerUpsAssets[2],powerUpsAssets[3],powerUpsAssets[4])
+        self.powerFactory=PowerUpFactory(gameAssets[1][0],gameAssets[1][1],gameAssets[1][2],gameAssets[1][3],gameAssets[1][4])
         self.main_font = pygame.font.Font(os.path.join(".","launcher","assets","game.ttf"), 40)
 
 
@@ -80,11 +80,11 @@ class normalGameEngine:
         
         #player Entity
        
-        self.pl1=player(200,600,3,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7,damage = 100)
+        self.pl1=player(200,600,self.profile.get_current_weapon(),(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7)
         self.Players.append(self.pl1)
 
         if self.is_coop==2:
-            self.pl2=player(400,600,2,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,200,7)
+            self.pl2=player(400,600,self.profile.get_current_weapon(),(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,200,7)
             self.Players.append(self.pl2)
     
     def move_entities(self,keys):

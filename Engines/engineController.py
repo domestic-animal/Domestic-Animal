@@ -37,14 +37,19 @@ class engineController:
         self.lvlSelector = levelSelector()
         # returned states from the engines
         self.gameStateLOADED=gameState
+
+        self.loadedLvl=profile.get_story_progress()
+
         if(self.gameStateLOADED != None):
             self.controllerState = "game"
+            self.loadedLvl=gameState.level
         self.gameState = None
         self.states = []
         #difficulity
         self.diff = 1
         #window to draw objects on
         self.WIDTH, self.HEIGHT = 600, 700
+        self.CO_OP=1
 
         self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT))
         for i in range(len(self.Background)):
@@ -72,19 +77,31 @@ class engineController:
             #get the new state
             if len(self.states) >1:
                 self.gameState = self.states[1]
+
             if self.states[0] == "start":
+                self.loadedLvl=self.profile.get_story_progress()
                 self.controllerState = "game"
-            if self.states[0] == "runAway" :
+                self.CO_OP=1
+
+            elif self.states[0] == "start2":
+                self.loadedLvl=self.profile.get_story_progress()
+                self.controllerState = "game"
+                self.CO_OP=2
+
+            elif self.states[0] == "runAway" :
                 pygame.display.quit()
                 break
-            if self.states[0] == "menu":
+            elif self.states[0] == "menu":
                 self.controllerState = "menu"
-            if self.states[0] == "market":
+            elif self.states[0] == "market":
                 self.controllerState = "market"
-            if self.states[0] == "inventory":
+            elif self.states[0] == "inventory":
                 self.controllerState = "inventory"
-            if self.states[0] == "level":
+            elif self.states[0] == "level":
                 self.controllerState = "level"
+            else:
+                self.loadedLvl=int(self.states[0])
+                self.controllerState = "game"
         
                 
             
@@ -104,8 +121,10 @@ class engineController:
 
                 self.convert(PLAYER_SHIP_SKINS,BULLET_SHIP_SKINS,ENEMY_SKINS,POWER_UPS,BOSSES,ENEMY_BULLET_SKINS)
                 #to be changed according to inventory menu
-                PLAYER_ASSETS =[PLAYER_SHIP_SKINS[2], BULLET_SHIP_SKINS[0],PLAYER_SHIP_SKINS[3], BULLET_SHIP_SKINS[2]]
-                BG = self.Background[0]
+                PLAYER_ASSETS =[PLAYER_SHIP_SKINS[self.profile.get_current_skin()] , BULLET_SHIP_SKINS[self.profile.get_current_weapon()],
+                PLAYER_SHIP_SKINS[self.profile.get_current_skin()+1], BULLET_SHIP_SKINS[self.profile.get_current_weapon()]]
+
+                BG = self.Background[2]
                 ENEMY_ASSETS = [ENEMY_SKINS,BOSSES,ENEMY_BULLET_SKINS]
                 GAME_ASSETS = [BG,POWER_UPS]
                 #Endless mode
@@ -116,7 +135,7 @@ class engineController:
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
                     diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
                     playerAssets= PLAYER_ASSETS,enemyAssets=ENEMY_ASSETS,gameAssets= GAME_ASSETS,
-                     gameState=self.gameStateLOADED,powerUpsAssets = POWER_UPS,fileManager=self.filemanager )
+                     gameState=self.gameStateLOADED,fileManager=self.filemanager,is_coop=2 )
                     self.gameStateLOADED = None
                 #Versus mode
                 elif self.mode == 0:
@@ -125,12 +144,12 @@ class engineController:
 
                 elif self.mode > 0:
                     # get the chosen level from the level selector
-                    level = self.lvlSelector.getLevel(self.profile.get_story_progress(),self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES,self.WIDTH,self.HEIGHT)
+                    level = self.lvlSelector.getLevel(self.loadedLvl,self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES,self.WIDTH,self.HEIGHT)
                     # assign the current Engine to be the normal game engine
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
                     diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
                     playerAssets= PLAYER_ASSETS,enemyAssets=ENEMY_ASSETS,gameAssets= GAME_ASSETS,
-                     gameState=self.gameStateLOADED,powerUpsAssets = POWER_UPS,fileManager=self.filemanager )
+                     gameState=self.gameStateLOADED ,fileManager=self.filemanager, is_coop=self.CO_OP)
                     self.gameStateLOADED = None
 
             
@@ -150,6 +169,7 @@ class engineController:
                 inventory = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0],self.mode)
                 inventory.create_menue(4,self.profile)
                 self.currEngine = inventory
+
             elif self.controllerState == "level":
                 lvl = menu(self.WIN, self.WIDTH, self.HEIGHT,self.profile,self.Background[0],self.mode)
                 lvl.create_menue(5,self.profile)
