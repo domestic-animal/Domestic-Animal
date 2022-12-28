@@ -1,7 +1,11 @@
 from typing import MutableSequence
 import pygame.mixer as mix
+import random
 
 class Music():
+    """
+    Music class handles playing, pausing & stoping the in-game background music
+    """
 
     def __init__(self, music: MutableSequence[str]):
         self.music = music  # Array of the music absolutePaths
@@ -9,8 +13,16 @@ class Music():
         self.paused = False # Pause indicator
 
     def loadTrack(self, track = 0):
+        """
+        Loads the wanted track into the pygame.mixer.music
+        
+        :param track: the wanted track to play (-1 for random track)
+        """
         mix.music.unload()
-        mix.music.load(self.music[track])
+        self.track = track
+        if track == -1: #random track
+            self.track = random.randint(0, len(self.music) - 1)
+        mix.music.load(self.music[self.track])
 
     def play(self):
         mix.music.play(-1)
@@ -22,15 +34,5 @@ class Music():
             mix.music.unpause()
         self.paused = not self.paused
     
-    def stop():
+    def stop(self):
         mix.music.stop()
-
-    # def pause(self):
-    #     if not self.paused:
-    #         mix.music.pause()
-    #     self.paused = True
-    
-    # def resume(self):
-    #     if self.paused:
-    #         mix.music.unpause()
-    #     self.paused = False
