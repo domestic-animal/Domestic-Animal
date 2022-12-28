@@ -3,7 +3,7 @@ from assets_handler.music import Music
 import filepath
 import pygame
 import os
-
+pygame.init()
 pygame.mixer.init()
 
 class assetsFactory:
