@@ -9,7 +9,7 @@ class SpriteSheet():
 		ordered by shapes as rows & shape's frames as columns)
 	"""
 	
-	def __init__(self, sheet, width, height, scale, frames_number, skins_number = 1, cooldown = 100):
+	def __init__(self, sheet, width, height, scale, frames_number, skins_number = 1, cooldown = 100, sounds = []):
 		"""
 		Constructor: extracts the frames & sets the class attributes
 
@@ -26,12 +26,15 @@ class SpriteSheet():
 		skinsNumber = int(self.sheet.get_height() / height)
 		self.skin = [0] * skinsNumber			# Array of the skins found in the spritesheet
 		framesNumber = int(self.sheet.get_width() / width) if frames_number != 1 else 1
+		hasSound = (len(sounds) != 0)
 		# Extracting the frames for each skin
 		for s in range(skinsNumber):
 			frames = [0] * framesNumber
 			for f in range(framesNumber):
 				frames[f] = self.extract_frame(width, height, scale, f, s)
 			self.skin[s] = Skin(frames, cooldown) if frames_number != 1 else frames[0]
+			if hasSound:
+				self.skin[s].setSound(sounds[s])
 
 	def extract_frame(self, width, height, scale, f, s):
 		"""

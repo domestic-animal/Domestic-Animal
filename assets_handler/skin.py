@@ -15,6 +15,14 @@ class Skin():
         self.last_update = pygame.time.get_ticks()  # The last time a refresh has done
         self.animation_cooldown = cooldown          # Refresh rate between frames
         self.currframe = 0                          # Current frame displayed
+        self.sound: pygame.mixer.Sound = None                           # Sound to be played in game
+
+    def setSound(self, sound): #used by the SpriteSheet
+        self.sound = sound
+
+    def playSound(self):
+        if self.sound != None:
+            self.sound.play()
     
     def setCooldown(self, cooldown):
         self.animation_cooldown = cooldown
