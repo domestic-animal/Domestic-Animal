@@ -8,6 +8,7 @@ class Music():
     """
 
     def __init__(self, music: MutableSequence[str]):
+        mix.init()
         self.music = music  # Array of the music absolutePaths
         self.track = 0      # the current played track
         self.paused = False # Pause indicator
