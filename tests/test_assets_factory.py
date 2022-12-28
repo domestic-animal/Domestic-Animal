@@ -1,5 +1,6 @@
 from assets_handler.assetsFactory import assetsFactory
 from assets_handler.skin import Skin
+from assets_handler.music import Music
 import pygame
 
 ASSETS_FACTORY = assetsFactory()
@@ -58,3 +59,14 @@ def test_backgrounds():
     BGs = ASSETS_FACTORY.create_backgrounds()
     for bg in BGs:
         assert isinstance(bg, pygame.Surface)
+
+def test_music():
+    music = ASSETS_FACTORY.create_music()
+    assert isinstance(music, Music)
+    music.loadTrack()
+    music.play()
+    music.pauseToggle()
+    assert music.paused == True
+    music.pauseToggle()
+    assert music.paused == False
+    music.stop()

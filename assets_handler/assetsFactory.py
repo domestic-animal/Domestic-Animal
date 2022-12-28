@@ -5,6 +5,8 @@ import filepath
 import pygame
 import os
 
+mixer.init()
+
 class assetsFactory:
     """
     The factory class for loading the assets - images and sounds
