@@ -66,13 +66,13 @@ class bossDog(enemy):
 
 
     def shoot(self):
-        if random.random()<0.85:
-            return self.weapon.shoot( self.x+(self.skin.frames[0].get_width()/2), self.y+self.skin.frames[0].get_height())
+        if random.random()<0.75:
+            return self.weapon.shoot( self.x+(self.skin.frames[0].get_width()/2)-15, self.y+self.skin.frames[0].get_height())
         else:
             if random.random()<0.5:
                  return self.weapon2.shoot( self.x, self.y+self.skin.frames[0].get_height())
             else:
-                return self.weapon3.shoot( self.x+self.skin.frames[0].get_width(), self.y+self.skin.frames[0].get_height() )
+                return self.weapon3.shoot( self.x+self.skin.frames[0].get_width()-20, self.y+self.skin.frames[0].get_height() )
 
 
 

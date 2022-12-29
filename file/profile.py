@@ -11,7 +11,7 @@ class Profile:
     __co_player_weapon = 0
     __skins = [0]
     __current_skin = 0
-    __coins = 1000000
+    __coins = 0
     __endless_score = 0
     __endless_survival_time = 0
 

@@ -50,7 +50,7 @@ class engineController:
         #difficulity
         self.diff = 1
         #window to draw objects on
-        self.WIDTH, self.HEIGHT = 600, 700
+        self.WIDTH, self.HEIGHT = 800, 700
         self.CO_OP=1
         self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT))
         for i in range(len(self.Background)):

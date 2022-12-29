@@ -66,7 +66,7 @@ class laser(bullet):
         self.y = 60
         self.collisions = 1000
         self.skin.scale((20,y))
-        self.startY = y-20
+        self.startY = y
 
         # self.secondCollision = 1000
         # self.mask= pygame.mask.from_surface(self.skin.frames[0])
@@ -74,6 +74,7 @@ class laser(bullet):
     def move(self):
         super().move()
         self.skin.scale((20, self.startY))
+        # self.startY = self.y
     def Objectdamage(self, entity):
         entity.health-=self.damage
         self.collisions-= 1

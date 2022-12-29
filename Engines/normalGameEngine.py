@@ -57,6 +57,7 @@ class normalGameEngine:
 
         #rat enemy for higher difficulty
         self.RAT_SKINS = enemyAssets[0]
+        self.MAXLEVELNUMBER = 7
         # pause menu
         self.menuengine = menu(self.WIN, self.WIN.get_width(),self.WIN.get_height(),self.profile, self.gameAssets[0],self.level.number)
         
@@ -81,11 +82,11 @@ class normalGameEngine:
         
         #player Entity
        
-        self.pl1=player(200,600,self.profile.get_current_weapon(),(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7)
+        self.pl1=player(200,600,self.profile.get_current_weapon(),(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,1000,7)
         self.Players.append(self.pl1)
 
         if self.is_coop==2:
-            self.pl2=player(400,600,self.profile.get_current_weapon(),(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,200,7)
+            self.pl2=player(400,600,self.profile.get_current_weapon(),(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,1000,7)
             self.Players.append(self.pl2)
     
     def move_entities(self,keys):
@@ -133,7 +134,7 @@ class normalGameEngine:
             rat_movement = random.choice([(0, 1), (self.WIN.get_width(), -1)])
             RAT_SKIN = random.choice([self.RAT_SKINS[5], self.RAT_SKINS[4]])
             RAT_SKIN.playSound()
-            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 30*self.diff, 5*self.diff, rat_movement[1], 0,1)
+            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 200*self.diff, 5*self.diff, rat_movement[1], 0,1)
             self.Bullets.append(rat)
     
     # function to get the current game score
@@ -294,9 +295,12 @@ class normalGameEngine:
                 if self.Enemies==None:
                     self.gameover = 1
                     self.exit = 1
-                    if(self.level.number == self.profile.get_story_progress()):
+                    if(self.level.number == self.profile.get_story_progress()
+                     and self.profile.get_story_progress() <self.MAXLEVELNUMBER):
                         self.profile.set_story_progress(self.profile.get_story_progress()+1)
                     self.profile.set_coins(self.profile.get_coins()+self.score)
+                    if self.is_coop >1:
+                        return ["start2", self.getGameState()]
                     return ["start", self.getGameState()]
 
             #detect the keys pressed
