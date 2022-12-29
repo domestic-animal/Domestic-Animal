@@ -301,6 +301,8 @@ class normalGameEngine:
                     self.profile.set_coins(self.profile.get_coins()+self.score)
                     if self.is_coop >1:
                         return ["start2", self.getGameState()]
+                    if self.profile.get_story_progress() == self.MAXLEVELNUMBER:
+                        return ["menu", self.getGameState()]
                     return ["start", self.getGameState()]
 
             #detect the keys pressed
