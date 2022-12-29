@@ -66,17 +66,50 @@ class endlesslevel(level):
         self.waveNumber+=1
         enemies=[]
         factor=enemyFactory(self.BULLET_SKINS,self.ENEMY_SKINS, self.BOSSES_SKINS)
-        x=20
-        y=0
-        threshy=450
-        for _ in range(8):
-            threshy-=50
+        if(timediffuclty==3):
+            if random.random() < 0.1:
+                x= 270
+                y=0
+                threshy= 140
+                boss_cat = factor.create("bc", self.diff,x,y,(self.windowX,self.windowY))
+                boss_dog = factor.create("bd", self.diff,x,y,(self.windowX,threshy))
+                enemies.append(boss_cat)
+                enemies.append(boss_dog)
+            elif random.random() < 0.2:
+                x= 270
+                y=0
+                enemies.append(factor.create("bc", self.diff,x,y,(self.windowX,self.windowY)))
+            elif random.random() < 0.3:
+                x= 270
+                y=0
+                threshy= 140
+                enemies.append(factor.create("bd", self.diff,x,y,(self.windowX,threshy)))
+         
+            else:
+                x=20
+                y=0
+                threshy=450
+                for _ in range(8):
+                    threshy-=50
+                    x=20
+                    for _ in range(10):
+                        type=random.choice(["d","c"])
+                        enemy=factor.create(type,timediffuclty,x,y,(self.windowX,threshy))
+                        enemies.append(enemy)
+                        x+= self.windowX/10
+                
+        else:
             x=20
-            for _ in range(10):
-                type=random.choice(["d","c"])
-                enemy=factor.create(type,timediffuclty,x,y,(self.windowX,threshy))
-                enemies.append(enemy)
-                x+= self.windowX/10
+            y=0
+            threshy=450
+            for _ in range(8):
+                threshy-=50
+                x=20
+                for _ in range(10):
+                    type=random.choice(["d","c"])
+                    enemy=factor.create(type,timediffuclty,x,y,(self.windowX,threshy))
+                    enemies.append(enemy)
+                    x+= self.windowX/10
         return enemies
 
 
@@ -196,7 +229,10 @@ class levelFour(storylevel):
             enemies=[]
             threshy=500
             if _ == 4:
-                boss_dog = factor.create("bd", self.diff,200,0,(self.windowX,self.windowY/2))
+                x= 270
+                y=0
+                threshy= 140
+                boss_dog = factor.create("bd", self.diff,200,0,(self.windowX,180))
                 enemies.append(boss_dog)
             else:
                 for _ in range(7):
@@ -304,6 +340,8 @@ class levelSeven(storylevel):
             enemies=[]
             threshy=500
             if _ == 5:
+                x= 270
+                y=0
                 boss_cat = factor.create("bc", self.diff,200,0,(self.windowX,self.windowY))
                 enemies.append(boss_cat)
             else:
@@ -334,10 +372,10 @@ class levelEight(storylevel):
     
     def makewaves(self):
         factor=enemyFactory(self.BULLET_SKINS,self.ENEMY_SKINS, self.BOSSES_SKINS )
-        x= 200
+        x= 270
         y=0
-        threshy= 210
+        threshy= 140
         boss_cat = factor.create("bc", self.diff,x,y,(self.windowX,self.windowY))
         boss_dog = factor.create("bd", self.diff,x,y,(self.windowX,threshy))
         self.waves.append([boss_cat,boss_dog])
-        print(self.waves)
+        # print(self.waves)

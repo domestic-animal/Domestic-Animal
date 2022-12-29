@@ -57,6 +57,7 @@ class normalGameEngine:
 
         #rat enemy for higher difficulty
         self.RAT_SKINS = enemyAssets[0]
+        self.MAXLEVELNUMBER = 7
         # pause menu
         self.menuengine = menu(self.WIN, self.WIN.get_width(),self.WIN.get_height(),self.profile, self.gameAssets[0],self.level.number)
         
@@ -72,6 +73,7 @@ class normalGameEngine:
         self.score=score
         self.gameObserver = gameobserver(self.WIN.get_width(),self.WIN.get_height())
         self.gamesaver = GameStateSaver()
+        self.music = gameAssets[2];
         self.powerFactory=PowerUpFactory(gameAssets[1][0],gameAssets[1][1],gameAssets[1][2],gameAssets[1][3],gameAssets[1][4])
         self.main_font = pygame.font.Font(os.path.join(".","launcher","assets","game.ttf"), 30)
 
@@ -80,11 +82,11 @@ class normalGameEngine:
         
         #player Entity
        
-        self.pl1=player(200,600,self.profile.get_current_weapon(),(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,200,7)
+        self.pl1=player(200,600,self.profile.get_current_weapon(),(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,1000,7)
         self.Players.append(self.pl1)
 
         if self.is_coop==2:
-            self.pl2=player(400,600,self.profile.get_current_weapon(),(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,200,7)
+            self.pl2=player(400,600,self.profile.get_current_weapon(),(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,1000,7)
             self.Players.append(self.pl2)
     
     def move_entities(self,keys):
@@ -131,7 +133,8 @@ class normalGameEngine:
             player = random.choice(self.Players)
             rat_movement = random.choice([(0, 1), (self.WIN.get_width(), -1)])
             RAT_SKIN = random.choice([self.RAT_SKINS[5], self.RAT_SKINS[4]])
-            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 30*self.diff, 5*self.diff, rat_movement[1], 0,1)
+            RAT_SKIN.playSound()
+            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 200*self.diff, 5*self.diff, rat_movement[1], 0,1)
             self.Bullets.append(rat)
     
     # function to get the current game score
@@ -155,12 +158,15 @@ class normalGameEngine:
     def pause_menu(self):
         self.menuengine.create_menue(1)
         while(True):
+            #self.music.loadTrack(2)
+            #self.music.play()
             selection = self.menuengine.start()
             if selection[0] == "save":
                 self.exit = 1
                 self.gamesaver.save_story(self.profile.get_name(),self.getGameState())
                 self.exit = 0
             if selection[0] == "runAway":
+                self.music.stop()
                 self.exit = 1
                 self.gameState = None
                 return ["menu", self.getGameState()]
@@ -168,6 +174,7 @@ class normalGameEngine:
                 return None
         
     def game_over_menu(self):
+        self.music.stop()
         self.menuengine.create_menue(6)
         selection = self.menuengine.start()
         self.exit = 1
@@ -225,6 +232,32 @@ class normalGameEngine:
             self.diff=3
 
 
+    def onDeath(self,starttime):
+        if self.is_coop > 1:
+            if len(self.graveyard) == 2:
+                endtime =time.time()
+                if self.level.number==-1:
+                    self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
+                    if(self.profile.get_endless_score() < self.score):
+                        self.profile.set_endless_score(self.score)
+                    self.profile.set_endless_survival_time(endtime-starttime)
+                return self.game_over_menu()
+            else:
+                return None
+        else:
+            if len(self.graveyard) == 1:
+                if self.level.number==-1:
+                    endtime =time.time()
+                    self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
+                    if(self.profile.get_endless_score() < self.score):
+                        self.profile.set_endless_score(self.score)
+                    self.profile.set_endless_survival_time(endtime-starttime)
+                return self.game_over_menu()
+            else:
+                return None
+
+
+
     def start(self):
         """
             function used to start the game engine 
@@ -244,7 +277,12 @@ class normalGameEngine:
         ################################
         curr=datetime.datetime.now()
         starttime = time.time()
-        # print(f"start time {starttime}")
+
+        self.music.loadTrack(0)
+        if self.level.number==7 or self.level.number==3 or self.level.number == 6:
+              self.music.loadTrack(1)
+        self.music.setVolume(0.22)
+        self.music.play()
         while True:
             #drawing FPS
             clock.tick(FPS)
@@ -257,9 +295,14 @@ class normalGameEngine:
                 if self.Enemies==None:
                     self.gameover = 1
                     self.exit = 1
-                    if(self.level.number == self.profile.get_story_progress()):
+                    if(self.level.number == self.profile.get_story_progress()
+                     and self.profile.get_story_progress() <self.MAXLEVELNUMBER):
                         self.profile.set_story_progress(self.profile.get_story_progress()+1)
                     self.profile.set_coins(self.profile.get_coins()+self.score)
+                    if self.is_coop >1:
+                        return ["start2", self.getGameState()]
+                    if self.level.number == self.MAXLEVELNUMBER:
+                        return ["menu", self.getGameState()]
                     return ["start", self.getGameState()]
 
             #detect the keys pressed
@@ -287,32 +330,20 @@ class normalGameEngine:
 
             #pasue menu
             if keys[pygame.K_ESCAPE]: # pause
+                self.music.pauseToggle()
                 select = self.pause_menu()
+                self.music.pauseToggle()
                 if(select != None):
+                    self.music.stop()
                     return select
-            #on death or quitting
-            if self.is_coop > 1:
-                if len(self.graveyard) == 2:
-                    endtime =time.time()
-                    if self.level.number==-1:
-                        self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
-                        if(self.profile.get_endless_score() < self.score):
-                            self.profile.set_endless_score(self.score)
-                        self.profile.set_endless_survival_time(endtime-starttime)
-                    return self.game_over_menu()
-            else:
-                if len(self.graveyard) == 1:
-                    if self.level.number==-1:
-                        endtime =time.time()
-                        # print(f"end time {endtime}")
-                        self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
-                        if(self.profile.get_endless_score() < self.score):
-                            self.profile.set_endless_score(self.score)
-                        self.profile.set_endless_survival_time(endtime-starttime)
-                    return self.game_over_menu()
-                    
+                                
             if self.level==-1:
                 self.endlessDiffculty(curr)
+            #on death or quitting
+            deadattr = self.onDeath(starttime)
+            if(deadattr is not None):
+                return deadattr
+
 
 
 

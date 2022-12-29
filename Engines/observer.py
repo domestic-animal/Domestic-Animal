@@ -83,6 +83,7 @@ class gameobserver(observer):
         for Enemy in enemies[:]:
             if Enemy.health<=0:
                 score=multi*Enemy.score
+                Enemy.skin.playSound()
                 enemies.remove(Enemy)
         for Player in players:
             if Player.health <= 0:
@@ -97,6 +98,7 @@ class gameobserver(observer):
             for Player in players:
                 if self.is_collide(Power,Player):
                     Power.add_powerup(Player)
+                    Power.skin.playSound()
                     powerup.remove(Power)
                     break
             if Power.off_screen(self.windowY):

@@ -58,3 +58,40 @@ class penetrate(bullet):
         
         if(self.collisions) <= 0:
             self.y=-40
+
+class laser(bullet):
+    
+    def __init__(self,x,y,image, damage, velocity, ishorizontal,isvertical,is_friendly):
+        super().__init__(x,y,image, damage, velocity, ishorizontal,isvertical,is_friendly)
+        self.y = 60
+        self.collisions = 1000
+        self.skin.scale((20,y))
+        self.startY = y
+
+        # self.secondCollision = 1000
+        # self.mask= pygame.mask.from_surface(self.skin.frames[0])
+
+    def move(self):
+        super().move()
+        self.skin.scale((20, self.startY))
+        # self.startY = self.y
+    def Objectdamage(self, entity):
+        entity.health-=self.damage
+        self.collisions-= 1
+        
+        if(self.collisions) <= 0:
+            self.y=-40
+        # if  self.collisions >0 :
+        #     self.collisions-= 1
+        #     entity.health-=self.damage
+        #     print(self.skin.frames[0].get_width())
+        #     print(self.skin.frames[0].get_height())
+            
+        # elif self.secondCollision >0:
+        #     entity.health-=(self.damage/10)
+        #     self.secondCollision-= 1
+
+        # if(self.collisions + self.secondCollision) <= 0:
+        #     # self.skin.scale((12,19))
+        #     # self.mask= pygame.mask.from_surface(self.skin.frames[0])
+        #     self.y=-40

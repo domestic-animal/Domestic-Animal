@@ -45,11 +45,12 @@ class engineController:
             self.loadedLvl=gameState.level
             self.diff==gameState.difficulty
         self.gameState = None
+        self.BGM = self.assets[6]
         self.states = []
         #difficulity
         self.diff = 1
         #window to draw objects on
-        self.WIDTH, self.HEIGHT = 600, 700
+        self.WIDTH, self.HEIGHT = 800, 700
         self.CO_OP=1
         self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT))
         for i in range(len(self.Background)):
@@ -90,6 +91,7 @@ class engineController:
                 self.CO_OP=2
 
             elif self.states[0] == "runAway" :
+                self.BGM.stop()
                 pygame.display.quit()
                 break
             elif self.states[0] == "menu":
@@ -117,14 +119,18 @@ class engineController:
             """switching function to switch between game engines
             
             """
+            self.BGM.loadTrack(2)
+            self.BGM.play()
             ## if the controller state is game 
             if self.controllerState == "game":
+                self.BGM.stop()
                 PLAYER_SHIP_SKINS = self.assets[0]
                 BULLET_SHIP_SKINS = self.assets[1]
                 ENEMY_SKINS = self.assets[2]
                 POWER_UPS = self.assets[3]
                 BOSSES = self.assets[4]
                 ENEMY_BULLET_SKINS = self.assets[5]
+                BACKGROUND_MUSIC = self.BGM
 
                 self.convert(PLAYER_SHIP_SKINS,BULLET_SHIP_SKINS,ENEMY_SKINS,POWER_UPS,BOSSES,ENEMY_BULLET_SKINS)
                 #to be changed according to inventory menu
@@ -133,7 +139,7 @@ class engineController:
 
                 BG = random.choice(self.Background)
                 ENEMY_ASSETS = [ENEMY_SKINS,BOSSES,ENEMY_BULLET_SKINS]
-                GAME_ASSETS = [BG,POWER_UPS]
+                GAME_ASSETS = [BG,POWER_UPS,BACKGROUND_MUSIC]
                 #Endless mode
                 if self.mode == -1:
                     # get the chosen level from the level selector
@@ -147,7 +153,7 @@ class engineController:
                 #Versus mode
                 elif self.mode == 0:
                     self.currEngine = vsGameEngine(window =self.WIN,profile = self.profile,settings1 = self.settings1,
-                    settings2 = self.settings2,playerAssets= PLAYER_ASSETS,gameAssets=[BG])
+                    settings2 = self.settings2,playerAssets= PLAYER_ASSETS,gameAssets=GAME_ASSETS)
 
                 elif self.mode > 0:
                     # get the chosen level from the level selector

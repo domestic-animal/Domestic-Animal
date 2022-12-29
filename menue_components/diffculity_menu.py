@@ -14,10 +14,10 @@ class diffculityMenu():
         factory= assetsFactory()
         button_image = factory.create_images("buttons", 4)
 
-        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 500, 180, 44, price=0, image = button_image[3], number = 1)) #hard
-        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 420, 180, 44, price=0, image = button_image[14], number = 2)) #medium
-        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 340, 180, 44, price=0, image = button_image[3], number = 3)) #esay
-        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 100, 180, 44, price=0, image = button_image[5], number = -1)) #exit
+        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 500, 180, 44, price=0, image = button_image[25], number = 1)) #esay
+        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 420, 180, 44, price=0, image = button_image[26], number = 2)) #medium
+        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 340, 180, 44, price=0, image = button_image[27], number = 3)) #hard
+        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 100, 180, 44, price=0, image = button_image[9], number = -1)) #exit
 
         return created_buttons , []
 

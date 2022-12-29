@@ -1,3 +1,4 @@
+import copy
 import pygame
 import sys
 """
@@ -38,6 +39,7 @@ class vsGameEngine:
         self.PLAYER1_CONTROLS = [settings1["left"],settings1["right"],settings1["up"],settings1["down"]]
         self.PLAYER2_CONTROLS =  [settings2["left"],settings2["right"],settings2["up"],settings2["down"]]
         self.profile = profile
+        self.music = self.gameAssets[2]
 
         # pause menu
         self.menuengine = menu(self.WIN, self.WIN.get_width(),self.WIN.get_height(),self.profile, self.gameAssets[0],-1)
@@ -55,14 +57,15 @@ class vsGameEngine:
         self.playerAssets[1].rotate(-1)
 
         self.playerAssets[0].rotate(-1)
-        pl1=player(0,295,1,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,250,7,1)
+        pl1=player(0,295,0,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,250,7,1)
         self.Players.append(pl1)
 
-        # self.playerAssets[3].rotate(1)
-
+        PLAYER2_BULLET = copy.deepcopy(self.playerAssets[3])
+        PLAYER2_BULLET.rotate(1)
+        PLAYER2_BULLET.rotate(1)
         self.playerAssets[2].rotate(1)
         pl2=player(self.WIN.get_width()-self.playerAssets[2].frames[0].get_width(),
-        295,1,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,250,7,-1)
+        295,0,(self.playerAssets[2],PLAYER2_BULLET),self.PLAYER2_CONTROLS,250,7,-1)
         self.Players.append(pl2)
     
     
@@ -120,7 +123,9 @@ class vsGameEngine:
         clock = pygame.time.Clock()
         #generate the wave
 
-
+        self.music.loadTrack(0)
+        self.music.setVolume(0.22)
+        self.music.play()
         ####    Main game loop      ####
         ################################
         while True:
@@ -146,21 +151,20 @@ class vsGameEngine:
 
             #pasue menu
             if keys[pygame.K_ESCAPE]: # shoot
+                self.music.pauseToggle()
                 selection = self.menuengine.start()
-                if selection[0] == "save":
-                    pass
                 if selection[0] == "runAway":
                     self.playerAssets[1].rotate(1)
                     self.playerAssets[0].rotate(1)
-                    self.playerAssets[3].rotate(-1)
                     self.playerAssets[2].rotate(-1)
                     return ["menu"]
-                    
+                self.music.pauseToggle()
+
+                
             #on death or quitting
             if self.Players[0].health <= 0 or self.Players[1].health <= 0:
                     self.playerAssets[1].rotate(1)
                     self.playerAssets[0].rotate(1)
-                    self.playerAssets[3].rotate(-1)
                     self.playerAssets[2].rotate(-1)
                     return ["menu"]
 
