@@ -32,7 +32,7 @@ class cat(enemy):
 
     def __init__(self, x, damage, y, weapon, img, health, velocity, threshold,score):
         super().__init__(x, damage, y, weapon, img, health, velocity, threshold,score)
-        self.skin.sound.set_volume(10)    
+        # self.skin.sound.set_volume(10)    
     def move(self):
     
         
