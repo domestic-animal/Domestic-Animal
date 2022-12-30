@@ -295,8 +295,11 @@ class normalGameEngine:
         starttime = time.time()
 
         self.music.loadTrack(0)
-        if self.level.number==7 or self.level.number==3 or self.level.number == 6:
+        if self.level.number==3 or self.level.number == 6:
               self.music.loadTrack(1)
+        elif self.level.number==7 :
+            self.music.loadTrack(3)
+
         self.music.setVolume(0.22)
         self.music.play()
         while True:

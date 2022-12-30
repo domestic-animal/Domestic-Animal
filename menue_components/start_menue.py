@@ -17,6 +17,9 @@ class startMenue():
         decrease_amount = 500
         step = 80
         created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - decrease_amount, 180, 44, price=0, image = button_image[0], number = 0)) #start single
+        if self.mode==0:
+            created_buttons.pop()
+            created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - decrease_amount, 180, 44, price=0, image = button_image[12], number = 0)) #start single
         decrease_amount -= step
         if self.mode != 0:#not VS mode
             created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - decrease_amount, 180, 44, price=0, image = button_image[1], number = 5)) #start multi
