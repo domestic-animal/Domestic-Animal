@@ -81,12 +81,10 @@ class engineController:
                 self.gameState = self.states[1]
 
             if self.states[0] == "start":
-                self.loadedLvl=self.profile.get_story_progress()
                 self.controllerState = "game"
                 self.CO_OP=1
 
             elif self.states[0] == "start2":
-                self.loadedLvl=self.profile.get_story_progress()
                 self.controllerState = "game"
                 self.CO_OP=2
 
@@ -110,7 +108,7 @@ class engineController:
                 self.controllerState = "menu"
             else:
                 self.loadedLvl=int(self.states[0])
-                self.controllerState = "game"
+                self.controllerState = "menu"
         
                 
             
