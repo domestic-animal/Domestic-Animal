@@ -16,11 +16,14 @@ class pauseMenue():
         created_buttons = []
         factory= assetsFactory()
         button_image = factory.create_images("buttons", 4)
-
-        created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT - 400, 180, 44, price=1, image = button_image[12], number = 0))
+        
+        decrease = 400
+        created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT - decrease, 180, 44, price=1, image = button_image[12], number = 0))
+        decrease -= 60
         if self.mode >= 0 :
-            created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT - 340, 180, 44, price=0, image = button_image[3], number = 1))
-        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - 280, 180, 44, price=1, image = button_image[6], number = 2))
+            created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT - decrease, 180, 44, price=0, image = button_image[3], number = 1))
+            decrease -= 60
+        created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - decrease, 180, 44, price=1, image = button_image[6], number = 2))
         
         return created_buttons, []
 
