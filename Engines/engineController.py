@@ -77,8 +77,12 @@ class engineController:
             self.WIN = pygame.display.set_mode(( self.WIDTH, self.HEIGHT))
             self.filemanager.save_profile(self.profile)
             #get the new state
-            if len(self.states) >1:
+            if len(self.states) ==2:
                 self.gameState = self.states[1]
+
+            if len(self.states) ==3:
+                if self.states[2]==True:
+                    self.loadedLvl=self.profile.get_story_progress()
 
             if self.states[0] == "start":
                 self.controllerState = "game"
@@ -103,7 +107,7 @@ class engineController:
             elif self.states[0] == "diff":
                 self.controllerState = "diff"
             elif self.controllerState == "diff":
-                if isinstance(self.states[0],int):
+                if self.states[0]!="menu":
                     self.diff=int(self.states[0])
                 self.controllerState = "menu"
             else:
@@ -155,7 +159,7 @@ class engineController:
 
                 elif self.mode > 0:
                     # get the chosen level from the level selector
-                    level = self.lvlSelector.getLevel(self.loadedLvl-1,self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES,self.WIDTH,self.HEIGHT)
+                    level = self.lvlSelector.getLevel(self.loadedLvl,self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES,self.WIDTH,self.HEIGHT)
                     # assign the current Engine to be the normal game engine
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
                     diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
