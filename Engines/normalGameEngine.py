@@ -136,7 +136,7 @@ class normalGameEngine:
             rat_movement = random.choice([(0, 1), (self.WIN.get_width(), -1)])
             RAT_SKIN = random.choice([self.RAT_SKINS[5], self.RAT_SKINS[4]])
             RAT_SKIN.playSound()
-            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 200*self.diff, 3*self.diff, rat_movement[1], 0,1)
+            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 75*self.diff, 3*self.diff, rat_movement[1], 0,1)
             self.Bullets.append(rat)
     
     # function to get the current game score
