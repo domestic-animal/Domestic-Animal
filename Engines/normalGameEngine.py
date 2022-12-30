@@ -140,7 +140,7 @@ class normalGameEngine:
     # function to get the current game score
     def getGameState(self):
         return gameState(self.powerup,self.score,self.Bullets,self.Players, self.Enemies
-        ,self.diff,self.exit,self.level.number,datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        ,self.diff,self.exit,self.level.number+1,datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         ,self.gameover,self.is_coop)
 
     def loadGameState(self):
@@ -190,11 +190,11 @@ class normalGameEngine:
             # drawing background
             self.WIN.blit(self.gameAssets[0], (0, 0))
             if(self.level.number >= 0):
-                scores_label = self.main_font.render(f"score: {self.score}  level: {self.level.number+1}  wave:{self.level.waveNumber}"
+                scores_label = self.main_font.render(f"score: {self.score}  level: {self.level.number+1}  wave:{self.level.waveNumber+1}"
                         , 1, (255,255,255))
                 self.WIN.blit(scores_label,(0, 0))
             else:
-                scores_label = self.main_font.render(f"score: {self.score}  wave:{self.level.waveNumber}", 1, (255,255,255))
+                scores_label = self.main_font.render(f"score: {self.score}  wave:{self.level.waveNumber+1}", 1, (255,255,255))
                 self.WIN.blit(scores_label,(0, 0))
             # drawing player
             for i in self.Players:

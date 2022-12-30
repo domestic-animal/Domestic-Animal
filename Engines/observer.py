@@ -65,7 +65,7 @@ class gameobserver(observer):
                         if self.is_collide(Enemy,Player):
                                 Enemy.health -= Enemy.damage
                                 Player.health -= Enemy.damage
-                                Player.cool_down=30
+                                # Player.cool_down=3
 
 
         
