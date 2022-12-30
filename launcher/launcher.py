@@ -123,6 +123,7 @@ class Launcher(QMainWindow):
 			self.game_thread = Game_Thread()
 			self.game_thread.deadSignal.connect(self.pager.show)
 			if mode != 0:
+				# Qthread destroyed fix
 				while(not self.auto_save.isFinished()):
 					pass
 				self.auto_save = Auto_Save_Thread()
