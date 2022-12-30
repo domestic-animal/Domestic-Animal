@@ -131,7 +131,7 @@ class normalGameEngine:
 
     def generate_rat(self):
             # to do : with difficulity
-        if (random.randint(0, (18/self.diff)* 60) == 1 and (self.level.number>3 or self.level.number ==-1)):
+        if (random.randint(0, (34/self.diff)* 60) == 1 and (self.level.number>3 or self.level.number ==-1)):
             player = random.choice(self.Players)
             rat_movement = random.choice([(0, 1), (self.WIN.get_width(), -1)])
             RAT_SKIN = random.choice([self.RAT_SKINS[5], self.RAT_SKINS[4]])
@@ -143,7 +143,7 @@ class normalGameEngine:
     def getGameState(self):
         return gameState(self.powerup,self.score,self.Bullets,self.Players, self.Enemies
         ,self.diff,self.exit,self.level.number,datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-        ,self.gameover,self.is_coop)
+        ,self.gameover,self.is_coop,self.level.waveNumber)
 
     def loadGameState(self):
             self.Bullets = self.gameState.bullets
@@ -155,6 +155,7 @@ class normalGameEngine:
             self.is_coop = self.gameState.is_coop
             if(self.is_coop > 1):
                 self.pl2 = self.gameState.players[1]
+            self.level.waveNumber = self.gameState.waveNumber
     # def game_over_menu(self):
 
     def pause_menu(self):
@@ -195,7 +196,7 @@ class normalGameEngine:
             # drawing background
             self.WIN.blit(self.gameAssets[0], (0, 0))
             if(self.level.number >= 0):
-                scores_label = self.main_font.render(f"score: {self.score}  level: {self.level.number}"
+                scores_label = self.main_font.render(f"score: {self.score}  level: {self.level.number} wave:{self.level.waveNumber}"
                         , 1, (255,255,255))
                 self.WIN.blit(scores_label,(0, 0))
             else:
@@ -219,7 +220,7 @@ class normalGameEngine:
 
     # function to create the power ups the power 
     def insertpowerup(self):
-      if (random.randint(0, (40/self.diff)* 60) == 1):
+      if (random.randint(0, (35/self.diff)* 60) == 1):
             powers=["h","d","s","r","i"]
             choice=random.choice(powers)
             x=random.randint(50,550)
@@ -299,9 +300,9 @@ class normalGameEngine:
         curr=datetime.datetime.now()
         starttime = time.time()
 
-        self.music.loadTrack(0)
+        self.music.loadTrack(1)
         if self.level.number==4 or self.level.number == 7:
-              self.music.loadTrack(1)
+              self.music.loadTrack(0)
         elif self.level.number==8 :
             self.music.loadTrack(3)
 
@@ -314,7 +315,6 @@ class normalGameEngine:
             self.redraw_window()
             #generate a new wave when the wave is cleared
             if len(self.Enemies) == 0:
-                # print("requested wave")
                 self.Enemies = self.level.getwave(self.diff)
                 if self.Enemies==None:
                     return self.on_level_complete()

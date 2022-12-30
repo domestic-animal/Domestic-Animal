@@ -36,8 +36,7 @@ class enemyFactory:
                           7,   #bullet velocity
                           1500, #HP
                           6]],   #movement velocity
-                          
-                                                       
+                                    
                     2:#medium
                     #dog boss
                     [[10,35,    #firerates
@@ -78,8 +77,8 @@ class enemyFactory:
             w = weapon(self.CAT_LASER, 1,0,1, int(600/diff),20*diff,2*diff)
             typeSkin=random.randint(1,2)
             if(typeSkin==1):
-                return enemy.cat(x,  7*diff,  y,  w,  self.CAT,  50*diff,  3*diff,  threshold,  10*diff)
-            return enemy.cat(x,  7*diff,  y,  w,  self.CAT2,  50*diff,  3*diff,  threshold,  10*diff)
+                return enemy.cat(x,  7*diff,  y,  w,  self.CAT,  50*diff,  2.5*diff,  threshold,  10*diff)
+            return enemy.cat(x,  7*diff,  y,  w,  self.CAT2,  50*diff,  2.5*diff,  threshold,  10*diff)
         elif type =="bd":
             self.BOSSDOG.scale((200,250))
             holder=self.numbers[diff]

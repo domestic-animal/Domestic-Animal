@@ -43,7 +43,7 @@ class playerWeapon(weapon):
                 elif(self.bullettype == 2):
                     b = zapper(x+14, y, self.bullet_img,self.damage/7, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
                 elif (self.bullettype == 3):
-                    b = penetrate(x+14, y, self.bullet_img,self.damage/15, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
+                    b = penetrate(x+14, y, self.bullet_img,self.damage/12, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
                 self.cool_down_counter = 1
                 return b
         else:

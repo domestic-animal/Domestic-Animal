@@ -302,10 +302,28 @@ class levelSix(storylevel):
         y=0
         threshy=550
         type="d"
-        for _ in range(6):
+        for _ in range(4):
             threshy=550
             enemies=[]
-            for _ in range(9):
+            if _ ==0:
+                for _ in range(9):
+                    threshy-=50
+                    x=20
+                    for _ in range(10):
+                        enemy=factor.create("d",self.diff+0.5,x,y,(self.windowX,threshy))
+                        enemies.append(enemy)
+                        x+=self.windowX/10
+
+            elif _ ==1:
+                for _ in range(9):
+                    threshy-=50
+                    x=20
+                    for _ in range(10):
+                        enemy=factor.create("c",self.diff+0.5,x,y,(self.windowX,threshy))
+                        enemies.append(enemy)
+                        x+=self.windowX/10
+            else:
+                for _ in range(9):
                     threshy-=50
                     x=20
                     if type=="c":
@@ -313,7 +331,7 @@ class levelSix(storylevel):
                     else:
                         type="c"
                     for _ in range(10):
-                        enemy=factor.create(type,self.diff,x,y,(self.windowX,threshy))
+                        enemy=factor.create(type,self.diff+0.5,x,y,(self.windowX,threshy))
                         enemies.append(enemy)
                         x+=self.windowX/10
             self.waves.append(enemies)
@@ -336,14 +354,22 @@ class levelSeven(storylevel):
         y=0
         threshy=500
         type="d"
-        for _ in range(6):
+        for _ in range(4):
             enemies=[]
             threshy=500
-            if _ == 5:
-                x= 270
-                y=0
+            if _ == 3:
                 boss_cat = factor.create("bc", self.diff,200,0,(self.windowX,self.windowY))
+                boss_cat1 = factor.create("bc", self.diff,600,0,(self.windowX,self.windowY))
+                enemies.append(boss_cat1)
                 enemies.append(boss_cat)
+            elif _ == 2:
+                for _ in range(9):
+                    threshy-=50
+                    x=20
+                    for _ in range(10):
+                        enemy=factor.create("c",self.diff+0.5,x,y,(self.windowX,threshy))
+                        enemies.append(enemy)
+                        x+=self.windowX/10
             else:
                 for _ in range(9):
                         threshy-=50
@@ -353,7 +379,7 @@ class levelSeven(storylevel):
                         else:
                             type="c"
                         for _ in range(10):
-                            enemy=factor.create(type,self.diff,x,y,(self.windowX,threshy))
+                            enemy=factor.create(type,self.diff+0.5,x,y,(self.windowX,threshy))
                             enemies.append(enemy)
                             x+=self.windowX/10
             self.waves.append(enemies)
@@ -375,7 +401,8 @@ class levelEight(storylevel):
         x= 270
         y=0
         threshy= 140
-        boss_cat = factor.create("bc", self.diff,x,y,(self.windowX,self.windowY))
+        boss_cat = factor.create("bc", self.diff,400,550,(self.windowX,self.windowY))
+        boss_cat1 = factor.create("bc", self.diff,400,0,(self.windowX,self.windowY))
         boss_dog = factor.create("bd", self.diff,x,y,(self.windowX,threshy))
-        self.waves.append([boss_cat,boss_dog])
+        self.waves.append([boss_cat,boss_dog,boss_cat1])
         # print(self.waves)
