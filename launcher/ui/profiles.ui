@@ -96,14 +96,15 @@ background-color: rgb(230, 226, 195);
     <widget class="QLabel" name="lb_feed">
      <property name="geometry">
       <rect>
-       <x>230</x>
+       <x>280</x>
        <y>10</y>
-       <width>371</width>
+       <width>321</width>
        <height>71</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 0px;</string>
+      <string notr="true">border: 0px;
+font-size: 20px;</string>
      </property>
      <property name="text">
       <string/>

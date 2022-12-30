@@ -81,12 +81,10 @@ class engineController:
                 self.gameState = self.states[1]
 
             if self.states[0] == "start":
-                self.loadedLvl=self.profile.get_story_progress()
                 self.controllerState = "game"
                 self.CO_OP=1
 
             elif self.states[0] == "start2":
-                self.loadedLvl=self.profile.get_story_progress()
                 self.controllerState = "game"
                 self.CO_OP=2
 
@@ -110,7 +108,7 @@ class engineController:
                 self.controllerState = "menu"
             else:
                 self.loadedLvl=int(self.states[0])
-                self.controllerState = "game"
+                self.controllerState = "menu"
         
                 
             
@@ -157,7 +155,7 @@ class engineController:
 
                 elif self.mode > 0:
                     # get the chosen level from the level selector
-                    level = self.lvlSelector.getLevel(self.loadedLvl,self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES,self.WIDTH,self.HEIGHT)
+                    level = self.lvlSelector.getLevel(self.loadedLvl-1,self.diff,ENEMY_SKINS,ENEMY_BULLET_SKINS,BOSSES,self.WIDTH,self.HEIGHT)
                     # assign the current Engine to be the normal game engine
                     self.currEngine = normalGameEngine(window =self.WIN,level =level,
                     diff = self.diff,profile = self.profile,settings1 = self.settings1,settings2= self.settings2,
