@@ -83,12 +83,12 @@ class normalGameEngine:
         
         #player Entity
         self.pl1=player(200,600,self.profile.get_current_weapon(),(self.playerAssets[0],self.playerAssets[1]),
-        self.PLAYER1_CONTROLS,450,7,damage = 35 *self.diff)
+        self.PLAYER1_CONTROLS,600,7,damage = 40 *self.diff)
         self.Players.append(self.pl1)
 
         if self.is_coop==2:
             self.pl2=player(400,600,self.profile.get_current_weapon(),(self.playerAssets[2],self.playerAssets[3]),
-            self.PLAYER2_CONTROLS,450,7, damage =35 *self.diff)
+            self.PLAYER2_CONTROLS,600,7, damage =40 *self.diff)
             self.Players.append(self.pl2)
     
     def move_entities(self,keys):
@@ -195,7 +195,7 @@ class normalGameEngine:
             # drawing background
             self.WIN.blit(self.gameAssets[0], (0, 0))
             if(self.level.number >= 0):
-                scores_label = self.main_font.render(f"score: {self.score}  level: {self.level.number}  wave:{self.level.waveNumber}"
+                scores_label = self.main_font.render(f"score: {self.score}  level: {self.level.number}"
                         , 1, (255,255,255))
                 self.WIN.blit(scores_label,(0, 0))
             else:
