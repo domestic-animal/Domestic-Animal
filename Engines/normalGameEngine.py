@@ -175,13 +175,16 @@ class normalGameEngine:
         
     def game_over_menu(self):
         self.music.stop()
+        print (self.menuengine.game_mode)
         self.menuengine.create_menue(6)
         selection = self.menuengine.start()
         self.exit = 1
         self.gameover = 1
         self.gameState = None
         return ["menu", self.getGameState()]
- 
+    
+    #def game_level_completed_menu(self):
+
      # function to draw  the window
     def redraw_window(self):
             """
@@ -190,11 +193,11 @@ class normalGameEngine:
             # drawing background
             self.WIN.blit(self.gameAssets[0], (0, 0))
             if(self.level.number >= 0):
-                scores_label = self.main_font.render(f"score: {self.score}  level: {self.level.number+1}  wave:{self.level.waveNumber+1}"
+                scores_label = self.main_font.render(f"score: {self.score}  level: {self.level.number+1}  wave:{self.level.waveNumber}"
                         , 1, (255,255,255))
                 self.WIN.blit(scores_label,(0, 0))
             else:
-                scores_label = self.main_font.render(f"score: {self.score}  wave:{self.level.waveNumber+1}", 1, (255,255,255))
+                scores_label = self.main_font.render(f"score: {self.score}  wave:{self.level.waveNumber}", 1, (255,255,255))
                 self.WIN.blit(scores_label,(0, 0))
             # drawing player
             for i in self.Players:
@@ -236,6 +239,8 @@ class normalGameEngine:
         if self.is_coop > 1:
             if len(self.graveyard) == 2:
                 endtime =time.time()
+                self.menuengine.game_mode = 0
+                print(self.menuengine.game_mode)
                 if self.level.number==-1:
                     self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
                     if(self.profile.get_endless_score() < self.score):
@@ -246,6 +251,7 @@ class normalGameEngine:
                 return None
         else:
             if len(self.graveyard) == 1:
+                self.menuengine.game_mode = 0
                 if self.level.number==-1:
                     endtime =time.time()
                     self.profile.set_coins(self.profile.get_coins()+int(self.score/2))
@@ -256,6 +262,16 @@ class normalGameEngine:
             else:
                 return None
 
+    def on_level_complete(self):
+        self.menuengine.game_mode = -1
+        
+        self.gameover = 1
+        self.exit = 1
+        if(self.level.number == self.profile.get_story_progress()
+        and self.profile.get_story_progress() <self.MAXLEVELNUMBER):
+            self.profile.set_story_progress(self.profile.get_story_progress()+1)
+            self.profile.set_coins(self.profile.get_coins()+self.score)
+        return self.game_over_menu()
 
 
     def start(self):
@@ -293,18 +309,8 @@ class normalGameEngine:
                 # print("requested wave")
                 self.Enemies = self.level.getwave(self.diff)
                 if self.Enemies==None:
-                    self.gameover = 1
-                    self.exit = 1
-                    if(self.level.number == self.profile.get_story_progress()
-                     and self.profile.get_story_progress() <self.MAXLEVELNUMBER):
-                        self.profile.set_story_progress(self.profile.get_story_progress()+1)
-                    self.profile.set_coins(self.profile.get_coins()+self.score)
-                    if self.is_coop >1:
-                        return ["start2", self.getGameState()]
-                    if self.level.number == self.MAXLEVELNUMBER:
-                        return ["menu", self.getGameState()]
-                    return ["start", self.getGameState()]
-
+                    return self.on_level_complete()
+                    
             #detect the keys pressed
             keys = pygame.key.get_pressed()
             # detect shooting

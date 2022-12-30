@@ -163,6 +163,12 @@ class vsGameEngine:
                 
             #on death or quitting
             if self.Players[0].health <= 0 or self.Players[1].health <= 0:
+                    if(self.Players[1].health <= 0):
+                        self.menuengine.game_mode = 1
+                    elif(self.Players[0].health <= 0) :
+                        self.menuengine.game_mode = 2
+                    self.menuengine.create_menue(6)
+                    self.menuengine.start()
                     self.playerAssets[1].rotate(1)
                     self.playerAssets[0].rotate(1)
                     self.playerAssets[2].rotate(-1)
