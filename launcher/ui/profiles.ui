@@ -104,7 +104,7 @@ background-color: rgb(230, 226, 195);
      </property>
      <property name="styleSheet">
       <string notr="true">border: 0px;
-font-size: 17px;</string>
+font-size: 20px;</string>
      </property>
      <property name="text">
       <string/>
