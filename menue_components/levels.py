@@ -56,7 +56,7 @@ class level():
                 # handle only buttons of weapons and
                 for i in range (1,len(buttons)-1):  
                     if buttons[i].isOver(pos):
-                        selection = str(buttons[i].number)
+                        selection = str(buttons[i].number+1)
                         print("select lvl : ", buttons[i].number)
                         runM = False
 
