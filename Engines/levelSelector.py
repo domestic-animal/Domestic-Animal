@@ -21,19 +21,19 @@ class levelSelector:
         #if the level is -1 then it is an endless level
         if(levelNumber < 0):
             return Engines.level.endlesslevel(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
-        if(levelNumber == 0):
-            return Engines.level.levelOne(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
         if(levelNumber == 1):
-            return Engines.level.levelTwo(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
+            return Engines.level.levelOne(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
         if(levelNumber == 2):
-            return Engines.level.levelThree(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
+            return Engines.level.levelTwo(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
         if(levelNumber == 3):
-            return Engines.level.levelFour(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
+            return Engines.level.levelThree(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
         if(levelNumber == 4):
-            return Engines.level.levelFive(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
+            return Engines.level.levelFour(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
         if(levelNumber == 5):
-            return Engines.level.levelSix(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
+            return Engines.level.levelFive(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
         if(levelNumber == 6):
-            return Engines.level.levelSeven(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
+            return Engines.level.levelSix(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
         if(levelNumber == 7):
+            return Engines.level.levelSeven(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)
+        if(levelNumber == 8):
             return Engines.level.levelEight(diff, ENEMY_SKINS, BULLET_SKINS,BOSS_SKINS, windowX, windowY)

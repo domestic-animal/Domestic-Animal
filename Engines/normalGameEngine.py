@@ -57,7 +57,7 @@ class normalGameEngine:
 
         #rat enemy for higher difficulty
         self.RAT_SKINS = enemyAssets[0]
-        self.MAXLEVELNUMBER = 7
+        self.MAXLEVELNUMBER = 8
         # pause menu
         self.menuengine = menu(self.WIN, self.WIN.get_width(),self.WIN.get_height(),self.profile, self.gameAssets[0],self.level.number)
         
@@ -74,6 +74,7 @@ class normalGameEngine:
         self.gameObserver = gameobserver(self.WIN.get_width(),self.WIN.get_height())
         self.gamesaver = GameStateSaver()
         self.music = gameAssets[2];
+        self.win_or_lose = False
         self.powerFactory=PowerUpFactory(gameAssets[1][0],gameAssets[1][1],gameAssets[1][2],gameAssets[1][3],gameAssets[1][4])
         self.main_font = pygame.font.Font(os.path.join(".","launcher","assets","game.ttf"), 30)
 
@@ -81,12 +82,13 @@ class normalGameEngine:
     def create_player(self):
         
         #player Entity
-       
-        self.pl1=player(200,600,self.profile.get_current_weapon(),(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,1000,7)
+        self.pl1=player(200,600,self.profile.get_current_weapon(),(self.playerAssets[0],self.playerAssets[1]),
+        self.PLAYER1_CONTROLS,600,7,damage = 40 *self.diff)
         self.Players.append(self.pl1)
 
         if self.is_coop==2:
-            self.pl2=player(400,600,self.profile.get_current_weapon(),(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,1000,7)
+            self.pl2=player(400,600,self.profile.get_current_weapon(),(self.playerAssets[2],self.playerAssets[3]),
+            self.PLAYER2_CONTROLS,600,7, damage =40 *self.diff)
             self.Players.append(self.pl2)
     
     def move_entities(self,keys):
@@ -129,19 +131,19 @@ class normalGameEngine:
 
     def generate_rat(self):
             # to do : with difficulity
-        if (random.randint(0, (18/self.diff)* 60) == 1 and (self.level.number>4 or self.level.number ==-1)):
+        if (random.randint(0, (34/self.diff)* 60) == 1 and (self.level.number>3 or self.level.number ==-1)):
             player = random.choice(self.Players)
             rat_movement = random.choice([(0, 1), (self.WIN.get_width(), -1)])
             RAT_SKIN = random.choice([self.RAT_SKINS[5], self.RAT_SKINS[4]])
             RAT_SKIN.playSound()
-            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 200*self.diff, 5*self.diff, rat_movement[1], 0,1)
+            rat = bullet(rat_movement[0], player.y, RAT_SKIN, 75*self.diff, 3*self.diff, rat_movement[1], 0,1)
             self.Bullets.append(rat)
     
     # function to get the current game score
     def getGameState(self):
         return gameState(self.powerup,self.score,self.Bullets,self.Players, self.Enemies
-        ,self.diff,self.exit,self.level.number+1,datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-        ,self.gameover,self.is_coop)
+        ,self.diff,self.exit,self.level.number,datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        ,self.gameover,self.is_coop,self.level.waveNumber)
 
     def loadGameState(self):
             self.Bullets = self.gameState.bullets
@@ -153,6 +155,7 @@ class normalGameEngine:
             self.is_coop = self.gameState.is_coop
             if(self.is_coop > 1):
                 self.pl2 = self.gameState.players[1]
+            self.level.waveNumber = self.gameState.waveNumber
     # def game_over_menu(self):
 
     def pause_menu(self):
@@ -181,7 +184,7 @@ class normalGameEngine:
         self.exit = 1
         self.gameover = 1
         self.gameState = None
-        return ["menu", self.getGameState()]
+        return ["menu", self.getGameState(), self.win_or_lose]
     
     #def game_level_completed_menu(self):
 
@@ -193,7 +196,7 @@ class normalGameEngine:
             # drawing background
             self.WIN.blit(self.gameAssets[0], (0, 0))
             if(self.level.number >= 0):
-                scores_label = self.main_font.render(f"score: {self.score}  level: {self.level.number+1}  wave:{self.level.waveNumber}"
+                scores_label = self.main_font.render(f"score: {self.score}  level: {self.level.number} wave:{self.level.waveNumber}"
                         , 1, (255,255,255))
                 self.WIN.blit(scores_label,(0, 0))
             else:
@@ -217,7 +220,7 @@ class normalGameEngine:
 
     # function to create the power ups the power 
     def insertpowerup(self):
-      if (random.randint(0, (18/self.diff)* 60) == 1):
+      if (random.randint(0, (35/self.diff)* 60) == 1):
             powers=["h","d","s","r","i"]
             choice=random.choice(powers)
             x=random.randint(50,550)
@@ -246,6 +249,7 @@ class normalGameEngine:
                     if(self.profile.get_endless_score() < self.score):
                         self.profile.set_endless_score(self.score)
                     self.profile.set_endless_survival_time(endtime-starttime)
+                self.win_or_lose = False
                 return self.game_over_menu()
             else:
                 return None
@@ -258,6 +262,7 @@ class normalGameEngine:
                     if(self.profile.get_endless_score() < self.score):
                         self.profile.set_endless_score(self.score)
                     self.profile.set_endless_survival_time(endtime-starttime)
+                self.win_or_lose = False
                 return self.game_over_menu()
             else:
                 return None
@@ -271,6 +276,7 @@ class normalGameEngine:
         and self.profile.get_story_progress() <self.MAXLEVELNUMBER):
             self.profile.set_story_progress(self.profile.get_story_progress()+1)
             self.profile.set_coins(self.profile.get_coins()+self.score)
+        self.win_or_lose = True
         return self.game_over_menu()
 
 
@@ -294,9 +300,12 @@ class normalGameEngine:
         curr=datetime.datetime.now()
         starttime = time.time()
 
-        self.music.loadTrack(0)
-        if self.level.number==7 or self.level.number==3 or self.level.number == 6:
-              self.music.loadTrack(1)
+        self.music.loadTrack(1)
+        if self.level.number==4 or self.level.number == 7:
+              self.music.loadTrack(0)
+        elif self.level.number==8 :
+            self.music.loadTrack(3)
+
         self.music.setVolume(0.22)
         self.music.play()
         while True:
@@ -306,7 +315,6 @@ class normalGameEngine:
             self.redraw_window()
             #generate a new wave when the wave is cleared
             if len(self.Enemies) == 0:
-                # print("requested wave")
                 self.Enemies = self.level.getwave(self.diff)
                 if self.Enemies==None:
                     return self.on_level_complete()

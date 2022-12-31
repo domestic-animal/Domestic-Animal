@@ -39,11 +39,11 @@ class playerWeapon(weapon):
                 if(self.bullettype ==0 ):
                     b = bullet(x+14, y+13, self.bullet_img,self.damage, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
                 elif (self.bullettype == 1):
-                    b = laser(x+14, y, self.bullet_img,self.damage/10, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
+                    b = laser(x+14, y, self.bullet_img,self.damage/8, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
                 elif(self.bullettype == 2):
                     b = zapper(x+14, y, self.bullet_img,self.damage/7, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
                 elif (self.bullettype == 3):
-                    b = penetrate(x+14, y, self.bullet_img,self.damage/15, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
+                    b = penetrate(x+14, y, self.bullet_img,self.damage/13, self.velocity, self.ishorizontal,self.isvertical,self.enemyWeapon)
                 self.cool_down_counter = 1
                 return b
         else:

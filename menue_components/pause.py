@@ -23,7 +23,7 @@ class pauseMenue():
         decrease_amount -= step
         if self.mode >= 0 :
             created_buttons.append(Button(self.WIDTH / 2 - 90, self.HEIGHT -  decrease_amount, 180, 44, price=0, image = button_image[3], number = 1))
-            decrease -= step
+            decrease_amount -= step
         created_buttons.append(Button( self.WIDTH / 2 - 90, self.HEIGHT - decrease_amount, 180, 44, price=1, image = button_image[6], number = 2))
         
         return created_buttons, []

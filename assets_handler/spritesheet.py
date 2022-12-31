@@ -20,7 +20,7 @@ class SpriteSheet():
 		:param frames_number: Number of frames in the spritesheet (the column images)
 		:param skins_number: Number of skins in the spritesheet (the row images)
 		:param cooldown: Refresh rate for the animation
-		to be added -> :param Animated: A boolean to consider animation or not
+		:param sounds: sounds array that contains sound for each skin
 		"""
 		self.sheet = sheet 						# The sheet to extract the frames from
 		skinsNumber = int(self.sheet.get_height() / height)
@@ -28,7 +28,7 @@ class SpriteSheet():
 		framesNumber = int(self.sheet.get_width() / width) if frames_number != 1 else 1
 		hasSound = (len(sounds) != 0)
 		# Extracting the frames for each skin
-		for s in range(skinsNumber):
+		for s in range(skins_number):
 			frames = [0] * framesNumber
 			for f in range(framesNumber):
 				frames[f] = self.extract_frame(width, height, scale, f, s)

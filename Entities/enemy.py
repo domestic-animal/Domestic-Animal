@@ -61,8 +61,12 @@ class bossDog(enemy):
         pygame.draw.rect(window, (255,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width() * (self.health/self.max_health), 8))
 
     def move(self):
-        if self.y<self.threshold[1]:
-            self.y=self.y+self.velocity
+            if(self.y >= self.threshold[1]):
+                if(self.x+self.velocity < 0 or self.x+self.velocity > self.threshold[0]-self.skin.frames[0].get_width()):
+                    self.velocity *= -1
+                self.x+= self.velocity
+            else:
+                self.y += self.velocity
 
 
     def shoot(self):
