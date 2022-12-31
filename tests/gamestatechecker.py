@@ -42,7 +42,7 @@ def create_random_game_state():
         powerups.append(powerup)
     game_state = gameState(powerups, random.randint(0, 1000),
                            [bullet], plyer, enemies, random.randint(0, 10), 0,
-                           level, datetime.date, random.randint(0, 2), 0)
+                           level, datetime.date, random.randint(0, 2), 0, 1)
 
     return game_state
 
