@@ -30,7 +30,7 @@ def create_random_game_state():
     plyer = player(player_postion[0], player_postion[1], 1, (dummy_skins[0],dummy_skins[0]), [1,2,3], 200, 7,1,130)
     bullet = plyer.shoot()
     lvlSelector = levelSelector()
-    level = lvlSelector.getLevel(-1, 1, dummy_skins, dummy_skins,dummy_skins)
+    level = lvlSelector.getLevel(-1, 1, dummy_skins, dummy_skins,dummy_skins, 600, 800)
     enemies = level.getwave(1)
 
     powerFactory = PowerUpFactory(dummy_skins[0], dummy_skins[0], dummy_skins[0], dummy_skins[0], dummy_skins[0])
@@ -42,7 +42,7 @@ def create_random_game_state():
         powerups.append(powerup)
     game_state = gameState(powerups, random.randint(0, 1000),
                            [bullet], plyer, enemies, random.randint(0, 10), 0,
-                           level, datetime.date, random.randint(0, 2), 0)
+                           level, datetime.date, random.randint(0, 2), 0, 1)
 
     return game_state
 

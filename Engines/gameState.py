@@ -1,6 +1,6 @@
 class gameState():
 
-    def __init__(self,powerups,score,bullets,players,enemies,difficulty,isExit,level,time,gameover,is_coop):
+    def __init__(self,powerups,score,bullets,players,enemies,difficulty,isExit,level,time,gameover,is_coop,wavenumber):
         
         self.powerups=powerups
         self.bullets=bullets
@@ -13,3 +13,4 @@ class gameState():
         self.isExit=isExit
         self.gameover=gameover
         self.is_coop = is_coop
+        self.waveNumber = wavenumber

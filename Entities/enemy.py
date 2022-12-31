@@ -32,6 +32,7 @@ class cat(enemy):
 
     def __init__(self, x, damage, y, weapon, img, health, velocity, threshold,score):
         super().__init__(x, damage, y, weapon, img, health, velocity, threshold,score)
+        # self.skin.sound.set_volume(10)    
     def move(self):
     
         
@@ -54,23 +55,28 @@ class bossDog(enemy):
     def draw(self, window):
         super().draw(window)
         self.healthbar(window)
+
     def healthbar(self, window):
-        pygame.draw.rect(window, (255,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width(), 8))
-        pygame.draw.rect(window, (0,255,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width() * (self.health/self.max_health), 8))
+        pygame.draw.rect(window, (0,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width(), 8))
+        pygame.draw.rect(window, (255,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width() * (self.health/self.max_health), 8))
 
     def move(self):
-        if self.y<self.threshold[1]:
-            self.y=self.y+self.velocity
+            if(self.y >= self.threshold[1]):
+                if(self.x+self.velocity < 0 or self.x+self.velocity > self.threshold[0]-self.skin.frames[0].get_width()):
+                    self.velocity *= -1
+                self.x+= self.velocity
+            else:
+                self.y += self.velocity
 
 
     def shoot(self):
-        if random.random()<0.7:
-            return self.weapon.shoot( self.x+(self.skin.frames[0].get_width()/2), self.y+self.skin.frames[0].get_height())
+        if random.random()<0.75:
+            return self.weapon.shoot( self.x+(self.skin.frames[0].get_width()/2)-15, self.y+self.skin.frames[0].get_height())
         else:
             if random.random()<0.5:
                  return self.weapon2.shoot( self.x, self.y+self.skin.frames[0].get_height())
             else:
-                return self.weapon3.shoot( self.x+self.skin.frames[0].get_width(), self.y+self.skin.frames[0].get_height() )
+                return self.weapon3.shoot( self.x+self.skin.frames[0].get_width()-20, self.y+self.skin.frames[0].get_height() )
 
 
 
@@ -84,9 +90,11 @@ class bossCat(enemy):
     def draw(self, window):
         super().draw(window)
         self.healthbar(window)
+
     def healthbar(self, window):
-        pygame.draw.rect(window, (255,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width(), 8))
-        pygame.draw.rect(window, (0,255,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width() * (self.health/self.max_health), 8))
+        pygame.draw.rect(window, (0,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width(), 8))
+        pygame.draw.rect(window, (255,0,0), (self.x, self.y + self.skin.frames[0].get_height() + 10, self.skin.frames[0].get_width() * (self.health/self.max_health), 8))
+    
     def move(self):
     
         if(self.x+self.skin.frames[0].get_width() >= self.threshold[0] and self.y+self.skin.frames[0].get_height() < self.threshold[1]):

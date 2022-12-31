@@ -39,16 +39,12 @@ class Auto_Save_Thread(QThread):
         state = copy.deepcopy(self.controller.getGameState())
         self.mutex.unlock()
         if state is not None:
-            if self.mode == -1:
-                if(state.gameover == 0):
-                    self.saver.autosave_endless(self.name,state)
-                else:
-                    self.saver.delete_autosaved_endless(self.name)
-            else:
-                if(state.gameover == 0):
-                    self.saver.autosave_story(self.name,state)
-                else:
-                    self.saver.delete_autosaved_story(self.name)
+          if state.gameover == 0:
+              self.saver.autosave_game_state(state, self.name, self.mode)
+          else:
+              self.saver.delete_autosaved_state(self.name, self.mode)
+
+
 
     def stop(self):
         # stop the thread on finish

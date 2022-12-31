@@ -1,3 +1,4 @@
+import copy
 import pygame
 import sys
 """
@@ -38,15 +39,16 @@ class vsGameEngine:
         self.PLAYER1_CONTROLS = [settings1["left"],settings1["right"],settings1["up"],settings1["down"]]
         self.PLAYER2_CONTROLS =  [settings2["left"],settings2["right"],settings2["up"],settings2["down"]]
         self.profile = profile
+        self.music = self.gameAssets[2]
 
         # pause menu
-        self.menuengine = menu(self.WIN, 800,600)
+        self.menuengine = menu(self.WIN, self.WIN.get_width(),self.WIN.get_height(),self.profile, self.gameAssets[0],-1)
         self.menuengine.create_menue(1)
 
         #constant attributes
         self.Bullets = []
         self.Players = []
-        self.gameObserver = vsobserver()
+        self.gameObserver = vsobserver(self.WIN.get_width(),self.WIN.get_height())
 
 
     def create_player(self):
@@ -55,20 +57,22 @@ class vsGameEngine:
         self.playerAssets[1].rotate(-1)
 
         self.playerAssets[0].rotate(-1)
-        pl1=player(200,295,1,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,250,7,1)
+        pl1=player(0,295,0,(self.playerAssets[0],self.playerAssets[1]),self.PLAYER1_CONTROLS,250,7,1)
         self.Players.append(pl1)
 
-        self.playerAssets[3].rotate(1)
-
+        PLAYER2_BULLET = copy.deepcopy(self.playerAssets[3])
+        PLAYER2_BULLET.rotate(1)
+        PLAYER2_BULLET.rotate(1)
         self.playerAssets[2].rotate(1)
-        pl2=player(600,295,1,(self.playerAssets[2],self.playerAssets[3]),self.PLAYER2_CONTROLS,250,7,-1)
+        pl2=player(self.WIN.get_width()-self.playerAssets[2].frames[0].get_width(),
+        295,0,(self.playerAssets[2],PLAYER2_BULLET),self.PLAYER2_CONTROLS,250,7,-1)
         self.Players.append(pl2)
     
     
     def move_entities(self,keys):
         #detect player movement
             for player in self.Players:
-                player.move(keys, 800, 600)
+                player.move(keys, self.WIN.get_width(),self.WIN.get_height())
 
             #move bullets
             for bullet in self.Bullets:
@@ -119,7 +123,9 @@ class vsGameEngine:
         clock = pygame.time.Clock()
         #generate the wave
 
-
+        self.music.loadTrack(0)
+        self.music.setVolume(0.22)
+        self.music.play()
         ####    Main game loop      ####
         ################################
         while True:
@@ -145,21 +151,26 @@ class vsGameEngine:
 
             #pasue menu
             if keys[pygame.K_ESCAPE]: # shoot
+                self.music.pauseToggle()
                 selection = self.menuengine.start()
-                if selection[0] == "save":
-                    pass
                 if selection[0] == "runAway":
                     self.playerAssets[1].rotate(1)
                     self.playerAssets[0].rotate(1)
-                    self.playerAssets[3].rotate(-1)
                     self.playerAssets[2].rotate(-1)
                     return ["menu"]
-                    
+                self.music.pauseToggle()
+
+                
             #on death or quitting
             if self.Players[0].health <= 0 or self.Players[1].health <= 0:
+                    if(self.Players[1].health <= 0):
+                        self.menuengine.game_mode = 1
+                    elif(self.Players[0].health <= 0) :
+                        self.menuengine.game_mode = 2
+                    self.menuengine.create_menue(6)
+                    self.menuengine.start()
                     self.playerAssets[1].rotate(1)
                     self.playerAssets[0].rotate(1)
-                    self.playerAssets[3].rotate(-1)
                     self.playerAssets[2].rotate(-1)
                     return ["menu"]
 
