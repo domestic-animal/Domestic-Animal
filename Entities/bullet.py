@@ -81,6 +81,7 @@ class laser(bullet):
         
         if(self.collisions) <= 0:
             self.y=-40
+            go=10
         # if  self.collisions >0 :
         #     self.collisions-= 1
         #     entity.health-=self.damage
